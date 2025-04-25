@@ -274,10 +274,10 @@ export default function DashboardPage() {
     <div className="container py-8 px-4 md:px-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold">Hoş Geldiniz, {user?.displayName}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">Hoş Geldiniz, {user?.displayName}</h1>
           <p className="text-muted-foreground">Hesabınızı ve eşyalarınızı yönetin</p>
         </div>
-        <Button asChild>
+        <Button asChild className="self-start md:self-auto">
           <Link href="/items/new">
             <Package className="mr-2 h-4 w-4" />
             Yeni Eşya Ekle
@@ -311,23 +311,31 @@ export default function DashboardPage() {
       {/* Main Content */}
       <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab} className="space-y-4 md:space-y-6">
         <div className="overflow-x-auto pb-2">
-          <TabsList className="w-full md:w-auto">
-            <TabsTrigger value="processes">Aktif Süreçler</TabsTrigger>
-            <TabsTrigger value="items">Eşyalarım</TabsTrigger>
-            <TabsTrigger value="requests" className="relative">
+          <TabsList className="w-full md:w-auto flex flex-wrap">
+            <TabsTrigger value="processes" className="flex-1 md:flex-none">
+              Aktif Süreçler
+            </TabsTrigger>
+            <TabsTrigger value="items" className="flex-1 md:flex-none">
+              Eşyalarım
+            </TabsTrigger>
+            <TabsTrigger value="requests" className="flex-1 md:flex-none relative">
               İstekler
               {pendingRequests.length > 0 && activeTab !== "requests" && (
                 <span className="absolute -right-1 -top-1 w-2 h-2 bg-red-500 rounded-full" />
               )}
             </TabsTrigger>
-            <TabsTrigger value="borrowed">Ödünç Aldıklarım</TabsTrigger>
-            <TabsTrigger value="ratings">Değerlendirmeler</TabsTrigger>
+            <TabsTrigger value="borrowed" className="flex-1 md:flex-none">
+              Ödünç Aldıklarım
+            </TabsTrigger>
+            <TabsTrigger value="ratings" className="flex-1 md:flex-none">
+              Değerlendirmeler
+            </TabsTrigger>
           </TabsList>
         </div>
 
         {/* Active Processes Tab */}
         <TabsContent value="processes" className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
             <h2 className="text-xl font-semibold">Aktif Süreçler</h2>
           </div>
 
@@ -348,7 +356,7 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent className="p-4 pt-0">
                     <div className="space-y-2">
-                      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 mt-2">
+                      <div className="flex flex-col gap-2 mt-2">
                         <div>
                           <p className="text-sm font-medium">Süreç Durumu</p>
                           <p className="text-sm text-muted-foreground">
@@ -366,7 +374,7 @@ export default function DashboardPage() {
                         </div>
                       </div>
 
-                      <div className="flex flex-col md:flex-row justify-between gap-4 mt-4">
+                      <div className="flex flex-col gap-4 mt-4">
                         <div className="flex flex-col gap-1">
                           <p className="text-xs text-muted-foreground">
                             <strong>Teslim Noktası:</strong> {process.pickupLocation}
@@ -378,11 +386,11 @@ export default function DashboardPage() {
                               : "Belirtilmemiş"}
                           </p>
                         </div>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" asChild>
+                        <div className="flex flex-col sm:flex-row gap-2 w-full">
+                          <Button variant="outline" size="sm" asChild className="flex-1">
                             <Link href={`/items/${process.itemId}`}>Eşyayı Gör</Link>
                           </Button>
-                          <Button size="sm" asChild>
+                          <Button size="sm" asChild className="flex-1">
                             <Link href={`/messages/${getConversationId(process)}`}>Mesajlara Git</Link>
                           </Button>
                         </div>
@@ -405,7 +413,7 @@ export default function DashboardPage() {
 
         {/* Items Tab */}
         <TabsContent value="items" className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
             <h2 className="text-xl font-semibold">Eşyalarım</h2>
             <Button asChild variant="outline" size="sm">
               <Link href="/profile">
@@ -471,7 +479,7 @@ export default function DashboardPage() {
 
         {/* Requests Tab */}
         <TabsContent value="requests" className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
             <h2 className="text-xl font-semibold">Bekleyen İstekler</h2>
             <Button asChild variant="outline" size="sm">
               <Link href="/messages">
@@ -506,11 +514,11 @@ export default function DashboardPage() {
                           ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
                           : "Belirtilmemiş"}
                       </p>
-                      <div className="flex justify-end gap-2 mt-4">
-                        <Button variant="outline" asChild>
+                      <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                        <Button variant="outline" asChild className="flex-1">
                           <Link href={`/items/${request.itemId}`}>Eşyayı Görüntüle</Link>
                         </Button>
-                        <Button asChild>
+                        <Button asChild className="flex-1">
                           <Link href={`/messages/${getConversationId(request)}`}>İsteği Yanıtla</Link>
                         </Button>
                       </div>
@@ -532,7 +540,7 @@ export default function DashboardPage() {
 
         {/* Borrowed Tab */}
         <TabsContent value="borrowed" className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
             <h2 className="text-xl font-semibold">Ödünç Aldıklarım</h2>
           </div>
 
@@ -559,11 +567,11 @@ export default function DashboardPage() {
                           ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
                           : "Belirtilmemiş"}
                       </p>
-                      <div className="flex justify-end gap-2 mt-4">
-                        <Button asChild variant="outline">
+                      <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                        <Button asChild variant="outline" className="flex-1">
                           <Link href={`/items/${request.itemId}`}>Eşyayı Gör</Link>
                         </Button>
-                        <Button asChild>
+                        <Button asChild className="flex-1">
                           <Link href={`/messages/${getConversationId(request)}`}>Mesajlara Git</Link>
                         </Button>
                       </div>
@@ -585,7 +593,7 @@ export default function DashboardPage() {
 
         {/* Ratings Tab */}
         <TabsContent value="ratings" className="space-y-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
             <h2 className="text-xl font-semibold">Değerlendirmelerim</h2>
           </div>
 
@@ -594,12 +602,14 @@ export default function DashboardPage() {
               {userRatings.map((rating) => (
                 <Card key={rating.id} className="overflow-hidden">
                   <CardHeader className="p-4 pb-2">
-                    <div className="flex justify-between items-start">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                       <div>
                         <CardTitle className="text-lg">{rating.itemTitle}</CardTitle>
                         <CardDescription>Değerlendiren: {rating.raterName}</CardDescription>
                       </div>
-                      <Badge variant="outline">{rating.type === "borrower" ? "Ödünç Alan" : "Eşya Sahibi"}</Badge>
+                      <Badge variant="outline" className="self-start">
+                        {rating.type === "borrower" ? "Ödünç Alan" : "Eşya Sahibi"}
+                      </Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="p-4 pt-2">
