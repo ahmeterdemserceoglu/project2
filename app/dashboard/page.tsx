@@ -10,12 +10,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, BarChart3, Clock, MessageSquare, Package, Star, ThumbsUp, Activity } from "lucide-react"
+import {
+  ArrowRight,
+  BarChart3,
+  Clock,
+  MessageSquare,
+  Package,
+  Star,
+  ThumbsUp,
+  Activity,
+  ChevronRight,
+  Calendar,
+  MapPin,
+} from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { StatsCard } from "@/components/ui/stats-card"
 import { EmptyState } from "@/components/ui/empty-state"
 import { useToast } from "@/components/ui/use-toast"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { Item, Request, Rating } from "@/lib/types"
 
 export default function DashboardPage() {
@@ -23,6 +37,7 @@ export default function DashboardPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { toast } = useToast()
+  const isMobile = useMediaQuery("(max-width: 768px)")
 
   const [userItems, setUserItems] = useState<Item[]>([])
   const [pendingRequests, setPendingRequests] = useState<Request[]>([])
@@ -37,18 +52,11 @@ export default function DashboardPage() {
     const tab = searchParams.get("tab")
     if (tab && ["processes", "items", "requests", "borrowed", "ratings"].includes(tab)) {
       setActiveTab(tab)
-
-      // If the tab is "requests", clear the notification
-      if (tab === "requests") {
-        // We'll update the notification state in the database or context in a real app
-        // For now, we'll just rely on the header component's pathname check
-      }
     }
   }, [searchParams])
 
   // Redirect if not logged in
   useEffect(() => {
-    // Only redirect if loading is false and user is null
     if (!loading && !user) {
       router.push("/auth/login?returnUrl=/dashboard")
     }
@@ -270,9 +278,207 @@ export default function DashboardPage() {
     return null
   }
 
+  // Mobile tab selector component
+  const MobileTabSelector = () => (
+    <div className="mb-6">
+      <Select value={activeTab} onValueChange={setActiveTab}>
+        <SelectTrigger className="w-full">
+          <SelectValue>
+            {activeTab === "processes" && "Aktif Süreçler"}
+            {activeTab === "items" && "Eşyalarım"}
+            {activeTab === "requests" && "İstekler"}
+            {activeTab === "borrowed" && "Ödünç Aldıklarım"}
+            {activeTab === "ratings" && "Değerlendirmeler"}
+          </SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="processes">Aktif Süreçler</SelectItem>
+          <SelectItem value="items">Eşyalarım</SelectItem>
+          <SelectItem value="requests">
+            İstekler {pendingRequests.length > 0 && <span className="ml-1 text-red-500">•</span>}
+          </SelectItem>
+          <SelectItem value="borrowed">Ödünç Aldıklarım</SelectItem>
+          <SelectItem value="ratings">Değerlendirmeler</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  )
+
+  // Desktop tab list component
+  const DesktopTabList = () => (
+    <TabsList className="mb-6">
+      <TabsTrigger value="processes">Aktif Süreçler</TabsTrigger>
+      <TabsTrigger value="items">Eşyalarım</TabsTrigger>
+      <TabsTrigger value="requests" className="relative">
+        İstekler
+        {pendingRequests.length > 0 && activeTab !== "requests" && (
+          <span className="absolute -right-1 -top-1 w-2 h-2 bg-red-500 rounded-full" />
+        )}
+      </TabsTrigger>
+      <TabsTrigger value="borrowed">Ödünç Aldıklarım</TabsTrigger>
+      <TabsTrigger value="ratings">Değerlendirmeler</TabsTrigger>
+    </TabsList>
+  )
+
+  // Mobile process card component
+  const MobileProcessCard = ({ process }: { process: Request & { role: string } }) => (
+    <div className="border rounded-lg mb-4 overflow-hidden">
+      <div className="p-4 border-b flex justify-between items-center">
+        <div>
+          <h3 className="font-medium">{process.itemTitle}</h3>
+          <p className="text-sm text-muted-foreground">
+            {process.role === "owner" ? `İsteyen: ${process.requesterName}` : `Eşya Sahibi: ${process.ownerName}`}
+          </p>
+        </div>
+        {getStatusBadge(process.status)}
+      </div>
+      <div className="p-4">
+        <div className="flex items-center mb-3">
+          <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">
+            {process.pickupDate
+              ? new Date(process.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+              : "Belirtilmemiş"}
+          </span>
+        </div>
+        <div className="flex items-center mb-4">
+          <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">{process.pickupLocation}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/items/${process.itemId}`}>Eşya</Link>
+          </Button>
+          <Button size="sm" asChild>
+            <Link href={`/messages/${getConversationId(process)}`}>Mesajlar</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Mobile request card component
+  const MobileRequestCard = ({ request }: { request: Request }) => (
+    <div className="border rounded-lg mb-4 overflow-hidden">
+      <div className="p-4 border-b flex justify-between items-center">
+        <div>
+          <h3 className="font-medium">{request.itemTitle}</h3>
+          <p className="text-sm text-muted-foreground">İsteyen: {request.requesterName}</p>
+        </div>
+        <Badge className="bg-yellow-500">Bekliyor</Badge>
+      </div>
+      <div className="p-4">
+        <p className="text-sm mb-3 line-clamp-2">{request.message}</p>
+        <div className="flex items-center mb-2">
+          <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">
+            {request.pickupDate
+              ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+              : "Belirtilmemiş"}
+          </span>
+        </div>
+        <div className="flex items-center mb-4">
+          <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">{request.pickupLocation}</span>
+        </div>
+        <Button size="sm" className="w-full" asChild>
+          <Link href={`/messages/${getConversationId(request)}`}>İsteği Yanıtla</Link>
+        </Button>
+      </div>
+    </div>
+  )
+
+  // Mobile borrowed item card component
+  const MobileBorrowedCard = ({ request }: { request: Request }) => (
+    <div className="border rounded-lg mb-4 overflow-hidden">
+      <div className="p-4 border-b flex justify-between items-center">
+        <h3 className="font-medium">{request.itemTitle}</h3>
+        <Badge className={request.status === "accepted" ? "bg-green-500" : "bg-blue-500"}>
+          {request.status === "accepted" ? "Kabul Edildi" : "Tamamlandı"}
+        </Badge>
+      </div>
+      <div className="p-4">
+        <div className="flex items-center mb-2">
+          <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">
+            {request.pickupDate
+              ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+              : "Belirtilmemiş"}
+          </span>
+        </div>
+        <div className="flex items-center mb-4">
+          <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
+          <span className="text-sm">{request.pickupLocation}</span>
+        </div>
+        <Button size="sm" className="w-full" asChild>
+          <Link href={`/messages/${getConversationId(request)}`}>Mesajlara Git</Link>
+        </Button>
+      </div>
+    </div>
+  )
+
+  // Mobile rating card component
+  const MobileRatingCard = ({ rating }: { rating: Rating }) => (
+    <div className="border rounded-lg mb-4 overflow-hidden">
+      <div className="p-4 border-b">
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="font-medium">{rating.itemTitle}</h3>
+            <p className="text-sm text-muted-foreground">Değerlendiren: {rating.raterName}</p>
+          </div>
+          <Badge variant="outline">{rating.type === "borrower" ? "Ödünç Alan" : "Eşya Sahibi"}</Badge>
+        </div>
+      </div>
+      <div className="p-4">
+        <div className="flex items-center mb-2">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={`h-4 w-4 ${i < rating.rating ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
+            />
+          ))}
+        </div>
+        {rating.comment && <p className="text-sm text-muted-foreground">{rating.comment}</p>}
+        <p className="text-xs text-muted-foreground mt-2">
+          {rating.createdAt ? new Date(rating.createdAt.seconds * 1000).toLocaleDateString("tr-TR") : ""}
+        </p>
+      </div>
+    </div>
+  )
+
+  // Mobile item card component
+  const MobileItemCard = ({ item }: { item: Item }) => (
+    <Link href={`/items/${item.id}`} className="block border rounded-lg mb-4 overflow-hidden">
+      <div className="relative h-32 w-full">
+        <Image
+          src={item.imageUrl || "/placeholder.svg?height=128&width=256"}
+          alt={item.title}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
+          <Badge
+            className={
+              item.status === "available" ? "bg-green-500" : item.status === "borrowed" ? "bg-orange-500" : "bg-red-500"
+            }
+          >
+            {item.status === "available" ? "Müsait" : item.status === "borrowed" ? "Ödünç Verildi" : "Müsait Değil"}
+          </Badge>
+        </div>
+      </div>
+      <div className="p-3">
+        <h3 className="font-medium line-clamp-1">{item.title}</h3>
+        <div className="flex justify-between items-center mt-2">
+          <Badge variant="outline">{item.category}</Badge>
+          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+        </div>
+      </div>
+    </Link>
+  )
+
   return (
-    <div className="container py-8 px-4 md:px-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+    <div className="container py-6 px-4 md:px-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">Hoş Geldiniz, {user?.displayName}</h1>
           <p className="text-muted-foreground">Hesabınızı ve eşyalarınızı yönetin</p>
@@ -286,7 +492,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <StatsCard
           title="Eşyalarım"
           value={userItems.length.toString()}
@@ -309,97 +515,84 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content */}
-      <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab} className="space-y-4 md:space-y-6">
-        <div className="overflow-x-auto pb-2">
-          <TabsList className="w-full md:w-auto flex flex-wrap">
-            <TabsTrigger value="processes" className="flex-1 md:flex-none">
-              Aktif Süreçler
-            </TabsTrigger>
-            <TabsTrigger value="items" className="flex-1 md:flex-none">
-              Eşyalarım
-            </TabsTrigger>
-            <TabsTrigger value="requests" className="flex-1 md:flex-none relative">
-              İstekler
-              {pendingRequests.length > 0 && activeTab !== "requests" && (
-                <span className="absolute -right-1 -top-1 w-2 h-2 bg-red-500 rounded-full" />
-              )}
-            </TabsTrigger>
-            <TabsTrigger value="borrowed" className="flex-1 md:flex-none">
-              Ödünç Aldıklarım
-            </TabsTrigger>
-            <TabsTrigger value="ratings" className="flex-1 md:flex-none">
-              Değerlendirmeler
-            </TabsTrigger>
-          </TabsList>
-        </div>
+      <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        {isMobile ? <MobileTabSelector /> : <DesktopTabList />}
 
         {/* Active Processes Tab */}
-        <TabsContent value="processes" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+        <TabsContent value="processes" className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Aktif Süreçler</h2>
           </div>
 
           {activeProcesses.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {activeProcesses.map((process) => (
-                <Card key={process.id} className="overflow-hidden">
-                  <CardHeader className="p-4 pb-2">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="text-lg">{process.itemTitle}</CardTitle>
-                      {getStatusBadge(process.status)}
-                    </div>
-                    <CardDescription>
-                      {process.role === "owner"
-                        ? `İsteyen: ${process.requesterName}`
-                        : `Eşya Sahibi: ${process.ownerName}`}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <div className="space-y-2">
-                      <div className="flex flex-col gap-2 mt-2">
-                        <div>
-                          <p className="text-sm font-medium">Süreç Durumu</p>
-                          <p className="text-sm text-muted-foreground">
-                            {process.status === "accepted" && "Kabul edildi, teslim bekleniyor"}
-                            {process.status === "delivered" && "Teslim edildi, iade bekleniyor"}
-                            {process.status === "return_requested" && "İade istendi, onay bekleniyor"}
-                            {process.status === "return_approved" && "İade onaylandı, tamamlanması bekleniyor"}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">Sonraki Adım</p>
-                          <p className="text-sm text-muted-foreground">
-                            {getNextActionText(process.status, process.role)}
-                          </p>
-                        </div>
+            isMobile ? (
+              <div>
+                {activeProcesses.map((process) => (
+                  <MobileProcessCard key={process.id} process={process} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {activeProcesses.map((process) => (
+                  <Card key={process.id} className="overflow-hidden">
+                    <CardHeader className="p-4 pb-2">
+                      <div className="flex justify-between items-center">
+                        <CardTitle className="text-lg">{process.itemTitle}</CardTitle>
+                        {getStatusBadge(process.status)}
                       </div>
+                      <CardDescription>
+                        {process.role === "owner"
+                          ? `İsteyen: ${process.requesterName}`
+                          : `Eşya Sahibi: ${process.ownerName}`}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-0">
+                      <div className="space-y-2">
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 mt-2">
+                          <div>
+                            <p className="text-sm font-medium">Süreç Durumu</p>
+                            <p className="text-sm text-muted-foreground">
+                              {process.status === "accepted" && "Kabul edildi, teslim bekleniyor"}
+                              {process.status === "delivered" && "Teslim edildi, iade bekleniyor"}
+                              {process.status === "return_requested" && "İade istendi, onay bekleniyor"}
+                              {process.status === "return_approved" && "İade onaylandı, tamamlanması bekleniyor"}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium">Sonraki Adım</p>
+                            <p className="text-sm text-muted-foreground">
+                              {getNextActionText(process.status, process.role)}
+                            </p>
+                          </div>
+                        </div>
 
-                      <div className="flex flex-col gap-4 mt-4">
-                        <div className="flex flex-col gap-1">
-                          <p className="text-xs text-muted-foreground">
-                            <strong>Teslim Noktası:</strong> {process.pickupLocation}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            <strong>Teslim Tarihi:</strong>{" "}
-                            {process.pickupDate
-                              ? new Date(process.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
-                              : "Belirtilmemiş"}
-                          </p>
-                        </div>
-                        <div className="flex flex-col sm:flex-row gap-2 w-full">
-                          <Button variant="outline" size="sm" asChild className="flex-1">
-                            <Link href={`/items/${process.itemId}`}>Eşyayı Gör</Link>
-                          </Button>
-                          <Button size="sm" asChild className="flex-1">
-                            <Link href={`/messages/${getConversationId(process)}`}>Mesajlara Git</Link>
-                          </Button>
+                        <div className="flex flex-col md:flex-row justify-between gap-4 mt-4">
+                          <div className="flex flex-col gap-1">
+                            <p className="text-xs text-muted-foreground">
+                              <strong>Teslim Noktası:</strong> {process.pickupLocation}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              <strong>Teslim Tarihi:</strong>{" "}
+                              {process.pickupDate
+                                ? new Date(process.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+                                : "Belirtilmemiş"}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button variant="outline" size="sm" asChild>
+                              <Link href={`/items/${process.itemId}`}>Eşyayı Gör</Link>
+                            </Button>
+                            <Button size="sm" asChild>
+                              <Link href={`/messages/${getConversationId(process)}`}>Mesajlara Git</Link>
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )
           ) : (
             <EmptyState
               icon={Activity}
@@ -412,60 +605,68 @@ export default function DashboardPage() {
         </TabsContent>
 
         {/* Items Tab */}
-        <TabsContent value="items" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+        <TabsContent value="items" className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Eşyalarım</h2>
             <Button asChild variant="outline" size="sm">
               <Link href="/profile">
-                Tüm Eşyalarımı Gör
+                Tümünü Gör
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
 
           {userItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {userItems.map((item) => (
-                <Card key={item.id} className="overflow-hidden group">
-                  <Link href={`/items/${item.id}`} className="block">
-                    <div className="relative h-40 w-full overflow-hidden">
-                      <Image
-                        src={item.imageUrl || "/placeholder.svg?height=160&width=320"}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                        <Badge
-                          className={
-                            item.status === "available"
-                              ? "bg-green-500"
+            isMobile ? (
+              <div>
+                {userItems.map((item) => (
+                  <MobileItemCard key={item.id} item={item} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                {userItems.map((item) => (
+                  <Card key={item.id} className="overflow-hidden group">
+                    <Link href={`/items/${item.id}`} className="block">
+                      <div className="relative h-40 w-full overflow-hidden">
+                        <Image
+                          src={item.imageUrl || "/placeholder.svg?height=160&width=320"}
+                          alt={item.title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                          <Badge
+                            className={
+                              item.status === "available"
+                                ? "bg-green-500"
+                                : item.status === "borrowed"
+                                  ? "bg-orange-500"
+                                  : "bg-red-500"
+                            }
+                          >
+                            {item.status === "available"
+                              ? "Müsait"
                               : item.status === "borrowed"
-                                ? "bg-orange-500"
-                                : "bg-red-500"
-                          }
-                        >
-                          {item.status === "available"
-                            ? "Müsait"
-                            : item.status === "borrowed"
-                              ? "Ödünç Verildi"
-                              : "Müsait Değil"}
-                        </Badge>
+                                ? "Ödünç Verildi"
+                                : "Müsait Değil"}
+                          </Badge>
+                        </div>
                       </div>
-                    </div>
-                    <CardHeader className="p-4 pb-0">
-                      <CardTitle className="text-lg line-clamp-1">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-2">
-                      <Badge variant="outline">{item.category}</Badge>
-                    </CardContent>
-                    <CardFooter className="p-4 pt-0">
-                      <Button className="w-full">Detayları Gör</Button>
-                    </CardFooter>
-                  </Link>
-                </Card>
-              ))}
-            </div>
+                      <CardHeader className="p-4 pb-0">
+                        <CardTitle className="text-lg line-clamp-1">{item.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-2">
+                        <Badge variant="outline">{item.category}</Badge>
+                      </CardContent>
+                      <CardFooter className="p-4 pt-0">
+                        <Button className="w-full">Detayları Gör</Button>
+                      </CardFooter>
+                    </Link>
+                  </Card>
+                ))}
+              </div>
+            )
           ) : (
             <EmptyState
               icon={Package}
@@ -478,55 +679,63 @@ export default function DashboardPage() {
         </TabsContent>
 
         {/* Requests Tab */}
-        <TabsContent value="requests" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+        <TabsContent value="requests" className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Bekleyen İstekler</h2>
             <Button asChild variant="outline" size="sm">
               <Link href="/messages">
-                Tüm Mesajları Gör
+                Tüm Mesajlar
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
 
           {pendingRequests.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {pendingRequests.map((request) => (
-                <Card key={request.id} className="overflow-hidden">
-                  <CardHeader className="p-4 pb-2">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="text-lg">{request.itemTitle}</CardTitle>
-                      <Badge className="bg-yellow-500">Bekliyor</Badge>
-                    </div>
-                    <CardDescription>İsteyen: {request.requesterName}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Mesaj:</strong> {request.message}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Teslim Noktası:</strong> {request.pickupLocation}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Teslim Tarihi:</strong>{" "}
-                        {request.pickupDate
-                          ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
-                          : "Belirtilmemiş"}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-2 mt-4">
-                        <Button variant="outline" asChild className="flex-1">
-                          <Link href={`/items/${request.itemId}`}>Eşyayı Görüntüle</Link>
-                        </Button>
-                        <Button asChild className="flex-1">
-                          <Link href={`/messages/${getConversationId(request)}`}>İsteği Yanıtla</Link>
-                        </Button>
+            isMobile ? (
+              <div>
+                {pendingRequests.map((request) => (
+                  <MobileRequestCard key={request.id} request={request} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {pendingRequests.map((request) => (
+                  <Card key={request.id} className="overflow-hidden">
+                    <CardHeader className="p-4 pb-2">
+                      <div className="flex justify-between items-center">
+                        <CardTitle className="text-lg">{request.itemTitle}</CardTitle>
+                        <Badge className="bg-yellow-500">Bekliyor</Badge>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                      <CardDescription>İsteyen: {request.requesterName}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-0">
+                      <div className="space-y-2">
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Mesaj:</strong> {request.message}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Teslim Noktası:</strong> {request.pickupLocation}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Teslim Tarihi:</strong>{" "}
+                          {request.pickupDate
+                            ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+                            : "Belirtilmemiş"}
+                        </p>
+                        <div className="flex justify-end gap-2 mt-4">
+                          <Button variant="outline" asChild>
+                            <Link href={`/items/${request.itemId}`}>Eşyayı Görüntüle</Link>
+                          </Button>
+                          <Button asChild>
+                            <Link href={`/messages/${getConversationId(request)}`}>İsteği Yanıtla</Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )
           ) : (
             <EmptyState
               icon={MessageSquare}
@@ -539,47 +748,55 @@ export default function DashboardPage() {
         </TabsContent>
 
         {/* Borrowed Tab */}
-        <TabsContent value="borrowed" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+        <TabsContent value="borrowed" className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Ödünç Aldıklarım</h2>
           </div>
 
           {borrowedItems.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {borrowedItems.map((request) => (
-                <Card key={request.id} className="overflow-hidden">
-                  <CardHeader className="p-4 pb-2">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="text-lg">{request.itemTitle}</CardTitle>
-                      <Badge className={request.status === "accepted" ? "bg-green-500" : "bg-blue-500"}>
-                        {request.status === "accepted" ? "Kabul Edildi" : "Tamamlandı"}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Teslim Noktası:</strong> {request.pickupLocation}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Teslim Tarihi:</strong>{" "}
-                        {request.pickupDate
-                          ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
-                          : "Belirtilmemiş"}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-2 mt-4">
-                        <Button asChild variant="outline" className="flex-1">
-                          <Link href={`/items/${request.itemId}`}>Eşyayı Gör</Link>
-                        </Button>
-                        <Button asChild className="flex-1">
-                          <Link href={`/messages/${getConversationId(request)}`}>Mesajlara Git</Link>
-                        </Button>
+            isMobile ? (
+              <div>
+                {borrowedItems.map((request) => (
+                  <MobileBorrowedCard key={request.id} request={request} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {borrowedItems.map((request) => (
+                  <Card key={request.id} className="overflow-hidden">
+                    <CardHeader className="p-4 pb-2">
+                      <div className="flex justify-between items-center">
+                        <CardTitle className="text-lg">{request.itemTitle}</CardTitle>
+                        <Badge className={request.status === "accepted" ? "bg-green-500" : "bg-blue-500"}>
+                          {request.status === "accepted" ? "Kabul Edildi" : "Tamamlandı"}
+                        </Badge>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-0">
+                      <div className="space-y-2">
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Teslim Noktası:</strong> {request.pickupLocation}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Teslim Tarihi:</strong>{" "}
+                          {request.pickupDate
+                            ? new Date(request.pickupDate.seconds * 1000).toLocaleDateString("tr-TR")
+                            : "Belirtilmemiş"}
+                        </p>
+                        <div className="flex justify-end gap-2 mt-4">
+                          <Button asChild variant="outline">
+                            <Link href={`/items/${request.itemId}`}>Eşyayı Gör</Link>
+                          </Button>
+                          <Button asChild>
+                            <Link href={`/messages/${getConversationId(request)}`}>Mesajlara Git</Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )
           ) : (
             <EmptyState
               icon={Package}
@@ -592,45 +809,51 @@ export default function DashboardPage() {
         </TabsContent>
 
         {/* Ratings Tab */}
-        <TabsContent value="ratings" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+        <TabsContent value="ratings" className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Değerlendirmelerim</h2>
           </div>
 
           {userRatings.length > 0 ? (
-            <div className="space-y-4">
-              {userRatings.map((rating) => (
-                <Card key={rating.id} className="overflow-hidden">
-                  <CardHeader className="p-4 pb-2">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                      <div>
-                        <CardTitle className="text-lg">{rating.itemTitle}</CardTitle>
-                        <CardDescription>Değerlendiren: {rating.raterName}</CardDescription>
+            isMobile ? (
+              <div>
+                {userRatings.map((rating) => (
+                  <MobileRatingCard key={rating.id} rating={rating} />
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {userRatings.map((rating) => (
+                  <Card key={rating.id} className="overflow-hidden">
+                    <CardHeader className="p-4 pb-2">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-lg">{rating.itemTitle}</CardTitle>
+                          <CardDescription>Değerlendiren: {rating.raterName}</CardDescription>
+                        </div>
+                        <Badge variant="outline">{rating.type === "borrower" ? "Ödünç Alan" : "Eşya Sahibi"}</Badge>
                       </div>
-                      <Badge variant="outline" className="self-start">
-                        {rating.type === "borrower" ? "Ödünç Alan" : "Eşya Sahibi"}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-2">
-                    <div className="flex items-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-5 w-5 ${
-                            i < rating.rating ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    {rating.comment && <p className="text-muted-foreground">{rating.comment}</p>}
-                    <p className="text-xs text-muted-foreground mt-2">
-                      {rating.createdAt ? new Date(rating.createdAt.seconds * 1000).toLocaleDateString("tr-TR") : ""}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-2">
+                      <div className="flex items-center mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`h-5 w-5 ${
+                              i < rating.rating ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      {rating.comment && <p className="text-muted-foreground">{rating.comment}</p>}
+                      <p className="text-xs text-muted-foreground mt-2">
+                        {rating.createdAt ? new Date(rating.createdAt.seconds * 1000).toLocaleDateString("tr-TR") : ""}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )
           ) : (
             <EmptyState
               icon={ThumbsUp}
@@ -644,22 +867,24 @@ export default function DashboardPage() {
       </Tabs>
 
       {/* Activity Chart */}
-      <div className="mt-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Aktivite Özeti</CardTitle>
-            <CardDescription>Son 30 günlük platform aktiviteniz</CardDescription>
-          </CardHeader>
-          <CardContent className="h-80 flex items-center justify-center">
-            <div className="text-center">
-              <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">
-                Aktivite grafiği yakında burada görüntülenecek. Platformu kullanmaya devam edin!
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      {!isMobile && (
+        <div className="mt-12">
+          <Card>
+            <CardHeader>
+              <CardTitle>Aktivite Özeti</CardTitle>
+              <CardDescription>Son 30 günlük platform aktiviteniz</CardDescription>
+            </CardHeader>
+            <CardContent className="h-80 flex items-center justify-center">
+              <div className="text-center">
+                <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">
+                  Aktivite grafiği yakında burada görüntülenecek. Platformu kullanmaya devam edin!
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   )
 }
