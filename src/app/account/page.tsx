@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { createClientComponentClient } from '@/lib/supabase';
-import { useToast } from '@/contexts/ToastContext';
-import { useNotification } from '@/contexts/NotificationContext';
-import RequireAuth from '@/components/auth/RequireAuth';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { createClientComponentClient } from "@/lib/supabase";
+import { useToast } from "@/contexts/ToastContext";
+import { useNotification } from "@/contexts/NotificationContext";
+import RequireAuth from "@/components/auth/RequireAuth";
 
 type ProfileData = {
   id: string;
@@ -25,149 +25,161 @@ export default function AccountPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phone: ''
+    firstName: "",
+    lastName: "",
+    phone: "",
   });
-  
+
   const supabase = createClientComponentClient();
   const { showToast } = useToast();
   const { showNotification } = useNotification();
-  
+
   // Kullanıcı bilgilerini yükle
   const loadUserProfile = async () => {
     try {
       setIsLoading(true);
-      
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
+
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
       if (userError || !user) {
-        throw new Error(userError?.message || 'Kullanıcı bilgileri bulunamadı');
+        throw new Error(userError?.message || "Kullanıcı bilgileri bulunamadı");
       }
-      
+
       const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
         .single();
-        
+
       if (profileError) {
         throw new Error(profileError.message);
       }
-      
+
       // Auth metadata ile profil bilgilerini birleştirerek güncelleyelim
       // Eğer profil tablosunda ad/soyad boşsa, auth metadata'dan alalım
-      profileData.first_name = profileData.first_name || user.user_metadata?.first_name || '';
-      profileData.last_name = profileData.last_name || user.user_metadata?.last_name || '';
-      
+      profileData.first_name =
+        profileData.first_name || user.user_metadata?.first_name || "";
+      profileData.last_name =
+        profileData.last_name || user.user_metadata?.last_name || "";
+
       // Eğer ad/soyad değişmiş ise veritabanını da güncelleyelim
-      if ((!profileData.first_name && user.user_metadata?.first_name) || 
-          (!profileData.last_name && user.user_metadata?.last_name)) {
+      if (
+        (!profileData.first_name && user.user_metadata?.first_name) ||
+        (!profileData.last_name && user.user_metadata?.last_name)
+      ) {
         await supabase
-          .from('profiles')
+          .from("profiles")
           .update({
-            first_name: profileData.first_name || user.user_metadata?.first_name || '',
-            last_name: profileData.last_name || user.user_metadata?.last_name || '',
-            updated_at: new Date().toISOString()
+            first_name:
+              profileData.first_name || user.user_metadata?.first_name || "",
+            last_name:
+              profileData.last_name || user.user_metadata?.last_name || "",
+            updated_at: new Date().toISOString(),
           })
-          .eq('id', user.id);
+          .eq("id", user.id);
       }
-      
+
       setProfile(profileData);
       setFormData({
-        firstName: profileData.first_name || '',
-        lastName: profileData.last_name || '',
-        phone: profileData.phone || ''
+        firstName: profileData.first_name || "",
+        lastName: profileData.last_name || "",
+        phone: profileData.phone || "",
       });
-      
     } catch (error: any) {
-      console.error('Error loading profile:', error.message);
-      showNotification('Profil bilgileri yüklenirken bir hata oluştu', 'error');
+      console.error("Error loading profile:", error.message);
+      showNotification("Profil bilgileri yüklenirken bir hata oluştu", "error");
     } finally {
       setIsLoading(false);
     }
   };
-  
+
   useEffect(() => {
     loadUserProfile();
   }, []);
-  
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    showNotification('Başarıyla çıkış yapıldı', 'success');
-    router.push('/');
+    showNotification("Başarıyla çıkış yapıldı", "success");
+    router.push("/");
   };
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const { error } = await supabase
-        .from('profiles')
+        .from("profiles")
         .update({
           first_name: formData.firstName,
           last_name: formData.lastName,
           phone: formData.phone || null,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
-        .eq('id', profile?.id);
-        
+        .eq("id", profile?.id);
+
       if (error) throw error;
-      
-      showToast('Profil başarıyla güncellendi', 'success');
+
+      showToast("Profil başarıyla güncellendi", "success");
       setIsEditing(false);
       loadUserProfile(); // Yeniden profil bilgilerini yükle
-      
     } catch (error: any) {
-      console.error('Error updating profile:', error);
-      showNotification('Profil güncellenirken bir hata oluştu', 'error');
+      console.error("Error updating profile:", error);
+      showNotification("Profil güncellenirken bir hata oluştu", "error");
     }
   };
-  
+
   const sendVerificationEmail = async () => {
     try {
-      const response = await fetch('/api/email/send', {
-        method: 'POST',
+      const response = await fetch("/api/email/send", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: profile?.id,
           email: profile?.email,
         }),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Doğrulama e-postası gönderilemedi');
+        throw new Error(errorData.error || "Doğrulama e-postası gönderilemedi");
       }
-      
+
       const data = await response.json();
-      
-      if (data.message === 'Email is already verified') {
-        showNotification('E-posta adresiniz zaten doğrulanmış', 'info');
+
+      if (data.message === "Email is already verified") {
+        showNotification("E-posta adresiniz zaten doğrulanmış", "info");
       } else {
-        showNotification('Doğrulama e-postası gönderildi. Lütfen e-posta kutunuzu kontrol edin.', 'success');
+        showNotification(
+          "Doğrulama e-postası gönderildi. Lütfen e-posta kutunuzu kontrol edin.",
+          "success",
+        );
       }
-      
     } catch (error: any) {
-      console.error('Error sending verification email:', error);
-      showNotification('Doğrulama e-postası gönderilirken bir hata oluştu', 'error');
+      console.error("Error sending verification email:", error);
+      showNotification(
+        "Doğrulama e-postası gönderilirken bir hata oluştu",
+        "error",
+      );
     }
   };
-  
+
   // Koruma kaydı - kimlik doğrulaması gerektiren sayfa
   return (
-    <RequireAuth>
-      <style jsx global>{`
+    <RequireAuth data-oid="wyc5dy6">
+      <style jsx global data-oid="n-ig:2h">{`
         /* CSS Variables */
         :root {
           --dark: #1e293b;
@@ -177,119 +189,185 @@ export default function AccountPage() {
           --secondary: #3b82f6;
           --secondary-light: #60a5fa;
         }
-        
+
         /* Account sayfasına özel dark mode CSS */
         .dark .account-page .account-card {
           background-color: var(--dark-medium);
           color: white;
         }
-        
+
         .dark .account-page .account-card-inner {
           background-color: var(--dark-medium);
         }
-        
+
         .dark .account-page .account-action-card {
           background-color: var(--dark);
           border: 1px solid var(--dark-lighter);
           color: white;
         }
-        
+
         .dark .account-page .account-input {
           background-color: var(--dark);
           border-color: var(--dark-lighter);
           color: white;
         }
-        
+
         .dark .account-page .account-info {
           color: #f1f5f9 !important;
         }
-        
+
         .dark .account-page .account-label {
           color: #cbd5e1 !important;
         }
-        
+
         .dark .account-page .account-link-card {
           background-color: var(--dark-medium);
           border: 1px solid var(--dark-lighter);
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
-        
+
         .dark .account-page .account-link-card:hover {
           background-color: var(--dark-lighter);
         }
-        
+
         .dark .account-page .edit-button {
           background-color: var(--dark);
           color: white;
           border-color: var(--dark-lighter);
         }
-        
+
         .dark .account-page .edit-button:hover {
           background-color: var(--dark-lighter);
         }
       `}</style>
-      <div className="container mx-auto px-4 py-8 account-page">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-6">
+      <div
+        className="container mx-auto px-4 py-8 account-page"
+        data-oid="8guw0gf"
+      >
+        <div className="max-w-4xl mx-auto" data-oid="l7mpor3">
+          <h1
+            className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-6"
+            data-oid="47myp_g"
+          >
             Hesabım
           </h1>
-          
+
           {isLoading ? (
-            <div className="flex justify-center p-8">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"></div>
+            <div className="flex justify-center p-8" data-oid="tw5tbu-">
+              <div
+                className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"
+                data-oid="vp7bdfk"
+              ></div>
             </div>
           ) : (
-            <div className="bg-white account-card rounded-xl shadow-sm overflow-hidden">
+            <div
+              className="bg-white account-card rounded-xl shadow-sm overflow-hidden"
+              data-oid="rf77ylm"
+            >
               {/* Profil Özeti */}
-              <div className="border-b border-gray-200 dark:border-dark-lighter p-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-gray-100 dark:bg-dark rounded-full p-3 h-16 w-16 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-500 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <div
+                className="border-b border-gray-200 dark:border-dark-lighter p-6"
+                data-oid="g3_uxik"
+              >
+                <div className="flex items-center gap-4" data-oid="5-bljnc">
+                  <div
+                    className="bg-gray-100 dark:bg-dark rounded-full p-3 h-16 w-16 flex items-center justify-center"
+                    data-oid="f_vo4mg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 text-gray-500 dark:text-gray-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      data-oid="qbrifnz"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        data-oid="ms03q:4"
+                      />
                     </svg>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                  <div data-oid="4h:ty6n">
+                    <h2
+                      className="text-xl font-semibold text-gray-800 dark:text-white"
+                      data-oid="v7tuejq"
+                    >
                       {profile?.first_name} {profile?.last_name}
                     </h2>
-                    <p className="text-gray-500 dark:text-gray-400 flex items-center">
-                      {profile?.email} 
+                    <p
+                      className="text-gray-500 dark:text-gray-400 flex items-center"
+                      data-oid="a:m_5x-"
+                    >
+                      {profile?.email}
                       {profile?.is_email_verified ? (
-                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500">
-                          <svg className="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <span
+                          className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500"
+                          data-oid=".w_2qdb"
+                        >
+                          <svg
+                            className="mr-1 h-3 w-3"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            data-oid="d1:p1oj"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                              data-oid="id.j6jt"
+                            />
                           </svg>
                           Doğrulanmış
                         </span>
                       ) : (
-                        <button 
+                        <button
                           onClick={sendVerificationEmail}
                           className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-500 hover:bg-yellow-200 dark:hover:bg-yellow-800/50"
+                          data-oid="6rh50:3"
                         >
                           Doğrula
                         </button>
                       )}
                     </p>
                   </div>
-                  
-                  <div className="ml-auto">
-                    <button 
+
+                  <div className="ml-auto" data-oid="-oi1q8t">
+                    <button
                       onClick={() => setIsEditing(!isEditing)}
                       className="edit-button inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      data-oid="uhw.6xx"
                     >
-                      {isEditing ? 'İptal' : 'Düzenle'}
+                      {isEditing ? "İptal" : "Düzenle"}
                     </button>
                   </div>
                 </div>
               </div>
-              
+
               {/* Profil Bilgileri */}
-              <div className="p-6 bg-white account-card-inner">
+              <div
+                className="p-6 bg-white account-card-inner"
+                data-oid="4nf:4p6"
+              >
                 {isEditing ? (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                    data-oid="qh0sbb-"
+                  >
+                    <div
+                      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                      data-oid="noby48x"
+                    >
+                      <div data-oid="t9:miz4">
+                        <label
+                          htmlFor="firstName"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1"
+                          data-oid="zuvwv2c"
+                        >
                           Ad
                         </label>
                         <input
@@ -299,10 +377,15 @@ export default function AccountPage() {
                           value={formData.firstName}
                           onChange={handleChange}
                           className="account-input w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+                          data-oid="3i_vij_"
                         />
                       </div>
-                      <div>
-                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1">
+                      <div data-oid="tkt118x">
+                        <label
+                          htmlFor="lastName"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1"
+                          data-oid="1v5d86s"
+                        >
                           Soyad
                         </label>
                         <input
@@ -312,12 +395,17 @@ export default function AccountPage() {
                           value={formData.lastName}
                           onChange={handleChange}
                           className="account-input w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+                          data-oid="5luhu88"
                         />
                       </div>
                     </div>
-                    
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1">
+
+                    <div data-oid="yz9w7.s">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1"
+                        data-oid="uuip93l"
+                      >
                         Telefon (isteğe bağlı)
                       </label>
                       <input
@@ -328,11 +416,16 @@ export default function AccountPage() {
                         onChange={handleChange}
                         className="account-input w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
                         placeholder="+90 555 123 4567"
+                        data-oid="p89v0fs"
                       />
                     </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1">
+
+                    <div data-oid="8fdxjl_">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 account-label mb-1"
+                        data-oid="t0visbp"
+                      >
                         E-posta
                       </label>
                       <input
@@ -341,116 +434,327 @@ export default function AccountPage() {
                         value={profile?.email}
                         disabled
                         className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-gray-400 cursor-not-allowed"
+                        data-oid="omp-ovx"
                       />
-                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        E-posta adresinizi değiştirmek için lütfen destek ile iletişime geçin.
+
+                      <p
+                        className="mt-1 text-xs text-gray-500 dark:text-gray-400"
+                        data-oid="sn.5gss"
+                      >
+                        E-posta adresinizi değiştirmek için lütfen destek ile
+                        iletişime geçin.
                       </p>
                     </div>
-                    
-                    <div className="pt-3">
+
+                    <div className="pt-3" data-oid="lfq-50i">
                       <button
                         type="submit"
                         className="w-full sm:w-auto px-4 py-2 bg-secondary hover:bg-secondary-dark text-white rounded-lg transition-colors"
+                        data-oid=":mv.kv4"
                       >
                         Değişiklikleri Kaydet
                       </button>
                     </div>
                   </form>
                 ) : (
-                  <div className="space-y-4 bg-white account-card-inner">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">Ad</h3>
-                        <p className="mt-1 text-base font-medium text-gray-900 account-info">{profile?.first_name || '-'}</p>
+                  <div
+                    className="space-y-4 bg-white account-card-inner"
+                    data-oid="q3ki:-w"
+                  >
+                    <div
+                      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                      data-oid="7i.uyfc"
+                    >
+                      <div data-oid="h7kmo9r">
+                        <h3
+                          className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label"
+                          data-oid="6dtsltv"
+                        >
+                          Ad
+                        </h3>
+                        <p
+                          className="mt-1 text-base font-medium text-gray-900 account-info"
+                          data-oid="4i.:z1k"
+                        >
+                          {profile?.first_name || "-"}
+                        </p>
                       </div>
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">Soyad</h3>
-                        <p className="mt-1 text-base font-medium text-gray-900 account-info">{profile?.last_name || '-'}</p>
+                      <div data-oid="zw_e94j">
+                        <h3
+                          className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label"
+                          data-oid="yxmbn72"
+                        >
+                          Soyad
+                        </h3>
+                        <p
+                          className="mt-1 text-base font-medium text-gray-900 account-info"
+                          data-oid="24fntv:"
+                        >
+                          {profile?.last_name || "-"}
+                        </p>
                       </div>
                     </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">E-posta</h3>
-                        <p className="mt-1 text-base font-medium text-gray-900 account-info flex items-center">
+
+                    <div
+                      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                      data-oid="8ext.16"
+                    >
+                      <div data-oid="sh2foo_">
+                        <h3
+                          className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label"
+                          data-oid="nsk33-y"
+                        >
+                          E-posta
+                        </h3>
+                        <p
+                          className="mt-1 text-base font-medium text-gray-900 account-info flex items-center"
+                          data-oid="d3y:op0"
+                        >
                           {profile?.email}
                           {profile?.is_email_verified && (
-                            <svg className="ml-1.5 h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            <svg
+                              className="ml-1.5 h-4 w-4 text-green-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              data-oid="lexfx2e"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                                data-oid="t:ytl1u"
+                              />
                             </svg>
                           )}
                         </p>
                       </div>
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">Telefon</h3>
-                        <p className="mt-1 text-base font-medium text-gray-900 account-info">{profile?.phone || '-'}</p>
+                      <div data-oid="4mv0_s7">
+                        <h3
+                          className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label"
+                          data-oid="kqraz7s"
+                        >
+                          Telefon
+                        </h3>
+                        <p
+                          className="mt-1 text-base font-medium text-gray-900 account-info"
+                          data-oid="sd7.c-i"
+                        >
+                          {profile?.phone || "-"}
+                        </p>
                       </div>
                     </div>
-                    
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">Üye Olma Tarihi</h3>
-                      <p className="mt-1 text-base font-medium text-gray-900 account-info">
-                        {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('tr-TR') : '-'}
+
+                    <div data-oid="094mb8a">
+                      <h3
+                        className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label"
+                        data-oid=".wyfoi9"
+                      >
+                        Üye Olma Tarihi
+                      </h3>
+                      <p
+                        className="mt-1 text-base font-medium text-gray-900 account-info"
+                        data-oid="-g5ae7v"
+                      >
+                        {profile?.created_at
+                          ? new Date(profile.created_at).toLocaleDateString(
+                              "tr-TR",
+                            )
+                          : "-"}
                       </p>
                     </div>
                   </div>
                 )}
               </div>
-              
+
               {/* Hesap İşlemleri */}
-              <div className="border-t border-gray-200 dark:border-dark-lighter p-6 bg-gray-50 account-action-card">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Hesap İşlemleri</h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Link href="/account/orders" className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors">
-                    <div className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              <div
+                className="border-t border-gray-200 dark:border-dark-lighter p-6 bg-gray-50 account-action-card"
+                data-oid="kfvj1v7"
+              >
+                <h3
+                  className="text-lg font-medium text-gray-900 dark:text-white mb-3"
+                  data-oid="n11_q9w"
+                >
+                  Hesap İşlemleri
+                </h3>
+
+                <div
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  data-oid="-xqhs-t"
+                >
+                  <Link
+                    href="/account/orders"
+                    className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors"
+                    data-oid="_wrlkcg"
+                  >
+                    <div
+                      className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2"
+                      data-oid="wk2xw8t"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        data-oid="drxd4fa"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                          data-oid="8-qa:08"
+                        />
                       </svg>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 account-info">Siparişlerim</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-300">Önceki siparişlerinizi görüntüleyin</p>
+                    <div data-oid="q.tfvyo">
+                      <h4
+                        className="font-medium text-gray-900 account-info"
+                        data-oid="fy:ujb0"
+                      >
+                        Siparişlerim
+                      </h4>
+                      <p
+                        className="text-sm text-gray-500 dark:text-gray-300"
+                        data-oid="x03mj-3"
+                      >
+                        Önceki siparişlerinizi görüntüleyin
+                      </p>
                     </div>
                   </Link>
-                  
-                  <Link href="/account/addresses" className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors">
-                    <div className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+
+                  <Link
+                    href="/account/addresses"
+                    className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors"
+                    data-oid="xz2ph10"
+                  >
+                    <div
+                      className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2"
+                      data-oid="-pu25:_"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        data-oid="c0aelmv"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          data-oid="5rpro6x"
+                        />
+
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          data-oid="o7rsh3."
+                        />
                       </svg>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 account-info">Adreslerim</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-300">Teslimat ve fatura adreslerinizi yönetin</p>
+                    <div data-oid="vrfngor">
+                      <h4
+                        className="font-medium text-gray-900 account-info"
+                        data-oid="6.occ2n"
+                      >
+                        Adreslerim
+                      </h4>
+                      <p
+                        className="text-sm text-gray-500 dark:text-gray-300"
+                        data-oid="okfwkax"
+                      >
+                        Teslimat ve fatura adreslerinizi yönetin
+                      </p>
                     </div>
                   </Link>
-                  
-                  <Link href="/account/password" className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors">
-                    <div className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+
+                  <Link
+                    href="/account/password"
+                    className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors"
+                    data-oid="i4iit-z"
+                  >
+                    <div
+                      className="mr-3 bg-secondary/10 text-secondary dark:text-secondary-light rounded-full p-2"
+                      data-oid=":szva0s"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        data-oid="sfa_3i0"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          data-oid="0qm3ku4"
+                        />
                       </svg>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 account-info">Şifre Değiştir</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-300">Hesap güvenliği için şifrenizi güncelleyin</p>
+                    <div data-oid="jbkrugb">
+                      <h4
+                        className="font-medium text-gray-900 account-info"
+                        data-oid="r.u8_s9"
+                      >
+                        Şifre Değiştir
+                      </h4>
+                      <p
+                        className="text-sm text-gray-500 dark:text-gray-300"
+                        data-oid="nys2-er"
+                      >
+                        Hesap güvenliği için şifrenizi güncelleyin
+                      </p>
                     </div>
                   </Link>
-                  
-                  <button 
+
+                  <button
                     onClick={handleLogout}
                     className="flex items-center p-3 rounded-lg bg-white account-link-card hover:bg-gray-100 transition-colors text-left"
+                    data-oid="sf.5m68"
                   >
-                    <div className="mr-3 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 rounded-full p-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    <div
+                      className="mr-3 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 rounded-full p-2"
+                      data-oid="pz40her"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        data-oid="58ec9s6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                          data-oid="h2c6pph"
+                        />
                       </svg>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 account-info">Çıkış Yap</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-300">Hesabınızdan güvenli çıkış yapın</p>
+                    <div data-oid="--xfn.q">
+                      <h4
+                        className="font-medium text-gray-900 account-info"
+                        data-oid="7yl--fn"
+                      >
+                        Çıkış Yap
+                      </h4>
+                      <p
+                        className="text-sm text-gray-500 dark:text-gray-300"
+                        data-oid="x.ya51."
+                      >
+                        Hesabınızdan güvenli çıkış yapın
+                      </p>
                     </div>
                   </button>
                 </div>
@@ -461,4 +765,4 @@ export default function AccountPage() {
       </div>
     </RequireAuth>
   );
-} 
+}

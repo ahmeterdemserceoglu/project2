@@ -1,132 +1,165 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { createClientComponentClient } from '@/lib/supabase';
+import React, { useEffect, useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { createClientComponentClient } from "@/lib/supabase";
 
 // Ana sayfa bileşeni
 export default function AuthErrorPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [showEmailForm, setShowEmailForm] = useState(false);
-  const [errorInfo, setErrorInfo] = useState({ error: 'unknown', description: 'Kimlik doğrulama sırasında bir hata oluştu.' });
-  
+  const [errorInfo, setErrorInfo] = useState({
+    error: "unknown",
+    description: "Kimlik doğrulama sırasında bir hata oluştu.",
+  });
+
   const supabase = createClientComponentClient();
-  
+
   // Manuel olarak profili e-posta doğrulandı olarak işaretleme
   const manuallyVerifyProfile = async () => {
     setLoading(true);
-    
+
     try {
       // Kullanıcının oturum açık olup olmadığını kontrol et
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (user) {
         // Kullanıcı oturum açmışsa profili güncelle
-        const { error } = await supabase.from('profiles')
-          .update({ 
+        const { error } = await supabase
+          .from("profiles")
+          .update({
             is_email_verified: true,
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
           })
-          .eq('id', user.id);
-        
+          .eq("id", user.id);
+
         if (error) {
           throw error;
         }
-        
-        alert('Profiliniz başarıyla doğrulandı!');
-        router.push('/account');
+
+        alert("Profiliniz başarıyla doğrulandı!");
+        router.push("/account");
         return;
       }
-      
+
       // Kullanıcı oturum açmamışsa e-posta ile kontrol etmek için formu göster
       setShowEmailForm(true);
-      
     } catch (error: any) {
-      console.error('Manuel doğrulama hatası:', error);
+      console.error("Manuel doğrulama hatası:", error);
       alert(`Doğrulama sırasında bir hata oluştu: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
-  
+
   // E-posta ile kullanıcıyı bul ve profili güncelle
   const verifyByEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       // E-posta ile profili bul
       const { data: profiles, error: profileError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', email)
+        .from("profiles")
+        .select("id")
+        .eq("email", email)
         .limit(1);
-      
+
       if (profileError) {
         throw profileError;
       }
-      
+
       if (!profiles || profiles.length === 0) {
-        alert('Bu e-posta adresi ile kayıtlı bir kullanıcı bulunamadı.');
+        alert("Bu e-posta adresi ile kayıtlı bir kullanıcı bulunamadı.");
         return;
       }
-      
+
       // Profili güncelle
       const { error: updateError } = await supabase
-        .from('profiles')
+        .from("profiles")
         .update({
           is_email_verified: true,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
-        .eq('id', profiles[0].id);
-      
+        .eq("id", profiles[0].id);
+
       if (updateError) {
         throw updateError;
       }
-      
-      alert('Profiliniz başarıyla doğrulandı! Şimdi giriş yapabilirsiniz.');
-      router.push('/login');
-      
+
+      alert("Profiliniz başarıyla doğrulandı! Şimdi giriş yapabilirsiniz.");
+      router.push("/login");
     } catch (error: any) {
-      console.error('E-posta ile doğrulama hatası:', error);
+      console.error("E-posta ile doğrulama hatası:", error);
       alert(`Doğrulama sırasında bir hata oluştu: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-2xl">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8"
+      data-oid="-vz68xo"
+    >
+      <div
+        className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-2xl"
+        data-oid="_kyfop2"
+      >
+        <div data-oid="ub9dfq9">
+          <h2
+            className="mt-6 text-center text-3xl font-extrabold text-white"
+            data-oid="hj7ujt1"
+          >
             Kimlik Doğrulama Hatası
           </h2>
-          
+
           {/* SearchParams'ı Suspense içinde kullan */}
-          <Suspense fallback={<div className="mt-4 text-center text-gray-300">Yükleniyor...</div>}>
-            <ErrorInfoHandler setErrorInfo={setErrorInfo} />
+          <Suspense
+            fallback={
+              <div
+                className="mt-4 text-center text-gray-300"
+                data-oid="t-ee_52"
+              >
+                Yükleniyor...
+              </div>
+            }
+            data-oid="5u6_zui"
+          >
+            <ErrorInfoHandler setErrorInfo={setErrorInfo} data-oid="o3arer4" />
           </Suspense>
-          
-          <div className="mt-4 text-center">
-            <div className="text-red-500 font-semibold">{errorInfo.error}</div>
-            <p className="mt-2 text-gray-300">{errorInfo.description}</p>
+
+          <div className="mt-4 text-center" data-oid="q28g7ty">
+            <div className="text-red-500 font-semibold" data-oid="q1j7wti">
+              {errorInfo.error}
+            </div>
+            <p className="mt-2 text-gray-300" data-oid="8pb-j42">
+              {errorInfo.description}
+            </p>
           </div>
         </div>
-        
-        <div className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm space-y-4">
-            <p className="text-gray-300 text-center">
+
+        <div className="mt-8 space-y-6" data-oid="97nwg_u">
+          <div className="rounded-md shadow-sm space-y-4" data-oid="bz-us11">
+            <p className="text-gray-300 text-center" data-oid="f_nta2-">
               E-posta doğrulama ile ilgili bir sorun mu yaşıyorsunuz?
             </p>
-            
+
             {showEmailForm ? (
-              <form onSubmit={verifyByEmail} className="space-y-4">
-                <div>
-                  <label htmlFor="email" className="sr-only">E-posta Adresi</label>
+              <form
+                onSubmit={verifyByEmail}
+                className="space-y-4"
+                data-oid="m9awduv"
+              >
+                <div data-oid="zqh7dq1">
+                  <label htmlFor="email" className="sr-only" data-oid="ze-w9lz">
+                    E-posta Adresi
+                  </label>
                   <input
                     id="email"
                     name="email"
@@ -137,38 +170,46 @@ export default function AuthErrorPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="E-posta adresiniz"
+                    data-oid="ggtuikr"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={loading}
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  data-oid="x-5z2di"
                 >
-                  {loading ? 'İşleniyor...' : 'E-posta ile Doğrula'}
+                  {loading ? "İşleniyor..." : "E-posta ile Doğrula"}
                 </button>
               </form>
             ) : (
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-4" data-oid="m6e47s6">
                 <button
                   onClick={manuallyVerifyProfile}
                   disabled={loading}
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  data-oid="j30-zn9"
                 >
-                  {loading ? 'İşleniyor...' : 'Manuel Doğrulama Dene'}
+                  {loading ? "İşleniyor..." : "Manuel Doğrulama Dene"}
                 </button>
-                
+
                 <button
-                  onClick={() => router.push('/login')}
+                  onClick={() => router.push("/login")}
                   className="group relative w-full flex justify-center py-2 px-4 border border-gray-600 text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  data-oid="80c5:x."
                 >
                   Giriş Sayfasına Dön
                 </button>
               </div>
             )}
           </div>
-          
-          <div className="text-center text-sm">
-            <Link href="/" className="text-indigo-400 hover:text-indigo-300">
+
+          <div className="text-center text-sm" data-oid="gqfemur">
+            <Link
+              href="/"
+              className="text-indigo-400 hover:text-indigo-300"
+              data-oid="7tyrahf"
+            >
               Ana Sayfaya Dön
             </Link>
           </div>
@@ -179,15 +220,23 @@ export default function AuthErrorPage() {
 }
 
 // URL parametrelerini işleyen ayrı bir bileşen
-function ErrorInfoHandler({ setErrorInfo }: { setErrorInfo: React.Dispatch<React.SetStateAction<{error: string, description: string}>> }) {
+function ErrorInfoHandler({
+  setErrorInfo,
+}: {
+  setErrorInfo: React.Dispatch<
+    React.SetStateAction<{ error: string; description: string }>
+  >;
+}) {
   const searchParams = useSearchParams();
-  
+
   useEffect(() => {
-    const error = searchParams.get('error') || 'unknown';
-    const description = searchParams.get('description') || 'Kimlik doğrulama sırasında bir hata oluştu.';
-    
+    const error = searchParams.get("error") || "unknown";
+    const description =
+      searchParams.get("description") ||
+      "Kimlik doğrulama sırasında bir hata oluştu.";
+
     setErrorInfo({ error, description });
   }, [searchParams, setErrorInfo]);
-  
+
   return null;
-} 
+}

@@ -1,5 +1,5 @@
-import ProductCard from './ProductCard';
-import { Product } from '@/lib/supabase';
+import ProductCard from "./ProductCard";
+import { Product } from "@/lib/supabase";
 
 type ProductGridProps = {
   products: (Product & {
@@ -10,33 +10,44 @@ type ProductGridProps = {
   className?: string;
 };
 
-const ProductGrid = ({ products, className = '' }: ProductGridProps) => {
+const ProductGrid = ({ products, className = "" }: ProductGridProps) => {
   if (!products || products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-500">Ürün bulunamadı.</p>
+      <div className="text-center py-12" data-oid="08du6-g">
+        <p className="text-gray-500" data-oid="0nbst-e">
+          Ürün bulunamadı.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${className}`}>
+    <div
+      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${className}`}
+      data-oid="f:imev0"
+    >
       {products.map((product) => (
         <ProductCard
           key={product.id}
           id={product.id}
           name={product.name}
           price={product.base_price}
-          image={product.primary_image_url || '/images/placeholder.png'}
+          image={product.primary_image_url || "/images/placeholder.png"}
           slug={product.slug}
           category={product.category_name}
-          isNew={new Date(product.created_at) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)}
-          isOnSale={!!product.sale_price && product.sale_price < product.base_price}
+          isNew={
+            new Date(product.created_at) >
+            new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          }
+          isOnSale={
+            !!product.sale_price && product.sale_price < product.base_price
+          }
           salePrice={product.sale_price}
+          data-oid="h8yi.nq"
         />
       ))}
     </div>
   );
 };
 
-export default ProductGrid; 
+export default ProductGrid;

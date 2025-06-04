@@ -1,0 +1,145 @@
+| table_name          | column_name             | data_type                | is_nullable | column_default     | character_maximum_length | numeric_precision | numeric_scale |
+| ------------------- | ----------------------- | ------------------------ | ----------- | ------------------ | ------------------------ | ----------------- | ------------- |
+| addresses           | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| addresses           | user_id                 | uuid                     | YES         | null               | null                     | null              | null          |
+| addresses           | address_line1           | text                     | NO          | null               | null                     | null              | null          |
+| addresses           | address_line2           | text                     | YES         | null               | null                     | null              | null          |
+| addresses           | city                    | text                     | NO          | null               | null                     | null              | null          |
+| addresses           | state                   | text                     | YES         | null               | null                     | null              | null          |
+| addresses           | postal_code             | text                     | NO          | null               | null                     | null              | null          |
+| addresses           | country                 | text                     | NO          | 'Türkiye'::text    | null                     | null              | null          |
+| addresses           | is_default              | boolean                  | YES         | false              | null                     | null              | null          |
+| addresses           | address_type            | text                     | YES         | 'both'::text       | null                     | null              | null          |
+| addresses           | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| addresses           | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| admin_operations    | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| admin_operations    | operation_id            | integer                  | NO          | null               | null                     | 32                | 0             |
+| admin_operations    | operation_type          | text                     | NO          | null               | null                     | null              | null          |
+| admin_operations    | parameters              | jsonb                    | YES         | null               | null                     | null              | null          |
+| admin_operations    | created_by              | uuid                     | YES         | null               | null                     | null              | null          |
+| admin_operations    | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| categories          | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| categories          | name                    | text                     | NO          | null               | null                     | null              | null          |
+| categories          | slug                    | text                     | NO          | null               | null                     | null              | null          |
+| categories          | description             | text                     | YES         | null               | null                     | null              | null          |
+| categories          | image_url               | text                     | YES         | null               | null                     | null              | null          |
+| categories          | parent_id               | uuid                     | YES         | null               | null                     | null              | null          |
+| categories          | is_active               | boolean                  | YES         | true               | null                     | null              | null          |
+| categories          | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| categories          | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| debug_logs          | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| debug_logs          | operation               | text                     | NO          | null               | null                     | null              | null          |
+| debug_logs          | status                  | text                     | NO          | null               | null                     | null              | null          |
+| debug_logs          | details                 | jsonb                    | YES         | null               | null                     | null              | null          |
+| debug_logs          | error_code              | text                     | YES         | null               | null                     | null              | null          |
+| debug_logs          | error_message           | text                     | YES         | null               | null                     | null              | null          |
+| debug_logs          | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| discounts           | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| discounts           | code                    | text                     | YES         | null               | null                     | null              | null          |
+| discounts           | description             | text                     | YES         | null               | null                     | null              | null          |
+| discounts           | discount_type           | text                     | NO          | null               | null                     | null              | null          |
+| discounts           | discount_value          | numeric                  | NO          | null               | null                     | 10                | 2             |
+| discounts           | minimum_purchase_amount | numeric                  | YES         | null               | null                     | 10                | 2             |
+| discounts           | starts_at               | timestamp with time zone | YES         | null               | null                     | null              | null          |
+| discounts           | expires_at              | timestamp with time zone | YES         | null               | null                     | null              | null          |
+| discounts           | is_active               | boolean                  | YES         | true               | null                     | null              | null          |
+| discounts           | usage_limit             | integer                  | YES         | null               | null                     | 32                | 0             |
+| discounts           | used_count              | integer                  | YES         | 0                  | null                     | 32                | 0             |
+| discounts           | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| discounts           | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| email_verifications | id                      | uuid                     | NO          | gen_random_uuid()  | null                     | null              | null          |
+| email_verifications | user_id                 | uuid                     | NO          | null               | null                     | null              | null          |
+| email_verifications | email                   | text                     | NO          | null               | null                     | null              | null          |
+| email_verifications | token                   | character varying        | NO          | null               | 100                      | null              | null          |
+| email_verifications | verified                | boolean                  | YES         | false              | null                     | null              | null          |
+| email_verifications | expires_at              | timestamp with time zone | NO          | null               | null                     | null              | null          |
+| email_verifications | verified_at             | timestamp with time zone | YES         | null               | null                     | null              | null          |
+| email_verifications | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| email_verifications | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| order_history       | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| order_history       | order_id                | uuid                     | YES         | null               | null                     | null              | null          |
+| order_history       | status                  | text                     | NO          | null               | null                     | null              | null          |
+| order_history       | comment                 | text                     | YES         | null               | null                     | null              | null          |
+| order_history       | created_by              | uuid                     | YES         | null               | null                     | null              | null          |
+| order_history       | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| order_items         | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| order_items         | order_id                | uuid                     | YES         | null               | null                     | null              | null          |
+| order_items         | product_id              | uuid                     | YES         | null               | null                     | null              | null          |
+| order_items         | product_name            | text                     | NO          | null               | null                     | null              | null          |
+| order_items         | quantity                | integer                  | NO          | null               | null                     | 32                | 0             |
+| order_items         | unit_price              | numeric                  | NO          | null               | null                     | 10                | 2             |
+| order_items         | attributes              | jsonb                    | YES         | null               | null                     | null              | null          |
+| order_items         | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| orders              | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| orders              | user_id                 | uuid                     | YES         | null               | null                     | null              | null          |
+| orders              | order_number            | text                     | NO          | null               | null                     | null              | null          |
+| orders              | status                  | text                     | YES         | 'pending'::text    | null                     | null              | null          |
+| orders              | total_amount            | numeric                  | NO          | null               | null                     | 10                | 2             |
+| orders              | shipping_amount         | numeric                  | YES         | 0                  | null                     | 10                | 2             |
+| orders              | tax_amount              | numeric                  | YES         | 0                  | null                     | 10                | 2             |
+| orders              | discount_amount         | numeric                  | YES         | 0                  | null                     | 10                | 2             |
+| orders              | shipping_address_id     | uuid                     | YES         | null               | null                     | null              | null          |
+| orders              | billing_address_id      | uuid                     | YES         | null               | null                     | null              | null          |
+| orders              | payment_method          | text                     | YES         | null               | null                     | null              | null          |
+| orders              | payment_status          | text                     | YES         | 'pending'::text    | null                     | null              | null          |
+| orders              | notes                   | text                     | YES         | null               | null                     | null              | null          |
+| orders              | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| orders              | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| product_attributes  | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| product_attributes  | product_id              | uuid                     | YES         | null               | null                     | null              | null          |
+| product_attributes  | attribute_name          | text                     | NO          | null               | null                     | null              | null          |
+| product_attributes  | attribute_value         | text                     | NO          | null               | null                     | null              | null          |
+| product_attributes  | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| product_images      | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| product_images      | product_id              | uuid                     | YES         | null               | null                     | null              | null          |
+| product_images      | image_url               | text                     | NO          | null               | null                     | null              | null          |
+| product_images      | alt_text                | text                     | YES         | null               | null                     | null              | null          |
+| product_images      | is_primary              | boolean                  | YES         | false              | null                     | null              | null          |
+| product_images      | display_order           | integer                  | YES         | 0                  | null                     | 32                | 0             |
+| product_images      | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| product_reviews     | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| product_reviews     | product_id              | uuid                     | YES         | null               | null                     | null              | null          |
+| product_reviews     | user_id                 | uuid                     | YES         | null               | null                     | null              | null          |
+| product_reviews     | rating                  | integer                  | NO          | null               | null                     | 32                | 0             |
+| product_reviews     | comment                 | text                     | YES         | null               | null                     | null              | null          |
+| product_reviews     | is_verified             | boolean                  | YES         | false              | null                     | null              | null          |
+| product_reviews     | is_approved             | boolean                  | YES         | false              | null                     | null              | null          |
+| product_reviews     | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| product_reviews     | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| products            | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| products            | name                    | text                     | NO          | null               | null                     | null              | null          |
+| products            | slug                    | text                     | NO          | null               | null                     | null              | null          |
+| products            | sku                     | text                     | YES         | null               | null                     | null              | null          |
+| products            | description             | text                     | YES         | null               | null                     | null              | null          |
+| products            | base_price              | numeric                  | NO          | null               | null                     | 10                | 2             |
+| products            | sale_price              | numeric                  | YES         | null               | null                     | 10                | 2             |
+| products            | stock_quantity          | integer                  | YES         | 0                  | null                     | 32                | 0             |
+| products            | category_id             | uuid                     | YES         | null               | null                     | null              | null          |
+| products            | is_featured             | boolean                  | YES         | false              | null                     | null              | null          |
+| products            | is_active               | boolean                  | YES         | true               | null                     | null              | null          |
+| products            | primary_image_url       | text                     | YES         | null               | null                     | null              | null          |
+| products            | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| products            | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| products            | weight_grams            | integer                  | YES         | null               | null                     | 32                | 0             |
+| products            | dimensions              | jsonb                    | YES         | null               | null                     | null              | null          |
+| products            | metadata                | jsonb                    | YES         | null               | null                     | null              | null          |
+| profiles            | id                      | uuid                     | NO          | null               | null                     | null              | null          |
+| profiles            | first_name              | text                     | YES         | null               | null                     | null              | null          |
+| profiles            | last_name               | text                     | YES         | null               | null                     | null              | null          |
+| profiles            | phone                   | text                     | YES         | null               | null                     | null              | null          |
+| profiles            | email                   | text                     | NO          | null               | null                     | null              | null          |
+| profiles            | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| profiles            | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| profiles            | is_admin                | boolean                  | YES         | false              | null                     | null              | null          |
+| profiles            | user_id                 | uuid                     | YES         | null               | null                     | null              | null          |
+| profiles            | is_email_verified       | boolean                  | YES         | false              | null                     | null              | null          |
+| settings            | id                      | text                     | NO          | null               | null                     | null              | null          |
+| settings            | value                   | jsonb                    | NO          | null               | null                     | null              | null          |
+| settings            | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| settings            | updated_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| verification_tokens | id                      | uuid                     | NO          | uuid_generate_v4() | null                     | null              | null          |
+| verification_tokens | user_id                 | uuid                     | YES         | null               | null                     | null              | null          |
+| verification_tokens | email                   | text                     | NO          | null               | null                     | null              | null          |
+| verification_tokens | token                   | text                     | NO          | null               | null                     | null              | null          |
+| verification_tokens | created_at              | timestamp with time zone | YES         | now()              | null                     | null              | null          |
+| verification_tokens | expires_at              | timestamp with time zone | NO          | null               | null                     | null              | null          |

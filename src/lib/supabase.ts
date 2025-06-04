@@ -1,26 +1,31 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from './database.types';
-import { cookies } from 'next/headers';
 
 // These environment variables need to be set in .env.local file
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-// For client-side usage
+// Create a singleton client instance for client-side usage
+let clientInstance: ReturnType<typeof createClient<Database>> | null = null;
+
+// For client-side usage - singleton pattern to prevent multiple instances
 export function createClientComponentClient() {
-  return createClient<Database>(
-    supabaseUrl,
-    supabaseAnonKey,
-    {
-      auth: {
-        // Disable Supabase's default email verification
-        flowType: 'pkce',
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: false
+  if (!clientInstance) {
+    clientInstance = createClient<Database>(
+      supabaseUrl,
+      supabaseAnonKey,
+      {
+        auth: {
+          // Disable Supabase's default email verification
+          flowType: 'pkce',
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: false
+        }
       }
-    }
-  );
+    );
+  }
+  return clientInstance;
 }
 
 // For server-side usage (API routes, Server Components)
@@ -193,4 +198,4 @@ export type Promotion = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
-}; 
+};
