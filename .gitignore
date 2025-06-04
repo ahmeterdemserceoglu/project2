@@ -1,0 +1,8 @@
+# Node.js / JavaScript / Next.js tipik ignore
+node_modules/
+.next/
+out/
+.DS_Store
+.env
+.env.local
+*.log
