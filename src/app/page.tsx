@@ -407,62 +407,206 @@ export default function Home() {
         <div className="floating-cube" data-oid="-56h3_8"></div>
       </section>
 
-      {/* Fragmented Product Gallery - UPDATED */}
-      <section className="fragmented-gallery relative py-20" data-oid="savbcs1">
-        <div className="container mx-auto" data-oid="710z6rj">
-          <div className="gallery-label" data-oid="kf_qzkw">
-            <span className="thin-line" data-oid="nox_ru8"></span>
-            <h3
-              className="text-xl tracking-[0.5em] uppercase"
-              data-oid="pwlc6tx"
+      {/* Featured Products Section - Modern Design */}
+      <section className="py-16 bg-white dark:bg-gray-900" data-oid="savbcs1">
+        <div className="container mx-auto px-4" data-oid="710z6rj">
+          <div className="text-center mb-12" data-oid="kf_qzkw">
+            <h2
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 tracking-wide"
+              data-oid="myzoxh:"
             >
-              Öne Çıkanlar
-            </h3>
+              ÖNE ÇIKANLAR
+            </h2>
+            <p
+              className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto"
+              data-oid="y_8gfie"
+            >
+              En popüler ve en çok tercih edilen ürünlerimizi keşfedin
+            </p>
           </div>
 
-          <div className="fragment-container my-20" data-oid="i25.60x">
-            {products.map((product, i) => (
+          {/* Mobile: Horizontal Scroll */}
+          <div className="block md:hidden mb-8" data-oid="gqakzd:">
+            <div
+              className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide"
+              data-oid="dl4s2ek"
+            >
+              {products.slice(0, 6).map((product) => (
+                <div
+                  key={product.id}
+                  className="flex-shrink-0 w-64 bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-md"
+                  data-oid="jo.2y:j"
+                >
+                  <div
+                    className="aspect-square bg-gray-200 dark:bg-gray-700"
+                    data-oid="ah6:kh7"
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => handleImageError(e, product.name)}
+                      data-oid="p2kgigg"
+                    />
+                  </div>
+                  <div className="p-4" data-oid="ftf1axc">
+                    <h3
+                      className="font-semibold text-gray-900 dark:text-white text-sm mb-2 line-clamp-2"
+                      data-oid="leoeil8"
+                    >
+                      {product.name}
+                    </h3>
+                    <div
+                      className="flex items-center justify-between"
+                      data-oid="nvbniq4"
+                    >
+                      <span
+                        className="text-blue-600 font-bold text-lg"
+                        data-oid="bwx:3ar"
+                      >
+                        {formatPrice(product.price)}
+                      </span>
+                      {product.originalPrice > product.price && (
+                        <span
+                          className="text-gray-500 line-through text-sm"
+                          data-oid="4qnx5-k"
+                        >
+                          {formatPrice(product.originalPrice)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Grid Layout */}
+          <div
+            className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6"
+            data-oid="i25.60x"
+          >
+            {products.slice(0, 8).map((product) => (
               <div
                 key={product.id}
-                ref={(el) => {
-                  productRefs.current[i] = el;
-                  return undefined;
-                }}
-                className={`fragment-item fragment-${i + 1}`}
+                className="group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
                 data-oid="lfp0g6r"
               >
-                <div className="fragment-image" data-oid="4mv6wc3">
-                  {/* Replaced Next.js Image with standard <img> tag */}
+                <div
+                  className="relative aspect-square bg-gray-100 dark:bg-gray-700"
+                  data-oid="4mv6wc3"
+                >
                   <img
                     src={product.image}
                     alt={product.name}
-                    width={500}
-                    height={500}
-                    className="object-cover" // Ensure this class handles width/height correctly for img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => handleImageError(e, product.name)}
                     data-oid="r-._jo-"
                   />
+
+                  {product.isNew && (
+                    <div
+                      className="absolute top-3 left-3 bg-green-500 text-white px-2 py-1 rounded-md text-xs font-semibold"
+                      data-oid="pun1wws"
+                    >
+                      Yeni
+                    </div>
+                  )}
+                  {product.originalPrice > product.price && (
+                    <div
+                      className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-semibold"
+                      data-oid="vinj7t5"
+                    >
+                      %
+                      {Math.round(
+                        ((product.originalPrice - product.price) /
+                          product.originalPrice) *
+                          100,
+                      )}{" "}
+                      İndirim
+                    </div>
+                  )}
                 </div>
-                <div className="fragment-overlay" data-oid="hy79:ij">
-                  <span className="product-tag" data-oid="tkrto65">
-                    {product.tag}
-                  </span>
-                  <h4 className="product-name" data-oid="5dsdtm:">
+                <div className="p-4" data-oid="hy79:ij">
+                  <div
+                    className="text-xs text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide"
+                    data-oid="tkrto65"
+                  >
+                    {product.category}
+                  </div>
+                  <h3
+                    className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2"
+                    data-oid="5dsdtm:"
+                  >
                     {product.name}
-                  </h4>
-                  <p className="product-price" data-oid="9:im4h_">
-                    {formatPrice(product.price)}
-                  </p>
+                  </h3>
+
+                  <div className="flex items-center mb-3" data-oid="e6txrmd">
+                    <div className="flex text-yellow-400" data-oid="gij0arg">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-current" : "text-gray-300"}`}
+                          viewBox="0 0 20 20"
+                          data-oid="x1k2y:g"
+                        >
+                          <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                            data-oid="fu5o_2g"
+                          />
+                        </svg>
+                      ))}
+                    </div>
+                    <span
+                      className="text-sm text-gray-500 dark:text-gray-400 ml-2"
+                      data-oid="1rk2q2s"
+                    >
+                      ({product.reviewCount})
+                    </span>
+                  </div>
+
+                  <div
+                    className="flex items-center justify-between mb-4"
+                    data-oid="9:im4h_"
+                  >
+                    <div data-oid="d0knbl5">
+                      <span
+                        className="text-xl font-bold text-gray-900 dark:text-white"
+                        data-oid="fku9n4z"
+                      >
+                        {formatPrice(product.price)}
+                      </span>
+                      {product.originalPrice > product.price && (
+                        <span
+                          className="text-sm text-gray-500 line-through ml-2"
+                          data-oid="6r_hohs"
+                        >
+                          {formatPrice(product.originalPrice)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
                   <a
                     href={`/products/${product.id}`}
-                    className="product-details-button"
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center block font-medium"
                     data-oid="7i:zztn"
                   >
-                    Detayları Gör
+                    İncele
                   </a>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="text-center mt-12" data-oid="3zik-9k">
+            <a
+              href="/products"
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold inline-block"
+              data-oid="6ktfw5l"
+            >
+              Tüm Ürünleri Gör
+            </a>
           </div>
         </div>
       </section>
