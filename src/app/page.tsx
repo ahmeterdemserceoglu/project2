@@ -7,229 +7,229 @@ import { useNotification } from "@/contexts/NotificationContext";
 import SearchParamsHandler from "@/components/SearchParamsHandler";
 import "./anasayfa.css";
 
-// Improved product data structure with more e-commerce related fields
+// E-commerce product data structure
 const products = [
   {
     id: 1,
-    name: "Kozmik Nesne 1",
-    price: 199.99,
-    originalPrice: 249.99,
-    image: "/images/product-1.jpg",
-    tag: "DM.001",
-    description: "Evrenin uzak köşelerinden bir parça.",
-    rating: 4.5,
-    reviewCount: 28,
-    category: "Kozmik",
+    name: "iPhone 15 Pro Max",
+    price: 54999.99,
+    originalPrice: 59999.99,
+    image: "/images/iphone-15-pro.jpg",
+    tag: "APPLE",
+    description: "En gelişmiş iPhone deneyimi.",
+    rating: 4.8,
+    reviewCount: 342,
+    category: "Elektronik",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 2,
-    name: "Kuantum Küre",
-    price: 249.99,
-    originalPrice: 299.99,
-    image: "/images/product-2.jpg",
-    tag: "DM.002",
-    description: "Olasılıkları içinde barındıran küre.",
-    rating: 4.7,
-    reviewCount: 42,
-    category: "Kuantum",
+    name: "Samsung Galaxy Watch 6",
+    price: 3299.99,
+    originalPrice: 3799.99,
+    image: "/images/galaxy-watch-6.jpg",
+    tag: "SAMSUNG",
+    description: "Akıllı saat teknolojisinin zirvesi.",
+    rating: 4.6,
+    reviewCount: 189,
+    category: "Elektronik",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 3,
-    name: "Boyut Kristali",
-    price: 329.99,
-    originalPrice: 399.99,
-    image: "/images/product-3.jpg",
-    tag: "DM.003",
-    description: "Farklı boyutlara açılan bir anahtar.",
-    rating: 4.3,
-    reviewCount: 16,
-    category: "Kristal",
+    name: "Ergonomik Ofis Koltuğu",
+    price: 2899.99,
+    originalPrice: 3499.99,
+    image: "/images/office-chair.jpg",
+    tag: "HERMAN",
+    description: "Uzun çalışma saatleri için ideal.",
+    rating: 4.7,
+    reviewCount: 156,
+    category: "Mobilya",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 4,
-    name: "Nova Artefaktı",
-    price: 179.99,
-    originalPrice: 219.99,
-    image: "/images/product-4.jpg",
-    tag: "DM.004",
-    description: "Yıldız tozundan dövülmüş kadim bir obje.",
-    rating: 4.8,
-    reviewCount: 37,
-    category: "Artefakt",
-    inStock: false,
+    name: "MacBook Air M3",
+    price: 42999.99,
+    originalPrice: 47999.99,
+    image: "/images/macbook-air-m3.jpg",
+    tag: "APPLE",
+    description: "Güçlü performans, hafif tasarım.",
+    rating: 4.9,
+    reviewCount: 278,
+    category: "Elektronik",
+    inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 5,
-    name: "Sicim Heykeli",
-    price: 499.99,
-    originalPrice: 599.99,
-    image: "/images/product-5.jpg",
-    tag: "DM.005",
-    description: "Gerçekliğin dokusunu yansıtan heykel.",
-    rating: 4.9,
-    reviewCount: 53,
-    category: "Heykel",
+    name: "Modern L Koltuk Takımı",
+    price: 12999.99,
+    originalPrice: 15999.99,
+    image: "/images/l-sofa-set.jpg",
+    tag: "IKEA",
+    description: "Şık ve konforlu oturma grubu.",
+    rating: 4.5,
+    reviewCount: 89,
+    category: "Mobilya",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 6,
-    name: "Kara Delik Kalıntısı",
-    price: 399.99,
-    originalPrice: 449.99,
-    image: "/images/product-6.jpg",
-    tag: "DM.006",
-    description: "Kara deliğin merkezinden alınmış parça.",
-    rating: 4.6,
-    reviewCount: 31,
-    category: "Kozmik",
+    name: "Sony WH-1000XM5 Kulaklık",
+    price: 4299.99,
+    originalPrice: 4999.99,
+    image: "/images/sony-headphones.jpg",
+    tag: "SONY",
+    description: "Endüstri lideri gürültü engelleme.",
+    rating: 4.8,
+    reviewCount: 234,
+    category: "Elektronik",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 7,
-    name: "Zaman Kapsülü",
-    price: 299.99,
-    originalPrice: 349.99,
-    image: "/images/product-7.jpg",
-    tag: "DM.007",
-    description: "Zamanın akışını yavaşlatan bir cihaz.",
-    rating: 4.4,
-    reviewCount: 19,
-    category: "Zaman",
+    name: 'Akıllı 65" OLED TV',
+    price: 24999.99,
+    originalPrice: 29999.99,
+    image: "/images/oled-tv-65.jpg",
+    tag: "LG",
+    description: "4K HDR ile sinema deneyimi.",
+    rating: 4.7,
+    reviewCount: 167,
+    category: "Elektronik",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 8,
-    name: "Enerji Kristali",
-    price: 159.99,
-    originalPrice: 189.99,
-    image: "/images/product-8.jpg",
-    tag: "DM.008",
-    description: "Sonsuz enerji barındıran kristal.",
-    rating: 4.2,
-    reviewCount: 24,
-    category: "Kristal",
+    name: "Yemek Masası Takımı",
+    price: 5999.99,
+    originalPrice: 7499.99,
+    image: "/images/dining-table-set.jpg",
+    tag: "BELLONA",
+    description: "6 kişilik modern yemek masası.",
+    rating: 4.4,
+    reviewCount: 78,
+    category: "Mobilya",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 9,
-    name: "Galaktik Pusula",
-    price: 279.99,
-    originalPrice: 329.99,
-    image: "/images/product-9.jpg",
-    tag: "DM.009",
-    description: "Yıldızlar arası yolculuklar için rehber.",
+    name: "Gaming Mekanik Klavye",
+    price: 1299.99,
+    originalPrice: 1599.99,
+    image: "/images/gaming-keyboard.jpg",
+    tag: "RAZER",
+    description: "RGB aydınlatmalı mekanik klavye.",
     rating: 4.6,
-    reviewCount: 45,
-    category: "Navigasyon",
+    reviewCount: 145,
+    category: "Elektronik",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 10,
-    name: "Plazma Orb",
-    price: 189.99,
-    originalPrice: 229.99,
-    image: "/images/product-10.jpg",
-    tag: "DM.010",
-    description: "Elektrik enerjisini görselleştiren küre.",
-    rating: 4.4,
-    reviewCount: 33,
-    category: "Enerji",
+    name: "Kahve Makinesi Deluxe",
+    price: 3499.99,
+    originalPrice: 3999.99,
+    image: "/images/coffee-machine.jpg",
+    tag: "NESPRESSO",
+    description: "Profesyonel kahve deneyimi.",
+    rating: 4.5,
+    reviewCount: 112,
+    category: "Ev Aletleri",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 11,
-    name: "Hologram Projektör",
-    price: 549.99,
-    originalPrice: 649.99,
-    image: "/images/product-11.jpg",
-    tag: "DM.011",
-    description: "3D hologramlar oluşturan gelişmiş cihaz.",
-    rating: 4.8,
+    name: "Yatak Odası Takımı",
+    price: 18999.99,
+    originalPrice: 22999.99,
+    image: "/images/bedroom-set.jpg",
+    tag: "YATAŞ",
+    description: "Komplet yatak odası mobilyası.",
+    rating: 4.6,
     reviewCount: 67,
-    category: "Teknoloji",
+    category: "Mobilya",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 12,
-    name: "Meteor Parçası",
-    price: 129.99,
-    originalPrice: 159.99,
-    image: "/images/product-12.jpg",
-    tag: "DM.012",
-    description: "Uzaydan gelen nadir mineral örneği.",
-    rating: 4.3,
-    reviewCount: 21,
-    category: "Kozmik",
+    name: "Draadloze Oordopjes Pro",
+    price: 899.99,
+    originalPrice: 1199.99,
+    image: "/images/wireless-earbuds.jpg",
+    tag: "AIRPODS",
+    description: "Kablosuz müzik deneyimi.",
+    rating: 4.7,
+    reviewCount: 298,
+    category: "Elektronik",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 13,
-    name: "Antigravite Modülü",
-    price: 799.99,
-    originalPrice: 999.99,
-    image: "/images/product-13.jpg",
-    tag: "DM.013",
-    description: "Yerçekimini etkisiz hale getiren teknoloji.",
-    rating: 4.9,
+    name: "Akıllı Buzdolabı",
+    price: 32999.99,
+    originalPrice: 37999.99,
+    image: "/images/smart-fridge.jpg",
+    tag: "SAMSUNG",
+    description: "WiFi bağlantılı akıllı buzdolabı.",
+    rating: 4.8,
     reviewCount: 89,
-    category: "Teknoloji",
+    category: "Ev Aletleri",
     inStock: true,
     isNew: true,
     isFeatured: true,
   },
   {
     id: 14,
-    name: "Kristal Rezonatör",
-    price: 369.99,
-    originalPrice: 429.99,
-    image: "/images/product-14.jpg",
-    tag: "DM.014",
-    description: "Titreşim frekanslarını düzenleyen kristal.",
-    rating: 4.5,
-    reviewCount: 38,
-    category: "Kristal",
+    name: "Fitness Tracker Akıllı Bileklik",
+    price: 1599.99,
+    originalPrice: 1999.99,
+    image: "/images/fitness-tracker.jpg",
+    tag: "FITBIT",
+    description: "Sağlık takibi ve spor analizi.",
+    rating: 4.4,
+    reviewCount: 156,
+    category: "Elektronik",
     inStock: true,
     isNew: false,
     isFeatured: true,
   },
   {
     id: 15,
-    name: "Nebula Lambaları",
-    price: 219.99,
-    originalPrice: 269.99,
-    image: "/images/product-15.jpg",
-    tag: "DM.015",
-    description: "Nebula renklerini yansıtan aydınlatma.",
-    rating: 4.7,
-    reviewCount: 56,
-    category: "Dekorasyon",
+    name: "LED Masa Lambası",
+    price: 449.99,
+    originalPrice: 599.99,
+    image: "/images/led-desk-lamp.jpg",
+    tag: "PHILIPS",
+    description: "Ayarlanabilir LED aydınlatma.",
+    rating: 4.3,
+    reviewCount: 234,
+    category: "Ev & Yaşam",
     inStock: true,
     isNew: true,
     isFeatured: true,
@@ -238,16 +238,40 @@ const products = [
 
 // Categories for navigation
 const categories = [
-  { id: 1, name: "Kozmik", image: "/images/category-cosmic.jpg", count: 12 },
-  { id: 2, name: "Kuantum", image: "/images/category-quantum.jpg", count: 8 },
-  { id: 3, name: "Kristal", image: "/images/category-crystal.jpg", count: 15 },
-  { id: 4, name: "Artefakt", image: "/images/category-artefact.jpg", count: 9 },
-  { id: 5, name: "Heykel", image: "/images/category-sculpture.jpg", count: 7 },
+  {
+    id: 1,
+    name: "Elektronik",
+    image: "/images/category-electronics.jpg",
+    count: 1250,
+  },
+  {
+    id: 2,
+    name: "Mobilya",
+    image: "/images/category-furniture.jpg",
+    count: 890,
+  },
+  {
+    id: 3,
+    name: "Ev Aletleri",
+    image: "/images/category-appliances.jpg",
+    count: 567,
+  },
+  { id: 4, name: "Ev & Yaşam", image: "/images/category-home.jpg", count: 423 },
+  {
+    id: 5,
+    name: "Spor & Outdoor",
+    image: "/images/category-sports.jpg",
+    count: 334,
+  },
 ];
 
 // Format price in Turkish Lira
 const formatPrice = (price: number) => {
-  return `₺${price.toFixed(2)}`;
+  return new Intl.NumberFormat("tr-TR", {
+    style: "currency",
+    currency: "TRY",
+    minimumFractionDigits: 2,
+  }).format(price);
 };
 
 export default function Home() {
@@ -427,7 +451,7 @@ export default function Home() {
                     {product.name}
                   </h4>
                   <p className="product-price" data-oid="9:im4h_">
-                    {product.price}
+                    {formatPrice(product.price)}
                   </p>
                   <a
                     href={`/products/${product.id}`}
@@ -443,35 +467,136 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Spiral Collection Navigator */}
+      {/* Categories Showcase Section */}
       <section
-        className="spiral-section h-screen relative overflow-hidden"
+        className="categories-showcase py-20 bg-gray-50 dark:bg-gray-900"
         data-oid="k6t64ru"
       >
-        <div className="spiral-container" data-oid="ra2af_p">
-          <div className="spiral-path" data-oid="-et86_6">
-            {[...Array(5)].map((_, i) => (
+        <div className="container mx-auto px-4" data-oid="ra2af_p">
+          <div className="text-center mb-16" data-oid="-et86_6">
+            <h2
+              className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+              data-oid="vwqoogs"
+            >
+              Kategorilerimizi Keşfedin
+            </h2>
+            <p
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+              data-oid="j6p_rln"
+            >
+              Her ihtiyacınız için geniş ürün yelpazesi. Kaliteli markalar,
+              uygun fiyatlar.
+            </p>
+          </div>
+
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+            data-oid="kgh:s8r"
+          >
+            {categories.map((category, i) => (
               <div
-                key={i}
-                className={`spiral-node node-${i + 1}`}
-                data-oid="kgh:s8r"
+                key={category.id}
+                className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                data-oid="unu65cd"
               >
-                <div className="node-content" data-oid="unu65cd">
-                  <span className="node-label" data-oid="-.g9t6p">
-                    {["TERRA", "NOVA", "ASTRAL", "QUANTUM", "INFINITY"][i]}
-                  </span>
+                <div
+                  className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-blue-500 to-purple-600 p-8"
+                  data-oid="rz_-2dm"
+                >
+                  <div
+                    className="flex items-center justify-center h-full"
+                    data-oid="0b7fmqd"
+                  >
+                    <div className="text-center text-white" data-oid="lzkzh7:">
+                      <div className="text-6xl mb-4" data-oid="-wyphz8">
+                        {["📱", "🪑", "🏠", "💡", "⚽"][i]}
+                      </div>
+                      <h3
+                        className="text-2xl font-bold mb-2"
+                        data-oid="rp4l6n2"
+                      >
+                        {category.name}
+                      </h3>
+                      <p className="text-blue-100" data-oid="3..qy.n">
+                        {category.count} ürün
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6" data-oid="ktkuwho">
+                  <div
+                    className="flex items-center justify-between"
+                    data-oid="5.u8lci"
+                  >
+                    <div data-oid=":dt6b-:">
+                      <h4
+                        className="font-semibold text-gray-900 dark:text-white mb-2"
+                        data-oid="4yjy56q"
+                      >
+                        Popüler Ürünler
+                      </h4>
+                      <p
+                        className="text-sm text-gray-600 dark:text-gray-400"
+                        data-oid="l3appg0"
+                      >
+                        En çok tercih edilen ürünleri keşfedin
+                      </p>
+                    </div>
+                    <a
+                      href={`/category/${category.name.toLowerCase()}`}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                      data-oid="-.g9t6p"
+                    >
+                      Görüntüle
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="spiral-center" data-oid="x_ai:2j">
-            <div className="pulse-circle" data-oid="2522nxb"></div>
-            <h3
-              className="text-2xl font-light tracking-wider mt-4"
-              data-oid="2a0i3ad"
+
+          {/* Special Offers Grid */}
+          <div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+            data-oid="x_ai:2j"
+          >
+            <div
+              className="bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl p-8 text-white"
+              data-oid="s3vywjw"
             >
-              BOYUTLAR
-            </h3>
+              <h3 className="text-3xl font-bold mb-4" data-oid="65.b5sy">
+                Süper Fırsatlar
+              </h3>
+              <p className="text-lg mb-6 text-red-100" data-oid="l:42-7g">
+                Seçili ürünlerde %70'e varan indirimler
+              </p>
+              <a
+                href="/deals"
+                className="bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+                data-oid="r0amz7d"
+              >
+                Fırsatları Gör
+              </a>
+            </div>
+
+            <div
+              className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 text-white"
+              data-oid=":lwb8n9"
+            >
+              <h3 className="text-3xl font-bold mb-4" data-oid="xtfxzum">
+                Ücretsiz Kargo
+              </h3>
+              <p className="text-lg mb-6 text-green-100" data-oid="kqjh4sf">
+                500₺ ve üzeri alışverişlerde kargo bizden
+              </p>
+              <a
+                href="/shipping"
+                className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+                data-oid="syuiecr"
+              >
+                Detayları Öğren
+              </a>
+            </div>
           </div>
         </div>
       </section>
