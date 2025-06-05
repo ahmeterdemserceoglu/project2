@@ -186,91 +186,91 @@ export default async function ProductsPage() {
   const products = await getProducts();
 
   return (
-    <div className="container mx-auto py-8 px-4" data-oid="_8yxdih">
-      <h1 className="text-3xl font-bold mb-8" data-oid="qluchxz">
+    <div className="container mx-auto py-8 px-4" data-oid="_s28piu">
+      <h1 className="text-3xl font-bold mb-8" data-oid="3e:tp84">
         Ürünlerimiz
       </h1>
 
-      <div className="flex flex-col md:flex-row gap-8" data-oid="b4x_0f9">
+      <div className="flex flex-col md:flex-row gap-8" data-oid="78rn9ql">
         {/* Filters - Mobile */}
-        <div className="md:hidden mb-4" data-oid="fulc93c">
+        <div className="md:hidden mb-4" data-oid=".a:m63o">
           <details
             className="bg-white rounded-lg shadow p-4"
-            data-oid="-m58c5d"
+            data-oid="_o9o_6z"
           >
             <summary
               className="font-semibold cursor-pointer"
-              data-oid="yb572_5"
+              data-oid=".:ycb5x"
             >
               Filtreler
             </summary>
-            <div className="mt-4 space-y-4" data-oid="ej7akfy">
+            <div className="mt-4 space-y-4" data-oid=":l2duny">
               {/* Category Filter */}
-              <div data-oid="8x2g-o_">
-                <h3 className="font-medium mb-2" data-oid="fr7ccn_">
+              <div data-oid="p2cjw0g">
+                <h3 className="font-medium mb-2" data-oid="z4_yaix">
                   Kategoriler
                 </h3>
-                <div className="space-y-2" data-oid="g.j2_r:">
-                  <label className="flex items-center" data-oid="eyvfxld">
+                <div className="space-y-2" data-oid="1m0cqf8">
+                  <label className="flex items-center" data-oid="za52-5s">
                     <input
                       type="checkbox"
                       className="mr-2"
-                      data-oid="dbd.zv."
+                      data-oid="zay7iqf"
                     />
 
-                    <span data-oid="1a_:afi">Giyim</span>
+                    <span data-oid="6jj76:d">Giyim</span>
                   </label>
-                  <label className="flex items-center" data-oid="-:f1aa3">
+                  <label className="flex items-center" data-oid="cyy4ce:">
                     <input
                       type="checkbox"
                       className="mr-2"
-                      data-oid="ldv662s"
+                      data-oid="oo3.3u:"
                     />
 
-                    <span data-oid="c3coqun">Ayakkabı</span>
+                    <span data-oid="kn.84ea">Ayakkabı</span>
                   </label>
-                  <label className="flex items-center" data-oid="klduoqw">
+                  <label className="flex items-center" data-oid="_:pxiip">
                     <input
                       type="checkbox"
                       className="mr-2"
-                      data-oid="-xgi0q7"
+                      data-oid="nyyiscb"
                     />
 
-                    <span data-oid="jowpfme">Aksesuar</span>
+                    <span data-oid="8it8_4e">Aksesuar</span>
                   </label>
-                  <label className="flex items-center" data-oid="y4uy0j-">
+                  <label className="flex items-center" data-oid="n-hywo2">
                     <input
                       type="checkbox"
                       className="mr-2"
-                      data-oid="qfb484y"
+                      data-oid="vdvwrhb"
                     />
 
-                    <span data-oid="nmyvw8p">Elektronik</span>
+                    <span data-oid="bxsj:es">Elektronik</span>
                   </label>
                 </div>
               </div>
 
               {/* Price Filter */}
-              <div data-oid="a_vb70l">
-                <h3 className="font-medium mb-2" data-oid="b26p0-u">
+              <div data-oid="i52_e.m">
+                <h3 className="font-medium mb-2" data-oid="gw2.k-e">
                   Fiyat Aralığı
                 </h3>
-                <div className="flex items-center" data-oid="ds46af9">
+                <div className="flex items-center" data-oid="fw_:t43">
                   <input
                     type="number"
                     placeholder="Min"
                     className="w-24 p-2 border rounded-md"
-                    data-oid="m67ligk"
+                    data-oid="jtmdbhv"
                   />
 
-                  <span className="mx-2" data-oid="mq33c1e">
+                  <span className="mx-2" data-oid="-1ksodf">
                     -
                   </span>
                   <input
                     type="number"
                     placeholder="Max"
                     className="w-24 p-2 border rounded-md"
-                    data-oid="..9:53."
+                    data-oid="-1af9tk"
                   />
                 </div>
               </div>
@@ -281,119 +281,119 @@ export default async function ProductsPage() {
         </div>
 
         {/* Filters - Desktop */}
-        <div className="hidden md:block w-64 flex-shrink-0" data-oid="12hf6zz">
+        <div className="hidden md:block w-64 flex-shrink-0" data-oid="x.cq73:">
           <div
             className="bg-white rounded-lg shadow p-6 sticky top-24"
-            data-oid="re9vj1t"
+            data-oid="1j4h-2:"
           >
-            <h2 className="font-bold text-xl mb-4" data-oid="ysstw5:">
+            <h2 className="font-bold text-xl mb-4" data-oid="hd8m7t7">
               Filtreler
             </h2>
 
             {/* Category Filter */}
-            <div className="mb-6" data-oid="nemeak3">
-              <h3 className="font-medium mb-2" data-oid="xadch28">
+            <div className="mb-6" data-oid="14kbti7">
+              <h3 className="font-medium mb-2" data-oid="v-6r_13">
                 Kategoriler
               </h3>
-              <div className="space-y-2" data-oid="44em365">
-                <label className="flex items-center" data-oid="f.s4_9v">
-                  <input type="checkbox" className="mr-2" data-oid="g6k1ou." />
-                  <span data-oid="cu1xr_n">Giyim</span>
+              <div className="space-y-2" data-oid="1a16qr-">
+                <label className="flex items-center" data-oid="q16peqw">
+                  <input type="checkbox" className="mr-2" data-oid="ncmvxi2" />
+                  <span data-oid="j28k._o">Giyim</span>
                 </label>
-                <label className="flex items-center" data-oid="uqh3l__">
-                  <input type="checkbox" className="mr-2" data-oid="s.y6dw7" />
-                  <span data-oid="mafugrm">Ayakkabı</span>
+                <label className="flex items-center" data-oid="xj63.ie">
+                  <input type="checkbox" className="mr-2" data-oid="u01ibvz" />
+                  <span data-oid="h_u567x">Ayakkabı</span>
                 </label>
-                <label className="flex items-center" data-oid="6_4b9-t">
-                  <input type="checkbox" className="mr-2" data-oid="srkxouu" />
-                  <span data-oid="1a-1ppd">Aksesuar</span>
+                <label className="flex items-center" data-oid="lj7kzlb">
+                  <input type="checkbox" className="mr-2" data-oid="yuq7baz" />
+                  <span data-oid="2mpdur4">Aksesuar</span>
                 </label>
-                <label className="flex items-center" data-oid="w2kh0px">
-                  <input type="checkbox" className="mr-2" data-oid="ikp9.3t" />
-                  <span data-oid="jschhmu">Elektronik</span>
+                <label className="flex items-center" data-oid="oxod4fi">
+                  <input type="checkbox" className="mr-2" data-oid="wk39oa0" />
+                  <span data-oid="ehniqrv">Elektronik</span>
                 </label>
               </div>
             </div>
 
             {/* Price Filter */}
-            <div className="mb-6" data-oid="pfa_i9w">
-              <h3 className="font-medium mb-2" data-oid="ie6gg:i">
+            <div className="mb-6" data-oid="ll00d6c">
+              <h3 className="font-medium mb-2" data-oid="4icup26">
                 Fiyat Aralığı
               </h3>
-              <div className="flex items-center" data-oid="bqrpx::">
+              <div className="flex items-center" data-oid="w5btv3b">
                 <input
                   type="number"
                   placeholder="Min"
                   className="w-20 p-2 border rounded-md"
-                  data-oid="5keck4b"
+                  data-oid="l5jfb21"
                 />
 
-                <span className="mx-2" data-oid="b98vniz">
+                <span className="mx-2" data-oid="01-h6t6">
                   -
                 </span>
                 <input
                   type="number"
                   placeholder="Max"
                   className="w-20 p-2 border rounded-md"
-                  data-oid="ok2wnn2"
+                  data-oid="0q3wy9."
                 />
               </div>
             </div>
 
             {/* Availability Filter */}
-            <div className="mb-6" data-oid=":kzm:w-">
-              <h3 className="font-medium mb-2" data-oid="wdk1jrx">
+            <div className="mb-6" data-oid="nfrbt7v">
+              <h3 className="font-medium mb-2" data-oid="l7vfi1j">
                 Stok Durumu
               </h3>
-              <label className="flex items-center" data-oid="c734p62">
-                <input type="checkbox" className="mr-2" data-oid=".802zp8" />
-                <span data-oid="pjvdeb5">Sadece stoktakileri göster</span>
+              <label className="flex items-center" data-oid="qf9t6s3">
+                <input type="checkbox" className="mr-2" data-oid="f-akq:4" />
+                <span data-oid="4bjisvl">Sadece stoktakileri göster</span>
               </label>
             </div>
 
             {/* Discount Filter */}
-            <div data-oid="sjgqbgt">
-              <h3 className="font-medium mb-2" data-oid="--89nzn">
+            <div data-oid="r4wv02t">
+              <h3 className="font-medium mb-2" data-oid="t314oqd">
                 İndirim
               </h3>
-              <label className="flex items-center" data-oid="2ugv_9f">
-                <input type="checkbox" className="mr-2" data-oid="tycf48." />
-                <span data-oid="8y0q6.x">İndirimdeki ürünler</span>
+              <label className="flex items-center" data-oid="-ojcet_">
+                <input type="checkbox" className="mr-2" data-oid="4:44gzk" />
+                <span data-oid="4-70vql">İndirimdeki ürünler</span>
               </label>
             </div>
           </div>
         </div>
 
         {/* Products */}
-        <div className="flex-grow" data-oid="grgdhq6">
+        <div className="flex-grow" data-oid="rgq6aut">
           {/* Sort options */}
           <div
             className="flex justify-between items-center mb-6"
-            data-oid="ecv95_z"
+            data-oid=":cwnb5."
           >
-            <p className="text-gray-600" data-oid="tcb0kyd">
+            <p className="text-gray-600" data-oid="5apw:4-">
               {products.length} ürün bulundu
             </p>
-            <select className="border rounded-md p-2" data-oid="i.oi3rv">
-              <option value="newest" data-oid="44fc:5_">
+            <select className="border rounded-md p-2" data-oid="lzxqg-q">
+              <option value="newest" data-oid="k7pfzq4">
                 En Yeniler
               </option>
-              <option value="price-asc" data-oid="rxx313q">
+              <option value="price-asc" data-oid="pxt1zg:">
                 Fiyat (Artan)
               </option>
-              <option value="price-desc" data-oid="irl_8.v">
+              <option value="price-desc" data-oid="81awq.i">
                 Fiyat (Azalan)
               </option>
-              <option value="name-asc" data-oid="rkjj3dp">
+              <option value="name-asc" data-oid="wu.cbom">
                 İsim (A-Z)
               </option>
-              <option value="name-desc" data-oid="zn63l1l">
+              <option value="name-desc" data-oid="17m34kx">
                 İsim (Z-A)
               </option>
             </select>
           </div>
 
-          <ProductGrid products={products} data-oid="9rns7bs" />
+          <ProductGrid products={products} data-oid="pjorjwt" />
         </div>
       </div>
     </div>

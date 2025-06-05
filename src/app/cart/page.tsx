@@ -30,17 +30,17 @@ const CartPage = () => {
 
   if (items.length === 0) {
     return (
-      <div className="container mx-auto py-16 px-4" data-oid="qkjohbv">
-        <h1 className="text-3xl font-bold mb-8" data-oid="qr25z9d">
+      <div className="container mx-auto py-16 px-4" data-oid="8yljhei">
+        <h1 className="text-3xl font-bold mb-8" data-oid="41iecyx">
           Sepetiniz
         </h1>
         <div
           className="bg-white rounded-lg shadow-lg p-12 max-w-lg mx-auto text-center"
-          data-oid="c_nh2ec"
+          data-oid="351lm9a"
         >
           <div
             className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6"
-            data-oid="cmg_qzn"
+            data-oid="2jn.8n1"
           >
             <svg
               className="w-12 h-12 text-gray-400"
@@ -48,42 +48,42 @@ const CartPage = () => {
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="jmplgw5"
+              data-oid="sdv6-zl"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={1.5}
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                data-oid="i8n7wyt"
+                data-oid="0npkqkm"
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-semibold mb-4" data-oid="1wauca1">
+          <h2 className="text-2xl font-semibold mb-4" data-oid="5vyobgq">
             Sepetiniz şu anda boş
           </h2>
-          <p className="text-gray-600 mb-8" data-oid=":h5-fld">
+          <p className="text-gray-600 mb-8" data-oid="ldx6b-e">
             Sepetinizde ürün bulunmamaktadır. Alışverişe başlamak için ürünleri
             keşfedin.
           </p>
           <Link
             href="/products"
             className="btn btn-primary px-8 py-3 rounded-md inline-flex items-center"
-            data-oid="ep-f8xq"
+            data-oid="e4m8cmq"
           >
-            <span data-oid="kapq.zv">Alışverişe Başla</span>
+            <span data-oid="9:q33or">Alışverişe Başla</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 ml-2"
               viewBox="0 0 20 20"
               fill="currentColor"
-              data-oid="fbbv8cx"
+              data-oid="nncvsrd"
             >
               <path
                 fillRule="evenodd"
                 d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
                 clipRule="evenodd"
-                data-oid="cktb169"
+                data-oid="d3.1gqk"
               />
             </svg>
           </Link>
@@ -93,57 +93,57 @@ const CartPage = () => {
   }
 
   return (
-    <div className="container mx-auto py-12 px-4" data-oid="coq-oj1">
-      <h1 className="text-3xl font-bold mb-8" data-oid="x3l0trv">
+    <div className="container mx-auto py-12 px-4" data-oid="-eup_ro">
+      <h1 className="text-3xl font-bold mb-8" data-oid="f2ldgrr">
         Sepetiniz
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-oid="8y0rrvr">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-oid="0ba9uys">
         {/* Cart Items */}
-        <div className="lg:col-span-2" data-oid="1qwb73c">
+        <div className="lg:col-span-2" data-oid="c9caqex">
           <div
             className="bg-white rounded-lg shadow-lg overflow-hidden"
-            data-oid="gsjlhpv"
+            data-oid="d.:h02s"
           >
             {/* Header */}
             <div
               className="hidden md:grid grid-cols-6 gap-4 p-4 border-b bg-gray-50 text-gray-700 font-medium"
-              data-oid="jymcf8x"
+              data-oid="_6nmj1d"
             >
-              <div className="col-span-3" data-oid="u4ml0a0">
+              <div className="col-span-3" data-oid=".ytc0in">
                 Ürün
               </div>
-              <div className="text-center" data-oid="savbcw5">
+              <div className="text-center" data-oid="ue0kf79">
                 Fiyat
               </div>
-              <div className="text-center" data-oid="-dqta3i">
+              <div className="text-center" data-oid="p5v6jqq">
                 Adet
               </div>
-              <div className="text-center" data-oid="q0_ei08">
+              <div className="text-center" data-oid="outfjzc">
                 Toplam
               </div>
             </div>
 
             {/* Items */}
-            <div className="divide-y" data-oid="u_gw.ca">
+            <div className="divide-y" data-oid="zo9q-.l">
               {items.map((item) => (
                 <div
                   key={item.id}
                   className="p-6 hover:bg-gray-50 transition-colors"
-                  data-oid="pk.dwxz"
+                  data-oid="96x08ug"
                 >
                   <div
                     className="md:grid md:grid-cols-6 md:gap-4 flex flex-col space-y-4 md:space-y-0 items-center"
-                    data-oid="bwhz-c-"
+                    data-oid="qf5fs0z"
                   >
                     {/* Product */}
                     <div
                       className="md:col-span-3 flex items-center space-x-4 w-full"
-                      data-oid=":5xctdm"
+                      data-oid="n0ccekq"
                     >
                       <div
                         className="relative w-20 h-20 flex-shrink-0"
-                        data-oid="dd9txtg"
+                        data-oid="pe2kuhn"
                       >
                         <Image
                           src={item.image}
@@ -151,11 +151,11 @@ const CartPage = () => {
                           fill
                           sizes="80px"
                           className="object-cover rounded-md"
-                          data-oid="6yl93yt"
+                          data-oid="hkj0uk1"
                         />
                       </div>
-                      <div data-oid="cpc7uxz">
-                        <h3 className="font-medium" data-oid="k98w92j">
+                      <div data-oid="3vbxfp_">
+                        <h3 className="font-medium" data-oid="sy:ng_r">
                           {item.name}
                         </h3>
                         {item.attributes &&
@@ -164,7 +164,7 @@ const CartPage = () => {
                               <p
                                 key={key}
                                 className="text-sm text-gray-500"
-                                data-oid="99:fj4j"
+                                data-oid="v.r_3re"
                               >
                                 {key}: {value}
                               </p>
@@ -176,11 +176,11 @@ const CartPage = () => {
                     {/* Price */}
                     <div
                       className="text-center md:text-center"
-                      data-oid="zdj0cxb"
+                      data-oid="zr6w-o3"
                     >
                       <span
                         className="md:hidden font-medium mr-2"
-                        data-oid=":6nn8in"
+                        data-oid="4vo7rkd"
                       >
                         Fiyat:
                       </span>
@@ -190,24 +190,24 @@ const CartPage = () => {
                     {/* Quantity */}
                     <div
                       className="flex items-center justify-center"
-                      data-oid="rpmekqg"
+                      data-oid="q3x5wbu"
                     >
                       <span
                         className="md:hidden font-medium mr-2"
-                        data-oid="k95lvoc"
+                        data-oid="4ofmu9i"
                       >
                         Adet:
                       </span>
                       <div
                         className="flex border rounded-md"
-                        data-oid="f5ik_vt"
+                        data-oid="j3-9__6"
                       >
                         <button
                           className="px-3 py-1 hover:bg-gray-100 transition-colors"
                           onClick={() =>
                             handleQuantityChange(item.id, item.quantity - 1)
                           }
-                          data-oid="vkxfalb"
+                          data-oid="w.arrye"
                         >
                           -
                         </button>
@@ -222,7 +222,7 @@ const CartPage = () => {
                             )
                           }
                           className="w-12 text-center focus:outline-none"
-                          data-oid="q1fh:8g"
+                          data-oid="zd_ewqc"
                         />
 
                         <button
@@ -230,7 +230,7 @@ const CartPage = () => {
                           onClick={() =>
                             handleQuantityChange(item.id, item.quantity + 1)
                           }
-                          data-oid="jex8upt"
+                          data-oid="b2vxtne"
                         >
                           +
                         </button>
@@ -240,22 +240,22 @@ const CartPage = () => {
                     {/* Total */}
                     <div
                       className="text-center md:text-center"
-                      data-oid="0ek7mxj"
+                      data-oid="q8fdzns"
                     >
                       <span
                         className="md:hidden font-medium mr-2"
-                        data-oid="mwzyjpc"
+                        data-oid="8pnxkcr"
                       >
                         Toplam:
                       </span>
-                      <div className="flex flex-col" data-oid="hq5n:ar">
-                        <span data-oid="r3r1gxw">
+                      <div className="flex flex-col" data-oid="5_4zemc">
+                        <span data-oid="y0ji4by">
                           ₺{(item.price * item.quantity).toFixed(2)}
                         </span>
                         <button
                           onClick={() => handleRemoveItem(item.id)}
                           className="text-red-500 text-sm hover:text-red-700 transition-colors"
-                          data-oid="m.2a.7:"
+                          data-oid="64ql670"
                         >
                           Kaldır
                         </button>
@@ -269,33 +269,33 @@ const CartPage = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="lg:col-span-1" data-oid="zf08v4h">
+        <div className="lg:col-span-1" data-oid="rwc0s_i">
           <div
             className="bg-white rounded-lg shadow-lg p-6 sticky top-24"
-            data-oid="ablrl5u"
+            data-oid="r00trw2"
           >
             <h2
               className="text-xl font-bold mb-6 pb-4 border-b"
-              data-oid="geqsaac"
+              data-oid=".8g2cvg"
             >
               Sipariş Özeti
             </h2>
-            <div className="space-y-4 mb-6" data-oid="s15_wts">
-              <div className="flex justify-between" data-oid="6:arcs.">
-                <span className="text-gray-600" data-oid="_7v4w.0">
+            <div className="space-y-4 mb-6" data-oid="hl8-:8f">
+              <div className="flex justify-between" data-oid="ycdwxox">
+                <span className="text-gray-600" data-oid="bb21e69">
                   Ara Toplam
                 </span>
-                <span className="font-medium" data-oid="v1.e_a_">
+                <span className="font-medium" data-oid="9oqxox3">
                   ₺{totalPrice().toFixed(2)}
                 </span>
               </div>
-              <div className="flex justify-between" data-oid="s1qvrp6">
-                <span className="text-gray-600" data-oid="c1cn_dl">
+              <div className="flex justify-between" data-oid="mgpg3pf">
+                <span className="text-gray-600" data-oid="zv0xpv:">
                   Kargo
                 </span>
-                <span className="font-medium" data-oid="fv2lvw-">
+                <span className="font-medium" data-oid="z7ef518">
                   {totalPrice() >= 500 ? (
-                    <span className="text-green-600" data-oid="d.fbjeg">
+                    <span className="text-green-600" data-oid="nw439ta">
                       Ücretsiz
                     </span>
                   ) : (
@@ -303,13 +303,13 @@ const CartPage = () => {
                   )}
                 </span>
               </div>
-              <div className="border-t pt-4 mt-4" data-oid="pd10.9o">
+              <div className="border-t pt-4 mt-4" data-oid="gcnh_mb">
                 <div
                   className="flex justify-between font-bold text-lg"
-                  data-oid="t3icwxf"
+                  data-oid="yjf1vms"
                 >
-                  <span data-oid="p_lbc9h">Toplam</span>
-                  <span data-oid=".i1hymd">
+                  <span data-oid="0uktq-6">Toplam</span>
+                  <span data-oid="2wjrg9q">
                     ₺
                     {totalPrice() >= 500
                       ? totalPrice().toFixed(2)
@@ -317,11 +317,11 @@ const CartPage = () => {
                   </span>
                 </div>
                 {totalPrice() < 500 && (
-                  <p className="text-sm text-gray-500 mt-2" data-oid="q5avb11">
+                  <p className="text-sm text-gray-500 mt-2" data-oid="q152ha:">
                     500₺ üzeri siparişlerde kargo ücretsiz!
                     <span
                       className="text-primary font-medium"
-                      data-oid="6bc0s-v"
+                      data-oid="q-:o54f"
                     >
                       {" "}
                       ₺{(500 - totalPrice()).toFixed(2)} daha ekleyin
@@ -334,7 +334,7 @@ const CartPage = () => {
               onClick={handleCheckout}
               disabled={isCheckingOut}
               className="btn btn-primary w-full flex items-center justify-center py-3"
-              data-oid="ra3t497"
+              data-oid="hmdnwrx"
             >
               {isCheckingOut ? (
                 <>
@@ -343,7 +343,7 @@ const CartPage = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    data-oid="pvir6y2"
+                    data-oid=".1qi499"
                   >
                     <circle
                       className="opacity-25"
@@ -352,13 +352,13 @@ const CartPage = () => {
                       r="10"
                       stroke="currentColor"
                       strokeWidth="4"
-                      data-oid="lpwpyx."
+                      data-oid="_ro_2u8"
                     ></circle>
                     <path
                       className="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      data-oid="uav7-3o"
+                      data-oid="nfpyaiq"
                     ></path>
                   </svg>
                   İşleniyor...
@@ -367,24 +367,24 @@ const CartPage = () => {
                 "Ödemeye Geç"
               )}
             </button>
-            <div className="mt-4 text-center" data-oid="r7j3-d:">
+            <div className="mt-4 text-center" data-oid="uh2mod1">
               <Link
                 href="/products"
                 className="text-primary hover:underline inline-flex items-center"
-                data-oid="1h:98pz"
+                data-oid="v3-solm"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 mr-1"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  data-oid="7x-sk5s"
+                  data-oid="vtcsyob"
                 >
                   <path
                     fillRule="evenodd"
                     d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
                     clipRule="evenodd"
-                    data-oid="jvtj9pl"
+                    data-oid="pwwdxd0"
                   />
                 </svg>
                 Alışverişe Devam Et

@@ -42,12 +42,12 @@ export function ToastProvider({ children }: ToastProviderProps) {
   }, []);
 
   return (
-    <ToastContext.Provider value={{ showToast }} data-oid="q5qozsd">
+    <ToastContext.Provider value={{ showToast }} data-oid="l7tos.8">
       {children}
       <ToastContainer
         toasts={toasts}
         onClose={removeToast}
-        data-oid="g3__rsr"
+        data-oid="wq3yz9t"
       />
     </ToastContext.Provider>
   );

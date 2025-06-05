@@ -104,7 +104,7 @@ export default function Orders() {
     return (
       <span
         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}
-        data-oid="1rfj1y6"
+        data-oid="pf_up:m"
       >
         {config.label}
       </span>
@@ -139,7 +139,7 @@ export default function Orders() {
     return (
       <span
         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}
-        data-oid="hpd46p2"
+        data-oid="cem33nw"
       >
         {config.label}
       </span>
@@ -155,14 +155,14 @@ export default function Orders() {
   };
 
   return (
-    <RequireAuth data-oid="-ouopn1">
-      <div className="container mx-auto px-4 py-8" data-oid="h4l3nnz">
-        <div className="max-w-4xl mx-auto" data-oid="sg9ji-v">
-          <div className="mb-6" data-oid="wg1z867">
+    <RequireAuth data-oid="ceitrhd">
+      <div className="container mx-auto px-4 py-8" data-oid="voepq_s">
+        <div className="max-w-4xl mx-auto" data-oid="8iv3bgt">
+          <div className="mb-6" data-oid="lzhagah">
             <Link
               href="/account"
               className="inline-flex items-center text-sm text-secondary hover:text-secondary-dark"
-              data-oid="ivcsjab"
+              data-oid="72zrhyy"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -170,64 +170,64 @@ export default function Orders() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="hrm_n3i"
+                data-oid="7asgraz"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M15 19l-7-7 7-7"
-                  data-oid="7qkz7b-"
+                  data-oid="4z4-ax4"
                 />
               </svg>
               Hesap Sayfasına Dön
             </Link>
             <h1
               className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-2"
-              data-oid="4i:qazl"
+              data-oid="qzxr25u"
             >
               Siparişlerim
             </h1>
             <p
               className="text-gray-600 dark:text-gray-300 mt-1"
-              data-oid="b538:5t"
+              data-oid="nrthdwr"
             >
               Tüm siparişlerinizi ve durumlarını görüntüleyin.
             </p>
           </div>
 
           {isLoading ? (
-            <div className="flex justify-center p-8" data-oid="au0l.oa">
+            <div className="flex justify-center p-8" data-oid="1juvz6t">
               <div
                 className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"
-                data-oid="e97an0p"
+                data-oid="8dx-b9i"
               ></div>
             </div>
           ) : (
             <>
               {orders.length > 0 ? (
-                <div className="space-y-4" data-oid="ecu3xxv">
+                <div className="space-y-4" data-oid="gapew3f">
                   {orders.map((order) => (
                     <div
                       key={order.id}
                       className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden"
-                      data-oid="dj6-fi_"
+                      data-oid="d9ffmtw"
                     >
-                      <div className="p-6" data-oid="l2n:3--">
+                      <div className="p-6" data-oid="w.im1bm">
                         <div
                           className="flex items-center justify-between mb-4"
-                          data-oid="k:w2zv."
+                          data-oid="e25idih"
                         >
-                          <div data-oid="7oi.flc">
+                          <div data-oid="3h8:yv4">
                             <h3
                               className="text-lg font-semibold text-gray-800 dark:text-white"
-                              data-oid="1r:9c2p"
+                              data-oid=":seexz4"
                             >
                               Sipariş #{order.order_number}
                             </h3>
                             <p
                               className="text-sm text-gray-500 dark:text-gray-400"
-                              data-oid="2rs97xe"
+                              data-oid="gq6ubxm"
                             >
                               {new Date(order.created_at).toLocaleDateString(
                                 "tr-TR",
@@ -241,17 +241,17 @@ export default function Orders() {
                           </div>
                           <div
                             className="flex flex-col items-end"
-                            data-oid="9::1j20"
+                            data-oid="ctri._m"
                           >
                             <span
                               className="text-lg font-bold text-gray-800 dark:text-white"
-                              data-oid="6t_31gr"
+                              data-oid="d6om:k2"
                             >
                               {formatCurrency(order.total_amount)}
                             </span>
                             <div
                               className="flex space-x-2 mt-1"
-                              data-oid="-2y9ajg"
+                              data-oid="cza1b9-"
                             >
                               {getStatusBadge(order.status)}
                               {getPaymentStatusBadge(order.payment_status)}
@@ -261,12 +261,12 @@ export default function Orders() {
 
                         <div
                           className="border-t border-gray-200 dark:border-dark-lighter pt-4 mt-4"
-                          data-oid="9ii.1ja"
+                          data-oid="bm3902m"
                         >
                           <Link
                             href={`/account/orders/${order.id}`}
                             className="inline-flex items-center text-sm text-secondary hover:text-secondary-dark font-medium"
-                            data-oid="u1brs_j"
+                            data-oid="j7fni:j"
                           >
                             Sipariş Detayları
                             <svg
@@ -275,14 +275,14 @@ export default function Orders() {
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
-                              data-oid="-9nqzyk"
+                              data-oid="x57pq.m"
                             >
                               <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
                                 d="M9 5l7 7-7 7"
-                                data-oid="vy8evmm"
+                                data-oid=".srbcxt"
                               />
                             </svg>
                           </Link>
@@ -294,7 +294,7 @@ export default function Orders() {
               ) : (
                 <div
                   className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden p-8 text-center"
-                  data-oid="70wo2dm"
+                  data-oid="_tatdgi"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -302,33 +302,33 @@ export default function Orders() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    data-oid="9r65alo"
+                    data-oid="g629lw5"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={1.5}
                       d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                      data-oid="93:.ex9"
+                      data-oid="bkf6aco"
                     />
                   </svg>
                   <h3
                     className="mt-2 text-lg font-medium text-gray-900 dark:text-white"
-                    data-oid="jjrcf1:"
+                    data-oid="n.5tc0v"
                   >
                     Henüz siparişiniz bulunmuyor
                   </h3>
                   <p
                     className="mt-1 text-gray-500 dark:text-gray-400"
-                    data-oid="rek.d:m"
+                    data-oid="z_-_ocj"
                   >
                     Ürünlerimize göz atarak alışveriş yapabilirsiniz.
                   </p>
-                  <div className="mt-6" data-oid="y2el7c9">
+                  <div className="mt-6" data-oid="5qnd-z1">
                     <Link
                       href="/products"
                       className="inline-flex items-center justify-center px-4 py-2 bg-secondary hover:bg-secondary-dark text-white rounded-lg transition-colors"
-                      data-oid="e8n4ytj"
+                      data-oid="s7i_p88"
                     >
                       Ürünlere Göz At
                     </Link>

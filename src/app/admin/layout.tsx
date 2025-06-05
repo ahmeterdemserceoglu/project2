@@ -26,14 +26,14 @@ const AdminSidebar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="o.heydt"
+            data-oid="p-3npvg"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              data-oid="3b6i0qo"
+              data-oid="c0oopyv"
             />
           </svg>
         );
@@ -45,14 +45,14 @@ const AdminSidebar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="hc-00hc"
+            data-oid=":chj2g_"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-              data-oid=".k9sw3e"
+              data-oid=".ncl_xk"
             />
           </svg>
         );
@@ -64,14 +64,14 @@ const AdminSidebar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="iio1_k_"
+            data-oid="fuebfkg"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              data-oid="fawi-bb"
+              data-oid="amz7fn:"
             />
           </svg>
         );
@@ -83,14 +83,14 @@ const AdminSidebar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="8saz9br"
+            data-oid="1limyj."
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-              data-oid="qd1sj8q"
+              data-oid="-7inw-g"
             />
           </svg>
         );
@@ -102,14 +102,14 @@ const AdminSidebar = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="jai02.4"
+            data-oid="sa9ezd5"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              data-oid="ys0dfa9"
+              data-oid="ktv8zzl"
             />
 
             <path
@@ -117,7 +117,7 @@ const AdminSidebar = () => {
               strokeLinejoin="round"
               strokeWidth={2}
               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              data-oid="637riv9"
+              data-oid="enbkp8k"
             />
           </svg>
         );
@@ -128,37 +128,37 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className="bg-white h-full shadow-md" data-oid="16jwula">
-      <div className="p-6 bg-primary text-white" data-oid="2tfqpb2">
+    <div className="bg-white h-full shadow-md" data-oid="2kqg4ji">
+      <div className="p-6 bg-primary text-white" data-oid="sd78z7m">
         <Link
           href="/admin/dashboard"
           className="text-xl font-bold flex items-center"
-          data-oid="rd1wj8o"
+          data-oid="lo4jz4-"
         >
           <svg
             className="h-6 w-6 mr-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="-7:spkb"
+            data-oid="x0pl2xe"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              data-oid="72ldnub"
+              data-oid="4p1wzeh"
             />
           </svg>
           Admin Panel
         </Link>
       </div>
-      <nav className="p-4" data-oid="2nhnk5n">
-        <ul className="space-y-2" data-oid="r5bo4cz">
+      <nav className="p-4" data-oid="cv5cx:d">
+        <ul className="space-y-2" data-oid="sfyb:fx">
           {navItems.map((item) => {
             const isActive = pathname.startsWith(item.href);
             return (
-              <li key={item.href} data-oid="gkdqq.h">
+              <li key={item.href} data-oid="-_awx.3">
                 <Link
                   href={item.href}
                   className={`flex items-center p-3 rounded-lg ${
@@ -166,9 +166,9 @@ const AdminSidebar = () => {
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
-                  data-oid="1j4p.kp"
+                  data-oid="77fi3aw"
                 >
-                  <span className="mr-3" data-oid="rh3b.67">
+                  <span className="mr-3" data-oid="dhjzw9d">
                     {renderIcon(item.icon)}
                   </span>
                   {item.title}
@@ -178,25 +178,25 @@ const AdminSidebar = () => {
           })}
         </ul>
       </nav>
-      <div className="p-4 mt-auto border-t" data-oid="44pcuw:">
+      <div className="p-4 mt-auto border-t" data-oid="yvjz.wy">
         <Link
           href="/"
           className="flex items-center text-sm text-gray-700 hover:text-primary"
-          data-oid="3chy-op"
+          data-oid="f3qq3bc"
         >
           <svg
             className="h-4 w-4 mr-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="q3ozr46"
+            data-oid="pfgpy2r"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M3 12l2-2m0 0l7-7 7 7m-14 0l2 2m0 0l7 7 7-7m-14 0l2-2"
-              data-oid="l3wu8yu"
+              data-oid="zjr4fq:"
             />
           </svg>
           Site'ye Dön
@@ -214,21 +214,21 @@ export default function AdminLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-50" data-oid="fg2-jh3">
+    <div className="flex h-screen bg-gray-50" data-oid="_a469sd">
       {/* Mobile menu button */}
-      <div className="md:hidden fixed top-4 left-4 z-50" data-oid="734z-nc">
+      <div className="md:hidden fixed top-4 left-4 z-50" data-oid="m-y9aeq">
         <button
           type="button"
           className="p-2 rounded-md bg-white shadow-md text-gray-700"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          data-oid="vs:8wys"
+          data-oid="jkn8q:y"
         >
           <svg
             className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="-8ouz1w"
+            data-oid="3hl0cvt"
           >
             {mobileMenuOpen ? (
               <path
@@ -236,7 +236,7 @@ export default function AdminLayout({
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M6 18L18 6M6 6l12 12"
-                data-oid="wuhe:g:"
+                data-oid="r5q:-ay"
               />
             ) : (
               <path
@@ -244,7 +244,7 @@ export default function AdminLayout({
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M4 6h16M4 12h16m-7 6h7"
-                data-oid=".0hjdcn"
+                data-oid="q0tbhr."
               />
             )}
           </svg>
@@ -254,27 +254,27 @@ export default function AdminLayout({
       {/* Sidebar for desktop */}
       <aside
         className="hidden md:block md:w-64 lg:w-72 shrink-0"
-        data-oid="viwxlww"
+        data-oid="3mtrsm-"
       >
-        <AdminSidebar data-oid="edjbma_" />
+        <AdminSidebar data-oid="wmhw67b" />
       </aside>
 
       {/* Mobile sidebar */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40" data-oid="y9-ujfx">
+        <div className="md:hidden fixed inset-0 z-40" data-oid="wm_9yt2">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
-            data-oid="eh3pfa9"
+            data-oid="oehqoja"
           />
 
           {/* Sidebar */}
           <div
             className="fixed left-0 top-0 h-full w-64 z-50"
-            data-oid="94ru.1l"
+            data-oid="5bty94i"
           >
-            <AdminSidebar data-oid="0v5fy0:" />
+            <AdminSidebar data-oid="irxlant" />
           </div>
         </div>
       )}
@@ -282,7 +282,7 @@ export default function AdminLayout({
       {/* Main content */}
       <main
         className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8"
-        data-oid="1uulb_y"
+        data-oid="qvt237h"
       >
         {children}
       </main>

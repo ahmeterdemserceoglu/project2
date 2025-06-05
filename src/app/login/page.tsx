@@ -169,32 +169,32 @@ function LoginContent() {
   return (
     <div
       className="h-screen overflow-hidden flex flex-col md:flex-row"
-      data-oid="itpnl-_"
+      data-oid="b0qumjq"
     >
       {/* Form side - Taking full height on mobile, half width on desktop */}
       <div
         className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-y-auto"
-        data-oid="-ss6do7"
+        data-oid="s6ex6tz"
       >
-        <div className="w-full max-w-md py-2" data-oid="g6vtgyu">
-          <div className="text-center md:text-left mb-6" data-oid="1dt9n61">
-            <Link href="/" className="inline-block mb-6" data-oid="r31veny">
+        <div className="w-full max-w-md py-2" data-oid="y6ev02h">
+          <div className="text-center md:text-left mb-6" data-oid="z.h1x:i">
+            <Link href="/" className="inline-block mb-6" data-oid="nwva12u">
               <span
                 className="text-2xl font-bold tracking-tighter relative"
-                data-oid="apqs4cl"
+                data-oid="mn6anvp"
               >
-                <span className="text-primary" data-oid="2c:31z9">
+                <span className="text-primary" data-oid="j0c1e5e">
                   HD
                 </span>
                 <span
                   className="text-gray-800 dark:text-white"
-                  data-oid="aehwrul"
+                  data-oid="i78dwp2"
                 >
                   Ticaret
                 </span>
                 <span
                   className="text-xs text-secondary ml-1 absolute -right-4 top-0"
-                  data-oid="qwpoua3"
+                  data-oid="vtg7wha"
                 >
                   .com
                 </span>
@@ -202,21 +202,21 @@ function LoginContent() {
             </Link>
             <h1
               className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2"
-              data-oid="2jmz931"
+              data-oid="35rn_6h"
             >
               Hoş Geldiniz
             </h1>
-            <p className="text-gray-500 dark:text-gray-400" data-oid="-ef833a">
+            <p className="text-gray-500 dark:text-gray-400" data-oid="-frh9zd">
               Hesabınıza giriş yaparak özel tekliflerden yararlanın.
             </p>
           </div>
 
-          <form className="space-y-4" onSubmit={handleLogin} data-oid="zw309p4">
-            <div data-oid="d-nmi8m">
+          <form className="space-y-4" onSubmit={handleLogin} data-oid="x7624_b">
+            <div data-oid="6dcgdxh">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                data-oid="1bh7zgk"
+                data-oid="xqiqthw"
               >
                 Email
               </label>
@@ -229,25 +229,25 @@ function LoginContent() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="email@example.com"
                 required
-                data-oid="n0ma19x"
+                data-oid="gfwq59g"
               />
             </div>
-            <div data-oid="xieq1j9">
+            <div data-oid="1a.c210">
               <div
                 className="flex items-center justify-between mb-1"
-                data-oid="b.55pj2"
+                data-oid="6ckw22s"
               >
                 <label
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-                  data-oid="59erv6g"
+                  data-oid="xc7-d6f"
                 >
                   Şifre
                 </label>
                 <Link
                   href="/forgot-password"
                   className="text-sm text-secondary hover:text-secondary-dark"
-                  data-oid="6z99u77"
+                  data-oid="125-q8c"
                 >
                   Şifremi Unuttum?
                 </Link>
@@ -261,23 +261,23 @@ function LoginContent() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="••••••••"
                 required
-                data-oid="rskpv:t"
+                data-oid="5e8a:9."
               />
             </div>
-            <div className="flex items-center" data-oid="7oo:pmd">
+            <div className="flex items-center" data-oid="4p2jnb0">
               <input
                 type="checkbox"
                 id="remember"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="h-4 w-4 text-secondary border-gray-300 rounded focus:ring-secondary"
-                data-oid=".8mx72o"
+                data-oid="24329vb"
               />
 
               <label
                 htmlFor="remember"
                 className="ml-2 block text-sm text-gray-700 dark:text-gray-200"
-                data-oid="73:1gu8"
+                data-oid=":cuzj6t"
               >
                 Beni Hatırla
               </label>
@@ -286,7 +286,7 @@ function LoginContent() {
               type="submit"
               disabled={isLoading}
               className="w-full bg-secondary hover:bg-secondary-dark text-white py-3 px-4 rounded-xl transition-colors duration-200 font-medium flex justify-center items-center"
-              data-oid="budk1kj"
+              data-oid="1psoh6i"
             >
               {isLoading ? (
                 <>
@@ -295,7 +295,7 @@ function LoginContent() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    data-oid="y26ubig"
+                    data-oid=":7zp0o4"
                   >
                     <circle
                       className="opacity-25"
@@ -304,13 +304,13 @@ function LoginContent() {
                       r="10"
                       stroke="currentColor"
                       strokeWidth="4"
-                      data-oid="j96jpj2"
+                      data-oid="zj3vgl7"
                     ></circle>
                     <path
                       className="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      data-oid="k6cjrq5"
+                      data-oid="yurdjbx"
                     ></path>
                   </svg>
                   Giriş Yapılıyor...
@@ -321,85 +321,85 @@ function LoginContent() {
             </button>
           </form>
 
-          <div className="mt-6 text-center" data-oid="zpd1mv-">
+          <div className="mt-6 text-center" data-oid="4u5r07r">
             <span
               className="text-gray-600 dark:text-gray-400"
-              data-oid="m_kx0ks"
+              data-oid="fi4v04p"
             >
               Hesabınız yok mu?{" "}
             </span>
             <Link
               href="/register"
               className="text-secondary hover:text-secondary-dark font-medium"
-              data-oid="21r7x6j"
+              data-oid="j3trq_3"
             >
               Kayıt Ol
             </Link>
           </div>
 
-          <div className="mt-6" data-oid="gtdux.7">
-            <div className="relative" data-oid="9v.p2tm">
+          <div className="mt-6" data-oid="23srqlf">
+            <div className="relative" data-oid="nd-xhyo">
               <div
                 className="absolute inset-0 flex items-center"
-                data-oid="d5o4g0m"
+                data-oid="45v9lc-"
               >
                 <div
                   className="w-full border-t border-gray-300 dark:border-dark-lighter"
-                  data-oid="zv53dsj"
+                  data-oid="_-kpg3n"
                 ></div>
               </div>
               <div
                 className="relative flex justify-center text-sm"
-                data-oid="907zioe"
+                data-oid="r4k5k5n"
               >
                 <span
                   className="px-2 bg-white dark:bg-dark text-gray-500 dark:text-gray-400"
-                  data-oid="c-0icg0"
+                  data-oid="fq3.-_2"
                 >
                   veya şununla devam et
                 </span>
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-3 gap-3" data-oid="4ugi7f0">
+            <div className="mt-6 grid grid-cols-3 gap-3" data-oid="s:k..u:">
               <button
                 type="button"
                 onClick={() => handleSocialLogin("google")}
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid="6k4htgt"
+                data-oid=".uo_6:h"
               >
-                <span className="sr-only" data-oid="8l5z_kd">
+                <span className="sr-only" data-oid="za.f5kk">
                   Google ile giriş yap
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="x_kltlx"
+                  data-oid="ckd5hbv"
                 >
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4"
-                    data-oid="r2slofh"
+                    data-oid="xhuy2ap"
                   />
 
                   <path
                     d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
                     fill="#34A853"
-                    data-oid="x_h1i2g"
+                    data-oid="euoc45e"
                   />
 
                   <path
                     d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
                     fill="#FBBC05"
-                    data-oid="nr4l-qk"
+                    data-oid="meydthh"
                   />
 
                   <path
                     d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                     fill="#EA4335"
-                    data-oid="jy-bp0h"
+                    data-oid="fug0a6x"
                   />
                 </svg>
               </button>
@@ -408,42 +408,42 @@ function LoginContent() {
                 onClick={() => handleSocialLogin("facebook")}
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid="bqh:kip"
+                data-oid="qgssg7o"
               >
-                <span className="sr-only" data-oid="2::1gzf">
+                <span className="sr-only" data-oid="2r4rbxm">
                   Facebook ile giriş yap
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="9pjcm_y"
+                  data-oid="uxxcp79"
                 >
                   <path
                     d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
                     fill="#1877F2"
-                    data-oid="8pcv-k1"
+                    data-oid="5xrt25n"
                   />
                 </svg>
               </button>
               <button
                 type="button"
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid=".no51rw"
+                data-oid="ihonfeg"
               >
-                <span className="sr-only" data-oid="5022epx">
+                <span className="sr-only" data-oid="4r-xd7g">
                   Apple ile giriş yap
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="d99n2-7"
+                  data-oid="am9bac5"
                 >
                   <path
                     d="M16.462 16.964c-.511.971-1.04 1.935-1.89 1.956-.825.02-1.09-.499-2.04-.499-.95 0-1.244.479-2.033.499-.82.02-1.446-.931-1.96-1.9-1.066-1.607-1.884-4.535-1.047-6.505.417-.98 1.162-1.6 1.969-1.6.822 0 1.336.499 2.015.499.679 0 1.252-.499 2.116-.499.757 0 1.556.452 2.124 1.232-1.883 1.015-1.578 3.647.746 4.817zM14.1 7.196c.411-.525.745-1.25.627-1.996-.694.048-1.511.3-1.992.746-.465.429-.852 1.131-.745 1.795.767.052 1.561-.234 2.11-.545z"
                     fill="#000000"
-                    data-oid=".-9ezcu"
+                    data-oid="afvi88o"
                   />
                 </svg>
               </button>
@@ -455,33 +455,33 @@ function LoginContent() {
       {/* Image side - Hidden on mobile, half width on desktop */}
       <div
         className="hidden md:flex w-1/2 bg-gradient-to-br from-secondary/10 to-accent/10 dark:from-secondary/20 dark:to-accent/20 items-center justify-center"
-        data-oid="9ppegm0"
+        data-oid="54ga4.d"
       >
-        <div className="p-6 max-w-md" data-oid="l9crgep">
+        <div className="p-6 max-w-md" data-oid=".w63u_v">
           <div
             className="bg-white dark:bg-dark-light rounded-2xl overflow-hidden shadow-lg"
-            data-oid="cvj9._h"
+            data-oid="5ium6zu"
           >
-            <div className="relative aspect-[16/9] w-full" data-oid="obpawxg">
+            <div className="relative aspect-[16/9] w-full" data-oid="f4kxgae">
               <Image
                 src="/images/login-image.png"
                 alt="Login"
                 fill
                 className="object-cover"
                 priority
-                data-oid="rm2vg_-"
+                data-oid="owxottn"
               />
             </div>
-            <div className="p-6" data-oid="ovqlmdr">
+            <div className="p-6" data-oid="8qor0j:">
               <h2
                 className="text-xl font-bold text-gray-800 dark:text-white mb-2"
-                data-oid="no0:g3f"
+                data-oid="s0h6vb4"
               >
                 Premium Avantajlar
               </h2>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="c:g89ti"
+                data-oid="el:650q"
               >
                 HD Ticaret'in sunduğu özel fırsatlardan ve indirimlerden
                 yararlanabilirsiniz.
@@ -501,26 +501,26 @@ export default function Login() {
       fallback={
         <div
           className="h-screen flex items-center justify-center bg-gray-50 dark:bg-dark"
-          data-oid="qiic-zj"
+          data-oid=":l8go7b"
         >
           <div
             className="max-w-md w-full p-6 bg-white dark:bg-dark-light rounded-xl shadow-lg"
-            data-oid="43j3i.7"
+            data-oid="g1wu253"
           >
-            <div className="flex flex-col items-center" data-oid="97n0tqu">
+            <div className="flex flex-col items-center" data-oid="_8g.r0b">
               <div
                 className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary mx-auto mb-4"
-                data-oid="rxe:zv0"
+                data-oid="r4ba-sx"
               ></div>
               <h1
                 className="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                data-oid="koc14a6"
+                data-oid="bi-z3-."
               >
                 Yükleniyor...
               </h1>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="qqxm2on"
+                data-oid="cf8fwlk"
               >
                 Lütfen bekleyin, sayfa yükleniyor.
               </p>
@@ -528,9 +528,9 @@ export default function Login() {
           </div>
         </div>
       }
-      data-oid="apgpu04"
+      data-oid="jpncq:7"
     >
-      <LoginContent data-oid="-sopbl6" />
+      <LoginContent data-oid="e:4az5y" />
     </Suspense>
   );
 }

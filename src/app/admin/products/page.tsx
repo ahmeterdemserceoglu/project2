@@ -182,34 +182,34 @@ export default function AdminProductsPage() {
   };
 
   return (
-    <div data-oid="q95bn0s">
+    <div data-oid="uau_jqy">
       <header
         className="flex flex-col md:flex-row md:items-center justify-between mb-8 space-y-4 md:space-y-0"
-        data-oid="508nswc"
+        data-oid="a:pjuc:"
       >
-        <div data-oid="58vmw:f">
-          <h1 className="text-2xl font-bold text-gray-900" data-oid="jjhcjst">
+        <div data-oid="3dt8o_5">
+          <h1 className="text-2xl font-bold text-gray-900" data-oid="k2gctxx">
             Ürünler
           </h1>
-          <p className="text-gray-500" data-oid="bq5c-b3">
+          <p className="text-gray-500" data-oid="n79rupe">
             Toplam {products.length} ürün,{" "}
             {products.filter((p) => p.status === "active").length} aktif
           </p>
         </div>
-        <div className="flex space-x-3" data-oid="mni5phy">
+        <div className="flex space-x-3" data-oid="0uvlbkv">
           <button
             onClick={() => handleBulkAction("delete")}
             disabled={selectedProducts.length === 0}
             className={`px-3 py-2 border rounded-md text-sm font-medium 
               ${selectedProducts.length === 0 ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "bg-red-50 text-red-600 hover:bg-red-100"}`}
-            data-oid="0af8wf_"
+            data-oid="6zbr_c8"
           >
             Seçilenleri Sil
           </button>
           <Link
             href="/admin/products/add"
             className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors"
-            data-oid="k:o2etj"
+            data-oid="6y.-:eb"
           >
             Ürün Ekle
           </Link>
@@ -219,34 +219,34 @@ export default function AdminProductsPage() {
       {/* Filters */}
       <div
         className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-4"
-        data-oid="-r225m2"
+        data-oid="-ffd.t-"
       >
-        <div className="md:col-span-2" data-oid="kjg9i.5">
+        <div className="md:col-span-2" data-oid="dzhpi2z">
           <label
             htmlFor="search"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="rch_iop"
+            data-oid="pujaqv7"
           >
             Ürün Ara
           </label>
-          <div className="relative" data-oid="q9r7._8">
+          <div className="relative" data-oid="k5sgtor">
             <div
               className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              data-oid="pu_uclq"
+              data-oid="vxk0rbf"
             >
               <svg
                 className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="vig0kbx"
+                data-oid="elcik:c"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  data-oid="e6g1jr."
+                  data-oid="3iwnx-q"
                 />
               </svg>
             </div>
@@ -257,16 +257,16 @@ export default function AdminProductsPage() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Ürün adına göre ara..."
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-              data-oid="6n17q1y"
+              data-oid=":0ktykb"
             />
           </div>
         </div>
 
-        <div data-oid="5plsfg4">
+        <div data-oid="uq73v39">
           <label
             htmlFor="category"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="xowj015"
+            data-oid="anj88rx"
           >
             Kategori
           </label>
@@ -275,24 +275,24 @@ export default function AdminProductsPage() {
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="4m.r_o7"
+            data-oid="6s8_541"
           >
-            <option value="" data-oid=".r0vg1w">
+            <option value="" data-oid="6b-i0ce">
               Tüm Kategoriler
             </option>
             {categories.map((category) => (
-              <option key={category} value={category} data-oid="ktg-u17">
+              <option key={category} value={category} data-oid="mj_n6z0">
                 {category}
               </option>
             ))}
           </select>
         </div>
 
-        <div data-oid="ojoymgl">
+        <div data-oid="xnxkdaz">
           <label
             htmlFor="status"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="nri4tga"
+            data-oid="ai58x7x"
           >
             Durum
           </label>
@@ -301,15 +301,15 @@ export default function AdminProductsPage() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="8e6..4j"
+            data-oid="b6mbepo"
           >
-            <option value="" data-oid="9gos_o5">
+            <option value="" data-oid="b_2swzn">
               Tüm Durumlar
             </option>
-            <option value="active" data-oid="sucziyo">
+            <option value="active" data-oid="0es.xm4">
               Aktif
             </option>
-            <option value="out_of_stock" data-oid=":9kkumz">
+            <option value="out_of_stock" data-oid="05a5ssj">
               Stokta Yok
             </option>
           </select>
@@ -319,17 +319,17 @@ export default function AdminProductsPage() {
       {/* Products Table */}
       <div
         className="bg-white shadow-sm rounded-xl overflow-hidden"
-        data-oid="_5hky9l"
+        data-oid="coa90v_"
       >
-        <div className="overflow-x-auto" data-oid="imv_g9_">
+        <div className="overflow-x-auto" data-oid="ti-of4e">
           <table
             className="min-w-full divide-y divide-gray-200"
-            data-oid="krl6lai"
+            data-oid="g_7wg11"
           >
-            <thead className="bg-gray-50" data-oid="rw-x.3r">
-              <tr data-oid="0wz3_q:">
-                <th className="px-6 py-3 text-left" data-oid="btksfcb">
-                  <div className="flex items-center" data-oid="e3g1eeo">
+            <thead className="bg-gray-50" data-oid="qiyn0x5">
+              <tr data-oid="vr35d75">
+                <th className="px-6 py-3 text-left" data-oid="5wuv.qm">
+                  <div className="flex items-center" data-oid="zboc56v">
                     <input
                       type="checkbox"
                       checked={
@@ -338,43 +338,43 @@ export default function AdminProductsPage() {
                       }
                       onChange={handleSelectAll}
                       className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
-                      data-oid="z_biri8"
+                      data-oid="o67g4cr"
                     />
                   </div>
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="62_6l1."
+                  data-oid="a2fkfuw"
                 >
                   Ürün
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="_29mbo7"
+                  data-oid="jwnwzac"
                 >
                   Kategori
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="xdu_zq-"
+                  data-oid="000j_z8"
                 >
                   Stok
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="ojqwsfv"
+                  data-oid="sn3qbjd"
                 >
                   Fiyat
                 </th>
                 <th
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="jwcigq2"
+                  data-oid="bn85snm"
                 >
                   Durum
                 </th>
                 <th
                   className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="-sfaomt"
+                  data-oid="iymik4a"
                 >
                   İşlemler
                 </th>
@@ -382,17 +382,17 @@ export default function AdminProductsPage() {
             </thead>
             <tbody
               className="bg-white divide-y divide-gray-200"
-              data-oid="s36b22h"
+              data-oid="lmrske6"
             >
               {filteredProducts.length === 0 ? (
-                <tr data-oid="hhagw9b">
+                <tr data-oid="b:t_xiw">
                   <td
                     colSpan={7}
                     className="px-6 py-10 text-center text-gray-500"
-                    data-oid="s_e083-"
+                    data-oid="g97vmnq"
                   >
-                    <p data-oid="80gdpqb">Sonuç bulunamadı</p>
-                    <p className="text-sm mt-1" data-oid="vs8fgb7">
+                    <p data-oid="vn01afb">Sonuç bulunamadı</p>
+                    <p className="text-sm mt-1" data-oid="e.jkh2f">
                       Filtreleri değiştirmeyi deneyin
                     </p>
                   </td>
@@ -402,47 +402,47 @@ export default function AdminProductsPage() {
                   <tr
                     key={product.id}
                     className="hover:bg-gray-50"
-                    data-oid=".c-im-9"
+                    data-oid="6beb36h"
                   >
                     <td
                       className="px-6 py-4 whitespace-nowrap"
-                      data-oid="yrz_fm5"
+                      data-oid="_eay8d0"
                     >
                       <input
                         type="checkbox"
                         checked={selectedProducts.includes(product.id)}
                         onChange={() => handleSelectProduct(product.id)}
                         className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
-                        data-oid="g5yb_qa"
+                        data-oid="ru34aj1"
                       />
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap"
-                      data-oid="-54bkbp"
+                      data-oid="tvdla1j"
                     >
-                      <div className="flex items-center" data-oid="d06uzpz">
+                      <div className="flex items-center" data-oid="c4fdx5k">
                         <div
                           className="flex-shrink-0 h-10 w-10 relative"
-                          data-oid="hfs3y.3"
+                          data-oid="8:yr4k-"
                         >
                           <Image
                             src={product.image}
                             alt={product.name}
                             fill
                             className="object-cover rounded-md"
-                            data-oid="huvlx7c"
+                            data-oid="g9tvj4a"
                           />
                         </div>
-                        <div className="ml-4" data-oid="pnl0jn0">
+                        <div className="ml-4" data-oid="c8.w:pi">
                           <div
                             className="text-sm font-medium text-gray-900"
-                            data-oid="j6sp9a2"
+                            data-oid="z._:uid"
                           >
                             {product.name}
                           </div>
                           <div
                             className="text-sm text-gray-500"
-                            data-oid="u00d8zy"
+                            data-oid="laknjl6"
                           >
                             ID: {product.id}
                           </div>
@@ -451,37 +451,37 @@ export default function AdminProductsPage() {
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                      data-oid="gcxottu"
+                      data-oid="al1oqf-"
                     >
                       {product.category}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                      data-oid="..etanc"
+                      data-oid="ph5dvj2"
                     >
                       {product.stock}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                      data-oid="2ew3pno"
+                      data-oid="hl_3woi"
                     >
                       ₺{product.price.toLocaleString()}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap"
-                      data-oid="04o0lx."
+                      data-oid="x:3yrmi"
                     >
                       {product.status === "active" ? (
                         <span
                           className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                          data-oid="qmq.ja."
+                          data-oid="amosndg"
                         >
                           Aktif
                         </span>
                       ) : (
                         <span
                           className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
-                          data-oid="kgtbr:e"
+                          data-oid="bwmnhr6"
                         >
                           Stokta Yok
                         </span>
@@ -489,12 +489,12 @@ export default function AdminProductsPage() {
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                      data-oid="g4fu9sw"
+                      data-oid="gvnh_h1"
                     >
                       <Link
                         href={`/admin/products/edit/${product.id}`}
                         className="text-primary hover:text-primary-dark mr-4"
-                        data-oid="0utta2l"
+                        data-oid="_mkkme3"
                       >
                         Düzenle
                       </Link>
@@ -505,7 +505,7 @@ export default function AdminProductsPage() {
                           )
                         }
                         className="text-red-600 hover:text-red-800"
-                        data-oid="3ekow7a"
+                        data-oid="bixbz5f"
                       >
                         Sil
                       </button>
@@ -520,46 +520,46 @@ export default function AdminProductsPage() {
         {/* Pagination */}
         <div
           className="px-6 py-3 flex items-center justify-between border-t"
-          data-oid="yi8ntw9"
+          data-oid="mg.024x"
         >
-          <div className="text-sm text-gray-700" data-oid="kbwwxvj">
-            <span className="font-medium" data-oid="o60gtww">
+          <div className="text-sm text-gray-700" data-oid="tg01mpo">
+            <span className="font-medium" data-oid="yv5f9p:">
               {filteredProducts.length}
             </span>{" "}
             sonuç gösteriliyor
           </div>
           <div
             className="flex-1 flex justify-center md:justify-end"
-            data-oid="ij8_7nq"
+            data-oid="orjydja"
           >
-            <div className="inline-flex shadow-sm" data-oid="bnlj4rt">
+            <div className="inline-flex shadow-sm" data-oid="ubria..">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
-                data-oid="ut.coym"
+                data-oid="01kdx4r"
               >
                 Önceki
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="ri:j0me"
+                data-oid="r-7:509"
               >
                 1
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="cj71_dz"
+                data-oid="7-75mgt"
               >
                 2
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="3lr3xzz"
+                data-oid="9-asqzz"
               >
                 3
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
-                data-oid="3.zb_sf"
+                data-oid="d7r76pt"
               >
                 Sonraki
               </button>

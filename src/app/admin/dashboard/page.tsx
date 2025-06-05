@@ -18,19 +18,19 @@ const StatsCard = ({
   changeType?: "increase" | "decrease" | "neutral";
 }) => {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm" data-oid="kw9ej0a">
+    <div className="bg-white rounded-xl p-6 shadow-sm" data-oid="rp25_70">
       <div
         className="flex items-center justify-between mb-4"
-        data-oid="pqb6997"
+        data-oid="_nk4ptk"
       >
-        <div className="text-gray-500 font-medium" data-oid="l15zy92">
+        <div className="text-gray-500 font-medium" data-oid="yisvlw2">
           {title}
         </div>
-        <div className="text-gray-400" data-oid="sgf4sh7">
+        <div className="text-gray-400" data-oid="2oxim3.">
           {icon}
         </div>
       </div>
-      <div className="text-2xl font-bold mb-2" data-oid="vgfd41o">
+      <div className="text-2xl font-bold mb-2" data-oid="-72m30s">
         {value}
       </div>
       {change && (
@@ -42,7 +42,7 @@ const StatsCard = ({
                 ? "text-red-600"
                 : "text-gray-500"
           }`}
-          data-oid="g-7.e5l"
+          data-oid="fyr.su2"
         >
           {changeType === "increase" && (
             <svg
@@ -51,14 +51,14 @@ const StatsCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="03qs1bc"
+              data-oid="6nlre:f"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M5 15l7-7 7 7"
-                data-oid=".1pqao:"
+                data-oid="jcw8bp3"
               ></path>
             </svg>
           )}
@@ -69,14 +69,14 @@ const StatsCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="jqq5k3w"
+              data-oid="cl:xhwk"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M19 9l-7 7-7-7"
-                data-oid="mqsq0zl"
+                data-oid="id6_0i_"
               ></path>
             </svg>
           )}
@@ -100,21 +100,21 @@ const ActivityItem = ({
   icon: React.ReactNode;
 }) => {
   return (
-    <div className="flex space-x-3" data-oid="tp8szci">
+    <div className="flex space-x-3" data-oid="z:fg4.8">
       <div
         className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full text-primary"
-        data-oid="n5w10gi"
+        data-oid="5tndz9a"
       >
         {icon}
       </div>
-      <div data-oid="m9kz_s3">
-        <h4 className="text-sm font-medium text-gray-900" data-oid="-j8wfuj">
+      <div data-oid="fjd2mio">
+        <h4 className="text-sm font-medium text-gray-900" data-oid="bg:lngu">
           {title}
         </h4>
-        <p className="text-sm text-gray-500" data-oid="lqw5n--">
+        <p className="text-sm text-gray-500" data-oid="59wz_jt">
           {content}
         </p>
-        <span className="text-xs text-gray-400" data-oid="i9::vw:">
+        <span className="text-xs text-gray-400" data-oid="ivrxwaq">
           {time}
         </span>
       </div>
@@ -168,64 +168,64 @@ const RecentOrders = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid=".r6uxq1">
+    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="sc0goik">
       <div
         className="flex justify-between items-center mb-6"
-        data-oid="xfugnyf"
+        data-oid="hc.g476"
       >
-        <h3 className="text-lg font-semibold" data-oid="lhdi:6h">
+        <h3 className="text-lg font-semibold" data-oid="tud97mg">
           Son Siparişler
         </h3>
         <Link
           href="/admin/orders"
           className="text-primary hover:text-primary-dark text-sm font-medium"
-          data-oid="7xh55z_"
+          data-oid="dsj.rv7"
         >
           Tümünü Gör
         </Link>
       </div>
-      <div className="overflow-x-auto" data-oid="b68b-6:">
-        <table className="min-w-full" data-oid="rqulfey">
-          <thead data-oid="j4n__pt">
+      <div className="overflow-x-auto" data-oid="99w1du:">
+        <table className="min-w-full" data-oid="isbry:o">
+          <thead data-oid="l6d_9gh">
             <tr
               className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              data-oid="9ocw1zh"
+              data-oid="v.n-hko"
             >
-              <th className="pb-3" data-oid="ge6:-r8">
+              <th className="pb-3" data-oid="31fu0yo">
                 Sipariş No
               </th>
-              <th className="pb-3" data-oid="4jrc3py">
+              <th className="pb-3" data-oid="hhhx6t.">
                 Müşteri
               </th>
-              <th className="pb-3" data-oid="mj93s8.">
+              <th className="pb-3" data-oid="0g1oj2z">
                 Tarih
               </th>
-              <th className="pb-3" data-oid="c0ja928">
+              <th className="pb-3" data-oid="l76cewz">
                 Durum
               </th>
-              <th className="pb-3 text-right" data-oid="vb1cqwj">
+              <th className="pb-3 text-right" data-oid=":2ap.7l">
                 Toplam
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200" data-oid="bkuk_hl">
+          <tbody className="divide-y divide-gray-200" data-oid="6zy3zn1">
             {orders.map((order) => (
-              <tr key={order.id} className="text-sm" data-oid="evyts2:">
+              <tr key={order.id} className="text-sm" data-oid="1:p4g5m">
                 <td
                   className="py-3 text-primary font-medium"
-                  data-oid="1j9aq96"
+                  data-oid="x67nkob"
                 >
-                  <Link href={`/admin/orders/${order.id}`} data-oid="a08c:rw">
+                  <Link href={`/admin/orders/${order.id}`} data-oid="we93hok">
                     {order.orderNumber}
                   </Link>
                 </td>
-                <td className="py-3 text-gray-900" data-oid="g5eqqv.">
+                <td className="py-3 text-gray-900" data-oid="2a6m1i9">
                   {order.customer}
                 </td>
-                <td className="py-3 text-gray-500" data-oid=".zq8z2g">
+                <td className="py-3 text-gray-500" data-oid="apz6:w_">
                   {order.date}
                 </td>
-                <td className="py-3" data-oid="h-wu1ys">
+                <td className="py-3" data-oid="7:s32m6">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                     ${
@@ -237,7 +237,7 @@ const RecentOrders = () => {
                             ? "bg-yellow-100 text-yellow-800"
                             : "bg-red-100 text-red-800"
                     }`}
-                    data-oid="6m0zquf"
+                    data-oid="v5p33-s"
                   >
                     {order.status === "delivered"
                       ? "Teslim Edildi"
@@ -250,7 +250,7 @@ const RecentOrders = () => {
                 </td>
                 <td
                   className="py-3 text-right text-gray-900"
-                  data-oid=".w.b58z"
+                  data-oid=":bojgjd"
                 >
                   ₺{order.total.toLocaleString()}
                 </td>
@@ -304,70 +304,70 @@ const TopProducts = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="9595m4d">
+    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="u.o3390">
       <div
         className="flex justify-between items-center mb-6"
-        data-oid="awkanhp"
+        data-oid="_vq0p-j"
       >
-        <h3 className="text-lg font-semibold" data-oid="13fpmh9">
+        <h3 className="text-lg font-semibold" data-oid="2skwhhv">
           En Çok Satan Ürünler
         </h3>
         <Link
           href="/admin/products"
           className="text-primary hover:text-primary-dark text-sm font-medium"
-          data-oid="x3-5h-l"
+          data-oid="rlv.tjg"
         >
           Tümünü Gör
         </Link>
       </div>
-      <div className="overflow-x-auto" data-oid="fi.ai49">
-        <table className="min-w-full" data-oid="a_s.kbs">
-          <thead data-oid="tbebw2x">
+      <div className="overflow-x-auto" data-oid="835xul8">
+        <table className="min-w-full" data-oid="o6_4l0-">
+          <thead data-oid="736:ff7">
             <tr
               className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              data-oid=":y7fky5"
+              data-oid="tkr_m6x"
             >
-              <th className="pb-3" data-oid="5f0jaws">
+              <th className="pb-3" data-oid="dg3p5-9">
                 Ürün
               </th>
-              <th className="pb-3" data-oid=".7o6hwh">
+              <th className="pb-3" data-oid="-a0coww">
                 Kategori
               </th>
-              <th className="pb-3 text-right" data-oid="yai1:90">
+              <th className="pb-3 text-right" data-oid="isc4_6r">
                 Satış
               </th>
-              <th className="pb-3 text-right" data-oid="5dkg61w">
+              <th className="pb-3 text-right" data-oid="zb5p5rs">
                 Hasılat
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200" data-oid="bkslu0-">
+          <tbody className="divide-y divide-gray-200" data-oid="24xeycz">
             {products.map((product) => (
-              <tr key={product.id} className="text-sm" data-oid="r2ol73u">
+              <tr key={product.id} className="text-sm" data-oid="8y-4hrx">
                 <td
                   className="py-3 text-gray-900 font-medium"
-                  data-oid="esslux8"
+                  data-oid="hhdc14t"
                 >
                   <Link
                     href={`/admin/products/edit/${product.id}`}
                     className="hover:text-primary"
-                    data-oid="yqs6n7y"
+                    data-oid="9:5.f5q"
                   >
                     {product.name}
                   </Link>
                 </td>
-                <td className="py-3 text-gray-500" data-oid="a6q9e_u">
+                <td className="py-3 text-gray-500" data-oid="veahb96">
                   {product.category}
                 </td>
                 <td
                   className="py-3 text-right text-gray-900"
-                  data-oid="am69_9w"
+                  data-oid="bq2z_kp"
                 >
                   {product.sold}
                 </td>
                 <td
                   className="py-3 text-right text-gray-900"
-                  data-oid="n06a0oi"
+                  data-oid="b31ok75"
                 >
                   ₺{product.revenue.toLocaleString()}
                 </td>
@@ -383,30 +383,30 @@ const TopProducts = () => {
 // Revenue Chart component (placeholder - would be a real chart in a real app)
 const RevenueChart = () => {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="n5te_lq">
+    <div className="bg-white rounded-xl shadow-sm p-6" data-oid=".y60slu">
       <div
         className="flex justify-between items-center mb-6"
-        data-oid="pnra7pb"
+        data-oid="oi0ny20"
       >
-        <h3 className="text-lg font-semibold" data-oid="49a3pin">
+        <h3 className="text-lg font-semibold" data-oid="1ljcp2i">
           Satış Grafiği
         </h3>
-        <div className="flex space-x-2 text-sm" data-oid="-xowxbd">
+        <div className="flex space-x-2 text-sm" data-oid="wqznjke">
           <button
             className="px-3 py-1 rounded bg-primary text-white"
-            data-oid="mjwpa-s"
+            data-oid="mbz6crr"
           >
             Günlük
           </button>
           <button
             className="px-3 py-1 rounded hover:bg-gray-100"
-            data-oid="xuqvu4g"
+            data-oid="vo6486t"
           >
             Haftalık
           </button>
           <button
             className="px-3 py-1 rounded hover:bg-gray-100"
-            data-oid="z9mx4cr"
+            data-oid="9txzl4q"
           >
             Aylık
           </button>
@@ -414,30 +414,30 @@ const RevenueChart = () => {
       </div>
       <div
         className="h-64 flex flex-col justify-center items-center bg-gray-50 rounded-lg border border-dashed border-gray-300"
-        data-oid="azf_ztl"
+        data-oid="3ub0byr"
       >
-        <div className="text-gray-400 mb-2" data-oid="6c630gi">
+        <div className="text-gray-400 mb-2" data-oid="i63y8u4">
           <svg
             className="w-12 h-12"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="qze8u27"
+            data-oid="-hixckt"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
               d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              data-oid="f.ubm2a"
+              data-oid="0rrppcy"
             ></path>
           </svg>
         </div>
-        <p className="text-gray-500" data-oid="_dgqwod">
+        <p className="text-gray-500" data-oid="61rr3-n">
           Gerçek bir uygulamada burada interaktif bir grafik gösterilecektir
         </p>
-        <p className="text-gray-400 text-sm mt-2" data-oid="tdnljqj">
+        <p className="text-gray-400 text-sm mt-2" data-oid="79d-djo">
           Örneğin: Chart.js, Recharts veya Nivo kullanılabilir
         </p>
       </div>
@@ -451,42 +451,42 @@ export default function AdminDashboardPage() {
   const [period, setPeriod] = useState("week");
 
   return (
-    <div data-oid="5a1f.:m">
+    <div data-oid="a8c-efz">
       <header
         className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4"
-        data-oid="ksguxkv"
+        data-oid="2gemqh."
       >
-        <div data-oid="1:9hedy">
-          <h1 className="text-2xl font-bold text-gray-900" data-oid="c6ghi7h">
+        <div data-oid="k7l9oeh">
+          <h1 className="text-2xl font-bold text-gray-900" data-oid="kubr-75">
             Gösterge Paneli
           </h1>
-          <p className="text-gray-500" data-oid="t.6:hnd">
+          <p className="text-gray-500" data-oid="6eg4a6i">
             Mağazanız için genel bakış ve istatistikler
           </p>
         </div>
-        <div className="flex items-center space-x-3" data-oid="t6r-08x">
+        <div className="flex items-center space-x-3" data-oid="zq7blcs">
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
             className="py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="3uw1ayr"
+            data-oid="qemzuy3"
           >
-            <option value="today" data-oid="va3e77d">
+            <option value="today" data-oid="pfg6fts">
               Bugün
             </option>
-            <option value="week" data-oid="7ofqx37">
+            <option value="week" data-oid="prn2gbb">
               Bu Hafta
             </option>
-            <option value="month" data-oid="tlvk8c8">
+            <option value="month" data-oid="zvy0fct">
               Bu Ay
             </option>
-            <option value="year" data-oid="d45lwjq">
+            <option value="year" data-oid="ihf59d1">
               Bu Yıl
             </option>
           </select>
           <button
             className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors"
-            data-oid="v9gcnwf"
+            data-oid="x-3iy_9"
           >
             Rapor İndir
           </button>
@@ -496,7 +496,7 @@ export default function AdminDashboardPage() {
       {/* Stats Grid */}
       <div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-        data-oid="ui1ellh"
+        data-oid="54f73mz"
       >
         <StatsCard
           title="Toplam Satış"
@@ -508,20 +508,20 @@ export default function AdminDashboardPage() {
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="u4g:3:a"
+              data-oid="109swfb"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                data-oid="7xj_pbx"
+                data-oid="d5-tmc."
               ></path>
             </svg>
           }
           change="+8.2% geçen haftaya göre"
           changeType="increase"
-          data-oid="2cr-p:r"
+          data-oid="wgcu-ha"
         />
 
         <StatsCard
@@ -534,20 +534,20 @@ export default function AdminDashboardPage() {
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="3tssy_."
+              data-oid="i0qbv8z"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                data-oid="6ci2fyk"
+                data-oid="jednp6j"
               ></path>
             </svg>
           }
           change="+12.5% geçen haftaya göre"
           changeType="increase"
-          data-oid="aczabzk"
+          data-oid="knvuflb"
         />
 
         <StatsCard
@@ -560,20 +560,20 @@ export default function AdminDashboardPage() {
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="t56mymr"
+              data-oid="lr9k1bu"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                data-oid="gl0fy2s"
+                data-oid="m9izn7g"
               ></path>
             </svg>
           }
           change="+3.1% geçen haftaya göre"
           changeType="increase"
-          data-oid="jirez.i"
+          data-oid="lq6xftm"
         />
 
         <StatsCard
@@ -586,32 +586,32 @@ export default function AdminDashboardPage() {
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="2hir.s."
+              data-oid="6dowqwg"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                data-oid="xo08nas"
+                data-oid="uihhsq5"
               ></path>
             </svg>
           }
           change="-2.5% geçen haftaya göre"
           changeType="decrease"
-          data-oid="izvvxsd"
+          data-oid="nrhxgc5"
         />
       </div>
 
       {/* Charts Row */}
-      <div className="mb-8" data-oid="lgvsot.">
-        <RevenueChart data-oid="73n4uxd" />
+      <div className="mb-8" data-oid="hu0_yti">
+        <RevenueChart data-oid="0n9sk.d" />
       </div>
 
       {/* Two Columns Layout for Recent Orders and Top Products */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-oid="8_r5kzf">
-        <RecentOrders data-oid="8s1vu04" />
-        <TopProducts data-oid="vqcch_v" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-oid="s5onx__">
+        <RecentOrders data-oid="bvqreet" />
+        <TopProducts data-oid="z-7qxei" />
       </div>
     </div>
   );
