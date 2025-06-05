@@ -13,8 +13,10 @@ type ProductGridProps = {
 const ProductGrid = ({ products, className = "" }: ProductGridProps) => {
   if (!products || products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-500">Ürün bulunamadı.</p>
+      <div className="text-center py-12" data-oid="6lpw47u">
+        <p className="text-gray-500" data-oid="kpyaquz">
+          Ürün bulunamadı.
+        </p>
       </div>
     );
   }
@@ -22,6 +24,7 @@ const ProductGrid = ({ products, className = "" }: ProductGridProps) => {
   return (
     <div
       className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${className}`}
+      data-oid="nsjc70a"
     >
       {products.map((product) => (
         <ProductCard
@@ -40,6 +43,7 @@ const ProductGrid = ({ products, className = "" }: ProductGridProps) => {
             !!product.sale_price && product.sale_price < product.base_price
           }
           salePrice={product.sale_price}
+          data-oid="78vp1d:"
         />
       ))}
     </div>
