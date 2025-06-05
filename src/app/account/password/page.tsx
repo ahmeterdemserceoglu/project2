@@ -111,14 +111,14 @@ export default function ChangePassword() {
   };
 
   return (
-    <RequireAuth data-oid="_98bwdv">
-      <div className="container mx-auto px-4 py-8" data-oid="fyk79:3">
-        <div className="max-w-md mx-auto" data-oid="xwe-7ot">
-          <div className="mb-6" data-oid="2adbfhk">
+    <RequireAuth data-oid="xufe8nx">
+      <div className="container mx-auto px-4 py-8" data-oid="yu9lzws">
+        <div className="max-w-md mx-auto" data-oid="bpodzf4">
+          <div className="mb-6" data-oid="-ah:gxe">
             <Link
               href="/account"
               className="inline-flex items-center text-sm text-secondary hover:text-secondary-dark"
-              data-oid="ch1lkeq"
+              data-oid="zdju93z"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,27 +126,27 @@ export default function ChangePassword() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="bnmufj1"
+                data-oid="x36iqrf"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M15 19l-7-7 7-7"
-                  data-oid="_h6jqmn"
+                  data-oid="wsv.dmk"
                 />
               </svg>
               Hesap Sayfasına Dön
             </Link>
             <h1
               className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-2"
-              data-oid="kwtvuwv"
+              data-oid="t0jgvh3"
             >
               Şifre Değiştir
             </h1>
             <p
               className="text-gray-600 dark:text-gray-300 mt-1"
-              data-oid="st9ul.u"
+              data-oid="-78jpuz"
             >
               Hesabınızın güvenliği için düzenli olarak şifrenizi değiştirin.
             </p>
@@ -154,18 +154,18 @@ export default function ChangePassword() {
 
           <div
             className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden"
-            data-oid="lkg-yiy"
+            data-oid="hg0_vl6"
           >
             <form
               onSubmit={handleSubmit}
               className="p-6 space-y-4"
-              data-oid="7.zw:0-"
+              data-oid="dke0gc5"
             >
-              <div data-oid="zoh5a86">
+              <div data-oid="o:.dcqa">
                 <label
                   htmlFor="currentPassword"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                  data-oid="rhvroqz"
+                  data-oid="wbcbg-8"
                 >
                   Mevcut Şifre
                 </label>
@@ -178,15 +178,15 @@ export default function ChangePassword() {
                   className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                   placeholder="••••••••"
                   required
-                  data-oid="nue.091"
+                  data-oid="seo-_-t"
                 />
               </div>
 
-              <div data-oid="2.v8nw:">
+              <div data-oid="jt1iitj">
                 <label
                   htmlFor="newPassword"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                  data-oid="47.ir6-"
+                  data-oid="c-8mxp_"
                 >
                   Yeni Şifre
                 </label>
@@ -199,22 +199,22 @@ export default function ChangePassword() {
                   className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                   placeholder="••••••••"
                   required
-                  data-oid="smgo8t0"
+                  data-oid="v8k00xi"
                 />
 
                 <p
                   className="mt-1 text-xs text-gray-500 dark:text-gray-400"
-                  data-oid="q_ondx:"
+                  data-oid="quvrlg3"
                 >
                   En az 8 karakter, bir büyük harf ve bir rakam içermelidir.
                 </p>
               </div>
 
-              <div data-oid="j6-av2v">
+              <div data-oid="g8:14bf">
                 <label
                   htmlFor="confirmPassword"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                  data-oid="koz2-5p"
+                  data-oid="3-ewbqx"
                 >
                   Yeni Şifre Tekrar
                 </label>
@@ -227,25 +227,25 @@ export default function ChangePassword() {
                   className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                   placeholder="••••••••"
                   required
-                  data-oid="z4yntec"
+                  data-oid="9.0489u"
                 />
               </div>
 
               {errorMessage && (
                 <div
                   className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-600 dark:text-red-400"
-                  data-oid="l:g33z7"
+                  data-oid="zd-s3t5"
                 >
                   {errorMessage}
                 </div>
               )}
 
-              <div className="pt-3" data-oid="ah8_le2">
+              <div className="pt-3" data-oid="817.xw-">
                 <button
                   type="submit"
                   disabled={isLoading}
                   className="w-full bg-secondary hover:bg-secondary-dark text-white py-2 px-4 rounded-lg transition-colors duration-200 font-medium flex justify-center items-center"
-                  data-oid="hoyezqf"
+                  data-oid="zycv5be"
                 >
                   {isLoading ? (
                     <>
@@ -254,7 +254,7 @@ export default function ChangePassword() {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        data-oid="f3it9rt"
+                        data-oid="a40h33e"
                       >
                         <circle
                           className="opacity-25"
@@ -263,13 +263,13 @@ export default function ChangePassword() {
                           r="10"
                           stroke="currentColor"
                           strokeWidth="4"
-                          data-oid="oo_mdx8"
+                          data-oid="y2bv003"
                         ></circle>
                         <path
                           className="opacity-75"
                           fill="currentColor"
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          data-oid="awrisfi"
+                          data-oid="nl1tjtv"
                         ></path>
                       </svg>
                       İşleniyor...
@@ -284,14 +284,14 @@ export default function ChangePassword() {
 
           <div
             className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400"
-            data-oid="n_xedsi"
+            data-oid="-w1aqne"
           >
-            <p data-oid="v--jtua">
+            <p data-oid="fmcd9m4">
               Şifrenizi mi unuttunuz?{" "}
               <Link
                 href="/forgot-password"
                 className="text-secondary hover:text-secondary-dark font-medium"
-                data-oid=":5m70o5"
+                data-oid="2khq9ej"
               >
                 Şifremi Unuttum
               </Link>{" "}

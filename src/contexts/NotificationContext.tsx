@@ -53,7 +53,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
   return (
     <NotificationContext.Provider
       value={{ showNotification }}
-      data-oid="xdys704"
+      data-oid="6wto3lp"
     >
       {children}
       {notification && (
@@ -61,7 +61,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
           message={notification.message}
           type={notification.type}
           onClose={handleClose}
-          data-oid="hunrnfd"
+          data-oid="60sorjk"
         />
       )}
     </NotificationContext.Provider>

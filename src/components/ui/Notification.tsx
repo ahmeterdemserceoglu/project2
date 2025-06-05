@@ -60,14 +60,14 @@ const Notification: React.FC<NotificationProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="fiec00s"
+            data-oid="my0bpkp"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M5 13l4 4L19 7"
-              data-oid="tl_4c7h"
+              data-oid="-difam4"
             />
           </svg>
         );
@@ -80,14 +80,14 @@ const Notification: React.FC<NotificationProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="_6w2ic-"
+            data-oid="cpx4:y5"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M6 18L18 6M6 6l12 12"
-              data-oid="1xih.nu"
+              data-oid=".b5a:qv"
             />
           </svg>
         );
@@ -100,14 +100,14 @@ const Notification: React.FC<NotificationProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="tjls8c."
+            data-oid="0kz7w.b"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              data-oid="8_skw-2"
+              data-oid="t17f1l."
             />
           </svg>
         );
@@ -121,14 +121,14 @@ const Notification: React.FC<NotificationProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="bql90zz"
+            data-oid="e0:5ywx"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              data-oid="5wditch"
+              data-oid="z0p.kav"
             />
           </svg>
         );
@@ -138,37 +138,37 @@ const Notification: React.FC<NotificationProps> = ({
   return (
     <div
       className="fixed top-0 left-0 w-full flex justify-center items-start z-50 pt-4 px-4 animate-slide-down"
-      data-oid="0r01wip"
+      data-oid="9nemc38"
     >
       <div
         className={`max-w-md w-full p-4 rounded-lg shadow-lg border flex items-center space-x-3 text-white ${getTypeStyles()}`}
-        data-oid="p7sc2v0"
+        data-oid="nrmsknt"
       >
-        <div className="flex-shrink-0" data-oid="9lakzd4">
+        <div className="flex-shrink-0" data-oid="y3ky2yj">
           {getIcon()}
         </div>
-        <div className="flex-1" data-oid="8v6nmaa">
-          <p className="text-sm font-medium" data-oid="buq83nu">
+        <div className="flex-1" data-oid="ckryf5d">
+          <p className="text-sm font-medium" data-oid="d821q5w">
             {message}
           </p>
         </div>
         <button
           onClick={handleClose}
           className="flex-shrink-0 ml-4 text-white hover:text-gray-100 focus:outline-none"
-          data-oid="_lez4si"
+          data-oid="cd4niug"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
-            data-oid="t4pjo35"
+            data-oid="xqan_p."
           >
             <path
               fillRule="evenodd"
               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
               clipRule="evenodd"
-              data-oid="r9mzp91"
+              data-oid="1421kz-"
             />
           </svg>
         </button>

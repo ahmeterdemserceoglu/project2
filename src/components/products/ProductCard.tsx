@@ -38,20 +38,20 @@ const ProductCard = ({
   };
 
   return (
-    <div className="card group h-full flex flex-col" data-oid="y_wixz5">
+    <div className="card group h-full flex flex-col" data-oid="aulvla9">
       <div
         className="relative overflow-hidden rounded-md mb-4"
-        data-oid="qt9h2pb"
+        data-oid="j2en2nx"
       >
-        <Link href={`/products/${slug}`} data-oid=".71mve3">
-          <div className="aspect-square relative" data-oid="_8j:w5-">
+        <Link href={`/products/${slug}`} data-oid="a1c_-r5">
+          <div className="aspect-square relative" data-oid="w-80ann">
             <Image
               src={image}
               alt={name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
               className="object-cover transition-transform duration-300 group-hover:scale-105"
-              data-oid="gi3rx7l"
+              data-oid="o.i7pfk"
             />
           </div>
         </Link>
@@ -59,12 +59,12 @@ const ProductCard = ({
         {/* Badges */}
         <div
           className="absolute top-2 left-2 flex flex-col gap-1"
-          data-oid="8rhca83"
+          data-oid="kvb4p6x"
         >
           {isNew && (
             <span
               className="bg-primary text-white text-xs font-bold px-2 py-1 rounded"
-              data-oid="dr0a3te"
+              data-oid=".7mw-ka"
             >
               Yeni
             </span>
@@ -72,7 +72,7 @@ const ProductCard = ({
           {isOnSale && (
             <span
               className="bg-accent text-white text-xs font-bold px-2 py-1 rounded"
-              data-oid="8jcfsvq"
+              data-oid="oxli-jb"
             >
               İndirim
             </span>
@@ -83,43 +83,43 @@ const ProductCard = ({
         <button
           onClick={handleAddToCart}
           className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white py-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-          data-oid="tkff1hj"
+          data-oid="tv_unuh"
         >
           Sepete Ekle
         </button>
       </div>
 
-      <div className="flex-grow" data-oid="5gu3y1n">
+      <div className="flex-grow" data-oid="lhb76h0">
         {category && (
-          <span className="text-xs text-gray-500 mb-1 block" data-oid="zi55fai">
+          <span className="text-xs text-gray-500 mb-1 block" data-oid="dt59-51">
             {category}
           </span>
         )}
-        <Link href={`/products/${slug}`} className="block" data-oid="iu_ih.s">
+        <Link href={`/products/${slug}`} className="block" data-oid="c-.mpzt">
           <h3
             className="font-semibold text-lg hover:text-primary transition-colors"
-            data-oid="p.xfq6w"
+            data-oid="xkgj429"
           >
             {name}
           </h3>
         </Link>
       </div>
 
-      <div className="mt-2" data-oid="z5w49ib">
+      <div className="mt-2" data-oid="43_qua_">
         {isOnSale && salePrice ? (
-          <div className="flex items-center gap-2" data-oid="w3iqfx1">
-            <span className="font-bold text-lg" data-oid="9usj216">
+          <div className="flex items-center gap-2" data-oid="v046pjk">
+            <span className="font-bold text-lg" data-oid="ccr1s5v">
               ₺{salePrice.toFixed(2)}
             </span>
             <span
               className="text-gray-500 line-through text-sm"
-              data-oid="7u0j6g2"
+              data-oid="lbvc8qk"
             >
               ₺{price.toFixed(2)}
             </span>
           </div>
         ) : (
-          <span className="font-bold text-lg" data-oid="egwjqf2">
+          <span className="font-bold text-lg" data-oid="g72gipx">
             ₺{price.toFixed(2)}
           </span>
         )}

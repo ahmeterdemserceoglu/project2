@@ -281,46 +281,24 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
-  const productRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+  // Auto-rotate testimonials
   useEffect(() => {
-    // Parallax scroll effect & product animation
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      document.documentElement.style.setProperty("--scroll", `${scrolled}px`);
-
-      productRefs.current.forEach((item, index) => {
-        if (item) {
-          const rect = item.getBoundingClientRect();
-          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-          if (isInView) {
-            item.style.transform = `translateX(${(index % 2 === 0 ? -1 : 1) * Math.min(scrolled * 0.02, 10)}px) translateY(${Math.sin(scrolled * 0.001 + index) * 5}px) rotateZ(${Math.cos(scrolled * 0.0005 + index) * 1}deg)`;
-            item.style.opacity = "1";
-          } else {
-            // item.style.opacity = '0'; // Optional: Fade out when scrolled past
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    handleScroll(); // Initialize scroll-based animations
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  // Function to handle image errors - uses standard img tag properties
+  // Function to handle image errors
   const handleImageError = (
     event: React.SyntheticEvent<HTMLImageElement, Event>,
-    productName: string,
+    fallbackText: string,
   ) => {
     const target = event.target as HTMLImageElement;
-    target.onerror = null; // Prevent infinite loop if placeholder also fails
-    target.src = `https://placehold.co/500x500/1a1a1a/4a4a4a?text=${productName.replace(/\s/g, "+")}`;
+    target.onerror = null;
+    target.src = `https://placehold.co/400x300/e5e7eb/6b7280?text=${encodeURIComponent(fallbackText)}`;
   };
 
   // Handle newsletter subscription
@@ -333,6 +311,7 @@ export default function Home() {
       setLoading(false);
       setSubscribed(true);
       setEmail("");
+      showToast("Bültenimize başarıyla abone oldunuz!", "success");
     }, 1500);
   };
 

@@ -25,17 +25,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" data-oid="ftlva26">
-      <body className="bg-gray-50" data-oid="w:zrdx3">
-        <ToastProvider data-oid="k2o0n-i">
-          <NotificationProvider data-oid="q0ih8v.">
-            <StoreProvider data-oid="sqf2vs2">
-              <div className="flex flex-col min-h-screen" data-oid="8u:q5ge">
-                <AppHeader data-oid=".o180yn" />
-                <main className="flex-grow" data-oid="g_9dye5">
+    <html lang="tr" data-oid="-i4c4dq">
+      <body className="bg-gray-50" data-oid="mr7.31l">
+        <ToastProvider data-oid="33.0jwo">
+          <NotificationProvider data-oid=".__1yjc">
+            <StoreProvider data-oid="3rdzex6">
+              <div className="flex flex-col min-h-screen" data-oid=".r3d0ue">
+                <AppHeader data-oid="rjxuz.p" />
+                <main className="flex-grow" data-oid="8c-lz-n">
                   {children}
                 </main>
-                <AppFooter data-oid="19cp51." />
+                <AppFooter data-oid="s29.a5h" />
               </div>
             </StoreProvider>
           </NotificationProvider>

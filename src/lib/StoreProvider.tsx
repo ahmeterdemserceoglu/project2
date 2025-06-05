@@ -21,7 +21,7 @@ export function StoreInitializer() {
 // This component provides toast notifications for the store actions
 export function ToastHandler() {
   // Add toast notifications for cart actions here
-  return <Toaster position="top-right" data-oid="y9koq9p" />;
+  return <Toaster position="top-right" data-oid="fw8pe0g" />;
 }
 
 // Combine both into a single provider to use in layout
@@ -33,8 +33,8 @@ export default function StoreProvider({
   return (
     <>
       {children}
-      <StoreInitializer data-oid="_q_ijvl" />
-      <ToastHandler data-oid="miqglla" />
+      <StoreInitializer data-oid="8t0wp12" />
+      <ToastHandler data-oid="f7mh.7p" />
     </>
   );
 }
