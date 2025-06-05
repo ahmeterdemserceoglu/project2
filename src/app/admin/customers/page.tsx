@@ -130,7 +130,7 @@ export default function CustomersPage() {
     return (
       <span
         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
-        data-oid="-agltrw"
+        data-oid="p2rmcxf"
       >
         {statusLabels[status] || status}
       </span>
@@ -138,12 +138,12 @@ export default function CustomersPage() {
   };
 
   return (
-    <div data-oid="windx1p">
-      <header className="mb-8" data-oid="skajdiv">
-        <h1 className="text-2xl font-bold text-gray-900" data-oid="tvu.4ll">
+    <div data-oid=".7c04m2">
+      <header className="mb-8" data-oid="fwwhx_n">
+        <h1 className="text-2xl font-bold text-gray-900" data-oid="niz1eh8">
           Müşteriler
         </h1>
-        <p className="text-gray-500" data-oid="qpm-qyv">
+        <p className="text-gray-500" data-oid="yvuo7xl">
           Tüm müşterileri görüntüleyin ve yönetin
         </p>
       </header>
@@ -151,55 +151,55 @@ export default function CustomersPage() {
       {/* Stats */}
       <div
         className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"
-        data-oid="7omefuq"
+        data-oid="eu9oxai"
       >
-        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="xjkf3-8">
+        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="owweo5t">
           <div
             className="text-sm font-medium text-gray-500 mb-1"
-            data-oid="293qglp"
+            data-oid="eh-jnx6"
           >
             Toplam Müşteri
           </div>
-          <div className="text-2xl font-semibold" data-oid="krjzash">
+          <div className="text-2xl font-semibold" data-oid="ie1_n:2">
             {customers.length}
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="f73i1ru">
+        <div className="bg-white rounded-xl shadow-sm p-6" data-oid=".p:u7lf">
           <div
             className="text-sm font-medium text-gray-500 mb-1"
-            data-oid="zemfn8y"
+            data-oid="j1okkj9"
           >
             Aktif Müşteriler
           </div>
           <div
             className="text-2xl font-semibold text-green-600"
-            data-oid="ycfj2o9"
+            data-oid="lv-x.ps"
           >
             {customers.filter((c) => c.status === "active").length}
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="n7t1sy2">
+        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="vso_8a5">
           <div
             className="text-sm font-medium text-gray-500 mb-1"
-            data-oid="3wvqmrb"
+            data-oid="0hkgthw"
           >
             Bu Ay Yeni
           </div>
           <div
             className="text-2xl font-semibold text-blue-600"
-            data-oid="l0-8dgs"
+            data-oid="eb72of4"
           >
             3
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="ky.mdv3">
+        <div className="bg-white rounded-xl shadow-sm p-6" data-oid="5nwhd_n">
           <div
             className="text-sm font-medium text-gray-500 mb-1"
-            data-oid="kr2kz0p"
+            data-oid="vo3:hoe"
           >
             Ortalama Sipariş
           </div>
-          <div className="text-2xl font-semibold" data-oid="6.1tz47">
+          <div className="text-2xl font-semibold" data-oid="0k.re59">
             ₺
             {Math.round(
               customers.reduce((acc, c) => acc + c.totalSpent, 0) /
@@ -212,34 +212,34 @@ export default function CustomersPage() {
       {/* Filters */}
       <div
         className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-3"
-        data-oid="zmdaieq"
+        data-oid="n8mpx:v"
       >
-        <div data-oid="pwbofyl">
+        <div data-oid="gsj.7og">
           <label
             htmlFor="search"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="m-c4.:q"
+            data-oid="69oxccj"
           >
             Arama
           </label>
-          <div className="relative" data-oid="gxya010">
+          <div className="relative" data-oid="-1.z1u7">
             <div
               className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              data-oid="cii1a9p"
+              data-oid="st31sn:"
             >
               <svg
                 className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="g.3ow3."
+                data-oid="of_e_c3"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  data-oid="3qns0q_"
+                  data-oid="wwhk56w"
                 />
               </svg>
             </div>
@@ -250,16 +250,16 @@ export default function CustomersPage() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="İsim, e-posta veya telefon"
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-              data-oid="d4ixeos"
+              data-oid="mzvld2u"
             />
           </div>
         </div>
 
-        <div data-oid="zj7en6s">
+        <div data-oid="c4weazu">
           <label
             htmlFor="status"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="x:9z9d5"
+            data-oid="odas_1:"
           >
             Durum
           </label>
@@ -268,25 +268,25 @@ export default function CustomersPage() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="mvgvl6u"
+            data-oid="k9bo5v_"
           >
-            <option value="" data-oid="x26d-g7">
+            <option value="" data-oid=":c37tb1">
               Tüm Durumlar
             </option>
-            <option value="active" data-oid="922i28m">
+            <option value="active" data-oid="it02m-t">
               Aktif
             </option>
-            <option value="inactive" data-oid="vabr3ec">
+            <option value="inactive" data-oid="w3ua_nz">
               Pasif
             </option>
           </select>
         </div>
 
-        <div data-oid="c0-up39">
+        <div data-oid="8y5ueo7">
           <label
             htmlFor="orderCount"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="uik3yaw"
+            data-oid="n8-w:.k"
           >
             Sipariş Sayısı
           </label>
@@ -295,18 +295,18 @@ export default function CustomersPage() {
             value={orderCountFilter}
             onChange={(e) => setOrderCountFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="_5n.tt5"
+            data-oid="9ra86e3"
           >
-            <option value="" data-oid="kjekbtp">
+            <option value="" data-oid="o-1:cec">
               Tümü
             </option>
-            <option value="none" data-oid="b7cmehc">
+            <option value="none" data-oid="r8wv-a4">
               Hiç sipariş vermedi
             </option>
-            <option value="one" data-oid="ytphzxv">
+            <option value="one" data-oid="hofb.4-">
               Tek sipariş
             </option>
-            <option value="multiple" data-oid="83js-o0">
+            <option value="multiple" data-oid="tqa_xqm">
               Birden fazla sipariş
             </option>
           </select>
@@ -316,61 +316,61 @@ export default function CustomersPage() {
       {/* Customers Table */}
       <div
         className="bg-white shadow-sm rounded-xl overflow-hidden"
-        data-oid="._fezdc"
+        data-oid="lvx3hxx"
       >
-        <div className="overflow-x-auto" data-oid="iz6mm5i">
+        <div className="overflow-x-auto" data-oid="q8.ezg3">
           <table
             className="min-w-full divide-y divide-gray-200"
-            data-oid="l0_w3ku"
+            data-oid="ezf47az"
           >
-            <thead className="bg-gray-50" data-oid="s-n5gv0">
-              <tr data-oid="3nscobr">
+            <thead className="bg-gray-50" data-oid="gg7fqi2">
+              <tr data-oid="i6uk-6w">
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="aarnol3"
+                  data-oid="k01xwj_"
                 >
                   Müşteri
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="8z8h35s"
+                  data-oid="twhwg1e"
                 >
                   İletişim
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="b57gmjc"
+                  data-oid="ir2a0kh"
                 >
                   Siparişler
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="ni4anll"
+                  data-oid="jpmbay5"
                 >
                   Toplam Harcama
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="z:ygqnq"
+                  data-oid="4pitj.r"
                 >
                   Son Sipariş
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="w.s0u:i"
+                  data-oid="3w3:qmk"
                 >
                   Durum
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="tf_c0:y"
+                  data-oid="l0tmv7o"
                 >
                   İşlemler
                 </th>
@@ -378,41 +378,41 @@ export default function CustomersPage() {
             </thead>
             <tbody
               className="bg-white divide-y divide-gray-200"
-              data-oid="0tafwez"
+              data-oid="zxalz7-"
             >
               {filteredCustomers.map((customer) => (
                 <tr
                   key={customer.id}
                   className="hover:bg-gray-50"
-                  data-oid="x0c.bd_"
+                  data-oid="gy6a:._"
                 >
                   <td
                     className="px-6 py-4 whitespace-nowrap"
-                    data-oid="58p3s2m"
+                    data-oid="se9e-fu"
                   >
-                    <div className="flex items-center" data-oid="xqcjjpa">
+                    <div className="flex items-center" data-oid="3hco2_b">
                       <div
                         className="flex-shrink-0 h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center"
-                        data-oid="vaf_43n"
+                        data-oid="_3cx-:e"
                       >
                         <span
                           className="font-medium text-gray-700"
-                          data-oid="vkq:--x"
+                          data-oid="crj.cye"
                         >
                           {customer.firstName[0]}
                           {customer.lastName[0]}
                         </span>
                       </div>
-                      <div className="ml-4" data-oid="xbsehcs">
+                      <div className="ml-4" data-oid="nqso7uc">
                         <div
                           className="text-sm font-medium text-gray-900"
-                          data-oid="qiu9k68"
+                          data-oid="ibbfho2"
                         >
                           {customer.firstName} {customer.lastName}
                         </div>
                         <div
                           className="text-sm text-gray-500"
-                          data-oid="49_.kgi"
+                          data-oid="9i7-.6n"
                         >
                           Müşteri ID: #{customer.id}
                         </div>
@@ -421,47 +421,47 @@ export default function CustomersPage() {
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
-                    data-oid="-dql392"
+                    data-oid="po10d9."
                   >
-                    <div className="text-sm text-gray-900" data-oid=":vngyqx">
+                    <div className="text-sm text-gray-900" data-oid="h6s_dtf">
                       {customer.email}
                     </div>
-                    <div className="text-sm text-gray-500" data-oid="fjiy_by">
+                    <div className="text-sm text-gray-500" data-oid="7h32ezt">
                       {customer.phone}
                     </div>
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="eawgh0h"
+                    data-oid="dh6mtks"
                   >
                     {customer.orderCount}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="5382:d3"
+                    data-oid="nm9bz0r"
                   >
                     ₺{customer.totalSpent.toLocaleString()}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    data-oid="9gmpy34"
+                    data-oid="_novjt-"
                   >
                     {customer.lastOrder}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
-                    data-oid="6jdaba1"
+                    data-oid="7ieyz2q"
                   >
-                    <StatusBadge status={customer.status} data-oid="a2xhvdv" />
+                    <StatusBadge status={customer.status} data-oid="_ob8tea" />
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                    data-oid="2doq.x9"
+                    data-oid="rh4du08"
                   >
                     <Link
                       href={`/admin/customers/${customer.id}`}
                       className="text-primary hover:text-primary-dark mr-3"
-                      data-oid="klmga3."
+                      data-oid="xjr9r3k"
                     >
                       Görüntüle
                     </Link>
@@ -482,7 +482,7 @@ export default function CustomersPage() {
                           ? "text-red-600 hover:text-red-800"
                           : "text-green-600 hover:text-green-800"
                       }
-                      data-oid="i:do1vu"
+                      data-oid="omolhar"
                     >
                       {customer.status === "active" ? "Pasif Yap" : "Aktif Yap"}
                     </button>
@@ -496,40 +496,40 @@ export default function CustomersPage() {
         {/* Pagination */}
         <div
           className="px-6 py-3 flex items-center justify-between border-t"
-          data-oid="o7wbj1o"
+          data-oid="y76z3.w"
         >
-          <div className="text-sm text-gray-700" data-oid="t6dmwrs">
-            <span className="font-medium" data-oid="f.7s0un">
+          <div className="text-sm text-gray-700" data-oid="2hcyu7o">
+            <span className="font-medium" data-oid="snjqq87">
               {filteredCustomers.length}
             </span>{" "}
             müşteri gösteriliyor
           </div>
           <div
             className="flex-1 flex justify-center md:justify-end"
-            data-oid="3yrpgur"
+            data-oid="3jdxbxe"
           >
-            <div className="inline-flex shadow-sm" data-oid="wc01sca">
+            <div className="inline-flex shadow-sm" data-oid="a.jy3_u">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
-                data-oid="u8peq-d"
+                data-oid="yxu-c7e"
               >
                 Önceki
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="94uqii9"
+                data-oid="7xh38k6"
               >
                 1
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="0_nd6fc"
+                data-oid="nfgglqs"
               >
                 2
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
-                data-oid="8wk4qi4"
+                data-oid="rhc:77o"
               >
                 Sonraki
               </button>

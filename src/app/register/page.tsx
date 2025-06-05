@@ -407,38 +407,38 @@ export default function Register() {
   return (
     <div
       className="h-screen overflow-hidden flex flex-col md:flex-row"
-      data-oid="9mxgjfi"
+      data-oid="f74.pj."
     >
       {/* Left side - Image (Hidden on mobile) */}
       <div
         className="hidden md:flex w-1/2 bg-gradient-to-br from-secondary/10 to-accent/10 dark:from-secondary/20 dark:to-accent/20 items-center justify-center"
-        data-oid="w-r:if8"
+        data-oid="srvhloo"
       >
-        <div className="p-6 max-w-md" data-oid="l5htd_f">
+        <div className="p-6 max-w-md" data-oid="s9f2rwd">
           <div
             className="bg-white dark:bg-dark-light rounded-2xl overflow-hidden shadow-lg"
-            data-oid="tpgb9c7"
+            data-oid="lehhy5t"
           >
-            <div className="relative aspect-[16/9] w-full" data-oid="kecvafv">
+            <div className="relative aspect-[16/9] w-full" data-oid="rl9-_.:">
               <Image
                 src="/images/register-image.png"
                 alt="Register"
                 fill
                 className="object-cover"
                 priority
-                data-oid="6l8_0jg"
+                data-oid="exy:qq9"
               />
             </div>
-            <div className="p-6" data-oid="-k_uh8o">
+            <div className="p-6" data-oid="rbzflg9">
               <h2
                 className="text-xl font-bold text-gray-800 dark:text-white mb-2"
-                data-oid="rumdxp6"
+                data-oid="_lon7c8"
               >
                 Alışveriş Deneyimini Kişiselleştir
               </h2>
               <p
                 className="text-gray-600 dark:text-gray-300"
-                data-oid="i7ssj7e"
+                data-oid="zmkb.v7"
               >
                 Hesabınızla tüm alışveriş deneyiminizi kişiselleştirebilirsiniz.
               </p>
@@ -450,27 +450,27 @@ export default function Register() {
       {/* Right side - Form (Full width on mobile, half width on desktop) */}
       <div
         className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-y-auto"
-        data-oid="gd59ulu"
+        data-oid="cosv8zd"
       >
-        <div className="w-full max-w-md py-2" data-oid="us4qncn">
-          <div className="text-center md:text-left mb-6" data-oid="lswq-c2">
-            <Link href="/" className="inline-block mb-6" data-oid="a5rym87">
+        <div className="w-full max-w-md py-2" data-oid="ov85:xi">
+          <div className="text-center md:text-left mb-6" data-oid="l6ab::f">
+            <Link href="/" className="inline-block mb-6" data-oid="xdzxqyq">
               <span
                 className="text-2xl font-bold tracking-tighter relative"
-                data-oid="q2fvhw."
+                data-oid="-4uvi36"
               >
-                <span className="text-primary" data-oid="8s:ikf8">
+                <span className="text-primary" data-oid="6xvzdg6">
                   HD
                 </span>
                 <span
                   className="text-gray-800 dark:text-white"
-                  data-oid="ibb:uwf"
+                  data-oid="0c0veyi"
                 >
                   Ticaret
                 </span>
                 <span
                   className="text-xs text-secondary ml-1 absolute -right-4 top-0"
-                  data-oid=".fd7d92"
+                  data-oid="sgt92:8"
                 >
                   .com
                 </span>
@@ -478,11 +478,11 @@ export default function Register() {
             </Link>
             <h1
               className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2"
-              data-oid="jjn8:1b"
+              data-oid="kmss7z4"
             >
               Hesap Oluştur
             </h1>
-            <p className="text-gray-500 dark:text-gray-400" data-oid="kms06o5">
+            <p className="text-gray-500 dark:text-gray-400" data-oid="j1_qu1.">
               Hızlı ve güvenli bir şekilde kayıt olun
             </p>
           </div>
@@ -490,17 +490,17 @@ export default function Register() {
           <form
             className="space-y-3"
             onSubmit={handleRegister}
-            data-oid="54znrqy"
+            data-oid="wkejycl"
           >
             <div
               className="grid grid-cols-1 md:grid-cols-2 gap-3"
-              data-oid="7-wlj:_"
+              data-oid="2yz4j89"
             >
-              <div data-oid="gvfxn9r">
+              <div data-oid="9y5k30-">
                 <label
                   htmlFor="firstName"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                  data-oid="tcr26xy"
+                  data-oid=".x27-rk"
                 >
                   Ad
                 </label>
@@ -513,14 +513,14 @@ export default function Register() {
                   className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                   placeholder="Adınız"
                   required
-                  data-oid="gx9ag67"
+                  data-oid="38:aazs"
                 />
               </div>
-              <div data-oid="s1o6ny8">
+              <div data-oid="57ethfh">
                 <label
                   htmlFor="lastName"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                  data-oid="-qzgfn1"
+                  data-oid="3x99it-"
                 >
                   Soyad
                 </label>
@@ -533,15 +533,15 @@ export default function Register() {
                   className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                   placeholder="Soyadınız"
                   required
-                  data-oid="ihieez-"
+                  data-oid="izup:da"
                 />
               </div>
             </div>
-            <div data-oid="tb0_gzq">
+            <div data-oid="unbd3g2">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                data-oid="ehi3c94"
+                data-oid="i-3ldvd"
               >
                 Email
               </label>
@@ -554,14 +554,14 @@ export default function Register() {
                 className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="email@example.com"
                 required
-                data-oid=".itmwi2"
+                data-oid="faw:-4e"
               />
             </div>
-            <div data-oid="554q9v7">
+            <div data-oid="s0udiw1">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                data-oid="epj_grs"
+                data-oid="9sn9830"
               >
                 Şifre
               </label>
@@ -574,21 +574,21 @@ export default function Register() {
                 className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="••••••••"
                 required
-                data-oid="y.q-849"
+                data-oid="2jh0vvp"
               />
 
               <p
                 className="mt-1 text-xs text-gray-500 dark:text-gray-400"
-                data-oid="e5z30mn"
+                data-oid="ied0j.6"
               >
                 En az 8 karakter ve bir rakam içermelidir.
               </p>
             </div>
-            <div data-oid="ms2hgm5">
+            <div data-oid="q1jitmt">
               <label
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                data-oid="tnx88ei"
+                data-oid="zielbps"
               >
                 Şifre Tekrar
               </label>
@@ -601,10 +601,10 @@ export default function Register() {
                 className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="••••••••"
                 required
-                data-oid="u2mv_s0"
+                data-oid="jr:cfdh"
               />
             </div>
-            <div className="flex items-start" data-oid=":4trfjn">
+            <div className="flex items-start" data-oid="ro83ika">
               <input
                 type="checkbox"
                 id="terms"
@@ -613,18 +613,18 @@ export default function Register() {
                 onChange={handleChange}
                 className="h-4 w-4 mt-1 text-secondary border-gray-300 rounded focus:ring-secondary"
                 required
-                data-oid="2i61.74"
+                data-oid="6toa7kt"
               />
 
               <label
                 htmlFor="terms"
                 className="ml-2 block text-sm text-gray-700 dark:text-gray-200"
-                data-oid="rv:nvur"
+                data-oid="nkl_f7-"
               >
                 <Link
                   href="/terms"
                   className="text-secondary hover:text-secondary-dark"
-                  data-oid="_7of19e"
+                  data-oid="kw3nibl"
                 >
                   Kullanım Şartları
                 </Link>{" "}
@@ -632,7 +632,7 @@ export default function Register() {
                 <Link
                   href="/privacy"
                   className="text-secondary hover:text-secondary-dark"
-                  data-oid=":um7d35"
+                  data-oid="wm06vqu"
                 >
                   Gizlilik Politikası
                 </Link>
@@ -643,7 +643,7 @@ export default function Register() {
             {errorMessage && (
               <div
                 className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-600 dark:text-red-400"
-                data-oid="cud5-sy"
+                data-oid="x2bwx64"
               >
                 {errorMessage}
               </div>
@@ -653,7 +653,7 @@ export default function Register() {
               type="submit"
               disabled={isLoading}
               className="w-full bg-secondary hover:bg-secondary-dark text-white py-2 px-4 rounded-xl transition-colors duration-200 font-medium flex justify-center items-center"
-              data-oid="4pqfm48"
+              data-oid="hhpj5rc"
             >
               {isLoading ? (
                 <>
@@ -662,7 +662,7 @@ export default function Register() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    data-oid=":4eve9g"
+                    data-oid="ba8ctdl"
                   >
                     <circle
                       className="opacity-25"
@@ -671,13 +671,13 @@ export default function Register() {
                       r="10"
                       stroke="currentColor"
                       strokeWidth="4"
-                      data-oid="mv-5-p."
+                      data-oid="cnqcskq"
                     ></circle>
                     <path
                       className="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      data-oid="2l7via7"
+                      data-oid="4z3sz0l"
                     ></path>
                   </svg>
                   Kayıt Yapılıyor...
@@ -688,85 +688,85 @@ export default function Register() {
             </button>
           </form>
 
-          <div className="mt-4 text-center" data-oid="9j:mq5e">
+          <div className="mt-4 text-center" data-oid="7yxfjhf">
             <span
               className="text-gray-600 dark:text-gray-400"
-              data-oid="8lk1jwp"
+              data-oid="4ys7red"
             >
               Zaten hesabınız var mı?{" "}
             </span>
             <Link
               href="/login"
               className="text-secondary hover:text-secondary-dark font-medium"
-              data-oid="bfkke-o"
+              data-oid=":ddkm86"
             >
               Giriş Yap
             </Link>
           </div>
 
-          <div className="mt-4" data-oid="8x96i_c">
-            <div className="relative" data-oid="vxgeurp">
+          <div className="mt-4" data-oid="hb5dfhq">
+            <div className="relative" data-oid="cj.eh96">
               <div
                 className="absolute inset-0 flex items-center"
-                data-oid="i36i:7i"
+                data-oid="j696cz6"
               >
                 <div
                   className="w-full border-t border-gray-300 dark:border-dark-lighter"
-                  data-oid="s.6ens4"
+                  data-oid="dc_wo76"
                 ></div>
               </div>
               <div
                 className="relative flex justify-center text-sm"
-                data-oid="ju6.u3o"
+                data-oid="70rcgn:"
               >
                 <span
                   className="px-2 bg-white dark:bg-dark text-gray-500 dark:text-gray-400"
-                  data-oid="y-kwup8"
+                  data-oid="nr0kt-1"
                 >
                   veya şununla devam et
                 </span>
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3" data-oid="khqrs:c">
+            <div className="mt-4 grid grid-cols-3 gap-3" data-oid="3_4vr5q">
               <button
                 type="button"
                 onClick={() => handleSocialSignUp("google")}
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid="9vh1f4w"
+                data-oid="boe6f6-"
               >
-                <span className="sr-only" data-oid="2p8bk4_">
+                <span className="sr-only" data-oid="9_6vz61">
                   Google ile kayıt ol
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="rreccfc"
+                  data-oid="71o_2gh"
                 >
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4"
-                    data-oid="62d.:dx"
+                    data-oid="jx8o203"
                   />
 
                   <path
                     d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
                     fill="#34A853"
-                    data-oid="l5x50mo"
+                    data-oid="98t5fg-"
                   />
 
                   <path
                     d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
                     fill="#FBBC05"
-                    data-oid="mo:lcbe"
+                    data-oid="shj8fem"
                   />
 
                   <path
                     d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                     fill="#EA4335"
-                    data-oid="o:wa8c0"
+                    data-oid=".maexkp"
                   />
                 </svg>
               </button>
@@ -775,42 +775,42 @@ export default function Register() {
                 onClick={() => handleSocialSignUp("facebook")}
                 disabled={isLoading}
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid="3-2hsd3"
+                data-oid="pk0w_n_"
               >
-                <span className="sr-only" data-oid="irp44u-">
+                <span className="sr-only" data-oid="1s:vybd">
                   Facebook ile kayıt ol
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="6pewdbf"
+                  data-oid="ibf04xv"
                 >
                   <path
                     d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
                     fill="#1877F2"
-                    data-oid="95xqqla"
+                    data-oid="pyiisdk"
                   />
                 </svg>
               </button>
               <button
                 type="button"
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-dark-lighter rounded-lg hover:bg-gray-50 dark:hover:bg-dark-lighter transition-colors"
-                data-oid="fm:blsm"
+                data-oid="zbffeyr"
               >
-                <span className="sr-only" data-oid=".inigub">
+                <span className="sr-only" data-oid="08nfe67">
                   Apple ile kayıt ol
                 </span>
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  data-oid="j.h7b:u"
+                  data-oid="qxstmdd"
                 >
                   <path
                     d="M16.462 16.964c-.511.971-1.04 1.935-1.89 1.956-.825.02-1.09-.499-2.04-.499-.95 0-1.244.479-2.033.499-.82.02-1.446-.931-1.96-1.9-1.066-1.607-1.884-4.535-1.047-6.505.417-.98 1.162-1.6 1.969-1.6.822 0 1.336.499 2.015.499.679 0 1.252-.499 2.116-.499.757 0 1.556.452 2.124 1.232-1.883 1.015-1.578 3.647.746 4.817zM14.1 7.196c.411-.525.745-1.25.627-1.996-.694.048-1.511.3-1.992.746-.465.429-.852 1.131-.745 1.795.767.052 1.561-.234 2.11-.545z"
                     fill="#000000"
-                    data-oid="0mxgrl."
+                    data-oid="uloyr-m"
                   />
                 </svg>
               </button>
@@ -818,12 +818,12 @@ export default function Register() {
           </div>
 
           {/* Debug Mode Toggle */}
-          <div className="mt-6 text-center" data-oid="ye1v1-3">
+          <div className="mt-6 text-center" data-oid="uoe6:32">
             <button
               type="button"
               onClick={() => setDebugMode(!debugMode)}
               className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-              data-oid="0p00t:_"
+              data-oid="2vi:kpg"
             >
               {debugMode ? "Debug Modunu Kapat" : ""}
             </button>
@@ -833,17 +833,17 @@ export default function Register() {
           {debugMode && debugInfo && (
             <div
               className="mt-4 p-3 bg-gray-50 dark:bg-dark-medium rounded-lg text-xs overflow-auto max-h-60"
-              data-oid="t7zdze2"
+              data-oid="thwlyyw"
             >
               <h4
                 className="font-medium text-sm text-gray-700 dark:text-gray-300 mb-2"
-                data-oid="uq._74h"
+                data-oid="l8mtv0y"
               >
                 Hata Detayları:
               </h4>
               <pre
                 className="text-xs text-gray-600 dark:text-gray-400"
-                data-oid="ge9jp6r"
+                data-oid="uj2pufp"
               >
                 {JSON.stringify(debugInfo, null, 2)}
               </pre>

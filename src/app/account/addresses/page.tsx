@@ -221,14 +221,14 @@ export default function Addresses() {
   };
 
   return (
-    <RequireAuth data-oid="0a82x4x">
-      <div className="container mx-auto px-4 py-8" data-oid="ew4kzzm">
-        <div className="max-w-4xl mx-auto" data-oid="z93k_hl">
-          <div className="mb-6" data-oid="u:54pf2">
+    <RequireAuth data-oid="_3l9jci">
+      <div className="container mx-auto px-4 py-8" data-oid="5-2.3wu">
+        <div className="max-w-4xl mx-auto" data-oid="69.ruw4">
+          <div className="mb-6" data-oid="9mhd1cj">
             <Link
               href="/account"
               className="inline-flex items-center text-sm text-secondary hover:text-secondary-dark"
-              data-oid="eobaseb"
+              data-oid="ninit4w"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -236,37 +236,37 @@ export default function Addresses() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="iro-a9v"
+                data-oid="b30nxgu"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M15 19l-7-7 7-7"
-                  data-oid="y4sz0pw"
+                  data-oid="xerba:d"
                 />
               </svg>
               Hesap Sayfasına Dön
             </Link>
             <h1
               className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-2"
-              data-oid="x0bvb1."
+              data-oid="yabvp6r"
             >
               Adreslerim
             </h1>
             <p
               className="text-gray-600 dark:text-gray-300 mt-1"
-              data-oid="voo85_s"
+              data-oid="i-nytm4"
             >
               Teslimat ve fatura adreslerinizi yönetin.
             </p>
           </div>
 
           {isLoading ? (
-            <div className="flex justify-center p-8" data-oid="wb8d4cq">
+            <div className="flex justify-center p-8" data-oid="icko2vt">
               <div
                 className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"
-                data-oid="oe22js8"
+                data-oid="c78fmgs"
               ></div>
             </div>
           ) : (
@@ -276,7 +276,7 @@ export default function Addresses() {
                 <button
                   onClick={() => setIsAdding(true)}
                   className="mb-4 inline-flex items-center px-4 py-2 bg-secondary hover:bg-secondary-dark text-white rounded-lg transition-colors"
-                  data-oid="d:klzdh"
+                  data-oid=".jz7_wi"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -284,14 +284,14 @@ export default function Addresses() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    data-oid="p6t_i.2"
+                    data-oid="cyz7idz"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
                       d="M12 4v16m8-8H4"
-                      data-oid="e.0vphj"
+                      data-oid="n1774y9"
                     />
                   </svg>
                   Yeni Adres Ekle
@@ -302,12 +302,12 @@ export default function Addresses() {
               {(isAdding || isEditing) && (
                 <div
                   className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden mb-6"
-                  data-oid="qqzxkl1"
+                  data-oid="ofbcojg"
                 >
-                  <div className="p-6" data-oid="or_n_-q">
+                  <div className="p-6" data-oid=":6-td7o">
                     <h2
                       className="text-xl font-bold text-gray-800 dark:text-white mb-4"
-                      data-oid="4rcoi5o"
+                      data-oid="8ttwz.8"
                     >
                       {isEditing ? "Adres Düzenle" : "Yeni Adres Ekle"}
                     </h2>
@@ -315,13 +315,13 @@ export default function Addresses() {
                     <form
                       onSubmit={handleSubmit}
                       className="space-y-4"
-                      data-oid="b1tgp12"
+                      data-oid="6i9ud4:"
                     >
-                      <div data-oid="-wdu_2h">
+                      <div data-oid="ewsh8o7">
                         <label
                           htmlFor="title"
                           className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                          data-oid="2eim22w"
+                          data-oid="hg9tl3f"
                         >
                           Adres Başlığı
                         </label>
@@ -334,19 +334,19 @@ export default function Addresses() {
                           className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                           placeholder="Örn: Ev, İş"
                           required
-                          data-oid="iz8nrfv"
+                          data-oid="94y76t0"
                         />
                       </div>
 
                       <div
                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                        data-oid="3nd1:tp"
+                        data-oid="t95g17:"
                       >
-                        <div data-oid="ihigd8k">
+                        <div data-oid="fb.macu">
                           <label
                             htmlFor="full_name"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="snw:g9-"
+                            data-oid="n1g.51o"
                           >
                             Ad Soyad
                           </label>
@@ -358,15 +358,15 @@ export default function Addresses() {
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                             required
-                            data-oid="ffd:u6e"
+                            data-oid="rv4ud4h"
                           />
                         </div>
 
-                        <div data-oid="1titfd2">
+                        <div data-oid="g6l:9c7">
                           <label
                             htmlFor="phone"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="akv8_qo"
+                            data-oid="yvk1ed5"
                           >
                             Telefon
                           </label>
@@ -378,16 +378,16 @@ export default function Addresses() {
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                             placeholder="+90 555 123 4567"
-                            data-oid="stxt7ua"
+                            data-oid="4t34stm"
                           />
                         </div>
                       </div>
 
-                      <div data-oid="hv1e64q">
+                      <div data-oid="q_dt3--">
                         <label
                           htmlFor="address_line1"
                           className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                          data-oid="h7jdqj5"
+                          data-oid="hcrohqs"
                         >
                           Adres Satırı 1
                         </label>
@@ -399,15 +399,15 @@ export default function Addresses() {
                           className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                           rows={2}
                           required
-                          data-oid="42t0_9r"
+                          data-oid="tnph_51"
                         />
                       </div>
 
-                      <div data-oid="jose004">
+                      <div data-oid="y9pu96d">
                         <label
                           htmlFor="address_line2"
                           className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                          data-oid="2:gl7iw"
+                          data-oid="yb-qxv6"
                         >
                           Adres Satırı 2 (İsteğe Bağlı)
                         </label>
@@ -418,19 +418,19 @@ export default function Addresses() {
                           onChange={handleChange}
                           className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                           rows={1}
-                          data-oid="heokrr1"
+                          data-oid="8ibdvox"
                         />
                       </div>
 
                       <div
                         className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                        data-oid="i6o28nm"
+                        data-oid="--b0kw0"
                       >
-                        <div className="col-span-2" data-oid="z6k_he7">
+                        <div className="col-span-2" data-oid="9a-j-01">
                           <label
                             htmlFor="city"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="dgdpp9h"
+                            data-oid="di6tzor"
                           >
                             İl
                           </label>
@@ -442,15 +442,15 @@ export default function Addresses() {
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                             required
-                            data-oid="upx7x5f"
+                            data-oid="i:2zyoa"
                           />
                         </div>
 
-                        <div className="col-span-2" data-oid="0d5b69k">
+                        <div className="col-span-2" data-oid="eib06vn">
                           <label
                             htmlFor="state"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="ftjl-n0"
+                            data-oid=".:9d4h."
                           >
                             İlçe
                           </label>
@@ -461,20 +461,20 @@ export default function Addresses() {
                             value={formData.state}
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
-                            data-oid="ewsszf3"
+                            data-oid="4.9mvsi"
                           />
                         </div>
                       </div>
 
                       <div
                         className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                        data-oid="hp4npue"
+                        data-oid="9yp0xz8"
                       >
-                        <div className="col-span-2" data-oid="kbx3bt5">
+                        <div className="col-span-2" data-oid="py_gh5p">
                           <label
                             htmlFor="postal_code"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="bywf4bi"
+                            data-oid="tcwjzep"
                           >
                             Posta Kodu
                           </label>
@@ -486,15 +486,15 @@ export default function Addresses() {
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                             required
-                            data-oid="w2g3mt4"
+                            data-oid="hc_:l.h"
                           />
                         </div>
 
-                        <div className="col-span-2" data-oid="anf4prc">
+                        <div className="col-span-2" data-oid="zfv5ykj">
                           <label
                             htmlFor="country"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="zc54xw5"
+                            data-oid="0a2mzxz"
                           >
                             Ülke
                           </label>
@@ -505,21 +505,21 @@ export default function Addresses() {
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
                             required
-                            data-oid="slljjjq"
+                            data-oid="sspmhj4"
                           >
-                            <option value="TR" data-oid="fh:t98x">
+                            <option value="TR" data-oid="q54105.">
                               Türkiye
                             </option>
-                            <option value="DE" data-oid="ofcqm-h">
+                            <option value="DE" data-oid="yp7am3g">
                               Almanya
                             </option>
-                            <option value="US" data-oid="hmij-p-">
+                            <option value="US" data-oid="95chl98">
                               Amerika Birleşik Devletleri
                             </option>
-                            <option value="GB" data-oid="v1633wz">
+                            <option value="GB" data-oid=":_zw2e9">
                               Birleşik Krallık
                             </option>
-                            <option value="FR" data-oid="cdaj1-d">
+                            <option value="FR" data-oid="qn.b_9h">
                               Fransa
                             </option>
                           </select>
@@ -528,13 +528,13 @@ export default function Addresses() {
 
                       <div
                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                        data-oid="jxy9rar"
+                        data-oid="06uoau8"
                       >
-                        <div data-oid="g8m5a73">
+                        <div data-oid="r5hqypc">
                           <label
                             htmlFor="address_type"
                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            data-oid="_oxq4jt"
+                            data-oid="p6gp07r"
                           >
                             Adres Türü
                           </label>
@@ -544,12 +544,12 @@ export default function Addresses() {
                             value={formData.address_type}
                             onChange={handleChange}
                             className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-dark-lighter dark:bg-dark-light dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary"
-                            data-oid="3s7kjnp"
+                            data-oid="8kqj1t_"
                           >
-                            <option value="shipping" data-oid="azfsigs">
+                            <option value="shipping" data-oid="98_fxko">
                               Teslimat Adresi
                             </option>
-                            <option value="billing" data-oid="wx.s6.-">
+                            <option value="billing" data-oid="jdvksh0">
                               Fatura Adresi
                             </option>
                           </select>
@@ -557,7 +557,7 @@ export default function Addresses() {
 
                         <div
                           className="flex items-center mt-8"
-                          data-oid="_n86ip0"
+                          data-oid="2u7h1k1"
                         >
                           <input
                             type="checkbox"
@@ -566,24 +566,24 @@ export default function Addresses() {
                             checked={formData.is_default}
                             onChange={handleChange}
                             className="h-4 w-4 text-secondary border-gray-300 rounded focus:ring-secondary"
-                            data-oid="zyrf96:"
+                            data-oid="bchlfct"
                           />
 
                           <label
                             htmlFor="is_default"
                             className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-                            data-oid="r-yk4v5"
+                            data-oid="e1q3dsc"
                           >
                             Varsayılan adres olarak ayarla
                           </label>
                         </div>
                       </div>
 
-                      <div className="pt-4 flex space-x-3" data-oid="t:rm2q0">
+                      <div className="pt-4 flex space-x-3" data-oid="2aksn_t">
                         <button
                           type="submit"
                           className="px-4 py-2 bg-secondary hover:bg-secondary-dark text-white rounded-lg transition-colors"
-                          data-oid="viuqhca"
+                          data-oid="3ky:wy-"
                         >
                           {isEditing ? "Güncelle" : "Kaydet"}
                         </button>
@@ -592,7 +592,7 @@ export default function Addresses() {
                           type="button"
                           onClick={cancelEdit}
                           className="px-4 py-2 border border-gray-300 dark:border-dark-lighter text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-lighter rounded-lg transition-colors"
-                          data-oid="dwpvtv:"
+                          data-oid="qvxy.l9"
                         >
                           İptal
                         </button>
@@ -606,7 +606,7 @@ export default function Addresses() {
               {!addresses.length && !isAdding && !isEditing ? (
                 <div
                   className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden p-8 text-center"
-                  data-oid="ayaddbx"
+                  data-oid="u8puhzq"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -614,14 +614,14 @@ export default function Addresses() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    data-oid="ddzoaco"
+                    data-oid="aoulwwy"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={1.5}
                       d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      data-oid="-23895e"
+                      data-oid="6941e3i"
                     />
 
                     <path
@@ -629,18 +629,18 @@ export default function Addresses() {
                       strokeLinejoin="round"
                       strokeWidth={1.5}
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      data-oid="kh77u1p"
+                      data-oid="stt46vr"
                     />
                   </svg>
                   <h3
                     className="mt-2 text-lg font-medium text-gray-900 dark:text-white"
-                    data-oid="71ua__q"
+                    data-oid="y4rh07q"
                   >
                     Henüz adres eklenmemiş
                   </h3>
                   <p
                     className="mt-1 text-gray-500 dark:text-gray-400"
-                    data-oid="j1ee1x-"
+                    data-oid="0y3kb:f"
                   >
                     Adres ekleyerek siparişlerinizi hızlıca tamamlayabilirsiniz.
                   </p>
@@ -653,35 +653,35 @@ export default function Addresses() {
                       <div
                         key={address.id}
                         className="bg-white dark:bg-dark-light rounded-xl shadow-sm overflow-hidden mb-4"
-                        data-oid="vfn8cq7"
+                        data-oid="p_uaszg"
                       >
-                        <div className="p-6" data-oid="g85funk">
+                        <div className="p-6" data-oid="s_tmtzj">
                           <div
                             className="flex items-start justify-between"
-                            data-oid="1:q8lft"
+                            data-oid="fy2qkq5"
                           >
-                            <div data-oid="ne-gtmb">
+                            <div data-oid="79wk:dq">
                               <div
                                 className="flex items-center"
-                                data-oid="-4akwxu"
+                                data-oid="8mbrtj0"
                               >
                                 <h3
                                   className="text-lg font-semibold text-gray-800 dark:text-white"
-                                  data-oid="nlg0hnt"
+                                  data-oid="2usfxn_"
                                 >
                                   {address.title}
                                 </h3>
                                 {address.is_default && (
                                   <span
                                     className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500"
-                                    data-oid="bjd7q9o"
+                                    data-oid="7o0-art"
                                   >
                                     Varsayılan
                                   </span>
                                 )}
                                 <span
                                   className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500"
-                                  data-oid="26:5_6:"
+                                  data-oid=".m5jz99"
                                 >
                                   {address.address_type === "shipping"
                                     ? "Teslimat"
@@ -690,32 +690,32 @@ export default function Addresses() {
                               </div>
                               <p
                                 className="mt-1 text-gray-900 dark:text-gray-100 font-medium"
-                                data-oid="mgxdz6k"
+                                data-oid="0ofebt3"
                               >
                                 {address.full_name}
                               </p>
                               <p
                                 className="mt-1 text-gray-600 dark:text-gray-300"
-                                data-oid="y2nk:tu"
+                                data-oid="p._i9pz"
                               >
                                 {address.address_line1}
                                 {address.address_line2 && (
                                   <>
-                                    <br data-oid="j7tu_uc" />
+                                    <br data-oid="v3m-9ou" />
                                     {address.address_line2}
                                   </>
                                 )}
                               </p>
                               <p
                                 className="text-gray-600 dark:text-gray-300"
-                                data-oid="opx-qf_"
+                                data-oid="_5z1kx2"
                               >
                                 {address.state && `${address.state}, `}
                                 {address.city}, {address.postal_code}
                               </p>
                               <p
                                 className="text-gray-600 dark:text-gray-300"
-                                data-oid="hr9u0t1"
+                                data-oid=":cesk8."
                               >
                                 {address.country === "TR"
                                   ? "Türkiye"
@@ -724,19 +724,19 @@ export default function Addresses() {
                               {address.phone && (
                                 <p
                                   className="mt-1 text-gray-600 dark:text-gray-300"
-                                  data-oid="npna22u"
+                                  data-oid="7gb3bet"
                                 >
                                   {address.phone}
                                 </p>
                               )}
                             </div>
 
-                            <div className="flex space-x-2" data-oid="hxeog1c">
+                            <div className="flex space-x-2" data-oid="-:xp_iz">
                               <button
                                 onClick={() => handleAddressEdit(address)}
                                 className="text-secondary hover:text-secondary-dark p-1"
                                 aria-label="Edit address"
-                                data-oid="ato6ms5"
+                                data-oid="63acpms"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -744,14 +744,14 @@ export default function Addresses() {
                                   fill="none"
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
-                                  data-oid="9yt.umj"
+                                  data-oid="1c90g46"
                                 >
                                   <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth={2}
                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                    data-oid="h8b_cdp"
+                                    data-oid="s-.o.0_"
                                   />
                                 </svg>
                               </button>
@@ -760,7 +760,7 @@ export default function Addresses() {
                                 onClick={() => handleAddressDelete(address.id)}
                                 className="text-red-500 hover:text-red-700 p-1"
                                 aria-label="Delete address"
-                                data-oid="v.:2u6l"
+                                data-oid="k36eumm"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -768,14 +768,14 @@ export default function Addresses() {
                                   fill="none"
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
-                                  data-oid=".jfgwtv"
+                                  data-oid="rl4pcw1"
                                 >
                                   <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth={2}
                                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                    data-oid="g:1aqbc"
+                                    data-oid="a0vwail"
                                   />
                                 </svg>
                               </button>

@@ -106,23 +106,23 @@ function VerifyEmailContent() {
     return (
       <div
         className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark"
-        data-oid="733kvy-"
+        data-oid="_7e_my."
       >
         <div
           className="max-w-md w-full p-8 bg-white dark:bg-dark-light rounded-xl shadow-lg text-center"
-          data-oid="-9isba7"
+          data-oid="fycs402"
         >
           <div
             className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary mx-auto mb-4"
-            data-oid=":dv7s8w"
+            data-oid="aw0kuo9"
           ></div>
           <h1
             className="text-xl font-bold text-gray-900 dark:text-white mb-2"
-            data-oid="59wek1a"
+            data-oid="qpz8lpw"
           >
             Email Doğrulanıyor...
           </h1>
-          <p className="text-gray-600 dark:text-gray-300" data-oid=".hlnht2">
+          <p className="text-gray-600 dark:text-gray-300" data-oid="2jj2gw9">
             Lütfen bekleyin, email adresiniz doğrulanıyor.
           </p>
         </div>
@@ -133,18 +133,18 @@ function VerifyEmailContent() {
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark p-4"
-      data-oid="xux-5z-"
+      data-oid="vev1hz9"
     >
       <div
         className="max-w-md w-full p-8 bg-white dark:bg-dark-light rounded-xl shadow-lg"
-        data-oid="y6vs-zd"
+        data-oid="rwa3:gd"
       >
-        <div className="text-center" data-oid="q1z_06o">
+        <div className="text-center" data-oid="154.7y_">
           {/* Success Icon */}
           {state.success ? (
             <div
               className="mb-6 p-3 rounded-full bg-green-100 dark:bg-green-900 inline-block"
-              data-oid="ja03i5e"
+              data-oid="v.68x2i"
             >
               <svg
                 className="h-12 w-12 text-green-500"
@@ -152,14 +152,14 @@ function VerifyEmailContent() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid=".wkee07"
+                data-oid="9j30e2f"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M5 13l4 4L19 7"
-                  data-oid="nshbo.6"
+                  data-oid="c9kb-7x"
                 />
               </svg>
             </div>
@@ -167,7 +167,7 @@ function VerifyEmailContent() {
             /* Error Icon */
             <div
               className="mb-6 p-3 rounded-full bg-red-100 dark:bg-red-900 inline-block"
-              data-oid="icknoah"
+              data-oid="b5v9e46"
             >
               <svg
                 className="h-12 w-12 text-red-500"
@@ -175,14 +175,14 @@ function VerifyEmailContent() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="gnr4kkz"
+                data-oid="le63cjn"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M6 18L18 6M6 6l12 12"
-                  data-oid="v-7.z-5"
+                  data-oid="_nf74nb"
                 />
               </svg>
             </div>
@@ -195,7 +195,7 @@ function VerifyEmailContent() {
                 ? "text-green-600 dark:text-green-400"
                 : "text-red-600 dark:text-red-400"
             }`}
-            data-oid="0fc541y"
+            data-oid=":be.eop"
           >
             {state.success ? "✅ Email Doğrulandı!" : "❌ Doğrulama Başarısız"}
           </h1>
@@ -203,7 +203,7 @@ function VerifyEmailContent() {
           {/* Message */}
           <p
             className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"
-            data-oid=":drn7o."
+            data-oid="who_v61"
           >
             {state.message}
           </p>
@@ -212,11 +212,11 @@ function VerifyEmailContent() {
           {state.success && (
             <div
               className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg"
-              data-oid="ab7kr_i"
+              data-oid="o1olgun"
             >
               <p
                 className="text-sm text-green-600 dark:text-green-400"
-                data-oid="v8_xgnn"
+                data-oid=":3a9gv3"
               >
                 🎉 Hesabınız aktifleştirildi! 3 saniye içinde giriş sayfasına
                 yönlendirileceksiniz...
@@ -228,11 +228,11 @@ function VerifyEmailContent() {
           {state.canResend && (
             <div
               className="mb-6 p-4 bg-gray-50 dark:bg-dark-medium rounded-lg"
-              data-oid="xhqhga-"
+              data-oid="6dcrd_j"
             >
               <p
                 className="text-sm text-gray-600 dark:text-gray-300 mb-3"
-                data-oid="iliynwh"
+                data-oid="6gdpgpr"
               >
                 Doğrulama emaili alamadınız mı?
               </p>
@@ -240,7 +240,7 @@ function VerifyEmailContent() {
                 onClick={handleResendEmail}
                 disabled={resendLoading}
                 className="w-full bg-secondary hover:bg-secondary-dark text-white py-2 px-4 rounded-lg transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                data-oid="gj:n303"
+                data-oid=".02m170"
               >
                 {resendLoading ? (
                   <>
@@ -249,7 +249,7 @@ function VerifyEmailContent() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      data-oid="idu1vzs"
+                      data-oid="9o2dy9d"
                     >
                       <circle
                         className="opacity-25"
@@ -258,13 +258,13 @@ function VerifyEmailContent() {
                         r="10"
                         stroke="currentColor"
                         strokeWidth="4"
-                        data-oid="s0yx98t"
+                        data-oid="5ci7m:1"
                       ></circle>
                       <path
                         className="opacity-75"
                         fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        data-oid="w-ncymh"
+                        data-oid="kpfy.x8"
                       ></path>
                     </svg>
                     Gönderiliyor...
@@ -281,7 +281,7 @@ function VerifyEmailContent() {
                       ? "text-green-600 dark:text-green-400"
                       : "text-red-600 dark:text-red-400"
                   }`}
-                  data-oid="vu0xsq8"
+                  data-oid="mk0.em_"
                 >
                   {resendMessage}
                 </p>
@@ -290,12 +290,12 @@ function VerifyEmailContent() {
           )}
 
           {/* Action Buttons */}
-          <div className="space-y-3" data-oid="st0o_40">
+          <div className="space-y-3" data-oid="119kix1">
             {state.success ? (
               <Link
                 href="/login"
                 className="w-full inline-block bg-secondary hover:bg-secondary-dark text-white py-3 px-4 rounded-lg transition-colors duration-200 font-medium text-center"
-                data-oid="r5lz29_"
+                data-oid=".ynrtwb"
               >
                 🚀 Giriş Yap
               </Link>
@@ -303,7 +303,7 @@ function VerifyEmailContent() {
               <Link
                 href="/register"
                 className="w-full inline-block bg-secondary hover:bg-secondary-dark text-white py-3 px-4 rounded-lg transition-colors duration-200 font-medium text-center"
-                data-oid=".ywrxf3"
+                data-oid="ar792py"
               >
                 🔄 Tekrar Kayıt Ol
               </Link>
@@ -312,7 +312,7 @@ function VerifyEmailContent() {
             <Link
               href="/"
               className="w-full inline-block border border-gray-300 dark:border-dark-lighter text-gray-700 dark:text-gray-300 py-3 px-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-medium transition-colors duration-200 font-medium text-center"
-              data-oid="n440tms"
+              data-oid="ur5-ymi"
             >
               🏠 Ana Sayfaya Dön
             </Link>
@@ -321,29 +321,29 @@ function VerifyEmailContent() {
           {/* Site Branding */}
           <div
             className="mt-8 pt-6 border-t border-gray-200 dark:border-dark-lighter"
-            data-oid="rwrhry-"
+            data-oid="w3gg.n3"
           >
-            <div className="text-center" data-oid="bpgl3zq">
+            <div className="text-center" data-oid="-:d_air">
               <span
                 className="text-lg font-bold tracking-tighter"
-                data-oid="rig_:84"
+                data-oid="sx7ptiu"
               >
-                <span className="text-primary" data-oid="bm:byum">
+                <span className="text-primary" data-oid="_xlys:l">
                   HD
                 </span>
                 <span
                   className="text-gray-900 dark:text-white"
-                  data-oid="sb7lrk1"
+                  data-oid="fif7.:x"
                 >
                   Ticaret
                 </span>
-                <span className="text-secondary text-sm" data-oid="x6wkrvd">
+                <span className="text-secondary text-sm" data-oid="j0q1vft">
                   .com
                 </span>
               </span>
               <p
                 className="text-xs text-gray-500 dark:text-gray-400 mt-1"
-                data-oid="_08i1n2"
+                data-oid="di-u42q"
               >
                 Güvenilir E-Ticaret Platformu
               </p>
@@ -361,31 +361,31 @@ export default function VerifyEmail() {
       fallback={
         <div
           className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark"
-          data-oid="m2_3tbl"
+          data-oid="0qj6i.4"
         >
           <div
             className="max-w-md w-full p-8 bg-white dark:bg-dark-light rounded-xl shadow-lg text-center"
-            data-oid="t5o6.8o"
+            data-oid="h24to07"
           >
             <div
               className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary mx-auto mb-4"
-              data-oid="xk-3whk"
+              data-oid="hkkkdtm"
             ></div>
             <h1
               className="text-xl font-bold text-gray-900 dark:text-white mb-2"
-              data-oid="xtx22a_"
+              data-oid="x3z66:2"
             >
               Yükleniyor...
             </h1>
-            <p className="text-gray-600 dark:text-gray-300" data-oid="e4cnf4b">
+            <p className="text-gray-600 dark:text-gray-300" data-oid="n7t5vg7">
               Lütfen bekleyin, sayfa yükleniyor.
             </p>
           </div>
         </div>
       }
-      data-oid=":on5vnk"
+      data-oid="160wdga"
     >
-      <VerifyEmailContent data-oid="vx-k..1" />
+      <VerifyEmailContent data-oid="5366e7s" />
     </Suspense>
   );
 }

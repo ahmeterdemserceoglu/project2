@@ -142,49 +142,49 @@ export default async function ProductPage({ params }: Props) {
   const isInStock = product.stock_quantity > 0;
 
   return (
-    <div className="container mx-auto py-12 px-4" data-oid="ukffr46">
+    <div className="container mx-auto py-12 px-4" data-oid="miux0w7">
       {/* Breadcrumb */}
       <div
         className="text-sm mb-6 flex items-center text-gray-500"
-        data-oid="k8suqbb"
+        data-oid="c0.0dy0"
       >
-        <Link href="/" data-oid="8myjnv0">
+        <Link href="/" data-oid="pklp4ae">
           Ana Sayfa
         </Link>
-        <span className="mx-2" data-oid="cluoc.:">
+        <span className="mx-2" data-oid="umi2lkb">
           /
         </span>
-        <Link href="/products" data-oid="5z3tyjb">
+        <Link href="/products" data-oid="xymw51d">
           Ürünler
         </Link>
         {product.category_name && (
           <>
-            <span className="mx-2" data-oid="syfr98.">
+            <span className="mx-2" data-oid="h85uert">
               /
             </span>
-            <Link href={`/category/${product.category_id}`} data-oid="ij6bog4">
+            <Link href={`/category/${product.category_id}`} data-oid="r3-bord">
               {product.category_name}
             </Link>
           </>
         )}
-        <span className="mx-2" data-oid="eq.4f3o">
+        <span className="mx-2" data-oid="ig-fz0z">
           /
         </span>
-        <span className="text-gray-700 font-medium truncate" data-oid="._uxyl7">
+        <span className="text-gray-700 font-medium truncate" data-oid="y5ijz:v">
           {product.name}
         </span>
       </div>
 
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16"
-        data-oid="3tq_s27"
+        data-oid="hdef8ju"
       >
         {/* Product Images */}
-        <div className="space-y-6" data-oid="e.fxzfc">
+        <div className="space-y-6" data-oid="lw-lxub">
           {/* Main Image */}
           <div
             className="relative aspect-square overflow-hidden rounded-xl shadow-md bg-white"
-            data-oid="c6wmbhs"
+            data-oid="3.43tft"
           >
             <Image
               src={product.primary_image_url || "/images/placeholder.png"}
@@ -193,13 +193,13 @@ export default async function ProductPage({ params }: Props) {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-contain p-4"
               priority
-              data-oid="-qh54v9"
+              data-oid="w4f-2yk"
             />
 
             {product.sale_price && (
               <div
                 className="absolute top-4 left-4 bg-accent text-white text-sm font-medium px-3 py-1 rounded-full"
-                data-oid="mso79m2"
+                data-oid="nq_trei"
               >
                 %
                 {Math.round(
@@ -211,11 +211,11 @@ export default async function ProductPage({ params }: Props) {
             {!isInStock && (
               <div
                 className="absolute inset-0 bg-black/40 flex items-center justify-center"
-                data-oid="n0fajf4"
+                data-oid="1xji2ee"
               >
                 <span
                   className="bg-red-600 text-white px-4 py-2 rounded-md font-medium text-lg transform -rotate-12"
-                  data-oid="ijlnu-m"
+                  data-oid="t:-7btw"
                 >
                   Stokta Yok
                 </span>
@@ -224,12 +224,12 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {/* Thumbnail Images */}
-          <div className="grid grid-cols-4 gap-3" data-oid="3mj8fgu">
+          <div className="grid grid-cols-4 gap-3" data-oid="syvjs2.">
             {product.images.map((image: any) => (
               <div
                 key={image.id}
                 className="relative aspect-square overflow-hidden rounded-md cursor-pointer border-2 border-transparent hover:border-primary transition-colors bg-white shadow-sm"
-                data-oid="ri:ul40"
+                data-oid="syl2ypv"
               >
                 <Image
                   src={image.image_url}
@@ -237,7 +237,7 @@ export default async function ProductPage({ params }: Props) {
                   fill
                   sizes="25vw"
                   className="object-contain p-2"
-                  data-oid="0hn165g"
+                  data-oid="ktg0aei"
                 />
               </div>
             ))}
@@ -245,102 +245,102 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         {/* Product Info */}
-        <div data-oid="ju8e_7v">
+        <div data-oid="vg0bcvh">
           {product.category_name && (
             <p
               className="text-sm text-primary font-medium mb-2"
-              data-oid="ivvjy_b"
+              data-oid="bpkeaq7"
             >
               {product.category_name}
             </p>
           )}
-          <h1 className="text-3xl font-bold mb-4" data-oid="8-vco6p">
+          <h1 className="text-3xl font-bold mb-4" data-oid="wvb9ee0">
             {product.name}
           </h1>
 
           {/* Rating */}
-          <div className="flex items-center mb-6" data-oid="u7gpk0-">
+          <div className="flex items-center mb-6" data-oid="dq.oo.8">
             <div
               className="flex items-center text-yellow-400"
-              data-oid="-5wj0kv"
+              data-oid="--:c2g6"
             >
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                data-oid="1pp7s9y"
+                data-oid="yupd36a"
               >
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  data-oid="h1xj9ol"
+                  data-oid="e_qpdas"
                 />
               </svg>
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                data-oid="xvl6m_j"
+                data-oid="2rhd4:3"
               >
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  data-oid="ue22bfu"
+                  data-oid="p7g312w"
                 />
               </svg>
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                data-oid="fldop3r"
+                data-oid="ts_sq-8"
               >
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  data-oid="dbzh5n0"
+                  data-oid=".byz4j2"
                 />
               </svg>
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                data-oid="pmh_m4d"
+                data-oid="ehmt2qq"
               >
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  data-oid="tkkcif4"
+                  data-oid="lh5:fvx"
                 />
               </svg>
               <svg
                 className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
-                data-oid="xg630vl"
+                data-oid="i42q1xd"
               >
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  data-oid="jhpn2.w"
+                  data-oid="e_udeqo"
                 />
               </svg>
             </div>
-            <p className="ml-2 text-gray-600 text-sm" data-oid="wxl6i.c">
+            <p className="ml-2 text-gray-600 text-sm" data-oid=":dfk-oe">
               (24 Değerlendirme)
             </p>
           </div>
 
           {/* Price */}
-          <div className="mb-6" data-oid="q_a.pjn">
+          <div className="mb-6" data-oid="m89230c">
             {product.sale_price ? (
-              <div className="flex items-center gap-2" data-oid="7oulllq">
-                <span className="text-3xl font-bold" data-oid="_vr-h4g">
+              <div className="flex items-center gap-2" data-oid="0l4avaw">
+                <span className="text-3xl font-bold" data-oid="h_o__wn">
                   ₺{product.sale_price.toFixed(2)}
                 </span>
                 <span
                   className="text-gray-500 line-through text-lg"
-                  data-oid="r5cs317"
+                  data-oid="..jj.0q"
                 >
                   ₺{product.base_price.toFixed(2)}
                 </span>
               </div>
             ) : (
-              <span className="text-3xl font-bold" data-oid="pk356qf">
+              <span className="text-3xl font-bold" data-oid="ssok:ts">
                 ₺{product.base_price.toFixed(2)}
               </span>
             )}
@@ -348,21 +348,21 @@ export default async function ProductPage({ params }: Props) {
             {/* Free shipping notice */}
             <p
               className="text-sm text-green-600 mt-2 flex items-center"
-              data-oid="u0a0ccv"
+              data-oid="_wtwgsn"
             >
               <svg
                 className="w-4 h-4 mr-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                data-oid=".2-nk5z"
+                data-oid="pyr6si."
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M5 13l4 4L19 7"
-                  data-oid="1ls1qi0"
+                  data-oid="_t5h8hm"
                 />
               </svg>
               500₺ üzeri siparişlerde kargo bedava
@@ -370,14 +370,14 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {/* Stock Status */}
-          <div className="mb-6 flex items-center" data-oid="how3uxk">
+          <div className="mb-6 flex items-center" data-oid="bf.8fur">
             {isInStock ? (
               <>
                 <span
                   className="h-3 w-3 bg-green-500 rounded-full mr-2"
-                  data-oid="dd:wocv"
+                  data-oid="bllvkc4"
                 ></span>
-                <p className="text-green-600 font-medium" data-oid="quvnpb2">
+                <p className="text-green-600 font-medium" data-oid="47ul-1i">
                   Stokta Var - 24 saat içinde kargoda
                 </p>
               </>
@@ -385,9 +385,9 @@ export default async function ProductPage({ params }: Props) {
               <>
                 <span
                   className="h-3 w-3 bg-red-500 rounded-full mr-2"
-                  data-oid="fpq49_h"
+                  data-oid="0kz8php"
                 ></span>
-                <p className="text-red-600 font-medium" data-oid="brdz:3e">
+                <p className="text-red-600 font-medium" data-oid="6a8wnad">
                   Stokta Yok
                 </p>
               </>
@@ -395,11 +395,11 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {/* Description */}
-          <div className="mb-8" data-oid="::9er7j">
-            <h2 className="text-lg font-semibold mb-2" data-oid="2nopy4b">
+          <div className="mb-8" data-oid="8tn4207">
+            <h2 className="text-lg font-semibold mb-2" data-oid="sh4urxc">
               Ürün Açıklaması
             </h2>
-            <p className="text-gray-700" data-oid="g8t92rk">
+            <p className="text-gray-700" data-oid="48huj1r">
               {product.description}
             </p>
           </div>
@@ -407,14 +407,14 @@ export default async function ProductPage({ params }: Props) {
           {/* Add to Cart */}
           <div
             className="flex flex-col sm:flex-row gap-4 mb-8"
-            data-oid="2brmgae"
+            data-oid="qu7s4pr"
           >
             {isInStock ? (
               <>
-                <div className="flex border rounded-md" data-oid="r51rqzk">
+                <div className="flex border rounded-md" data-oid="3wo:t7:">
                   <button
                     className="px-4 py-2 border-r hover:bg-gray-50"
-                    data-oid="r87:jdq"
+                    data-oid="_1ajx0:"
                   >
                     -
                   </button>
@@ -423,12 +423,12 @@ export default async function ProductPage({ params }: Props) {
                     min="1"
                     defaultValue="1"
                     className="w-16 text-center focus:outline-none"
-                    data-oid="qj:rssf"
+                    data-oid=".evt_9e"
                   />
 
                   <button
                     className="px-4 py-2 border-l hover:bg-gray-50"
-                    data-oid="1em99c-"
+                    data-oid="6enhg8y"
                   >
                     +
                   </button>
@@ -442,25 +442,25 @@ export default async function ProductPage({ params }: Props) {
                     image:
                       product.primary_image_url || "/images/placeholder.png",
                   }}
-                  data-oid="eohspzl"
+                  data-oid="__:wu7d"
                 />
               </>
             ) : (
-              <div className="w-full" data-oid="ktycfv0">
+              <div className="w-full" data-oid="5pzv19j">
                 <button
                   className="w-full py-3 px-4 bg-gray-200 text-gray-600 rounded-md cursor-not-allowed flex items-center justify-center"
                   disabled
-                  data-oid="7n-gw1v"
+                  data-oid="cc7ydzu"
                 >
                   Stokta Yok
                 </button>
-                <p className="text-sm text-gray-600 mt-2" data-oid="03_:na1">
+                <p className="text-sm text-gray-600 mt-2" data-oid="wblnd59">
                   Stok durumu için lütfen bizimle iletişime geçin.
                 </p>
                 <a
                   href="/iletisim"
                   className="text-primary text-sm hover:underline mt-1 inline-block"
-                  data-oid="68tg0ef"
+                  data-oid="dmkl48f"
                 >
                   Haber ver
                 </a>
@@ -469,77 +469,77 @@ export default async function ProductPage({ params }: Props) {
           </div>
 
           {/* Additional Info */}
-          <div className="border-t pt-6" data-oid="ejds9p3">
-            <div className="grid grid-cols-2 gap-4 mb-6" data-oid="rchr:_d">
-              <div data-oid="xv4khd6">
-                <p className="text-gray-500 text-sm" data-oid="quj94mi">
+          <div className="border-t pt-6" data-oid=":t1hc74">
+            <div className="grid grid-cols-2 gap-4 mb-6" data-oid="n4op..v">
+              <div data-oid="lpd7hww">
+                <p className="text-gray-500 text-sm" data-oid="w61zmjv">
                   SKU:
                 </p>
-                <p data-oid="56_f67.">{product.sku || "N/A"}</p>
+                <p data-oid="0qry-q1">{product.sku || "N/A"}</p>
               </div>
-              <div data-oid="o0ehb99">
-                <p className="text-gray-500 text-sm" data-oid="1ap-z6k">
+              <div data-oid="cg:746w">
+                <p className="text-gray-500 text-sm" data-oid="5:un2sw">
                   Kategori:
                 </p>
-                <p data-oid="azuq.f1">{product.category_name || "N/A"}</p>
+                <p data-oid="h:.6sq.">{product.category_name || "N/A"}</p>
               </div>
             </div>
 
             {/* Secure shopping */}
             <div
               className="flex items-center space-x-4 text-sm text-gray-500"
-              data-oid="dktwph:"
+              data-oid="e3pogg7"
             >
-              <div className="flex items-center" data-oid="03h5588">
+              <div className="flex items-center" data-oid="wme:38-">
                 <svg
                   className="w-4 h-4 mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  data-oid="u3bzpxa"
+                  data-oid="l7wv8j_"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    data-oid="-0ewil-"
+                    data-oid="nr3:gej"
                   />
                 </svg>
                 Güvenli Ödeme
               </div>
-              <div className="flex items-center" data-oid="qpvzkwc">
+              <div className="flex items-center" data-oid="5:bubia">
                 <svg
                   className="w-4 h-4 mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  data-oid="16:vv07"
+                  data-oid="3dbcdq:"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    data-oid="bfkc-17"
+                    data-oid="qiwalm9"
                   />
                 </svg>
                 14 Gün İade
               </div>
-              <div className="flex items-center" data-oid="r88-jq7">
+              <div className="flex items-center" data-oid="zbgm85q">
                 <svg
                   className="w-4 h-4 mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  data-oid="9iq.p1k"
+                  data-oid="dtbrsw."
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    data-oid="2scd077"
+                    data-oid="027:t-d"
                   />
                 </svg>
                 Orijinal Ürün
@@ -550,29 +550,29 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* Product Tabs */}
-      <div className="mb-16" data-oid="j9e3iqk">
-        <div className="border-b" data-oid="-gjywzy">
-          <ul className="flex flex-wrap -mb-px" data-oid="h9ga4ug">
-            <li className="mr-2" data-oid="mw:fpqp">
+      <div className="mb-16" data-oid="_l899o_">
+        <div className="border-b" data-oid="::80f2g">
+          <ul className="flex flex-wrap -mb-px" data-oid="l-lzg88">
+            <li className="mr-2" data-oid="gt8hql-">
               <button
                 className="inline-block py-4 px-6 border-b-2 border-primary font-medium text-primary"
-                data-oid="bouevpu"
+                data-oid="m7myakc"
               >
                 Detaylar
               </button>
             </li>
-            <li className="mr-2" data-oid="j.:q3x2">
+            <li className="mr-2" data-oid="9jhiq89">
               <button
                 className="inline-block py-4 px-6 border-b-2 border-transparent hover:border-gray-300 font-medium text-gray-600"
-                data-oid="qttrhty"
+                data-oid="-ufr0b2"
               >
                 Özellikler
               </button>
             </li>
-            <li className="mr-2" data-oid="z636dk8">
+            <li className="mr-2" data-oid="-xu1lwy">
               <button
                 className="inline-block py-4 px-6 border-b-2 border-transparent hover:border-gray-300 font-medium text-gray-600"
-                data-oid="y7wgbol"
+                data-oid="e6y1z9m"
               >
                 Değerlendirmeler (24)
               </button>
@@ -580,11 +580,11 @@ export default async function ProductPage({ params }: Props) {
           </ul>
         </div>
 
-        <div className="py-6" data-oid="pbsl98e">
-          <p className="text-gray-700 mb-4" data-oid="uz19m69">
+        <div className="py-6" data-oid="g0o23tb">
+          <p className="text-gray-700 mb-4" data-oid="lx11pu6">
             {product.description}
           </p>
-          <p className="text-gray-700" data-oid="953pbch">
+          <p className="text-gray-700" data-oid=".hawrfu">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             volutpat velit id enim tincidunt, in tincidunt tellus pharetra.
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
@@ -597,11 +597,11 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <div data-oid="et09u38">
-          <h2 className="text-2xl font-bold mb-6" data-oid="ojrq3t9">
+        <div data-oid="d0svinh">
+          <h2 className="text-2xl font-bold mb-6" data-oid="e0k7.et">
             Benzer Ürünler
           </h2>
-          <ProductGrid products={relatedProducts} data-oid="j:fja-g" />
+          <ProductGrid products={relatedProducts} data-oid="cc.:8gh" />
         </div>
       )}
     </div>

@@ -105,16 +105,16 @@ export default function AuthErrorPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8"
-      data-oid="-vz68xo"
+      data-oid="j0n1eb5"
     >
       <div
         className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-2xl"
-        data-oid="_kyfop2"
+        data-oid="ifn6hk."
       >
-        <div data-oid="ub9dfq9">
+        <div data-oid="xaii.u:">
           <h2
             className="mt-6 text-center text-3xl font-extrabold text-white"
-            data-oid="hj7ujt1"
+            data-oid="lon4jxm"
           >
             Kimlik Doğrulama Hatası
           </h2>
@@ -124,29 +124,29 @@ export default function AuthErrorPage() {
             fallback={
               <div
                 className="mt-4 text-center text-gray-300"
-                data-oid="t-ee_52"
+                data-oid="6:32:dd"
               >
                 Yükleniyor...
               </div>
             }
-            data-oid="5u6_zui"
+            data-oid="1g6cu_7"
           >
-            <ErrorInfoHandler setErrorInfo={setErrorInfo} data-oid="o3arer4" />
+            <ErrorInfoHandler setErrorInfo={setErrorInfo} data-oid="02lruva" />
           </Suspense>
 
-          <div className="mt-4 text-center" data-oid="q28g7ty">
-            <div className="text-red-500 font-semibold" data-oid="q1j7wti">
+          <div className="mt-4 text-center" data-oid="lbd8yt5">
+            <div className="text-red-500 font-semibold" data-oid="e.dc6uz">
               {errorInfo.error}
             </div>
-            <p className="mt-2 text-gray-300" data-oid="8pb-j42">
+            <p className="mt-2 text-gray-300" data-oid="o_5mbw7">
               {errorInfo.description}
             </p>
           </div>
         </div>
 
-        <div className="mt-8 space-y-6" data-oid="97nwg_u">
-          <div className="rounded-md shadow-sm space-y-4" data-oid="bz-us11">
-            <p className="text-gray-300 text-center" data-oid="f_nta2-">
+        <div className="mt-8 space-y-6" data-oid="fo6qq4s">
+          <div className="rounded-md shadow-sm space-y-4" data-oid="l5bbkbb">
+            <p className="text-gray-300 text-center" data-oid="k.92b_o">
               E-posta doğrulama ile ilgili bir sorun mu yaşıyorsunuz?
             </p>
 
@@ -154,10 +154,10 @@ export default function AuthErrorPage() {
               <form
                 onSubmit={verifyByEmail}
                 className="space-y-4"
-                data-oid="m9awduv"
+                data-oid="s6lczz8"
               >
-                <div data-oid="zqh7dq1">
-                  <label htmlFor="email" className="sr-only" data-oid="ze-w9lz">
+                <div data-oid="mxyc62a">
+                  <label htmlFor="email" className="sr-only" data-oid="u_ktdu.">
                     E-posta Adresi
                   </label>
                   <input
@@ -170,25 +170,25 @@ export default function AuthErrorPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="E-posta adresiniz"
-                    data-oid="ggtuikr"
+                    data-oid=".d8p2ws"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={loading}
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  data-oid="x-5z2di"
+                  data-oid="x9v7ujg"
                 >
                   {loading ? "İşleniyor..." : "E-posta ile Doğrula"}
                 </button>
               </form>
             ) : (
-              <div className="flex flex-col space-y-4" data-oid="m6e47s6">
+              <div className="flex flex-col space-y-4" data-oid="0_s7i1w">
                 <button
                   onClick={manuallyVerifyProfile}
                   disabled={loading}
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  data-oid="j30-zn9"
+                  data-oid="tox4d30"
                 >
                   {loading ? "İşleniyor..." : "Manuel Doğrulama Dene"}
                 </button>
@@ -196,7 +196,7 @@ export default function AuthErrorPage() {
                 <button
                   onClick={() => router.push("/login")}
                   className="group relative w-full flex justify-center py-2 px-4 border border-gray-600 text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                  data-oid="80c5:x."
+                  data-oid="bcwib4t"
                 >
                   Giriş Sayfasına Dön
                 </button>
@@ -204,11 +204,11 @@ export default function AuthErrorPage() {
             )}
           </div>
 
-          <div className="text-center text-sm" data-oid="gqfemur">
+          <div className="text-center text-sm" data-oid="el58yox">
             <Link
               href="/"
               className="text-indigo-400 hover:text-indigo-300"
-              data-oid="7tyrahf"
+              data-oid="bc93sfh"
             >
               Ana Sayfaya Dön
             </Link>

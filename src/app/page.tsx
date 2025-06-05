@@ -207,90 +207,90 @@ export default function Home() {
   };
 
   return (
-    <main className="overflow-hidden" data-oid="gtj:h-t">
-      <Suspense fallback={null} data-oid="3ywdv9a">
-        <SearchParamsHandler data-oid="h4j:bk3" />
+    <main className="overflow-hidden" data-oid="swbyhh4">
+      <Suspense fallback={null} data-oid="-.wa6sh">
+        <SearchParamsHandler data-oid=":-uqdu_" />
       </Suspense>
 
       {/* Liquid Header Section */}
       <section
         className="liquid-header h-screen relative overflow-hidden"
-        data-oid="ujhjt-a"
+        data-oid="3:.7l4r"
       >
-        <div className="liquid-shape" data-oid="_6adflq"></div>
+        <div className="liquid-shape" data-oid="2sjhzf7"></div>
         <div
           className="absolute inset-0 flex items-center justify-center z-10"
-          data-oid="5f32n.9"
+          data-oid="mjt2137"
         >
-          <div className="glitch-container" data-oid="u0wi4_8">
+          <div className="glitch-container" data-oid=":g8emyc">
             <h1
               className="glitch-text"
               data-text="DIMENSION"
-              data-oid="x-s:lq9"
+              data-oid="chnj9yp"
             >
               DIMENSION
             </h1>
           </div>
-          <div className="mt-32 transform -rotate-90" data-oid="p.do.52">
-            <p className="vertical-text" data-oid="yjlla-f">
+          <div className="mt-32 transform -rotate-90" data-oid=":t7hg5l">
+            <p className="vertical-text" data-oid="kpkyeo3">
               ALIŞKANLIKLARINIZI DEĞİŞTİRİN
             </p>
           </div>
         </div>
-        <div className="scroll-indicator" data-oid="r88d_8z">
-          <div className="line" data-oid="cfc8brl"></div>
-          <div className="dot" data-oid="nxy_-_q"></div>
+        <div className="scroll-indicator" data-oid="8nuoia7">
+          <div className="line" data-oid="h35ndu-"></div>
+          <div className="dot" data-oid="dayk:ho"></div>
         </div>
       </section>
 
       {/* Diagonal Split Section */}
       <section
         className="diagonal-split relative h-screen overflow-hidden"
-        data-oid="5h3-.py"
+        data-oid="e2w0dvo"
       >
-        <div className="split-left" data-oid="72hk:m5"></div>
-        <div className="split-right" data-oid="56gwso7">
+        <div className="split-left" data-oid="whofom8"></div>
+        <div className="split-right" data-oid="0p1lbt6">
           <div
             className="content-container ml-auto w-1/2 p-12"
-            data-oid="ywvp9-w"
+            data-oid="0rac86_"
           >
-            <h2 className="distortion-text text-5xl mb-6" data-oid="-jp-ocl">
+            <h2 className="distortion-text text-5xl mb-6" data-oid="p4t-ukv">
               BOYUTUN ÖTESİNDE
             </h2>
-            <p className="max-w-md fade-in-text" data-oid="iok6.u:">
+            <p className="max-w-md fade-in-text" data-oid="xfmrdw5">
               Alışılmışın dışında, yerçekimine meydan okuyan bir alışveriş
               deneyimi. Nesnelerin sadece üç boyutlu olmadığı, duyguları ve
               hikayeleri içinde barındırdığı bir dünya keşfedin.
             </p>
-            <div className="mt-8" data-oid="voloqfr">
+            <div className="mt-8" data-oid="5n7ik8y">
               {/* Replaced Next.js Link with standard <a> tag */}
               <a
                 href="/collections"
                 className="hover-button"
-                data-oid="baklbiw"
+                data-oid="d8s16mc"
               >
                 KOLEKSİYONLARI KEŞFET
               </a>
             </div>
           </div>
         </div>
-        <div className="floating-cube" data-oid="nq7l.bd"></div>
+        <div className="floating-cube" data-oid="-56h3_8"></div>
       </section>
 
       {/* Fragmented Product Gallery - UPDATED */}
-      <section className="fragmented-gallery relative py-20" data-oid="muep:yg">
-        <div className="container mx-auto" data-oid="76mulrf">
-          <div className="gallery-label" data-oid="af-x-mj">
-            <span className="thin-line" data-oid="qop50ld"></span>
+      <section className="fragmented-gallery relative py-20" data-oid="savbcs1">
+        <div className="container mx-auto" data-oid="710z6rj">
+          <div className="gallery-label" data-oid="kf_qzkw">
+            <span className="thin-line" data-oid="nox_ru8"></span>
             <h3
               className="text-xl tracking-[0.5em] uppercase"
-              data-oid="0oxt242"
+              data-oid="pwlc6tx"
             >
               Öne Çıkanlar
             </h3>
           </div>
 
-          <div className="fragment-container my-20" data-oid="zp4ebf8">
+          <div className="fragment-container my-20" data-oid="i25.60x">
             {products.map((product, i) => (
               <div
                 key={product.id}
@@ -299,9 +299,9 @@ export default function Home() {
                   return undefined;
                 }}
                 className={`fragment-item fragment-${i + 1}`}
-                data-oid="2lpekdp"
+                data-oid="lfp0g6r"
               >
-                <div className="fragment-image" data-oid="edf-gr_">
+                <div className="fragment-image" data-oid="4mv6wc3">
                   {/* Replaced Next.js Image with standard <img> tag */}
                   <img
                     src={product.image}
@@ -310,23 +310,23 @@ export default function Home() {
                     height={500}
                     className="object-cover" // Ensure this class handles width/height correctly for img
                     onError={(e) => handleImageError(e, product.name)}
-                    data-oid="s4aejlp"
+                    data-oid="r-._jo-"
                   />
                 </div>
-                <div className="fragment-overlay" data-oid="03xe_4g">
-                  <span className="product-tag" data-oid="p-8784i">
+                <div className="fragment-overlay" data-oid="hy79:ij">
+                  <span className="product-tag" data-oid="tkrto65">
                     {product.tag}
                   </span>
-                  <h4 className="product-name" data-oid=":e3gz63">
+                  <h4 className="product-name" data-oid="5dsdtm:">
                     {product.name}
                   </h4>
-                  <p className="product-price" data-oid="foxc_60">
+                  <p className="product-price" data-oid="9:im4h_">
                     {product.price}
                   </p>
                   <a
                     href={`/products/${product.id}`}
                     className="product-details-button"
-                    data-oid="njtzkrh"
+                    data-oid="7i:zztn"
                   >
                     Detayları Gör
                   </a>
@@ -340,29 +340,29 @@ export default function Home() {
       {/* Spiral Collection Navigator */}
       <section
         className="spiral-section h-screen relative overflow-hidden"
-        data-oid="pebz0bd"
+        data-oid="k6t64ru"
       >
-        <div className="spiral-container" data-oid="v4rzr4h">
-          <div className="spiral-path" data-oid="2bj3ihy">
+        <div className="spiral-container" data-oid="ra2af_p">
+          <div className="spiral-path" data-oid="-et86_6">
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
                 className={`spiral-node node-${i + 1}`}
-                data-oid="gzrqphu"
+                data-oid="kgh:s8r"
               >
-                <div className="node-content" data-oid="dx4rux7">
-                  <span className="node-label" data-oid="o1pika7">
+                <div className="node-content" data-oid="unu65cd">
+                  <span className="node-label" data-oid="-.g9t6p">
                     {["TERRA", "NOVA", "ASTRAL", "QUANTUM", "INFINITY"][i]}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-          <div className="spiral-center" data-oid="t4.4zv_">
-            <div className="pulse-circle" data-oid="o.nfl-3"></div>
+          <div className="spiral-center" data-oid="x_ai:2j">
+            <div className="pulse-circle" data-oid="2522nxb"></div>
             <h3
               className="text-2xl font-light tracking-wider mt-4"
-              data-oid="nw1es1b"
+              data-oid="2a0i3ad"
             >
               BOYUTLAR
             </h3>
@@ -373,38 +373,38 @@ export default function Home() {
       {/* Perspective Tunnel */}
       <section
         className="perspective-tunnel relative h-screen overflow-hidden"
-        data-oid="iv..zwo"
+        data-oid="dhdtcct"
       >
-        <div className="tunnel-container" data-oid="m3wvaes">
-          <div className="tunnel-walls" data-oid="-pmq7p-">
+        <div className="tunnel-container" data-oid="3y:ojh7">
+          <div className="tunnel-walls" data-oid="2iy5nmx">
             {[...Array(10)].map((_, i) => (
               <div
                 key={i}
                 className={`tunnel-segment segment-${i + 1}`}
-                data-oid="s988c2j"
+                data-oid="sdeltf8"
               ></div>
             ))}
           </div>
           <div
             className="absolute inset-0 flex items-center justify-center z-10"
-            data-oid="_v3vha8"
+            data-oid="7.tnx_w"
           >
             <div
               className="text-content max-w-md text-center"
-              data-oid="wd0dxzz"
+              data-oid="e86jmzr"
             >
               <h2
                 className="text-4xl mb-6 font-light tracking-widest"
-                data-oid="n6tzkxi"
+                data-oid="qki:o92"
               >
                 HİÇ OLMADIĞI GİBİ
               </h2>
-              <p className="mb-8 blur-text" data-oid="1owm0kg">
+              <p className="mb-8 blur-text" data-oid="ymf-jlo">
                 Algılarınızın sınırlarını zorlayan, mekanın ve zamanın ötesinde
                 bir keşif. Alışkanlıklarınızı bırakın, yeniden tanımlanan bir
                 deneyime adım atın.
               </p>
-              <a href="/explore" className="cipher-button" data-oid="l-a3iim">
+              <a href="/explore" className="cipher-button" data-oid="v4hiji9">
                 OLASILIĞI KEŞFETMEYİ DENE
               </a>
             </div>
@@ -415,24 +415,24 @@ export default function Home() {
       {/* Newsletter Section */}
       <section
         className="newsletter-section py-24 relative overflow-hidden"
-        data-oid="0ko:ybn"
+        data-oid="gl6-2h7"
       >
-        <div className="absolute inset-0 z-0" data-oid="p65zwj5">
-          <div className="newsletter-bg" data-oid="f9kfew:"></div>
+        <div className="absolute inset-0 z-0" data-oid="cdhimfv">
+          <div className="newsletter-bg" data-oid="dw6lk78"></div>
         </div>
 
         <div
           className="container mx-auto px-4 relative z-10"
-          data-oid="js5.vfx"
+          data-oid="jz.u..m"
         >
-          <div className="max-w-xl mx-auto text-center" data-oid="0h0dk-c">
+          <div className="max-w-xl mx-auto text-center" data-oid="1tblx0q">
             <h2
               className="text-3xl md:text-4xl font-light mb-4"
-              data-oid="-1-ex5_"
+              data-oid="qtow48h"
             >
               GÜNCEL KALIN
             </h2>
-            <p className="mb-8" data-oid="l8o1hbd">
+            <p className="mb-8" data-oid=".o_e:6j">
               Yeni ürünler, özel indirimler ve kampanyalardan ilk siz haberdar
               olun.
             </p>
@@ -440,9 +440,9 @@ export default function Home() {
             {subscribed ? (
               <div
                 className="success-message p-4 bg-green-500/20 backdrop-blur-sm rounded-lg"
-                data-oid="pa2vc0v"
+                data-oid="upbhc.8"
               >
-                <p data-oid="n846o3z">
+                <p data-oid="de_oz5t">
                   Teşekkürler! Bültenimize başarıyla abone oldunuz.
                 </p>
               </div>
@@ -450,7 +450,7 @@ export default function Home() {
               <form
                 onSubmit={handleSubscribe}
                 className="flex flex-col sm:flex-row gap-4"
-                data-oid="ks:i_n5"
+                data-oid="b9bn3mv"
               >
                 <input
                   type="email"
@@ -459,23 +459,23 @@ export default function Home() {
                   placeholder="E-posta adresiniz"
                   required
                   className="flex-grow px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg focus:outline-none focus:border-purple-500"
-                  data-oid="94tl6rb"
+                  data-oid="-7hgk4x"
                 />
 
                 <button
                   type="submit"
                   className="primary-button px-6 py-3 whitespace-nowrap"
                   disabled={loading}
-                  data-oid="zrrmm58"
+                  data-oid="agu5sb8"
                 >
                   {loading ? "GÖNDERİLİYOR..." : "ABONE OL"}
                 </button>
               </form>
             )}
 
-            <p className="text-xs text-gray-400 mt-4" data-oid="-l:7bpp">
+            <p className="text-xs text-gray-400 mt-4" data-oid="dsw:-.8">
               Abone olarak,{" "}
-              <a href="/privacy" className="underline" data-oid="7f1nz8k">
+              <a href="/privacy" className="underline" data-oid="zvy8q8.">
                 Gizlilik Politikamızı
               </a>{" "}
               kabul etmiş olursunuz. İstediğiniz zaman abonelikten
@@ -486,7 +486,7 @@ export default function Home() {
       </section>
 
       {/* CSS for custom effects - Styles remain largely the same */}
-      <style jsx global data-oid="._enq9d">{`
+      <style jsx global data-oid="j_sk8sk">{`
         :root {
           --scroll: 0px;
         }
@@ -1530,3 +1530,4 @@ export default function Home() {
     </main>
   );
 }
+  

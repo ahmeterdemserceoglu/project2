@@ -51,17 +51,13 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
   }, []);
 
   return (
-    <NotificationContext.Provider
-      value={{ showNotification }}
-      data-oid="_gtb-sx"
-    >
+    <NotificationContext.Provider value={{ showNotification }}>
       {children}
       {notification && (
         <Notification
           message={notification.message}
           type={notification.type}
           onClose={handleClose}
-          data-oid=":eyxkh1"
         />
       )}
     </NotificationContext.Provider>
