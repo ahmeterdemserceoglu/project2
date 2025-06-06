@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@/lib/supabase";
-
-export default function AdminSettingsPage() {
-  const supabase = createClientComponentClient();
-  const router = useRouter();
-  const [formData, setFormData] = useState({
-=======
 import { createClientComponentClient } from "@/lib/supabase";
 
 interface SiteInfo {
@@ -22,8 +14,8 @@ interface SiteInfo {
 
 export default function SettingsPage() {
   const supabase = createClientComponentClient();
+  const router = useRouter();
   const [siteInfo, setSiteInfo] = useState<SiteInfo>({
->>>>>>> origin/codex/gerçek-verilerle-sayfa-güncelleme-ve-yeni-özellikler-ekle
     site_name: "",
     site_description: "",
     contact_email: "",
@@ -31,13 +23,12 @@ export default function SettingsPage() {
     address: "",
   });
   const [isLoading, setIsLoading] = useState(true);
-<<<<<<< HEAD
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    const fetchSettings = async () => {
+    const fetchSiteInfoInternal = async () => {
       try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         if (sessionError || !session) {
@@ -53,29 +44,38 @@ export default function SettingsPage() {
           router.push("/");
           return;
         }
-        const { data, error } = await supabase
+        const { data, error: settingsError } = await supabase
           .from("settings")
           .select("value")
           .eq("id", "site_info")
           .single();
-        if (error) throw error;
+        if (settingsError) throw settingsError;
         if (data && data.value) {
-          setFormData(prev => ({ ...prev, ...data.value }));
+          // Ensure all fields from SiteInfo are present, even if null/undefined in DB
+          const fetchedValue = data.value as Partial<SiteInfo>; // Type assertion
+          setSiteInfo(prev => ({
+            ...prev, // Keep existing values as defaults
+            site_name: fetchedValue.site_name || prev.site_name || "",
+            site_description: fetchedValue.site_description || prev.site_description || "",
+            contact_email: fetchedValue.contact_email || prev.contact_email || "",
+            contact_phone: fetchedValue.contact_phone || prev.contact_phone || "",
+            address: fetchedValue.address || prev.address || "",
+          }));
         }
-      } catch (e) {
+      } catch (e: any) {
         console.error("Error loading settings:", e);
-        setError("Ayarlar yüklenirken hata oluştu.");
+        setError(`Ayarlar yüklenirken hata oluştu: ${e.message}`);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchSettings();
+    fetchSiteInfoInternal();
   }, [supabase, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setSiteInfo(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,15 +85,15 @@ export default function SettingsPage() {
     setSuccess(false);
 
     try {
-      const { error } = await supabase
+      const { error: updateError } = await supabase
         .from("settings")
-        .update({ value: formData })
+        .update({ value: siteInfo })
         .eq("id", "site_info");
-      if (error) throw error;
+      if (updateError) throw updateError;
       setSuccess(true);
-    } catch (e) {
+    } catch (e: any) {
       console.error("Error saving settings:", e);
-      setError("Ayarlar kaydedilirken hata oluştu.");
+      setError(`Ayarlar kaydedilirken hata oluştu: ${e.message}`);
     } finally {
       setIsSaving(false);
     }
@@ -132,7 +132,7 @@ export default function SettingsPage() {
               type="text"
               id="site_name"
               name="site_name"
-              value={formData.site_name}
+              value={siteInfo.site_name}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -145,7 +145,7 @@ export default function SettingsPage() {
               id="site_description"
               name="site_description"
               rows={3}
-              value={formData.site_description}
+              value={siteInfo.site_description}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -158,7 +158,7 @@ export default function SettingsPage() {
               type="email"
               id="contact_email"
               name="contact_email"
-              value={formData.contact_email}
+              value={siteInfo.contact_email}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -171,7 +171,7 @@ export default function SettingsPage() {
               type="text"
               id="contact_phone"
               name="contact_phone"
-              value={formData.contact_phone}
+              value={siteInfo.contact_phone}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -184,113 +184,12 @@ export default function SettingsPage() {
               id="address"
               name="address"
               rows={3}
-              value={formData.address}
+              value={siteInfo.address}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
         </form>
-=======
-  const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      const { data, error } = await supabase
-        .from("settings")
-        .select("value")
-        .eq("id", "site_info")
-        .single();
-      if (!error && data) {
-        setSiteInfo({
-          site_name: data.value.site_name || "",
-          site_description: data.value.site_description || "",
-          contact_email: data.value.contact_email || "",
-          contact_phone: data.value.contact_phone || "",
-          address: data.value.address || "",
-        });
-      }
-      setIsLoading(false);
-    };
-    fetchSettings();
-  }, [supabase]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setSiteInfo((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSave = async () => {
-    setSaving(true);
-    await supabase.from("settings").upsert({ id: "site_info", value: siteInfo });
-    setSaving(false);
-  };
-
-  if (isLoading) {
-    return <div className="p-8">Yükleniyor...</div>;
-  }
-
-  return (
-    <div className="p-4 max-w-xl">
-      <h1 className="text-2xl font-bold mb-4">Site Ayarları</h1>
-      <div className="space-y-4 bg-white p-4 rounded-xl shadow-sm">
-        <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="site_name">Site Adı</label>
-          <input
-            id="site_name"
-            name="site_name"
-            value={siteInfo.site_name}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="site_description">Açıklama</label>
-          <textarea
-            id="site_description"
-            name="site_description"
-            value={siteInfo.site_description}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="contact_email">E-posta</label>
-          <input
-            id="contact_email"
-            name="contact_email"
-            value={siteInfo.contact_email}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="contact_phone">Telefon</label>
-          <input
-            id="contact_phone"
-            name="contact_phone"
-            value={siteInfo.contact_phone}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" htmlFor="address">Adres</label>
-          <textarea
-            id="address"
-            name="address"
-            value={siteInfo.address}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
-        >
-          {saving ? "Kaydediliyor..." : "Kaydet"}
-        </button>
->>>>>>> origin/codex/gerçek-verilerle-sayfa-güncelleme-ve-yeni-özellikler-ekle
       </div>
     </div>
   );
