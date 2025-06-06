@@ -1,6 +1,7 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
@@ -10,6 +11,11 @@ import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js'; // Import User type
 >>>>>>> origin/fix/account-page-loading
+=======
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@/lib/supabase";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function RequireAuth({
   children,
@@ -18,12 +24,18 @@ export default function RequireAuth({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+<<<<<<< HEAD
   const [user, setUser] = useState<User | null>(null); // Add user state
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   const router = useRouter();
   const supabase = createClientComponentClient();
 
   useEffect(() => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     const checkAuth = async () => {
       try {
         // First try to get the session from Supabase
@@ -81,6 +93,7 @@ export default function RequireAuth({
         console.error("Auth check error:", error);
         router.push("/login");
       } finally {
+<<<<<<< HEAD
 =======
     // Initial check for session
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -151,11 +164,21 @@ export default function RequireAuth({
     checkAuth();
 =======
 >>>>>>> origin/fix/account-page-loading
+=======
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   }, [router, supabase.auth]);
 
   if (isLoading) {
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       <div
         className="flex justify-center items-center min-h-[400px]"
         data-oid="wp2oybz"
@@ -164,14 +187,18 @@ export default function RequireAuth({
           className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"
           data-oid="xakxr64"
         ></div>
+<<<<<<< HEAD
 =======
       <div className="flex justify-center items-center min-h-[400px]">
         <div data-testid="loading-spinner" className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"></div>
 >>>>>>> origin/fix/account-page-loading
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       </div>
     );
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   return isAuthenticated ? <>{children}</> : null;
 }
@@ -189,3 +216,7 @@ export default function RequireAuth({
   ) : null; // Or handle redirect if !isAuthenticated more explicitly, though covered by useEffect
 } 
 >>>>>>> origin/fix/account-page-loading
+=======
+  return isAuthenticated ? <>{children}</> : null;
+}
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

@@ -2,9 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+<<<<<<< HEAD
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
 import { logAdminAction } from "@/lib/utils";
+=======
+import { createClientComponentClient } from "@/lib/supabase";
+import Link from "next/link";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 type Category = {
   id: string;
@@ -144,6 +149,7 @@ export default function NewCategoryPage() {
       }
       
       // Create category
+<<<<<<< HEAD
       const { data, error } = await supabase
         .from('categories')
         .insert([
@@ -174,6 +180,25 @@ export default function NewCategoryPage() {
           { name: formData.name }
         );
       }
+=======
+      const { data, error } = await supabase
+        .from('categories')
+        .insert([
+          {
+            name: formData.name.trim(),
+            slug: slug,
+            description: formData.description.trim() || null,
+            parent_category_id: formData.parent_category_id || null,
+            image_url: imageUrl,
+            sort_order: parseInt(formData.sort_order || "0"),
+          },
+        ])
+        .select();
+        
+      if (error) {
+        throw error;
+      }
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       
       // Redirect to categories page
       router.push('/admin/categories');

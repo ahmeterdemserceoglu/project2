@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+<<<<<<< HEAD
     "lint": "next lint",
 <<<<<<< HEAD
     "test": "jest",
@@ -15,6 +16,10 @@
     "test": "jest"
   },
 >>>>>>> origin/fix/account-page-loading
+=======
+    "lint": "next lint"
+  },
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   "keywords": [
     "ecommerce",
     "nextjs",
@@ -39,6 +44,7 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "swr": "^2.2.4",
+<<<<<<< HEAD
     "tailwind-merge": "^3.3.0",
     "uuid": "^11.1.0",
     "zustand": "^4.4.7",
@@ -52,12 +58,20 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.14",
+=======
+    "tailwind-merge": "^3.3.0",
+    "uuid": "^11.1.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     "@types/node": "^20.10.6",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.16",
+<<<<<<< HEAD
     "babel-jest": "^29.7.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
@@ -80,3 +94,12 @@
   }
 }
 >>>>>>> origin/fix/account-page-loading
+=======
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3"
+  }
+}
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

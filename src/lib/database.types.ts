@@ -52,6 +52,7 @@ export interface Database {
           }
         ]
       }
+<<<<<<< HEAD
       debug_logs: {
         Row: {
           id: string
@@ -120,3 +121,42 @@ export type Profile = Database['public']['Tables']['profiles']['Row']
 export type DebugLog = Database['public']['Tables']['debug_logs']['Row']
 
 export type AdminLog = Database['public']['Tables']['admin_logs']['Row']
+=======
+      debug_logs: {
+        Row: {
+          id: string
+          operation: string
+          status: string
+          details: Json | null
+          error_code: string | null
+          error_message: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          operation: string
+          status: string
+          details?: Json | null
+          error_code?: string | null
+          error_message?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          operation?: string
+          status?: string
+          details?: Json | null
+          error_code?: string | null
+          error_message?: string | null
+          created_at?: string
+        }
+      }
+      // Diğer tablolar da eklenebilir
+    }
+  }
+}
+
+export type Profile = Database['public']['Tables']['profiles']['Row']
+
+export type DebugLog = Database['public']['Tables']['debug_logs']['Row'] 
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
+<<<<<<< HEAD
 import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
+=======
+import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function NewProductPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -179,6 +183,7 @@ export default function NewProductPage() {
         throw new Error(`Ürün oluşturulurken hata oluştu: ${productError.message}`);
       }
 
+<<<<<<< HEAD
       if (!productData) {
         throw new Error("Ürün kaydedilemedi.");
       }
@@ -194,6 +199,11 @@ export default function NewProductPage() {
           { name: formData.name }
         );
       }
+=======
+      if (!productData) {
+        throw new Error("Ürün kaydedilemedi.");
+      }
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
       // Upload images if available
       if (imageFiles.length > 0) {

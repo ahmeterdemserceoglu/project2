@@ -1,6 +1,10 @@
 "use client";
 
+<<<<<<< HEAD
 import { useState, useRef, useEffect } from "react";
+=======
+import { useState } from "react";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 import { useCartStore } from "@/lib/store";
 import toast from "react-hot-toast";
 
@@ -19,7 +23,10 @@ const AddToCartButton = ({
   selectedAttributes,
 }: AddToCartButtonProps) => {
   const [isAdding, setIsAdding] = useState(false);
+<<<<<<< HEAD
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   const { addItem } = useCartStore();
 
   const handleAddToCart = () => {
@@ -51,14 +58,19 @@ const AddToCartButton = ({
     });
 
     // Reset adding state after a short delay
+<<<<<<< HEAD
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     timeoutRef.current = setTimeout(() => {
+=======
+    setTimeout(() => {
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       setIsAdding(false);
     }, 1000);
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -67,6 +79,8 @@ const AddToCartButton = ({
     };
   }, []);
 
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   return (
     <button
       onClick={handleAddToCart}

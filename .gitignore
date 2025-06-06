@@ -6,6 +6,7 @@ out/
 .env
 .env.local
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.log
 env.txt
 =======
@@ -14,3 +15,6 @@ env.txt
 pnpm-lock.yaml
 bun.lock
 >>>>>>> origin/codex/choose-package-manager-and-update-docs
+=======
+*.log
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

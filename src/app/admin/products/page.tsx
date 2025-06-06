@@ -5,7 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClientComponentClient } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { logAdminAction } from "@/lib/utils";
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -149,12 +152,17 @@ export default function AdminProductsPage() {
             .from('product_images')
             .delete()
             .in('product_id', selectedProducts);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
           // Then delete the products
           const { error } = await supabase
             .from('products')
             .delete()
             .in('id', selectedProducts);
+<<<<<<< HEAD
 
           if (error) throw error;
 
@@ -172,6 +180,13 @@ export default function AdminProductsPage() {
             { ids: selectedProducts }
           );
         }
+=======
+            
+          if (error) throw error;
+          
+        setProducts(products.filter((p) => !selectedProducts.includes(p.id)));
+        setSelectedProducts([]);
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         break;
           
       case "activate":
@@ -187,6 +202,7 @@ export default function AdminProductsPage() {
               selectedProducts.includes(p.id) ? { ...p, is_active: true } : p,
           ),
         );
+<<<<<<< HEAD
         {
           const { data: { session: actSession } } = await supabase.auth.getSession();
           if (actSession) {
@@ -200,6 +216,8 @@ export default function AdminProductsPage() {
             );
           }
         }
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         break;
           
       case "deactivate":
@@ -215,6 +233,7 @@ export default function AdminProductsPage() {
               selectedProducts.includes(p.id) ? { ...p, is_active: false } : p,
           ),
         );
+<<<<<<< HEAD
         {
           const { data: { session: deactSession } } = await supabase.auth.getSession();
           if (deactSession) {
@@ -228,6 +247,8 @@ export default function AdminProductsPage() {
             );
           }
         }
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         break;
           
       default:

@@ -2,9 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
 import { logAdminAction } from "@/lib/utils";
+=======
+import { createClientComponentClient } from "@/lib/supabase";
+import Link from "next/link";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 type Category = {
   id: string;
@@ -189,6 +194,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       }
       
       // Update category
+<<<<<<< HEAD
       const { data, error } = await supabase
         .from('categories')
         .update({
@@ -220,6 +226,27 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
 
       // Redirect to categories page
       router.push('/admin/categories');
+=======
+      const { data, error } = await supabase
+        .from('categories')
+        .update({
+          name: formData.name.trim(),
+          slug: slug,
+          description: formData.description.trim() || null,
+          parent_category_id: formData.parent_category_id || null,
+          image_url: imageUrl,
+          sort_order: parseInt(formData.sort_order || "0"),
+        })
+        .eq('id', categoryId)
+        .select();
+        
+      if (error) {
+        throw error;
+      }
+      
+      // Redirect to categories page
+      router.push('/admin/categories');
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       
     } catch (error: any) {
       console.error('Error updating category:', error);
@@ -262,6 +289,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       }
       
       // Delete category
+<<<<<<< HEAD
       const { error } = await supabase
         .from('categories')
         .delete()
@@ -285,6 +313,19 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
 
       // Redirect to categories page
       router.push('/admin/categories');
+=======
+      const { error } = await supabase
+        .from('categories')
+        .delete()
+        .eq('id', categoryId);
+        
+      if (error) {
+        throw error;
+      }
+      
+      // Redirect to categories page
+      router.push('/admin/categories');
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       
     } catch (error: any) {
       console.error('Error deleting category:', error);

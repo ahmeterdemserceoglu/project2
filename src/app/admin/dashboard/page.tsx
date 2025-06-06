@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+<<<<<<< HEAD
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,6 +17,8 @@ import {
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 // Stats Card component
 const StatsCard = ({
@@ -430,6 +433,7 @@ const TopProducts = () => {
   );
 };
 
+<<<<<<< HEAD
 // Revenue Chart Component
 const RevenueChart = () => {
   const supabase = createClientComponentClient();
@@ -531,6 +535,35 @@ const RevenueChart = () => {
           }}
         />
       )}
+=======
+// Revenue Chart Component (simplified for this example)
+const RevenueChart = () => {
+  return (
+    <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-lg font-semibold dark:text-white">
+          Satış İstatistikleri
+        </h3>
+        <div className="flex space-x-2">
+          <button className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+            Haftalık
+          </button>
+          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+            Aylık
+          </button>
+          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+            Yıllık
+          </button>
+        </div>
+      </div>
+      
+      {/* Placeholder for chart - in a real app, you would use a chart library like Chart.js or Recharts */}
+      <div className="h-64 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
+          Grafik kütüphanesi entegrasyonu gerekiyor (Chart.js veya ReCharts)
+        </p>
+      </div>
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     </div>
   );
 };
@@ -643,6 +676,7 @@ export default function AdminDashboardPage() {
         });
       }
       
+<<<<<<< HEAD
       // Fetch recent admin activity
       const { data: logs, error: activityError } = await supabase
         .from('admin_logs')
@@ -684,6 +718,48 @@ export default function AdminDashboardPage() {
           };
         });
 
+=======
+      // Fetch recent activity (simplified example - could be from orders, products updates, etc.)
+      const { data: recentOrders, error: activityError } = await supabase
+        .from('orders')
+        .select(`
+          id, 
+          status, 
+          created_at, 
+          user_id,
+          profiles!user_id(first_name, last_name, email)
+        `)
+        .order('created_at', { ascending: false })
+        .limit(3);
+        
+      if (!activityError && recentOrders) {
+        // Cast data to any to help with TypeScript
+        const ordersData: any[] = recentOrders;
+        
+        const activities = ordersData.map(order => {
+          // Get profile from the order
+          const profile = order.profiles;
+          
+          // Build user name/email text
+          let userText = 'Misafir Kullanıcı';
+          if (profile) {
+            if (profile.first_name && profile.last_name) {
+              userText = `${profile.first_name} ${profile.last_name}`;
+            } else if (profile.email) {
+              userText = profile.email;
+            }
+          }
+          
+          return {
+            id: order.id,
+            title: `Yeni Sipariş`,
+            content: `${userText} bir sipariş verdi`,
+            time: formatTimeAgo(new Date(order.created_at)),
+            type: 'order'
+          };
+        });
+        
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         setActivities(activities);
       }
       
@@ -726,6 +802,7 @@ export default function AdminDashboardPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
           </svg>
         );
+<<<<<<< HEAD
       case 'category':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -738,6 +815,8 @@ export default function AdminDashboardPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A7 7 0 0112 15a7 7 0 016.879 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         );
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       default:
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

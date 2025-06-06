@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
+<<<<<<< HEAD
 import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
+=======
+import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function EditProductPage({ params }: { params: { id: string } }) {
   const productId = params.id;
@@ -366,6 +370,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             }
           }
         }
+<<<<<<< HEAD
       }
 
       const { data: { session: logSession } } = await supabase.auth.getSession();
@@ -381,6 +386,11 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
       }
 
       setSuccess(true);
+=======
+      }
+
+      setSuccess(true);
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       // Redirect to products page after a short delay
       setTimeout(() => {
         router.push("/admin/products");

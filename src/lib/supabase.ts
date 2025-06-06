@@ -15,6 +15,7 @@ export function createClientComponentClient() {
       supabaseUrl,
       supabaseAnonKey,
       {
+<<<<<<< HEAD
         auth: {
           flowType: 'pkce',
           autoRefreshToken: true,
@@ -22,6 +23,49 @@ export function createClientComponentClient() {
           detectSessionInUrl: true,
           storageKey: 'supabase.auth.token'
         }
+=======
+        auth: {
+          flowType: 'pkce',
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+          storageKey: 'supabase.auth.token',
+          storage: {
+            getItem: (key: string) => {
+              if (typeof window === 'undefined') {
+                return null;
+              }
+              
+              const storedValue = localStorage.getItem(key);
+              
+              if (!storedValue) return null;
+              
+              try {
+                return JSON.parse(storedValue);
+              } catch (error) {
+                return storedValue;
+              }
+            },
+            setItem: (key: string, value: any) => {
+              if (typeof window === 'undefined') {
+                return;
+              }
+              
+              localStorage.setItem(
+                key,
+                typeof value === 'string' ? value : JSON.stringify(value)
+              );
+            },
+            removeItem: (key: string) => {
+              if (typeof window === 'undefined') {
+                return;
+              }
+              
+              localStorage.removeItem(key);
+            },
+          }
+        }
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       }
     );
   }

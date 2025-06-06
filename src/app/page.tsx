@@ -6,6 +6,9 @@ import { useToast } from "@/contexts/ToastContext";
 import { useNotification } from "@/contexts/NotificationContext";
 import SearchParamsHandler from "@/components/SearchParamsHandler";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 import "./anasayfa.css";
 import { useCartStore } from '@/lib/store';
 import { usePathname } from 'next/navigation';
@@ -44,9 +47,12 @@ interface Product {
   isFeatured: boolean;
   slug?: string;
 }
+<<<<<<< HEAD
 =======
 import './anasayfa.css';
 >>>>>>> origin/refactor/separate-homepage-css
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 // Improved product data structure with more e-commerce related fields
 const products: Product[] = [
@@ -421,11 +427,14 @@ export default function Home() {
   const [adminMode, setAdminMode] = useState(false);
   const [isAdminUser, setIsAdminUser] = useState(false);
   const [selectedFeaturedProduct, setSelectedFeaturedProduct] = useState<number>(featuredMobileProduct.id);
+<<<<<<< HEAD
 
   // Featured product card state
   const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
   const [showProductModal, setShowProductModal] = useState(false);
   const [selectedProductCardIndex, setSelectedProductCardIndex] = useState<number | null>(null);
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   
   // Kategori modal state'leri
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -480,6 +489,7 @@ export default function Home() {
     
     loadSavedCategories();
   }, []);
+<<<<<<< HEAD
 
   // Öne çıkan ürünleri localStorage'dan yükle
   useEffect(() => {
@@ -498,6 +508,8 @@ export default function Home() {
     }
     fetchInitialFeaturedProducts();
   }, []);
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   
   // Düzenleme modu değişikliklerini izle
   useEffect(() => {
@@ -797,6 +809,7 @@ export default function Home() {
     }
   };
 
+<<<<<<< HEAD
   // Öne çıkan ürünleri başlat
   const fetchInitialFeaturedProducts = () => {
     const initial = products.filter(p => p.isFeatured).slice(0, 5);
@@ -820,6 +833,8 @@ export default function Home() {
     setShowProductModal(false);
   };
 
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   // Bir kategorinin hover edilmesi durumunda
   const handleCategoryHover = (index: number) => {
     setHoverCategory(index);
@@ -1047,7 +1062,11 @@ export default function Home() {
           </div>
 
           <div className="fragment-container my-20 relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" data-oid="gw6jt-c">
+<<<<<<< HEAD
             {displayedProducts.map((product, i) => (
+=======
+            {products.filter(product => product.isFeatured).map((product, i) => (
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
               <div
                 key={product.id}
                 ref={(el) => {
@@ -1082,6 +1101,7 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
+<<<<<<< HEAD
                     </div>
                   )}
                   {isAdminUser && (
@@ -1098,6 +1118,9 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                       </svg>
                     </button>
+=======
+                </div>
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                   )}
                 </div>
                 <div className="fragment-overlay p-4 bg-white/10 backdrop-blur-sm rounded-lg mt-2" data-oid="chf8t3l">
@@ -1690,6 +1713,7 @@ export default function Home() {
       </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       {/* Ürün Atama Modal */}
       {showProductModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -1764,6 +1788,8 @@ export default function Home() {
         </div>
       )}
 
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       {/* Kategori Atama Modal */}
       {showCategoryModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -1879,8 +1905,11 @@ export default function Home() {
           </div>
         </div>
       )}
+<<<<<<< HEAD
 =======
 >>>>>>> origin/refactor/separate-homepage-css
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     </main>
   );
 }

@@ -1,7 +1,12 @@
 // lib/email.ts
+<<<<<<< HEAD
 import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 import { randomBytes } from 'crypto';
+=======
+import nodemailer from 'nodemailer';
+import { createClient } from '@supabase/supabase-js';
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,9 +28,15 @@ const transporter = nodemailer.createTransport({
 });
 
 // Email verification token generation
+<<<<<<< HEAD
 export function generateVerificationToken(): string {
   return randomBytes(32).toString('base64url');
 }
+=======
+export function generateVerificationToken(): string {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 // Create verification token and save to database
 export async function createEmailVerification(userId: string, email: string): Promise<string> {

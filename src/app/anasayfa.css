@@ -1,5 +1,8 @@
 :root {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   --scroll: 0px;
 }
 body {
@@ -1043,6 +1046,7 @@ body {
     font-size: 2rem;
   }
 }
+<<<<<<< HEAD
 =======
           --scroll: 0px;
         }
@@ -2083,3 +2087,5 @@ body {
           }
         }
 >>>>>>> origin/refactor/separate-homepage-css
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

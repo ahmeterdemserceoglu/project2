@@ -1,6 +1,7 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClientComponentClient } from "@/lib/supabase";
@@ -113,12 +114,90 @@ export default function OrdersPage() {
     return new Date(Number(year), Number(month) - 1, Number(day));
   };
 >>>>>>> origin/codex/update-orders-page-with-date-range-picker-and-filters
+=======
+import { useState } from "react";
+import Link from "next/link";
+
+// Mock order data
+const initialOrders = [
+  {
+    id: "1",
+    orderNumber: "HD-1001",
+    customerName: "Ahmet Yılmaz",
+    date: "02.06.2023",
+    status: "delivered",
+    paymentStatus: "paid",
+    total: 2300,
+  },
+  {
+    id: "2",
+    orderNumber: "HD-1002",
+    customerName: "Zeynep Kaya",
+    date: "01.06.2023",
+    status: "shipped",
+    paymentStatus: "paid",
+    total: 860,
+  },
+  {
+    id: "3",
+    orderNumber: "HD-1003",
+    customerName: "Mustafa Demir",
+    date: "01.06.2023",
+    status: "processing",
+    paymentStatus: "paid",
+    total: 1650,
+  },
+  {
+    id: "4",
+    orderNumber: "HD-1004",
+    customerName: "Fatma Aydın",
+    date: "31.05.2023",
+    status: "pending",
+    paymentStatus: "pending",
+    total: 3450,
+  },
+  {
+    id: "5",
+    orderNumber: "HD-1005",
+    customerName: "Ali Yıldız",
+    date: "30.05.2023",
+    status: "delivered",
+    paymentStatus: "paid",
+    total: 1200,
+  },
+  {
+    id: "6",
+    orderNumber: "HD-1006",
+    customerName: "Ayşe Demir",
+    date: "29.05.2023",
+    status: "cancelled",
+    paymentStatus: "refunded",
+    total: 750,
+  },
+  {
+    id: "7",
+    orderNumber: "HD-1007",
+    customerName: "Mehmet Can",
+    date: "28.05.2023",
+    status: "delivered",
+    paymentStatus: "paid",
+    total: 1250,
+  },
+];
+
+export default function OrdersPage() {
+  const [orders, setOrders] = useState(initialOrders);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [dateFilter, setDateFilter] = useState("");
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
   // Filter orders based on search and filters
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.orderNumber.toLowerCase().includes(search.toLowerCase()) ||
       order.customerName.toLowerCase().includes(search.toLowerCase());
+<<<<<<< HEAD
 <<<<<<< HEAD
     const matchesStatus = statusFilter ? order.status === statusFilter : true;
     const matchesDate = dateFilter
@@ -160,6 +239,15 @@ export default function OrdersPage() {
     setCurrentPage(1);
   }, [search, statusFilter, dateFilter, orders]);
 
+=======
+    const matchesStatus = statusFilter ? order.status === statusFilter : true;
+    // In a real app, this would be a proper date range filter
+    const matchesDate = dateFilter ? order.date.includes(dateFilter) : true;
+
+    return matchesSearch && matchesStatus && matchesDate;
+  });
+
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   // Status badge component
   const StatusBadge = ({ status }: { status: string }) => {
     const statusStyles: Record<string, string> = {
@@ -169,6 +257,7 @@ export default function OrdersPage() {
       delivered: "bg-green-100 text-green-800",
       cancelled: "bg-red-100 text-red-800",
       refunded: "bg-gray-100 text-gray-800",
+<<<<<<< HEAD
 >>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
     };
     fetchOrders();
@@ -258,6 +347,65 @@ export default function OrdersPage() {
           </tbody>
         </table>
 =======
+=======
+    };
+
+    const statusLabels: Record<string, string> = {
+      pending: "Bekliyor",
+      processing: "Hazırlanıyor",
+      shipped: "Kargoya Verildi",
+      delivered: "Teslim Edildi",
+      cancelled: "İptal Edildi",
+      refunded: "İade Edildi",
+    };
+
+    return (
+      <span
+        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
+        data-oid="68t6b6."
+      >
+        {statusLabels[status] || status}
+      </span>
+    );
+  };
+
+  // Payment status badge component
+  const PaymentBadge = ({ status }: { status: string }) => {
+    const statusStyles: Record<string, string> = {
+      paid: "bg-green-100 text-green-800",
+      pending: "bg-yellow-100 text-yellow-800",
+      failed: "bg-red-100 text-red-800",
+      refunded: "bg-gray-100 text-gray-800",
+    };
+
+    const statusLabels: Record<string, string> = {
+      paid: "Ödendi",
+      pending: "Bekliyor",
+      failed: "Başarısız",
+      refunded: "İade",
+    };
+
+    return (
+      <span
+        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
+        data-oid="hm97bn9"
+      >
+        {statusLabels[status] || status}
+      </span>
+    );
+  };
+
+  const handleUpdateStatus = (orderId: string, newStatus: string) => {
+    // In a real app, this would make an API call to update the status
+    setOrders(
+      orders.map((order) =>
+        order.id === orderId ? { ...order, status: newStatus } : order,
+      ),
+    );
+  };
+
+  return (
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     <div data-oid="7j76r1g">
       <header className="mb-8" data-oid="eyzt2yd">
         <h1 className="text-2xl font-bold text-gray-900" data-oid="kx4.i-7">
@@ -270,7 +418,11 @@ export default function OrdersPage() {
 
       {/* Filters */}
       <div
+<<<<<<< HEAD
         className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-4"
+=======
+        className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-3"
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         data-oid="26aegnz"
       >
         <div data-oid="-4r5g-2">
@@ -316,6 +468,7 @@ export default function OrdersPage() {
 
         <div data-oid="-sqseyk">
           <label
+<<<<<<< HEAD
             htmlFor="shippingStatus"
             className="block text-sm font-medium text-gray-700 mb-1"
             data-oid="j10iwtj"
@@ -326,6 +479,18 @@ export default function OrdersPage() {
             id="shippingStatus"
             value={shippingStatusFilter}
             onChange={(e) => setShippingStatusFilter(e.target.value)}
+=======
+            htmlFor="status"
+            className="block text-sm font-medium text-gray-700 mb-1"
+            data-oid="j10iwtj"
+          >
+            Durum
+          </label>
+          <select
+            id="status"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
             data-oid="s8c:pp9"
           >
@@ -350,6 +515,7 @@ export default function OrdersPage() {
           </select>
         </div>
 
+<<<<<<< HEAD
         <div data-oid="payment-filter">
           <label
             htmlFor="paymentStatus"
@@ -395,6 +561,25 @@ export default function OrdersPage() {
               className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
             />
           </div>
+=======
+        <div data-oid="-nl_cbl">
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700 mb-1"
+            data-oid="j2p4:l:"
+          >
+            Tarih
+          </label>
+          <input
+            type="text"
+            id="date"
+            value={dateFilter}
+            onChange={(e) => setDateFilter(e.target.value)}
+            placeholder="gg.aa.yyyy"
+            className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
+            data-oid="t3-vj7:"
+          />
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         </div>
       </div>
 
@@ -404,6 +589,7 @@ export default function OrdersPage() {
         data-oid="abwcr:2"
       >
         <div className="overflow-x-auto" data-oid="pkrq__f">
+<<<<<<< HEAD
           {isLoading ? (
             <div className="p-4 text-center">Yükleniyor...</div>
           ) : error ? (
@@ -411,6 +597,8 @@ export default function OrdersPage() {
           ) : paginatedOrders.length === 0 ? (
             <div className="p-4 text-center text-gray-500">Kayıt bulunamadı</div>
           ) : (
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
           <table
             className="min-w-full divide-y divide-gray-200"
             data-oid="n-.-.gg"
@@ -472,7 +660,11 @@ export default function OrdersPage() {
               className="bg-white divide-y divide-gray-200"
               data-oid="lb1pwr8"
             >
+<<<<<<< HEAD
               {paginatedOrders.map((order) => (
+=======
+              {filteredOrders.map((order) => (
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 <tr
                   key={order.id}
                   className="hover:bg-gray-50"
@@ -494,7 +686,11 @@ export default function OrdersPage() {
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     data-oid=":je1cw."
                   >
+<<<<<<< HEAD
                     {new Date(order.date).toLocaleDateString("tr-TR")}
+=======
+                    {order.date}
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
@@ -555,7 +751,10 @@ export default function OrdersPage() {
               ))}
             </tbody>
           </table>
+<<<<<<< HEAD
           )}
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         </div>
 
         {/* Pagination */}
@@ -576,12 +775,16 @@ export default function OrdersPage() {
             <div className="inline-flex shadow-sm" data-oid="meg.cq2">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
+<<<<<<< HEAD
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="2scaz-c"
               >
                 Önceki
               </button>
+<<<<<<< HEAD
               <span className="border-t border-b bg-white px-4 py-2 text-sm font-medium text-gray-700">
                 {currentPage} / {totalPages}
               </span>
@@ -589,6 +792,28 @@ export default function OrdersPage() {
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
+=======
+              <button
+                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
+                data-oid="sm4er5g"
+              >
+                1
+              </button>
+              <button
+                className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
+                data-oid="hxq45:."
+              >
+                2
+              </button>
+              <button
+                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
+                data-oid="_91-h3s"
+              >
+                3
+              </button>
+              <button
+                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="ec85zvi"
               >
                 Sonraki
@@ -671,7 +896,10 @@ export default function OrdersPage() {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
 >>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
+=======
+>>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       </div>
     </div>
   );
