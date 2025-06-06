@@ -2,14 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-<<<<<<< HEAD
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
 import { logAdminAction } from "@/lib/utils";
-=======
-import { createClientComponentClient } from "@/lib/supabase";
-import Link from "next/link";
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 type Category = {
   id: string;
@@ -149,38 +144,6 @@ export default function NewCategoryPage() {
       }
       
       // Create category
-<<<<<<< HEAD
-      const { data, error } = await supabase
-        .from('categories')
-        .insert([
-          {
-            name: formData.name.trim(),
-            slug: slug,
-            description: formData.description.trim() || null,
-            parent_category_id: formData.parent_category_id || null,
-            image_url: imageUrl,
-            sort_order: parseInt(formData.sort_order || "0"),
-          },
-        ])
-        .select();
-
-      if (error) {
-        throw error;
-      }
-
-      const newId = data?.[0]?.id || null;
-      const { data: { session: logSession } } = await supabase.auth.getSession();
-      if (logSession) {
-        await logAdminAction(
-          supabase,
-          logSession.user.id,
-          'create',
-          'category',
-          newId,
-          { name: formData.name }
-        );
-      }
-=======
       const { data, error } = await supabase
         .from('categories')
         .insert([
@@ -198,7 +161,23 @@ export default function NewCategoryPage() {
       if (error) {
         throw error;
       }
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
+
+      if (data && data.length > 0) {
+        const newCategoryId = data[0].id;
+        const { data: { session: logSession } } = await supabase.auth.getSession();
+        if (logSession) {
+          await logAdminAction(
+            supabase,
+            logSession.user.id,
+            'create', // action
+            'category', // entity
+            newCategoryId, // entityId
+            { name: formData.name.trim() } // details
+          );
+        } else {
+          console.warn('Admin action not logged: User session not found.');
+        }
+      }
       
       // Redirect to categories page
       router.push('/admin/categories');
