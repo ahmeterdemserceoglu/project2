@@ -4,11 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
-<<<<<<< HEAD
 import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
-=======
-import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function NewProductPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,20 +35,20 @@ export default function NewProductPage() {
       try {
         // Check if user is admin
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
+
         if (sessionError || !session) {
           // Not logged in, redirect to login
           router.push("/login");
           return;
         }
-        
+
         // Check if user has admin role
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("is_admin")
           .eq("id", session.user.id)
           .single();
-          
+
         if (profileError || !profile || !profile.is_admin) {
           // Not admin, redirect to homepage
           router.push("/");
@@ -95,7 +91,7 @@ export default function NewProductPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
-    
+
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked }));
@@ -108,7 +104,7 @@ export default function NewProductPage() {
     if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
       setImageFiles(prev => [...prev, ...newFiles]);
-      
+
       // Generate preview URLs
       const newPreviewUrls = newFiles.map(file => URL.createObjectURL(file));
       setImagePreviewUrls(prev => [...prev, ...newPreviewUrls]);
@@ -140,7 +136,7 @@ export default function NewProductPage() {
     setError("");
     setSuccess(false);
     setIsLoading(true);
-    
+
     try {
       // Validate form data
       if (!formData.name || !formData.description || !formData.base_price || !formData.category_id) {
@@ -183,7 +179,6 @@ export default function NewProductPage() {
         throw new Error(`Ürün oluşturulurken hata oluştu: ${productError.message}`);
       }
 
-<<<<<<< HEAD
       if (!productData) {
         throw new Error("Ürün kaydedilemedi.");
       }
@@ -199,11 +194,6 @@ export default function NewProductPage() {
           { name: formData.name }
         );
       }
-=======
-      if (!productData) {
-        throw new Error("Ürün kaydedilemedi.");
-      }
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
       // Upload images if available
       if (imageFiles.length > 0) {
@@ -244,7 +234,7 @@ export default function NewProductPage() {
             // Handle RLS policy error by trying with a direct SQL query
             if (imageRecordError.message.includes('policy')) {
               console.log('RLS policy error, attempting direct SQL insert...');
-              
+
               const { error: sqlError } = await supabase.rpc('admin_insert_product_image', {
                 product_id_param: productData,
                 image_url_param: publicUrlData.publicUrl,
@@ -252,7 +242,7 @@ export default function NewProductPage() {
                 display_order_param: i,
                 alt_text_param: formData.name
               });
-              
+
               if (sqlError) {
                 console.error('Direct SQL insert failed:', sqlError);
                 throw sqlError;
@@ -290,7 +280,7 @@ export default function NewProductPage() {
             >
               İptal
             </Link>
-            <button 
+            <button
               type="submit"
               form="product-form"
               className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50"
@@ -318,7 +308,7 @@ export default function NewProductPage() {
             {/* Basic Information */}
             <div className="space-y-6">
               <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Temel Bilgiler</h2>
-              
+
               <div className="space-y-4">
                 {/* Name */}
                 <div>
@@ -393,7 +383,7 @@ export default function NewProductPage() {
             {/* Pricing & Inventory */}
             <div className="space-y-6">
               <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Fiyat & Stok</h2>
-              
+
               <div className="space-y-4">
                 {/* Regular Price */}
                 <div>
@@ -461,7 +451,7 @@ export default function NewProductPage() {
                       Aktif (Satışta)
                     </label>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <input
                       type="checkbox"
@@ -479,7 +469,7 @@ export default function NewProductPage() {
               </div>
             </div>
           </div>
-          
+
           {/* Description */}
           <div className="space-y-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Ürün Açıklaması</h2>
@@ -502,7 +492,7 @@ export default function NewProductPage() {
           {/* Product Images */}
           <div className="space-y-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Ürün Görselleri</h2>
-            
+
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Görsel Yükle
@@ -526,16 +516,15 @@ export default function NewProductPage() {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {imagePreviewUrls.map((url, index) => (
-                    <div 
-                      key={index} 
-                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${
-                        index === primaryImageIndex ? "border-primary" : "border-transparent"
-                      }`}
+                    <div
+                      key={index}
+                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${index === primaryImageIndex ? "border-primary" : "border-transparent"
+                        }`}
                     >
-                      <img 
-                        src={url} 
+                      <img
+                        src={url}
                         alt={`Preview ${index + 1}`}
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover"
                         onClick={() => setPrimaryImage(index)}
                       />
                       <button

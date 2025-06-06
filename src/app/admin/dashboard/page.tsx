@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-<<<<<<< HEAD
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,8 +16,6 @@ import {
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 // Stats Card component
 const StatsCard = ({
@@ -50,18 +47,17 @@ const StatsCard = ({
         <div className="h-8 bg-gray-200 dark:bg-dark animate-pulse rounded"></div>
       ) : (
         <div className="text-2xl font-bold mb-2 dark:text-white">
-        {value}
-      </div>
+          {value}
+        </div>
       )}
       {change && !isLoading && (
         <div
-          className={`text-sm flex items-center ${
-            changeType === "increase"
-              ? "text-green-600"
-              : changeType === "decrease"
-                ? "text-red-600"
-                : "text-gray-500"
-          }`}
+          className={`text-sm flex items-center ${changeType === "increase"
+            ? "text-green-600"
+            : changeType === "decrease"
+              ? "text-red-600"
+              : "text-gray-500"
+            }`}
         >
           {changeType === "increase" && (
             <svg
@@ -158,11 +154,11 @@ const RecentOrders = () => {
           `)
           .order('created_at', { ascending: false })
           .limit(5);
-          
+
         if (error) {
           throw error;
         }
-        
+
         setOrders(data || []);
       } catch (error) {
         console.error('Error loading orders:', error);
@@ -250,52 +246,52 @@ const RecentOrders = () => {
                 className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
               >
                 <th className="pb-3">
-                Sipariş No
-              </th>
+                  Sipariş No
+                </th>
                 <th className="pb-3">
-                Müşteri
-              </th>
+                  Müşteri
+                </th>
                 <th className="pb-3">
-                Tarih
-              </th>
+                  Tarih
+                </th>
                 <th className="pb-3">
-                Durum
-              </th>
+                  Durum
+                </th>
                 <th className="pb-3 text-right">
-                Toplam
-              </th>
-            </tr>
-          </thead>
+                  Toplam
+                </th>
+              </tr>
+            </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-dark">
-            {orders.map((order) => (
+              {orders.map((order) => (
                 <tr key={order.id} className="text-sm">
                   <td className="py-3 text-primary font-medium">
                     <Link href={`/admin/orders/${order.id}`}>
                       {order.order_number || `#${order.id.substring(0, 8)}`}
-                  </Link>
-                </td>
+                    </Link>
+                  </td>
                   <td className="py-3 text-gray-900 dark:text-gray-200">
-                    {order.profiles 
-                      ? `${order.profiles.first_name || ''} ${order.profiles.last_name || ''}`.trim() || order.profiles.email 
+                    {order.profiles
+                      ? `${order.profiles.first_name || ''} ${order.profiles.last_name || ''}`.trim() || order.profiles.email
                       : 'Misafir Kullanıcı'}
-                </td>
+                  </td>
                   <td className="py-3 text-gray-500">
                     {formatDate(order.created_at)}
-                </td>
+                  </td>
                   <td className="py-3">
-                  <span
+                    <span
                       className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(order.status)}`}
                     >
                       {getStatusLabel(order.status)}
-                  </span>
-                </td>
+                    </span>
+                  </td>
                   <td className="py-3 text-right font-medium dark:text-gray-300">
                     {formatPrice(order.total_amount)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>
@@ -312,7 +308,7 @@ const TopProducts = () => {
     const fetchTopProducts = async () => {
       try {
         setIsLoading(true);
-        
+
         // Get products with their images, ordered by stock quantity
         const { data, error } = await supabase
           .from('products')
@@ -329,11 +325,11 @@ const TopProducts = () => {
           `)
           .order('stock_quantity', { ascending: false })
           .limit(5);
-        
+
         if (error) {
           throw error;
         }
-        
+
         setProducts(data || []);
       } catch (error) {
         console.error('Error loading products:', error);
@@ -353,7 +349,7 @@ const TopProducts = () => {
     if (!product.product_images || product.product_images.length === 0) {
       return '/images/placeholder.png'; // Default placeholder image
     }
-    
+
     // Find primary image or use first available
     const primaryImage = product.product_images.find((img: any) => img.is_primary);
     return primaryImage ? primaryImage.image_url : product.product_images[0].image_url;
@@ -372,7 +368,7 @@ const TopProducts = () => {
           Tüm Ürünler
         </Link>
       </div>
-      
+
       {isLoading ? (
         <div className="space-y-4">
           {[...Array(5)].map((_, i) => (
@@ -391,7 +387,7 @@ const TopProducts = () => {
         </div>
       ) : (
         <div className="space-y-4">
-            {products.map((product) => (
+          {products.map((product) => (
             <div key={product.id} className="flex items-center py-2 border-b border-gray-100 dark:border-dark last:border-0">
               <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 dark:bg-dark">
                 <img
@@ -404,12 +400,12 @@ const TopProducts = () => {
                 />
               </div>
               <div className="ml-4 flex-1">
-                  <Link
-                    href={`/admin/products/edit/${product.id}`}
+                <Link
+                  href={`/admin/products/edit/${product.id}`}
                   className="font-medium text-gray-900 dark:text-white hover:text-primary block truncate"
-                  >
-                    {product.name}
-                  </Link>
+                >
+                  {product.name}
+                </Link>
                 <div className="flex text-sm items-center justify-between mt-1">
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">
@@ -427,74 +423,140 @@ const TopProducts = () => {
               </div>
             </div>
           ))}
-      </div>
+        </div>
       )}
     </div>
   );
 };
 
-<<<<<<< HEAD
 // Revenue Chart Component
 const RevenueChart = () => {
   const supabase = createClientComponentClient();
-  const [range, setRange] = useState<'week' | 'month' | 'year'>('week');
-  const [chartData, setChartData] = useState<{ labels: string[]; data: number[] } | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [range, setRange] = useState('week'); // 'week', 'month', 'year'
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const now = new Date();
-      let start = new Date(now);
+      try {
+        setIsLoading(true);
 
-      if (range === 'week') {
-        start.setDate(now.getDate() - 6);
-      } else if (range === 'month') {
-        start.setDate(now.getDate() - 29);
-      } else {
-        start = new Date(now.getFullYear(), 0, 1);
+        // Calculate date range based on selected range
+        const endDate = new Date();
+        let startDate = new Date();
+
+        if (range === 'week') {
+          startDate.setDate(endDate.getDate() - 7);
+        } else if (range === 'month') {
+          startDate.setMonth(endDate.getMonth() - 1);
+        } else if (range === 'year') {
+          startDate.setFullYear(endDate.getFullYear() - 1);
+        }
+
+        // Fetch orders within date range
+        const { data, error } = await supabase
+          .from('orders')
+          .select('total_amount, created_at')
+          .gte('created_at', startDate.toISOString())
+          .lte('created_at', endDate.toISOString())
+          .order('created_at', { ascending: true });
+
+        if (error) {
+          throw error;
+        }
+
+        // Prepare data for chart
+        const preparedData = prepareData(data || [], startDate);
+        setChartData(preparedData);
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      } finally {
+        setIsLoading(false);
       }
-
-      const { data, error } = await supabase
-        .from('orders')
-        .select('total_amount, created_at')
-        .eq('status', 'delivered')
-        .gte('created_at', start.toISOString());
-
-      if (!error && data) {
-        setChartData(prepareData(data, start));
-      }
-      setLoading(false);
     };
 
     const prepareData = (orders: { total_amount: number | null; created_at: string }[], startDate: Date) => {
       if (range === 'year') {
-        const labels = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('tr-TR', { month: 'short' }));
-        const arr = new Array(12).fill(0);
-        orders.forEach((o) => {
-          const d = new Date(o.created_at);
-          const idx = d.getMonth();
-          arr[idx] += o.total_amount || 0;
-        });
-        return { labels, data: arr };
-      }
+        // For yearly view, group by months
+        const labels = Array.from({ length: 12 }, (_, i) =>
+          new Date(0, i).toLocaleString('tr-TR', { month: 'short' })
+        );
+        const data = new Array(12).fill(0);
 
-      const days = range === 'week' ? 7 : 30;
-      const labels: string[] = [];
-      const arr = new Array(days).fill(0);
-      for (let i = 0; i < days; i++) {
-        const d = new Date(startDate);
-        d.setDate(startDate.getDate() + i);
-        labels.push(`${d.getDate()}.${d.getMonth() + 1}`);
-      }
-      orders.forEach((o) => {
-        const d = new Date(o.created_at);
-        const diff = Math.floor((d.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-        if (diff >= 0 && diff < days) {
-          arr[diff] += o.total_amount || 0;
+        orders.forEach((order) => {
+          const date = new Date(order.created_at);
+          const monthIndex = date.getMonth();
+          data[monthIndex] += Number(order.total_amount) || 0;
+        });
+
+        return {
+          labels,
+          datasets: [{
+            label: 'Gelir',
+            data,
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          }]
+        };
+      } else if (range === 'month') {
+        // For monthly view, group by days
+        const days = 30;
+        const labels = [];
+        const data = new Array(days).fill(0);
+
+        for (let i = 0; i < days; i++) {
+          const date = new Date(startDate);
+          date.setDate(startDate.getDate() + i);
+          labels.push(`${date.getDate()}.${date.getMonth() + 1}`);
         }
-      });
-      return { labels, data: arr };
+
+        orders.forEach((order) => {
+          const date = new Date(order.created_at);
+          const diffDays = Math.floor((date.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+          if (diffDays >= 0 && diffDays < days) {
+            data[diffDays] += Number(order.total_amount) || 0;
+          }
+        });
+
+        return {
+          labels,
+          datasets: [{
+            label: 'Gelir',
+            data,
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          }]
+        };
+      } else {
+        // For weekly view
+        const days = 7;
+        const labels = [];
+        const data = new Array(days).fill(0);
+
+        for (let i = 0; i < days; i++) {
+          const date = new Date(startDate);
+          date.setDate(startDate.getDate() + i);
+          labels.push(`${date.getDate()}.${date.getMonth() + 1}`);
+        }
+
+        orders.forEach((order) => {
+          const date = new Date(order.created_at);
+          const diffDays = Math.floor((date.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+          if (diffDays >= 0 && diffDays < days) {
+            data[diffDays] += Number(order.total_amount) || 0;
+          }
+        });
+
+        return {
+          labels,
+          datasets: [{
+            label: 'Gelir',
+            data,
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          }]
+        };
+      }
     };
 
     fetchData();
@@ -505,65 +567,77 @@ const RevenueChart = () => {
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold dark:text-white">Satış İstatistikleri</h3>
         <div className="flex space-x-2">
-          {(['week', 'month', 'year'] as const).map((opt) => (
-            <button
-              key={opt}
-              onClick={() => setRange(opt)}
-              className={`text-xs font-medium px-2 py-1 rounded ${range === opt ? 'text-primary bg-primary/10' : 'text-gray-500 hover:text-primary'}`}
-            >
-              {opt === 'week' ? 'Haftalık' : opt === 'month' ? 'Aylık' : 'Yıllık'}
-            </button>
-          ))}
-        </div>
-      </div>
-      {loading || !chartData ? (
-        <div className="h-64 flex items-center justify-center">
-          <span className="text-gray-500 dark:text-gray-400 text-sm">Yükleniyor...</span>
-        </div>
-      ) : (
-        <Line
-          data={{
-            labels: chartData.labels,
-            datasets: [
-              {
-                label: 'Gelir',
-                data: chartData.data,
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.2)',
-              },
-            ],
-          }}
-        />
-      )}
-=======
-// Revenue Chart Component (simplified for this example)
-const RevenueChart = () => {
-  return (
-    <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold dark:text-white">
-          Satış İstatistikleri
-        </h3>
-        <div className="flex space-x-2">
-          <button className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+          <button
+            onClick={() => setRange('week')}
+            className={`px-3 py-1 text-sm rounded-md ${range === 'week'
+              ? 'bg-primary text-white'
+              : 'bg-gray-100 dark:bg-dark text-gray-600 dark:text-gray-300'
+              }`}
+          >
             Haftalık
           </button>
-          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+          <button
+            onClick={() => setRange('month')}
+            className={`px-3 py-1 text-sm rounded-md ${range === 'month'
+              ? 'bg-primary text-white'
+              : 'bg-gray-100 dark:bg-dark text-gray-600 dark:text-gray-300'
+              }`}
+          >
             Aylık
           </button>
-          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+          <button
+            onClick={() => setRange('year')}
+            className={`px-3 py-1 text-sm rounded-md ${range === 'year'
+              ? 'bg-primary text-white'
+              : 'bg-gray-100 dark:bg-dark text-gray-600 dark:text-gray-300'
+              }`}
+          >
             Yıllık
           </button>
         </div>
       </div>
-      
-      {/* Placeholder for chart - in a real app, you would use a chart library like Chart.js or Recharts */}
-      <div className="h-64 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          Grafik kütüphanesi entegrasyonu gerekiyor (Chart.js veya ReCharts)
-        </p>
-      </div>
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
+
+      {isLoading ? (
+        <div className="h-64 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      ) : chartData ? (
+        <div className="h-64">
+          <Line
+            data={chartData}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    callback: function (value) {
+                      return '₺' + value;
+                    }
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      return '₺' + context.raw;
+                    }
+                  }
+                }
+              }
+            }}
+          />
+        </div>
+      ) : (
+        <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
+          Veri bulunamadı
+        </div>
+      )}
     </div>
   );
 };
@@ -601,35 +675,35 @@ export default function AdminDashboardPage() {
       try {
         // Get current user session
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
+
         if (sessionError || !session) {
           // Not logged in, redirect to login
           router.push('/login');
           return;
         }
-        
+
         // Check if user has admin role
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
           .select('is_admin')
           .eq('id', session.user.id)
           .single();
-          
+
         if (profileError || !profile || !profile.is_admin) {
           // Not admin, redirect to homepage
           router.push('/');
           return;
         }
-        
+
         // User is admin, fetch dashboard data
         fetchDashboardData();
-        
+
       } catch (error) {
         console.error('Error checking admin status:', error);
         router.push('/');
       }
     };
-    
+
     checkAdminStatus();
   }, [supabase, router]);
 
@@ -637,88 +711,45 @@ export default function AdminDashboardPage() {
   const fetchDashboardData = async () => {
     try {
       setIsLoading(true);
-      
+
       // Get orders count
       const { count: orderCount, error: orderError } = await supabase
         .from('orders')
         .select('*', { count: 'exact', head: true });
-      
+
       // Get total revenue
       const { data: revenue, error: revenueError } = await supabase
         .from('orders')
         .select('total_amount')
         .match({ status: 'delivered' });
-      
+
       // Get product count
       const { count: productCount, error: productError } = await supabase
         .from('products')
         .select('*', { count: 'exact', head: true });
-      
+
       // Get customer count
       const { count: customerCount, error: customerError } = await supabase
         .from('profiles')
         .select('*', { count: 'exact', head: true })
         .eq('is_admin', false);
-      
+
       // If no errors, update stats
       if (!orderError && !revenueError && !productError && !customerError) {
         // Calculate total revenue
         const totalRevenue = revenue?.reduce((sum, order) => sum + (order.total_amount || 0), 0) || 0;
-        
+
         setStats({
           totalOrders: String(orderCount || 0),
-          totalRevenue: `₺${totalRevenue.toLocaleString('tr-TR', { 
-            minimumFractionDigits: 2, 
-            maximumFractionDigits: 2 
+          totalRevenue: `₺${totalRevenue.toLocaleString('tr-TR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
           })}`,
           productCount: String(productCount || 0),
           customerCount: String(customerCount || 0),
         });
       }
-      
-<<<<<<< HEAD
-      // Fetch recent admin activity
-      const { data: logs, error: activityError } = await supabase
-        .from('admin_logs')
-        .select(`
-          id,
-          action,
-          entity,
-          entity_id,
-          details,
-          created_at,
-          profiles!admin_id(first_name, last_name, email)
-        `)
-        .order('created_at', { ascending: false })
-        .limit(5);
 
-      if (!activityError && logs) {
-        const activities = logs.map((log: any) => {
-          const profile = log.profiles;
-          let adminText = 'Admin';
-          if (profile) {
-            if (profile.first_name && profile.last_name) {
-              adminText = `${profile.first_name} ${profile.last_name}`;
-            } else if (profile.email) {
-              adminText = profile.email;
-            }
-          }
-
-          let content = `${adminText} ${log.action}`;
-          if (log.details?.name) {
-            content += ` ${log.details.name}`;
-          }
-
-          return {
-            id: log.id,
-            title: log.action,
-            content,
-            time: formatTimeAgo(new Date(log.created_at)),
-            type: log.entity
-          };
-        });
-
-=======
       // Fetch recent activity (simplified example - could be from orders, products updates, etc.)
       const { data: recentOrders, error: activityError } = await supabase
         .from('orders')
@@ -731,15 +762,15 @@ export default function AdminDashboardPage() {
         `)
         .order('created_at', { ascending: false })
         .limit(3);
-        
+
       if (!activityError && recentOrders) {
         // Cast data to any to help with TypeScript
         const ordersData: any[] = recentOrders;
-        
+
         const activities = ordersData.map(order => {
           // Get profile from the order
           const profile = order.profiles;
-          
+
           // Build user name/email text
           let userText = 'Misafir Kullanıcı';
           if (profile) {
@@ -749,7 +780,7 @@ export default function AdminDashboardPage() {
               userText = profile.email;
             }
           }
-          
+
           return {
             id: order.id,
             title: `Yeni Sipariş`,
@@ -758,18 +789,17 @@ export default function AdminDashboardPage() {
             type: 'order'
           };
         });
-        
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
+
         setActivities(activities);
       }
-      
+
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
       setIsLoading(false);
     }
   };
-  
+
   // Format time
   const formatTimeAgo = (date: Date) => {
     const now = new Date();
@@ -777,7 +807,7 @@ export default function AdminDashboardPage() {
     const diffMins = Math.round(diffMs / 60000);
     const diffHours = Math.round(diffMins / 60);
     const diffDays = Math.round(diffHours / 24);
-    
+
     if (diffMins < 60) {
       return `${diffMins} dakika önce`;
     } else if (diffHours < 24) {
@@ -802,21 +832,6 @@ export default function AdminDashboardPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
           </svg>
         );
-<<<<<<< HEAD
-      case 'category':
-        return (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-          </svg>
-        );
-      case 'user':
-        return (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A7 7 0 0112 15a7 7 0 016.879 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        );
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       default:
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -831,13 +846,13 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <h1 className="text-2xl font-bold dark:text-white">
           Yönetim Paneli
-          </h1>
+        </h1>
         <div className="mt-4 md:mt-0">
           <span className="text-sm text-gray-500 dark:text-gray-400">
             Son güncelleme: {new Date().toLocaleString('tr-TR')}
           </span>
         </div>
-        </div>
+      </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

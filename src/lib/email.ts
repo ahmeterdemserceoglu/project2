@@ -1,16 +1,11 @@
 // lib/email.ts
-<<<<<<< HEAD
 import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 import { randomBytes } from 'crypto';
-=======
-import nodemailer from 'nodemailer';
-import { createClient } from '@supabase/supabase-js';
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://gvsezisxgofuchzsapks.supabase.co',
+  process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2c2V6aXN4Z29mdWNoenNhcGtzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzExNTE0MSwiZXhwIjoyMDYyNjkxMTQxfQ.NR9HI83kQ0dwv3IZ9JwY_lxf2myqyxF6VJUfzXut5Q0'
 );
 
 // SMTP transporter configuration
@@ -28,15 +23,9 @@ const transporter = nodemailer.createTransport({
 });
 
 // Email verification token generation
-<<<<<<< HEAD
 export function generateVerificationToken(): string {
   return randomBytes(32).toString('base64url');
 }
-=======
-export function generateVerificationToken(): string {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 // Create verification token and save to database
 export async function createEmailVerification(userId: string, email: string): Promise<string> {
@@ -70,7 +59,7 @@ export async function createEmailVerification(userId: string, email: string): Pr
 // Send verification email
 export async function sendVerificationEmail(email: string, token: string, firstName?: string): Promise<boolean> {
   const verificationUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/verify-email?token=${token}`;
-  
+
   const emailTemplate = `
     <!DOCTYPE html>
     <html>
@@ -165,7 +154,7 @@ export async function verifyEmailToken(token: string): Promise<{ success: boolea
     // Check if token is expired
     const now = new Date();
     const expiresAt = new Date(verification.expires_at);
-    
+
     if (now > expiresAt) {
       return { success: false, message: 'Doğrulama kodunun süresi dolmuş. Yeni bir kod talep edin.' };
     }
@@ -173,9 +162,9 @@ export async function verifyEmailToken(token: string): Promise<{ success: boolea
     // Mark token as verified
     const { error: updateError } = await supabase
       .from('email_verifications')
-      .update({ 
-        verified: true, 
-        verified_at: new Date().toISOString() 
+      .update({
+        verified: true,
+        verified_at: new Date().toISOString()
       })
       .eq('token', token);
 
@@ -187,7 +176,7 @@ export async function verifyEmailToken(token: string): Promise<{ success: boolea
     // Update user profile as email verified
     const { error: profileError } = await supabase
       .from('profiles')
-      .update({ 
+      .update({
         is_email_verified: true,
         updated_at: new Date().toISOString()
       })
@@ -197,25 +186,25 @@ export async function verifyEmailToken(token: string): Promise<{ success: boolea
       console.error('Error updating profile:', profileError);
       // Don't return error here, verification is still successful
     }
-    
+
     // Also update Supabase Auth user record as email verified
     // This ensures both systems (DB and Auth) are in sync
     try {
       // Try direct SQL approach using RPC function
-      const { error: rpcError } = await supabase.rpc('admin_confirm_user_email', { 
-        input_user_id: verification.user_id 
+      const { error: rpcError } = await supabase.rpc('admin_confirm_user_email', {
+        input_user_id: verification.user_id
       });
-      
+
       if (rpcError) {
         console.error('Error confirming user email via RPC:', rpcError);
-        
+
         // Fallback to updateUserById (though this seems to be failing)
         try {
           const { error: authUpdateError } = await supabase.auth.admin.updateUserById(
             verification.user_id,
             { email_confirm: true }
           );
-          
+
           if (authUpdateError) {
             console.error('Error updating auth user email confirmation status:', authUpdateError);
           }
@@ -230,10 +219,10 @@ export async function verifyEmailToken(token: string): Promise<{ success: boolea
       // Don't return error here, verification is still successful
     }
 
-    return { 
-      success: true, 
-      userId: verification.user_id, 
-      message: 'Email adresiniz başarıyla doğrulandı!' 
+    return {
+      success: true,
+      userId: verification.user_id,
+      message: 'Email adresiniz başarıyla doğrulandı!'
     };
 
   } catch (error) {
@@ -269,10 +258,10 @@ export async function resendVerificationEmail(email: string): Promise<{ success:
 
     // Create new verification token
     const token = await createEmailVerification(profile.id, email);
-    
+
     // Send new verification email
     const emailSent = await sendVerificationEmail(email, token, profile.first_name);
-    
+
     if (emailSent) {
       return { success: true, message: 'Yeni doğrulama emaili gönderildi. Lütfen email kutunuzu kontrol edin.' };
     } else {

@@ -1,10 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
-<<<<<<< HEAD
 import { twMerge } from "tailwind-merge";
 import { createClientComponentClient } from "./supabase";
-=======
-import { twMerge } from "tailwind-merge";
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -84,7 +80,6 @@ export function generateUniqueSku(baseSku: string): string {
  * @param slug - The slug to normalize
  * @returns Normalized slug
  */
-<<<<<<< HEAD
 export function normalizeSlug(slug: string): string {
   return slug.toLowerCase().trim();
 }
@@ -112,8 +107,3 @@ export async function logAdminAction(
     console.error('Failed to log admin action', e);
   }
 }
-=======
-export function normalizeSlug(slug: string): string {
-  return slug.toLowerCase().trim();
-} 
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255

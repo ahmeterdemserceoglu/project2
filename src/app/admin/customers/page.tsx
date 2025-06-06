@@ -1,40 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { createClientComponentClient } from "@/lib/supabase";
-
-interface Customer {
-  id: string;
-  first_name: string | null;
-  last_name: string | null;
-  email: string | null;
-  phone: string | null;
-}
-
-export default function CustomersPage() {
-  const supabase = createClientComponentClient();
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCustomers = async () => {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("id, first_name, last_name, email, phone")
-        .eq("is_admin", false)
-        .order("created_at", { ascending: false });
-      if (!error && data) {
-        setCustomers(data as Customer[]);
-      } else {
-        console.error("Error loading customers", error);
-        setCustomers([]);
-      }
-      setIsLoading(false);
-=======
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClientComponentClient } from "@/lib/supabase";
@@ -105,97 +70,6 @@ export default function CustomersPage() {
 
     fetchCustomers();
   }, [supabase]);
-=======
-import { useState } from "react";
-import Link from "next/link";
-
-// Mock customer data
-const initialCustomers = [
-  {
-    id: "1",
-    firstName: "Ahmet",
-    lastName: "Yılmaz",
-    email: "ahmet@example.com",
-    phone: "+90 555 111 2222",
-    orderCount: 3,
-    totalSpent: 2300,
-    lastOrder: "02.06.2023",
-    status: "active",
-  },
-  {
-    id: "2",
-    firstName: "Ayşe",
-    lastName: "Demir",
-    email: "ayse@example.com",
-    phone: "+90 555 333 4444",
-    orderCount: 1,
-    totalSpent: 750,
-    lastOrder: "29.05.2023",
-    status: "active",
-  },
-  {
-    id: "3",
-    firstName: "Mehmet",
-    lastName: "Can",
-    email: "mehmet@example.com",
-    phone: "+90 555 555 6666",
-    orderCount: 2,
-    totalSpent: 1250,
-    lastOrder: "28.05.2023",
-    status: "active",
-  },
-  {
-    id: "4",
-    firstName: "Zeynep",
-    lastName: "Kaya",
-    email: "zeynep@example.com",
-    phone: "+90 555 777 8888",
-    orderCount: 1,
-    totalSpent: 860,
-    lastOrder: "01.06.2023",
-    status: "active",
-  },
-  {
-    id: "5",
-    firstName: "Mustafa",
-    lastName: "Demir",
-    email: "mustafa@example.com",
-    phone: "+90 555 999 0000",
-    orderCount: 1,
-    totalSpent: 1650,
-    lastOrder: "01.06.2023",
-    status: "active",
-  },
-  {
-    id: "6",
-    firstName: "Fatma",
-    lastName: "Aydın",
-    email: "fatma@example.com",
-    phone: "+90 555 121 2323",
-    orderCount: 1,
-    totalSpent: 3450,
-    lastOrder: "31.05.2023",
-    status: "inactive",
-  },
-  {
-    id: "7",
-    firstName: "Ali",
-    lastName: "Yıldız",
-    email: "ali@example.com",
-    phone: "+90 555 343 4545",
-    orderCount: 1,
-    totalSpent: 1200,
-    lastOrder: "30.05.2023",
-    status: "active",
-  },
-];
-
-export default function CustomersPage() {
-  const [customers, setCustomers] = useState(initialCustomers);
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [orderCountFilter, setOrderCountFilter] = useState("");
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
   // Filter customers based on search and filters
   const filteredCustomers = customers.filter((customer) => {
@@ -204,7 +78,7 @@ export default function CustomersPage() {
         .toLowerCase()
         .includes(search.toLowerCase()) ||
       customer.email.toLowerCase().includes(search.toLowerCase()) ||
-      customer.phone.includes(search);
+      customer.phone?.includes(search);
 
     const matchesStatus = statusFilter
       ? customer.status === statusFilter
@@ -222,7 +96,6 @@ export default function CustomersPage() {
     return matchesSearch && matchesStatus && matchesOrderCount;
   });
 
-<<<<<<< HEAD
   const totalPages = Math.ceil(filteredCustomers.length / pageSize) || 1;
   const paginatedCustomers = filteredCustomers.slice(
     (currentPage - 1) * pageSize,
@@ -233,18 +106,22 @@ export default function CustomersPage() {
     setCurrentPage(1);
   }, [search, statusFilter, orderCountFilter, customers]);
 
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   // Status badge component
   const StatusBadge = ({ status }: { status: string }) => {
     const statusStyles: Record<string, string> = {
       active: "bg-green-100 text-green-800",
       inactive: "bg-gray-100 text-gray-800",
-<<<<<<< HEAD
->>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
     };
-    fetchCustomers();
-  }, [supabase]);
+
+    return (
+      <span
+        className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"
+          }`}
+      >
+        {status === "active" ? "Aktif" : "Pasif"}
+      </span>
+    );
+  };
 
   if (isLoading) {
     return <div className="p-8">Yükleniyor...</div>;
@@ -259,65 +136,6 @@ export default function CustomersPage() {
   }
 
   return (
-<<<<<<< HEAD
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Müşteriler</h1>
-      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                İsim
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                E-posta
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Telefon
-              </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                İşlemler
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {customers.map((c) => (
-              <tr key={c.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {c.first_name || ""} {c.last_name || ""}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{c.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{c.phone}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link href={`/admin/customers/${c.id}`} className="text-primary hover:text-primary-dark">
-                    Görüntüle
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-=======
-=======
-    };
-
-    const statusLabels: Record<string, string> = {
-      active: "Aktif",
-      inactive: "Pasif",
-    };
-
-    return (
-      <span
-        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
-        data-oid="n6z291q"
-      >
-        {statusLabels[status] || status}
-      </span>
-    );
-  };
-
-  return (
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     <div data-oid="p:mu51b">
       <header className="mb-8" data-oid="j6_z8wy">
         <h1 className="text-2xl font-bold text-gray-900" data-oid="iqpqzhz">
@@ -383,7 +201,7 @@ export default function CustomersPage() {
             ₺
             {Math.round(
               customers.reduce((acc, c) => acc + c.totalSpent, 0) /
-                customers.reduce((acc, c) => acc + c.orderCount, 0),
+              customers.reduce((acc, c) => acc + c.orderCount, 0),
             )}
           </div>
         </div>
@@ -499,16 +317,6 @@ export default function CustomersPage() {
         data-oid="3w20_jb"
       >
         <div className="overflow-x-auto" data-oid="anlpz5v">
-<<<<<<< HEAD
-          {isLoading ? (
-            <div className="p-4 text-center">Yükleniyor...</div>
-          ) : error ? (
-            <div className="p-4 text-center text-red-600">{error}</div>
-          ) : paginatedCustomers.length === 0 ? (
-            <div className="p-4 text-center text-gray-500">Kayıt bulunamadı</div>
-          ) : (
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
           <table
             className="min-w-full divide-y divide-gray-200"
             data-oid="-i6hk7h"
@@ -570,11 +378,7 @@ export default function CustomersPage() {
               className="bg-white divide-y divide-gray-200"
               data-oid="gbvev8."
             >
-<<<<<<< HEAD
               {paginatedCustomers.map((customer) => (
-=======
-              {filteredCustomers.map((customer) => (
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 <tr
                   key={customer.id}
                   className="hover:bg-gray-50"
@@ -640,13 +444,7 @@ export default function CustomersPage() {
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     data-oid="ntuylp2"
                   >
-<<<<<<< HEAD
-                    {customer.lastOrder
-                      ? new Date(customer.lastOrder).toLocaleDateString("tr-TR")
-                      : "-"}
-=======
                     {customer.lastOrder}
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
@@ -691,10 +489,6 @@ export default function CustomersPage() {
               ))}
             </tbody>
           </table>
-<<<<<<< HEAD
-          )}
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         </div>
 
         {/* Pagination */}
@@ -715,16 +509,12 @@ export default function CustomersPage() {
             <div className="inline-flex shadow-sm" data-oid="pfv_8px">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
-<<<<<<< HEAD
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="ovr5fnt"
               >
                 Önceki
               </button>
-<<<<<<< HEAD
               <span className="border-t border-b bg-white px-4 py-2 text-sm font-medium text-gray-700">
                 {currentPage} / {totalPages}
               </span>
@@ -732,22 +522,6 @@ export default function CustomersPage() {
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-=======
-              <button
-                className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="usqlnep"
-              >
-                1
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="r24:.r3"
-              >
-                2
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="qqnu-1."
               >
                 Sonraki
@@ -755,10 +529,6 @@ export default function CustomersPage() {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
->>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       </div>
     </div>
   );

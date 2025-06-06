@@ -1,9 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -12,20 +8,7 @@ import { createClientComponentClient } from "@/lib/supabase";
 import { useToast } from "@/contexts/ToastContext";
 import { useNotification } from "@/contexts/NotificationContext";
 import RequireAuth from "@/components/auth/RequireAuth";
-<<<<<<< HEAD
-=======
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { createClientComponentClient } from '@/lib/supabase';
-import { useToast } from '@/contexts/ToastContext';
-import { useNotification } from '@/contexts/NotificationContext';
-import RequireAuth from '@/components/auth/RequireAuth';
-import type { User } from '@supabase/supabase-js'; // Import User type
->>>>>>> origin/fix/account-page-loading
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
+import type { User } from '@supabase/supabase-js';
 
 type ProfileData = {
   id: string;
@@ -37,11 +20,7 @@ type ProfileData = {
   created_at: string;
 };
 
-<<<<<<< HEAD
-export default function AccountPage({ user }: { user?: User }) { // Add user prop
-=======
 export default function AccountPage() {
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   const router = useRouter();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,47 +30,39 @@ export default function AccountPage() {
     lastName: "",
     phone: "",
   });
+  const [user, setUser] = useState<User | null>(null);
 
   const supabase = createClientComponentClient();
   const { showToast } = useToast();
   const { showNotification } = useNotification();
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUser(session.user);
+      }
+    };
+
+    fetchUser();
+  }, [supabase.auth]);
 
   // Kullanıcı bilgilerini yükle
   const loadUserProfile = async () => {
     try {
       setIsLoading(true);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (userError || !user) {
-        throw new Error(userError?.message || "Kullanıcı bilgileri bulunamadı");
-<<<<<<< HEAD
-=======
-      if (!user) { // Check if user prop is available
+      if (!user) {
         showNotification('Kullanıcı bilgileri bulunamadı. Lütfen tekrar giriş yapın.', 'error');
         setIsLoading(false);
-        // router.push('/login'); // Optionally redirect
         return;
->>>>>>> origin/fix/account-page-loading
       }
 
       const { data: profileData, error: profileError } = await supabase
-<<<<<<< HEAD
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-=======
         .from('profiles')
         .select('*')
-        .eq('id', user.id) // Use user.id from prop
->>>>>>> origin/fix/account-page-loading
+        .eq('id', user.id)
         .single();
 
       if (profileError) {
@@ -121,49 +92,6 @@ export default function AccountPage() {
         return; // Exit if profile not found, but we've set a default from auth
       }
 
-      // Auth metadata ile profil bilgilerini birleştirerek güncelleyelim
-<<<<<<< HEAD
-=======
-      }
-
-      const { data: profileData, error: profileError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
-
-      if (profileError) {
-        throw new Error(profileError.message);
-      }
-
-      // Auth metadata ile profil bilgilerini birleştirerek güncelleyelim
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-      // Eğer profil tablosunda ad/soyad boşsa, auth metadata'dan alalım
-      profileData.first_name =
-        profileData.first_name || user.user_metadata?.first_name || "";
-      profileData.last_name =
-        profileData.last_name || user.user_metadata?.last_name || "";
-
-      // Eğer ad/soyad değişmiş ise veritabanını da güncelleyelim
-      if (
-        (!profileData.first_name && user.user_metadata?.first_name) ||
-        (!profileData.last_name && user.user_metadata?.last_name)
-      ) {
-        await supabase
-          .from("profiles")
-          .update({
-            first_name:
-              profileData.first_name || user.user_metadata?.first_name || "",
-            last_name:
-              profileData.last_name || user.user_metadata?.last_name || "",
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", user.id);
-      }
-
-      setProfile(profileData);
-<<<<<<< HEAD
-=======
       // This logic might be redundant if profile is kept up-to-date by other means (e.g. triggers)
       const updatedProfileData = { ...profileData };
       let shouldUpdateDb = false;
@@ -176,7 +104,7 @@ export default function AccountPage() {
         updatedProfileData.last_name = user.user_metadata.last_name;
         shouldUpdateDb = true;
       }
-      
+
       if (shouldUpdateDb) {
         const { error: updateError } = await supabase
           .from('profiles')
@@ -191,15 +119,12 @@ export default function AccountPage() {
           // Continue with potentially stale data if update fails, or handle error more strictly
         }
       }
-      
+
       setProfile(updatedProfileData);
->>>>>>> origin/fix/account-page-loading
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       setFormData({
-        firstName: profileData.first_name || "",
-        lastName: profileData.last_name || "",
-        phone: profileData.phone || "",
+        firstName: updatedProfileData.first_name || "",
+        lastName: updatedProfileData.last_name || "",
+        phone: updatedProfileData.phone || "",
       });
     } catch (error: any) {
       console.error("Error loading profile:", error.message);
@@ -210,30 +135,11 @@ export default function AccountPage() {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    loadUserProfile();
-  }, []);
-
-=======
-    if (user) { // Only load profile if user prop is available
+    if (user) {
       loadUserProfile();
-    } else {
-      // Handle case where user is not passed (e.g., if RequireAuth hasn't provided it yet or error)
-      // This might briefly happen if RequireAuth is still loading the user.
-      // If `RequireAuth` guarantees user presence, this else might only be for defensive coding.
-      if (!isLoading) { // Avoid if RequireAuth is still in its loading phase
-        showNotification('Kullanıcı oturumu bekleniyor...', 'info');
-      }
     }
-  }, [user]); // Add user to dependency array
-  
->>>>>>> origin/fix/account-page-loading
-=======
-    loadUserProfile();
-  }, []);
+  }, [user]);
 
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   const handleLogout = async () => {
     await supabase.auth.signOut();
     showNotification("Başarıyla çıkış yapıldı", "success");
@@ -264,15 +170,15 @@ export default function AccountPage() {
         .eq("id", profile?.id);
 
       if (error) throw error;
-      
+
       // Also update user metadata to ensure consistent data across auth and profiles
       const { error: userMetadataError } = await supabase.auth.updateUser({
-        data: { 
+        data: {
           first_name: formData.firstName,
           last_name: formData.lastName
         }
       });
-      
+
       if (userMetadataError) {
         console.error("Error updating user metadata:", userMetadataError);
       }
@@ -324,22 +230,10 @@ export default function AccountPage() {
   };
 
   // Koruma kaydı - kimlik doğrulaması gerektiren sayfa
-<<<<<<< HEAD
   // RequireAuth is typically applied in a layout component for account pages
   return (
-<<<<<<< HEAD
     <RequireAuth data-oid="btkkmsb">
       <style jsx global data-oid="c0sdf1j">{`
-=======
-    // <RequireAuth> // This should be handled by a layout if AccountPage receives user prop
-      <>
-      <style jsx global>{`
->>>>>>> origin/fix/account-page-loading
-=======
-  return (
-    <RequireAuth data-oid="btkkmsb">
-      <style jsx global data-oid="c0sdf1j">{`
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         /* CSS Variables */
         :root {
           --dark: #1e293b;
@@ -413,22 +307,11 @@ export default function AccountPage() {
           </h1>
 
           {isLoading ? (
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
             <div className="flex justify-center p-8" data-oid="tm96lod">
               <div
                 className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"
                 data-oid="gzf1z.3"
               ></div>
-<<<<<<< HEAD
-=======
-            <div className="flex justify-center p-8" data-testid="account-loader">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"></div>
->>>>>>> origin/fix/account-page-loading
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
             </div>
           ) : (
             <div
@@ -469,10 +352,6 @@ export default function AccountPage() {
                     >
                       {profile?.first_name} {profile?.last_name}
                     </h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                     <p
                       className="text-gray-500 dark:text-gray-400 flex items-center"
                       data-oid="cdh12_m"
@@ -507,30 +386,6 @@ export default function AccountPage() {
                           Doğrula
                         </button>
                       )}
-<<<<<<< HEAD
-=======
-                    <p className="text-gray-500 dark:text-gray-400 flex items-center">
-                      {profile?.email} 
-                      {/* Conditional rendering for email verification status */}
-                      {profile?.is_email_verified || user?.email_confirmed_at ? (
-                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500">
-                          <svg className="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            Doğrulanmış
-                          </span>
-                        ) : (
-                          <button
-                            onClick={sendVerificationEmail}
-                            disabled={!profile?.email}
-                            className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-500 hover:bg-yellow-200 dark:hover:bg-yellow-800/50 disabled:opacity-50"
-                          >
-                            Doğrula
-                          </button>
-                        )}
->>>>>>> origin/fix/account-page-loading
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                     </p>
                   </div>
 
@@ -693,10 +548,6 @@ export default function AccountPage() {
                         </p>
                       </div>
                     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
                     <div
                       className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -727,20 +578,6 @@ export default function AccountPage() {
                                 clipRule="evenodd"
                                 data-oid="mtuhjac"
                               />
-<<<<<<< HEAD
-=======
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-300 account-label">E-posta</h3>
-                        <p className="mt-1 text-base font-medium text-gray-900 account-info flex items-center">
-                          {profile?.email || user?.email}
-                          {(profile?.is_email_verified || user?.email_confirmed_at) && (
-                            <svg className="ml-1.5 h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
->>>>>>> origin/fix/account-page-loading
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                             </svg>
                           )}
                         </p>
@@ -774,8 +611,8 @@ export default function AccountPage() {
                       >
                         {profile?.created_at
                           ? new Date(profile.created_at).toLocaleDateString(
-                              "tr-TR",
-                            )
+                            "tr-TR",
+                          )
                           : "-"}
                       </p>
                     </div>
@@ -980,11 +817,6 @@ export default function AccountPage() {
           )}
         </div>
       </div>
-<<<<<<< HEAD
-    {/* </RequireAuth> */}
-    </>
-=======
     </RequireAuth>
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   );
 }

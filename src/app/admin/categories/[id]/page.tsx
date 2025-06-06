@@ -2,14 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-<<<<<<< HEAD
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
 import { logAdminAction } from "@/lib/utils";
-=======
-import { createClientComponentClient } from "@/lib/supabase";
-import Link from "next/link";
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 type Category = {
   id: string;
@@ -26,7 +21,7 @@ type Category = {
 export default function EditCategoryPage({ params }: { params: { id: string } }) {
   const categoryId = params.id;
   const router = useRouter();
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -43,57 +38,57 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  
+
   const supabase = createClientComponentClient();
-  
+
   useEffect(() => {
     fetchCategories();
     fetchCategoryData();
   }, [categoryId]);
-  
+
   useEffect(() => {
     // Generate slug from name only if it wasn't loaded from the database
     if (formData.name && !slug) {
       setSlug(generateSlug(formData.name));
     }
   }, [formData.name, slug]);
-  
+
   async function fetchCategories() {
     try {
       const { data, error } = await supabase
         .from('categories')
         .select('*')
         .order('name', { ascending: true });
-        
+
       if (error) {
         throw error;
       }
-      
+
       setCategories(data || []);
     } catch (error: any) {
       console.error('Error fetching categories:', error);
       setError(error.message);
     }
   }
-  
+
   async function fetchCategoryData() {
     try {
       setIsLoading(true);
-      
+
       const { data, error } = await supabase
         .from('categories')
         .select('*')
         .eq('id', categoryId)
         .single();
-        
+
       if (error) {
         throw error;
       }
-      
+
       if (!data) {
         throw new Error('Kategori bulunamadı');
       }
-      
+
       setFormData({
         name: data.name,
         description: data.description || "",
@@ -101,13 +96,13 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
         image_url: data.image_url || "",
         sort_order: data.sort_order.toString(),
       });
-      
+
       setSlug(data.slug);
-      
+
       if (data.image_url) {
         setImagePreview(data.image_url);
       }
-      
+
     } catch (error: any) {
       console.error('Error fetching category:', error);
       setError(error.message);
@@ -115,7 +110,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       setIsLoading(false);
     }
   }
-  
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setFormData({
@@ -123,15 +118,15 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       [name]: value
     });
   }
-  
+
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files || e.target.files.length === 0) {
       return;
     }
-    
+
     const file = e.target.files[0];
     setImageFile(file);
-    
+
     // Create preview
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -139,7 +134,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
     };
     reader.readAsDataURL(file);
   }
-  
+
   function generateSlug(name: string) {
     return name
       .toLowerCase()
@@ -154,47 +149,46 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       .replace(/-+/g, '-')
       .replace(/^-+|-+$/g, '');
   }
-  
+
   function handleSlugChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSlug(e.target.value);
   }
-  
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    
+
     try {
       setIsSaving(true);
       setError(null);
-      
+
       if (!formData.name.trim()) {
         throw new Error("Kategori adı gereklidir");
       }
-      
+
       let imageUrl = formData.image_url;
-      
+
       // Upload image if provided
       if (imageFile) {
         const fileExt = imageFile.name.split('.').pop();
         const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
         const filePath = fileName;
-        
+
         const { error: uploadError } = await supabase.storage
           .from('category_images')
           .upload(filePath, imageFile);
-          
+
         if (uploadError) {
           throw uploadError;
         }
-        
+
         const { data: { publicUrl } } = supabase.storage
           .from('category_images')
           .getPublicUrl(filePath);
-          
+
         imageUrl = publicUrl;
       }
-      
+
       // Update category
-<<<<<<< HEAD
       const { data, error } = await supabase
         .from('categories')
         .update({
@@ -226,28 +220,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
 
       // Redirect to categories page
       router.push('/admin/categories');
-=======
-      const { data, error } = await supabase
-        .from('categories')
-        .update({
-          name: formData.name.trim(),
-          slug: slug,
-          description: formData.description.trim() || null,
-          parent_category_id: formData.parent_category_id || null,
-          image_url: imageUrl,
-          sort_order: parseInt(formData.sort_order || "0"),
-        })
-        .eq('id', categoryId)
-        .select();
-        
-      if (error) {
-        throw error;
-      }
-      
-      // Redirect to categories page
-      router.push('/admin/categories');
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-      
+
     } catch (error: any) {
       console.error('Error updating category:', error);
       setError(error.message);
@@ -255,41 +228,28 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       setIsSaving(false);
     }
   }
-  
+
   async function handleDelete() {
     try {
       setIsDeleting(true);
-      
-      // Check if category has subcategories
-      const { data: subcategories, error: subcategoriesError } = await supabase
-        .from('categories')
-        .select('id')
-        .eq('parent_category_id', categoryId);
-        
-      if (subcategoriesError) {
-        throw subcategoriesError;
-      }
-      
-      if (subcategories && subcategories.length > 0) {
-        throw new Error('Bu kategorinin alt kategorileri var. Önce alt kategorileri silmelisiniz.');
-      }
-      
-      // Check if category has products
-      const { data: products, error: productsError } = await supabase
+      setError(null);
+
+      // Check for products using this category
+      const { data: productsUsingCategory, error: checkError } = await supabase
         .from('products')
         .select('id')
-        .eq('category_id', categoryId);
-        
-      if (productsError) {
-        throw productsError;
+        .eq('category_id', categoryId)
+        .limit(1);
+
+      if (checkError) {
+        throw checkError;
       }
-      
-      if (products && products.length > 0) {
-        throw new Error('Bu kategoriye ait ürünler var. Önce ürünlerin kategorisini değiştirmelisiniz.');
+
+      if (productsUsingCategory && productsUsingCategory.length > 0) {
+        throw new Error('Bu kategori ürünler tarafından kullanılıyor. Önce ürünleri başka bir kategoriye taşıyın.');
       }
-      
+
       // Delete category
-<<<<<<< HEAD
       const { error } = await supabase
         .from('categories')
         .delete()
@@ -307,26 +267,13 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
           'delete',
           'category',
           categoryId,
-          {}
+          { name: formData.name }
         );
       }
 
       // Redirect to categories page
       router.push('/admin/categories');
-=======
-      const { error } = await supabase
-        .from('categories')
-        .delete()
-        .eq('id', categoryId);
-        
-      if (error) {
-        throw error;
-      }
-      
-      // Redirect to categories page
-      router.push('/admin/categories');
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-      
+
     } catch (error: any) {
       console.error('Error deleting category:', error);
       setError(error.message);
@@ -335,11 +282,11 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
       setShowDeleteConfirm(false);
     }
   }
-  
+
   // Build category hierarchy for dropdown
   function buildCategoryOptions(categories: Category[], parentId: string | null = null, level = 0): JSX.Element[] {
     const options: JSX.Element[] = [];
-    
+
     categories
       .filter(category => category.parent_category_id === parentId)
       .forEach(category => {
@@ -351,14 +298,14 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
               {indent} {category.name}
             </option>
           );
-          
+
           // Don't include children of this category to avoid circular references
           if (category.id !== categoryId) {
             options.push(...buildCategoryOptions(categories, category.id, level + 1));
           }
         }
       });
-      
+
     return options;
   }
 
@@ -366,13 +313,13 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
   function isAncestorOf(categoryId: string, potentialDescendantId: string): boolean {
     const descendant = categories.find(c => c.id === potentialDescendantId);
     if (!descendant) return false;
-    
+
     if (descendant.parent_category_id === categoryId) return true;
-    
+
     if (descendant.parent_category_id) {
       return isAncestorOf(categoryId, descendant.parent_category_id);
     }
-    
+
     return false;
   }
 
@@ -385,20 +332,20 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-white">Kategori Düzenle</h1>
-        <Link 
-          href="/admin/categories" 
+        <Link
+          href="/admin/categories"
           className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition"
         >
           Geri Dön
         </Link>
       </div>
-      
+
       {error && (
         <div className="p-4 mb-6 bg-red-600 bg-opacity-20 border border-red-600 rounded-md text-white">
           {error}
         </div>
       )}
-      
+
       {isLoading ? (
         <div className="flex justify-center my-12">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -421,7 +368,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                 className="w-full p-2.5 bg-dark border border-gray-600 rounded-md text-white"
               />
             </div>
-            
+
             {/* Slug */}
             <div className="mb-4">
               <label htmlFor="slug" className="block mb-2 text-sm font-medium text-white">
@@ -435,7 +382,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                 className="w-full p-2.5 bg-dark border border-gray-600 rounded-md text-white"
               />
             </div>
-            
+
             {/* Description */}
             <div className="mb-4">
               <label htmlFor="description" className="block mb-2 text-sm font-medium text-white">
@@ -450,7 +397,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                 className="w-full p-2.5 bg-dark border border-gray-600 rounded-md text-white"
               ></textarea>
             </div>
-            
+
             {/* Parent category */}
             <div className="mb-4">
               <label htmlFor="parent_category_id" className="block mb-2 text-sm font-medium text-white">
@@ -467,7 +414,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                 {buildCategoryOptions(filteredCategories)}
               </select>
             </div>
-            
+
             {/* Sort order */}
             <div className="mb-4">
               <label htmlFor="sort_order" className="block mb-2 text-sm font-medium text-white">
@@ -482,13 +429,13 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                 className="w-full p-2.5 bg-dark border border-gray-600 rounded-md text-white"
               />
             </div>
-            
+
             {/* Image upload */}
             <div className="mb-6">
               <label htmlFor="image" className="block mb-2 text-sm font-medium text-white">
                 Kategori Görseli
               </label>
-              
+
               {imagePreview && (
                 <div className="mb-3">
                   <p className="mb-1 text-sm text-gray-400">Mevcut Görsel:</p>
@@ -497,7 +444,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
                   </div>
                 </div>
               )}
-              
+
               <input
                 type="file"
                 id="image"
@@ -507,7 +454,7 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
               />
               <p className="mt-1 text-xs text-gray-400">Yeni bir görsel yüklemek için seçin</p>
             </div>
-            
+
             {/* Submit button */}
             <div className="flex justify-end">
               <button
@@ -519,14 +466,14 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
               </button>
             </div>
           </form>
-          
+
           {/* Delete section */}
           <div className="bg-dark-lighter rounded-md p-6">
             <h2 className="text-xl font-bold text-white mb-4">Kategoriyi Sil</h2>
             <p className="text-gray-300 mb-4">
               Bu işlem geri alınamaz. Kategoriyi silmek için aşağıdaki butona tıklayın.
             </p>
-            
+
             {!showDeleteConfirm ? (
               <button
                 onClick={() => setShowDeleteConfirm(true)}

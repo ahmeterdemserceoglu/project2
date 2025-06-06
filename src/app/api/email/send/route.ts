@@ -4,8 +4,8 @@ import { createEmailVerification, sendVerificationEmail } from '@/lib/email';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://gvsezisxgofuchzsapks.supabase.co',
+  process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2c2V6aXN4Z29mdWNoenNhcGtzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzExNTE0MSwiZXhwIjoyMDYyNjkxMTQxfQ.NR9HI83kQ0dwv3IZ9JwY_lxf2myqyxF6VJUfzXut5Q0'
 );
 
 export async function POST(request: NextRequest) {
@@ -72,9 +72,9 @@ export async function POST(request: NextRequest) {
         });
 
       return NextResponse.json(
-        { 
-          success: true, 
-          message: 'Verification email sent successfully' 
+        {
+          success: true,
+          message: 'Verification email sent successfully'
         },
         { status: 200 }
       );
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Send email API error:', error);
-    
+
     // Log the error for debugging
     try {
       await supabase

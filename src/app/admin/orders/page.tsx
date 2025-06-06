@@ -1,72 +1,28 @@
 "use client";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { createClientComponentClient } from "@/lib/supabase";
-
-interface Order {
-  id: string;
-  order_number: string | null;
-  created_at: string;
-  status: string;
-  payment_status: string | null;
-  total_amount: number | null;
-  profiles: {
-    first_name: string | null;
-    last_name: string | null;
-    email: string | null;
-  } | null;
-}
-
-export default function OrdersPage() {
-  const supabase = createClientComponentClient();
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from("orders")
-        .select(
-          `id, order_number, created_at, status, payment_status, total_amount, profiles(first_name, last_name, email)`
-        )
-        .order("created_at", { ascending: false });
-
-      if (!error && data) {
-        // Normalize the profiles field since Supabase may return it as an array
-        const normalized = (data as any[]).map((order) => ({
-          ...order,
-          profiles: Array.isArray(order.profiles)
-            ? order.profiles[0] || null
-            : order.profiles,
-        })) as Order[];
-        setOrders(normalized);
-      } else {
-        console.error("Error loading orders", error);
-        setOrders([]);
-      }
-      setIsLoading(false);
-=======
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClientComponentClient } from "@/lib/supabase";
-
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-<<<<<<< HEAD
-  const [statusFilter, setStatusFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
+  const [shippingStatusFilter, setShippingStatusFilter] = useState("");
+  const [paymentStatusFilter, setPaymentStatusFilter] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
   const supabase = createClientComponentClient();
+
+  // Helper to parse dd.mm.yyyy formatted dates
+  const parseDate = (str: string) => {
+    const [day, month, year] = str.split(".");
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  };
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -75,7 +31,7 @@ export default function OrdersPage() {
         const { data, error } = await supabase
           .from("orders")
           .select(
-            `id, order_number, status, payment_status, total_amount, created_at, profiles(first_name, last_name)`,
+            `id, order_number, status, payment_status, total_amount, created_at, profiles(first_name, last_name, email)`,
           )
           .order("created_at", { ascending: false });
         if (error) throw error;
@@ -85,9 +41,9 @@ export default function OrdersPage() {
           orderNumber: o.order_number || `#${o.id.substring(0, 8)}`,
           customerName: o.profiles
             ? `${o.profiles.first_name || ""} ${o.profiles.last_name || ""}`.trim() ||
-              o.profiles.email
+            o.profiles.email
             : "Misafir",
-          date: o.created_at,
+          date: new Date(o.created_at).toLocaleDateString("tr-TR"),
           status: o.status,
           paymentStatus: o.payment_status,
           total: o.total_amount,
@@ -102,111 +58,12 @@ export default function OrdersPage() {
 
     fetchOrders();
   }, [supabase]);
-=======
-  const [shippingStatusFilter, setShippingStatusFilter] = useState("");
-  const [paymentStatusFilter, setPaymentStatusFilter] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
-  // Helper to parse dd.mm.yyyy formatted dates
-  const parseDate = (str: string) => {
-    const [day, month, year] = str.split(".");
-    return new Date(Number(year), Number(month) - 1, Number(day));
-  };
->>>>>>> origin/codex/update-orders-page-with-date-range-picker-and-filters
-=======
-import { useState } from "react";
-import Link from "next/link";
-
-// Mock order data
-const initialOrders = [
-  {
-    id: "1",
-    orderNumber: "HD-1001",
-    customerName: "Ahmet Yılmaz",
-    date: "02.06.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 2300,
-  },
-  {
-    id: "2",
-    orderNumber: "HD-1002",
-    customerName: "Zeynep Kaya",
-    date: "01.06.2023",
-    status: "shipped",
-    paymentStatus: "paid",
-    total: 860,
-  },
-  {
-    id: "3",
-    orderNumber: "HD-1003",
-    customerName: "Mustafa Demir",
-    date: "01.06.2023",
-    status: "processing",
-    paymentStatus: "paid",
-    total: 1650,
-  },
-  {
-    id: "4",
-    orderNumber: "HD-1004",
-    customerName: "Fatma Aydın",
-    date: "31.05.2023",
-    status: "pending",
-    paymentStatus: "pending",
-    total: 3450,
-  },
-  {
-    id: "5",
-    orderNumber: "HD-1005",
-    customerName: "Ali Yıldız",
-    date: "30.05.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 1200,
-  },
-  {
-    id: "6",
-    orderNumber: "HD-1006",
-    customerName: "Ayşe Demir",
-    date: "29.05.2023",
-    status: "cancelled",
-    paymentStatus: "refunded",
-    total: 750,
-  },
-  {
-    id: "7",
-    orderNumber: "HD-1007",
-    customerName: "Mehmet Can",
-    date: "28.05.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 1250,
-  },
-];
-
-export default function OrdersPage() {
-  const [orders, setOrders] = useState(initialOrders);
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
   // Filter orders based on search and filters
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.orderNumber.toLowerCase().includes(search.toLowerCase()) ||
       order.customerName.toLowerCase().includes(search.toLowerCase());
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const matchesStatus = statusFilter ? order.status === statusFilter : true;
-    const matchesDate = dateFilter
-      ? new Date(order.date)
-          .toLocaleDateString("tr-TR")
-          .includes(dateFilter)
-      : true;
-=======
->>>>>>> origin/codex/update-orders-page-with-date-range-picker-and-filters
 
     const matchesShippingStatus = shippingStatusFilter
       ? order.status === shippingStatusFilter
@@ -216,9 +73,14 @@ export default function OrdersPage() {
       ? order.paymentStatus === paymentStatusFilter
       : true;
 
-    const orderDate = parseDate(order.date);
-    const matchesStartDate = startDate ? orderDate >= new Date(startDate) : true;
-    const matchesEndDate = endDate ? orderDate <= new Date(endDate) : true;
+    let matchesStartDate = true;
+    let matchesEndDate = true;
+
+    if (startDate || endDate) {
+      const orderDate = parseDate(order.date);
+      matchesStartDate = startDate ? orderDate >= new Date(startDate) : true;
+      matchesEndDate = endDate ? orderDate <= new Date(endDate) : true;
+    }
 
     return (
       matchesSearch &&
@@ -237,17 +99,8 @@ export default function OrdersPage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, statusFilter, dateFilter, orders]);
+  }, [search, shippingStatusFilter, paymentStatusFilter, startDate, endDate, orders]);
 
-=======
-    const matchesStatus = statusFilter ? order.status === statusFilter : true;
-    // In a real app, this would be a proper date range filter
-    const matchesDate = dateFilter ? order.date.includes(dateFilter) : true;
-
-    return matchesSearch && matchesStatus && matchesDate;
-  });
-
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
   // Status badge component
   const StatusBadge = ({ status }: { status: string }) => {
     const statusStyles: Record<string, string> = {
@@ -257,97 +110,6 @@ export default function OrdersPage() {
       delivered: "bg-green-100 text-green-800",
       cancelled: "bg-red-100 text-red-800",
       refunded: "bg-gray-100 text-gray-800",
-<<<<<<< HEAD
->>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
-    };
-    fetchOrders();
-  }, [supabase]);
-
-  const statusLabels: Record<string, string> = {
-    pending: "Bekliyor",
-    processing: "Hazırlanıyor",
-    shipped: "Kargoda",
-    delivered: "Teslim Edildi",
-    cancelled: "İptal",
-    refunded: "İade",
-  };
-
-  if (isLoading) {
-    return <div className="p-8">Yükleniyor...</div>;
-  }
-
-  if (orders.length === 0) {
-    return (
-      <div className="p-8 bg-white rounded-xl shadow-sm">Şu an sipariş bulunmuyor.</div>
-    );
-  }
-
-  return (
-<<<<<<< HEAD
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Siparişler</h1>
-      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Sipariş No
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Müşteri
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tarih
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Durum
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Ödeme
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Toplam
-              </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                İşlemler
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-primary font-medium">
-                  {order.order_number || `#${order.id.substring(0, 8)}`}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.profiles
-                    ? `${order.profiles.first_name || ""} ${order.profiles.last_name || ""}`.trim() ||
-                      order.profiles.email
-                    : "Misafir Kullanıcı"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                  {new Date(order.created_at).toLocaleDateString("tr-TR")}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {statusLabels[order.status] || order.status}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.payment_status ? order.payment_status.toUpperCase() : ""}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  ₺{Number(order.total_amount || 0).toLocaleString("tr-TR")}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link href={`/admin/orders/${order.id}`} className="text-primary hover:text-primary-dark">
-                    Görüntüle
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-=======
-=======
     };
 
     const statusLabels: Record<string, string> = {
@@ -404,8 +166,17 @@ export default function OrdersPage() {
     );
   };
 
+  if (isLoading) {
+    return <div className="p-8">Yükleniyor...</div>;
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="p-8 bg-white rounded-xl shadow-sm">Şu an sipariş bulunmuyor.</div>
+    );
+  }
+
   return (
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
     <div data-oid="7j76r1g">
       <header className="mb-8" data-oid="eyzt2yd">
         <h1 className="text-2xl font-bold text-gray-900" data-oid="kx4.i-7">
@@ -418,11 +189,7 @@ export default function OrdersPage() {
 
       {/* Filters */}
       <div
-<<<<<<< HEAD
         className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-4"
-=======
-        className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-3"
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         data-oid="26aegnz"
       >
         <div data-oid="-4r5g-2">
@@ -468,18 +235,6 @@ export default function OrdersPage() {
 
         <div data-oid="-sqseyk">
           <label
-<<<<<<< HEAD
-            htmlFor="shippingStatus"
-            className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="j10iwtj"
-          >
-            Kargo Durumu
-          </label>
-          <select
-            id="shippingStatus"
-            value={shippingStatusFilter}
-            onChange={(e) => setShippingStatusFilter(e.target.value)}
-=======
             htmlFor="status"
             className="block text-sm font-medium text-gray-700 mb-1"
             data-oid="j10iwtj"
@@ -488,9 +243,8 @@ export default function OrdersPage() {
           </label>
           <select
             id="status"
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
+            value={shippingStatusFilter}
+            onChange={(e) => setShippingStatusFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
             data-oid="s8c:pp9"
           >
@@ -515,7 +269,6 @@ export default function OrdersPage() {
           </select>
         </div>
 
-<<<<<<< HEAD
         <div data-oid="payment-filter">
           <label
             htmlFor="paymentStatus"
@@ -539,31 +292,6 @@ export default function OrdersPage() {
 
         <div data-oid="-nl_cbl">
           <label
-            htmlFor="startDate"
-            className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="j2p4:l:"
-          >
-            Tarih Aralığı
-          </label>
-          <div className="flex space-x-2">
-            <input
-              type="date"
-              id="startDate"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            />
-            <input
-              type="date"
-              id="endDate"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            />
-          </div>
-=======
-        <div data-oid="-nl_cbl">
-          <label
             htmlFor="date"
             className="block text-sm font-medium text-gray-700 mb-1"
             data-oid="j2p4:l:"
@@ -573,13 +301,12 @@ export default function OrdersPage() {
           <input
             type="text"
             id="date"
-            value={dateFilter}
-            onChange={(e) => setDateFilter(e.target.value)}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
             placeholder="gg.aa.yyyy"
             className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
             data-oid="t3-vj7:"
           />
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         </div>
       </div>
 
@@ -589,7 +316,6 @@ export default function OrdersPage() {
         data-oid="abwcr:2"
       >
         <div className="overflow-x-auto" data-oid="pkrq__f">
-<<<<<<< HEAD
           {isLoading ? (
             <div className="p-4 text-center">Yükleniyor...</div>
           ) : error ? (
@@ -597,164 +323,151 @@ export default function OrdersPage() {
           ) : paginatedOrders.length === 0 ? (
             <div className="p-4 text-center text-gray-500">Kayıt bulunamadı</div>
           ) : (
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-          <table
-            className="min-w-full divide-y divide-gray-200"
-            data-oid="n-.-.gg"
-          >
-            <thead className="bg-gray-50" data-oid="yxnu5o-">
-              <tr data-oid="vjkir:e">
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="5qc_l7f"
-                >
-                  Sipariş No
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="nztrmsn"
-                >
-                  Müşteri
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="6glg0g9"
-                >
-                  Tarih
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="ootrxa_"
-                >
-                  Durum
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="wvec.p1"
-                >
-                  Ödeme
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="n3.n:9d"
-                >
-                  Toplam
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="s8x8da2"
-                >
-                  İşlemler
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              className="bg-white divide-y divide-gray-200"
-              data-oid="lb1pwr8"
+            <table
+              className="min-w-full divide-y divide-gray-200"
+              data-oid="n-.-.gg"
             >
-<<<<<<< HEAD
-              {paginatedOrders.map((order) => (
-=======
-              {filteredOrders.map((order) => (
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-                <tr
-                  key={order.id}
-                  className="hover:bg-gray-50"
-                  data-oid="1ziwef."
-                >
-                  <td
-                    className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary"
-                    data-oid="iuo1ldk"
+              <thead className="bg-gray-50" data-oid="yxnu5o-">
+                <tr data-oid="vjkir:e">
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="5qc_l7f"
                   >
-                    {order.orderNumber}
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="lhpho-w"
+                    Sipariş No
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="nztrmsn"
                   >
-                    {order.customerName}
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    data-oid=":je1cw."
+                    Müşteri
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="6glg0g9"
                   >
-<<<<<<< HEAD
-                    {new Date(order.date).toLocaleDateString("tr-TR")}
-=======
-                    {order.date}
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap"
-                    data-oid="gm:02v7"
+                    Tarih
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="ootrxa_"
                   >
-                    <StatusBadge status={order.status} data-oid="znou6oz" />
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap"
-                    data-oid="tq9g0:8"
+                    Durum
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="wvec.p1"
                   >
-                    <PaymentBadge
-                      status={order.paymentStatus}
-                      data-oid="i:3_iet"
-                    />
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="qbq5u_n"
+                    Ödeme
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="n3.n:9d"
                   >
-                    ₺{order.total.toLocaleString()}
-                  </td>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                    data-oid="2chkfel"
+                    Toplam
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    data-oid="s8x8da2"
                   >
-                    <Link
-                      href={`/admin/orders/${order.id}`}
-                      className="text-primary hover:text-primary-dark mr-3"
-                      data-oid="kkhblyh"
-                    >
-                      Görüntüle
-                    </Link>
-                    <button
-                      className="text-indigo-600 hover:text-indigo-900 mr-3"
-                      data-oid="5ej1:h:"
-                    >
-                      <span className="sr-only" data-oid="lk6gswe">
-                        Status güncelle
-                      </span>
-                      <svg
-                        className="h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        data-oid="utfd2rf"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                          clipRule="evenodd"
-                          data-oid="rb6ppxo"
-                        />
-                      </svg>
-                    </button>
-                  </td>
+                    İşlemler
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-<<<<<<< HEAD
+              </thead>
+              <tbody
+                className="bg-white divide-y divide-gray-200"
+                data-oid="lb1pwr8"
+              >
+                {paginatedOrders.map((order) => (
+                  <tr
+                    key={order.id}
+                    className="hover:bg-gray-50"
+                    data-oid="1ziwef."
+                  >
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary"
+                      data-oid="iuo1ldk"
+                    >
+                      {order.orderNumber}
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                      data-oid="lhpho-w"
+                    >
+                      {order.customerName}
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                      data-oid=":je1cw."
+                    >
+                      {order.date}
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      data-oid="gm:02v7"
+                    >
+                      <StatusBadge status={order.status} data-oid="znou6oz" />
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      data-oid="tq9g0:8"
+                    >
+                      <PaymentBadge
+                        status={order.paymentStatus}
+                        data-oid="i:3_iet"
+                      />
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                      data-oid="qbq5u_n"
+                    >
+                      ₺{order.total.toLocaleString()}
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                      data-oid="2chkfel"
+                    >
+                      <Link
+                        href={`/admin/orders/${order.id}`}
+                        className="text-primary hover:text-primary-dark mr-3"
+                        data-oid="kkhblyh"
+                      >
+                        Görüntüle
+                      </Link>
+                      <button
+                        className="text-indigo-600 hover:text-indigo-900 mr-3"
+                        data-oid="5ej1:h:"
+                      >
+                        <span className="sr-only" data-oid="lk6gswe">
+                          Status güncelle
+                        </span>
+                        <svg
+                          className="h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          data-oid="utfd2rf"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                            clipRule="evenodd"
+                            data-oid="rb6ppxo"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
         </div>
 
         {/* Pagination */}
@@ -775,16 +488,12 @@ export default function OrdersPage() {
             <div className="inline-flex shadow-sm" data-oid="meg.cq2">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
-<<<<<<< HEAD
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="2scaz-c"
               >
                 Önceki
               </button>
-<<<<<<< HEAD
               <span className="border-t border-b bg-white px-4 py-2 text-sm font-medium text-gray-700">
                 {currentPage} / {totalPages}
               </span>
@@ -792,28 +501,6 @@ export default function OrdersPage() {
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-=======
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="sm4er5g"
-              >
-                1
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="hxq45:."
-              >
-                2
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="_91-h3s"
-              >
-                3
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
                 data-oid="ec85zvi"
               >
                 Sonraki
@@ -896,10 +583,6 @@ export default function OrdersPage() {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
->>>>>>> origin/codex/replace-hardcoded-arrays-with-supabase-queries
-=======
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       </div>
     </div>
   );

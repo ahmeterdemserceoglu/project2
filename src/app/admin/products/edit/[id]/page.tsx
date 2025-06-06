@@ -4,11 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
-<<<<<<< HEAD
 import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
-=======
-import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
 
 export default function EditProductPage({ params }: { params: { id: string } }) {
   const productId = params.id;
@@ -44,20 +40,20 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
       try {
         // Check if user is admin
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
+
         if (sessionError || !session) {
           // Not logged in, redirect to login
           router.push("/login");
           return;
         }
-        
+
         // Check if user has admin role
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("is_admin")
           .eq("id", session.user.id)
           .single();
-          
+
         if (profileError || !profile || !profile.is_admin) {
           // Not admin, redirect to homepage
           router.push("/");
@@ -85,7 +81,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
   const fetchProduct = async () => {
     try {
       setIsLoading(true);
-      
+
       // Fetch product data
       const { data: product, error: productError } = await supabase
         .from("products")
@@ -127,7 +123,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
 
       setSlug(product.slug);
       setExistingImages(images || []);
-      
+
       // Set primary image
       const primaryImage = images?.find(img => img.is_primary);
       if (primaryImage) {
@@ -160,7 +156,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
-    
+
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked }));
@@ -173,7 +169,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
     if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
       setImageFiles(prev => [...prev, ...newFiles]);
-      
+
       // Generate preview URLs
       const newPreviewUrls = newFiles.map(file => URL.createObjectURL(file));
       setImagePreviewUrls(prev => [...prev, ...newPreviewUrls]);
@@ -221,7 +217,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
     setError("");
     setSuccess(false);
     setIsSaving(true);
-    
+
     try {
       // Validate form data
       if (!formData.name || !formData.description || !formData.base_price || !formData.category_id) {
@@ -352,7 +348,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             // Handle RLS policy error by trying with a direct SQL query
             if (imageRecordError.message.includes('policy')) {
               console.log('RLS policy error, attempting direct SQL insert...');
-              
+
               const { error: sqlError } = await supabase.rpc('admin_insert_product_image', {
                 product_id_param: productId,
                 image_url_param: publicUrlData.publicUrl,
@@ -360,7 +356,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                 display_order_param: existingImages.length + i,
                 alt_text_param: formData.name
               });
-              
+
               if (sqlError) {
                 console.error('Direct SQL insert failed:', sqlError);
                 throw sqlError;
@@ -370,7 +366,6 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             }
           }
         }
-<<<<<<< HEAD
       }
 
       const { data: { session: logSession } } = await supabase.auth.getSession();
@@ -386,11 +381,6 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
       }
 
       setSuccess(true);
-=======
-      }
-
-      setSuccess(true);
->>>>>>> c017cf20e76ba26ad97ab21e98a23f8aebfcd255
       // Redirect to products page after a short delay
       setTimeout(() => {
         router.push("/admin/products");
@@ -423,7 +413,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             >
               İptal
             </Link>
-            <button 
+            <button
               type="submit"
               form="product-form"
               className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50"
@@ -451,7 +441,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             {/* Basic Information */}
             <div className="space-y-6">
               <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Temel Bilgiler</h2>
-              
+
               <div className="space-y-4">
                 {/* Name */}
                 <div>
@@ -526,7 +516,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             {/* Pricing & Inventory */}
             <div className="space-y-6">
               <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Fiyat & Stok</h2>
-              
+
               <div className="space-y-4">
                 {/* Regular Price */}
                 <div>
@@ -594,7 +584,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                       Aktif (Satışta)
                     </label>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <input
                       type="checkbox"
@@ -612,7 +602,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
               </div>
             </div>
           </div>
-          
+
           {/* Description */}
           <div className="space-y-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Ürün Açıklaması</h2>
@@ -635,7 +625,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
           {/* Product Images */}
           <div className="space-y-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white border-b pb-2">Ürün Görselleri</h2>
-            
+
             {/* Existing Images */}
             {existingImages.length > 0 && (
               <div className="mb-6">
@@ -644,16 +634,15 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {existingImages.map((image) => (
-                    <div 
-                      key={image.id} 
-                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${
-                        primaryExistingImageId === image.id ? "border-primary" : "border-transparent"
-                      }`}
+                    <div
+                      key={image.id}
+                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${primaryExistingImageId === image.id ? "border-primary" : "border-transparent"
+                        }`}
                     >
-                      <img 
-                        src={image.image_url} 
+                      <img
+                        src={image.image_url}
                         alt={image.alt_text || "Ürün görseli"}
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover"
                         onClick={() => setPrimaryExistingImage(image.id)}
                       />
                       <button
@@ -673,7 +662,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                 </div>
               </div>
             )}
-            
+
             {/* Upload New Images */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -699,16 +688,15 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {imagePreviewUrls.map((url, index) => (
-                    <div 
-                      key={index} 
-                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${
-                        primaryImageIndex === index ? "border-primary" : "border-transparent"
-                      }`}
+                    <div
+                      key={index}
+                      className={`relative aspect-square border-2 rounded-md overflow-hidden ${primaryImageIndex === index ? "border-primary" : "border-transparent"
+                        }`}
                     >
-                      <img 
-                        src={url} 
+                      <img
+                        src={url}
                         alt={`Preview ${index + 1}`}
-                        className="w-full h-full object-cover" 
+                        className="w-full h-full object-cover"
                         onClick={() => setPrimaryNewImage(index)}
                       />
                       <button
