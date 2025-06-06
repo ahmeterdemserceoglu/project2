@@ -4,6 +4,18 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 // Stats Card component
 const StatsCard = ({
@@ -418,33 +430,107 @@ const TopProducts = () => {
   );
 };
 
-// Revenue Chart Component (simplified for this example)
+// Revenue Chart Component
 const RevenueChart = () => {
+  const supabase = createClientComponentClient();
+  const [range, setRange] = useState<'week' | 'month' | 'year'>('week');
+  const [chartData, setChartData] = useState<{ labels: string[]; data: number[] } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const now = new Date();
+      let start = new Date(now);
+
+      if (range === 'week') {
+        start.setDate(now.getDate() - 6);
+      } else if (range === 'month') {
+        start.setDate(now.getDate() - 29);
+      } else {
+        start = new Date(now.getFullYear(), 0, 1);
+      }
+
+      const { data, error } = await supabase
+        .from('orders')
+        .select('total_amount, created_at')
+        .eq('status', 'delivered')
+        .gte('created_at', start.toISOString());
+
+      if (!error && data) {
+        setChartData(prepareData(data, start));
+      }
+      setLoading(false);
+    };
+
+    const prepareData = (orders: { total_amount: number | null; created_at: string }[], startDate: Date) => {
+      if (range === 'year') {
+        const labels = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('tr-TR', { month: 'short' }));
+        const arr = new Array(12).fill(0);
+        orders.forEach((o) => {
+          const d = new Date(o.created_at);
+          const idx = d.getMonth();
+          arr[idx] += o.total_amount || 0;
+        });
+        return { labels, data: arr };
+      }
+
+      const days = range === 'week' ? 7 : 30;
+      const labels: string[] = [];
+      const arr = new Array(days).fill(0);
+      for (let i = 0; i < days; i++) {
+        const d = new Date(startDate);
+        d.setDate(startDate.getDate() + i);
+        labels.push(`${d.getDate()}.${d.getMonth() + 1}`);
+      }
+      orders.forEach((o) => {
+        const d = new Date(o.created_at);
+        const diff = Math.floor((d.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+        if (diff >= 0 && diff < days) {
+          arr[diff] += o.total_amount || 0;
+        }
+      });
+      return { labels, data: arr };
+    };
+
+    fetchData();
+  }, [range, supabase]);
+
   return (
     <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold dark:text-white">
-          Satış İstatistikleri
-        </h3>
+        <h3 className="text-lg font-semibold dark:text-white">Satış İstatistikleri</h3>
         <div className="flex space-x-2">
-          <button className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
-            Haftalık
-          </button>
-          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
-            Aylık
-          </button>
-          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
-            Yıllık
-          </button>
+          {(['week', 'month', 'year'] as const).map((opt) => (
+            <button
+              key={opt}
+              onClick={() => setRange(opt)}
+              className={`text-xs font-medium px-2 py-1 rounded ${range === opt ? 'text-primary bg-primary/10' : 'text-gray-500 hover:text-primary'}`}
+            >
+              {opt === 'week' ? 'Haftalık' : opt === 'month' ? 'Aylık' : 'Yıllık'}
+            </button>
+          ))}
         </div>
       </div>
-      
-      {/* Placeholder for chart - in a real app, you would use a chart library like Chart.js or Recharts */}
-      <div className="h-64 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          Grafik kütüphanesi entegrasyonu gerekiyor (Chart.js veya ReCharts)
-        </p>
-      </div>
+      {loading || !chartData ? (
+        <div className="h-64 flex items-center justify-center">
+          <span className="text-gray-500 dark:text-gray-400 text-sm">Yükleniyor...</span>
+        </div>
+      ) : (
+        <Line
+          data={{
+            labels: chartData.labels,
+            datasets: [
+              {
+                label: 'Gelir',
+                data: chartData.data,
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+              },
+            ],
+          }}
+        />
+      )}
     </div>
   );
 };
