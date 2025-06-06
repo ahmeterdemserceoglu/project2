@@ -20,41 +20,7 @@ export function createClientComponentClient() {
           autoRefreshToken: true,
           persistSession: true,
           detectSessionInUrl: true,
-          storageKey: 'supabase.auth.token',
-          storage: {
-            getItem: (key: string) => {
-              if (typeof window === 'undefined') {
-                return null;
-              }
-              
-              const storedValue = localStorage.getItem(key);
-              
-              if (!storedValue) return null;
-              
-              try {
-                return JSON.parse(storedValue);
-              } catch (error) {
-                return storedValue;
-              }
-            },
-            setItem: (key: string, value: any) => {
-              if (typeof window === 'undefined') {
-                return;
-              }
-              
-              localStorage.setItem(
-                key,
-                typeof value === 'string' ? value : JSON.stringify(value)
-              );
-            },
-            removeItem: (key: string) => {
-              if (typeof window === 'undefined') {
-                return;
-              }
-              
-              localStorage.removeItem(key);
-            },
-          }
+          storageKey: 'supabase.auth.token'
         }
       }
     );
