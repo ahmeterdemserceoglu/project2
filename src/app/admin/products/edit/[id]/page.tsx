@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
-import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
+import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
 
 export default function EditProductPage({ params }: { params: { id: string } }) {
   const productId = params.id;
@@ -366,6 +366,18 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
             }
           }
         }
+      }
+
+      const { data: { session: logSession } } = await supabase.auth.getSession();
+      if (logSession) {
+        await logAdminAction(
+          supabase,
+          logSession.user.id,
+          'update',
+          'product',
+          productId,
+          { name: formData.name }
+        );
       }
 
       setSuccess(true);

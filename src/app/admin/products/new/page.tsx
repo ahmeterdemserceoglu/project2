@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
-import { generateSlug, generateUniqueSlug, generateUniqueSku } from "@/lib/utils";
+import { generateSlug, generateUniqueSlug, generateUniqueSku, logAdminAction } from "@/lib/utils";
 
 export default function NewProductPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -181,6 +181,18 @@ export default function NewProductPage() {
 
       if (!productData) {
         throw new Error("Ürün kaydedilemedi.");
+      }
+
+      const { data: { session: logSession } } = await supabase.auth.getSession();
+      if (logSession) {
+        await logAdminAction(
+          supabase,
+          logSession.user.id,
+          'create',
+          'product',
+          productData,
+          { name: formData.name }
+        );
       }
 
       // Upload images if available

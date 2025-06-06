@@ -81,6 +81,35 @@ export interface Database {
           created_at?: string
         }
       }
+      admin_logs: {
+        Row: {
+          id: string
+          admin_id: string | null
+          action: string
+          entity: string | null
+          entity_id: string | null
+          details: Json | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          admin_id?: string | null
+          action: string
+          entity?: string | null
+          entity_id?: string | null
+          details?: Json | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          admin_id?: string | null
+          action?: string
+          entity?: string | null
+          entity_id?: string | null
+          details?: Json | null
+          created_at?: string
+        }
+      }
       // Diğer tablolar da eklenebilir
     }
   }
@@ -88,4 +117,6 @@ export interface Database {
 
 export type Profile = Database['public']['Tables']['profiles']['Row']
 
-export type DebugLog = Database['public']['Tables']['debug_logs']['Row'] 
+export type DebugLog = Database['public']['Tables']['debug_logs']['Row']
+
+export type AdminLog = Database['public']['Tables']['admin_logs']['Row']

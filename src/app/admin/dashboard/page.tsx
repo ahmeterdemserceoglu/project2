@@ -557,46 +557,47 @@ export default function AdminDashboardPage() {
         });
       }
       
-      // Fetch recent activity (simplified example - could be from orders, products updates, etc.)
-      const { data: recentOrders, error: activityError } = await supabase
-        .from('orders')
+      // Fetch recent admin activity
+      const { data: logs, error: activityError } = await supabase
+        .from('admin_logs')
         .select(`
-          id, 
-          status, 
-          created_at, 
-          user_id,
-          profiles!user_id(first_name, last_name, email)
+          id,
+          action,
+          entity,
+          entity_id,
+          details,
+          created_at,
+          profiles!admin_id(first_name, last_name, email)
         `)
         .order('created_at', { ascending: false })
-        .limit(3);
-        
-      if (!activityError && recentOrders) {
-        // Cast data to any to help with TypeScript
-        const ordersData: any[] = recentOrders;
-        
-        const activities = ordersData.map(order => {
-          // Get profile from the order
-          const profile = order.profiles;
-          
-          // Build user name/email text
-          let userText = 'Misafir Kullanıcı';
+        .limit(5);
+
+      if (!activityError && logs) {
+        const activities = logs.map((log: any) => {
+          const profile = log.profiles;
+          let adminText = 'Admin';
           if (profile) {
             if (profile.first_name && profile.last_name) {
-              userText = `${profile.first_name} ${profile.last_name}`;
+              adminText = `${profile.first_name} ${profile.last_name}`;
             } else if (profile.email) {
-              userText = profile.email;
+              adminText = profile.email;
             }
           }
-          
+
+          let content = `${adminText} ${log.action}`;
+          if (log.details?.name) {
+            content += ` ${log.details.name}`;
+          }
+
           return {
-            id: order.id,
-            title: `Yeni Sipariş`,
-            content: `${userText} bir sipariş verdi`,
-            time: formatTimeAgo(new Date(order.created_at)),
-            type: 'order'
+            id: log.id,
+            title: log.action,
+            content,
+            time: formatTimeAgo(new Date(log.created_at)),
+            type: log.entity
           };
         });
-        
+
         setActivities(activities);
       }
       
@@ -637,6 +638,18 @@ export default function AdminDashboardPage() {
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+        );
+      case 'category':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+          </svg>
+        );
+      case 'user':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A7 7 0 0112 15a7 7 0 016.879 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         );
       default:

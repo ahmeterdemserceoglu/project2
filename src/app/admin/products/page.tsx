@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClientComponentClient } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { logAdminAction } from "@/lib/utils";
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
@@ -148,17 +149,29 @@ export default function AdminProductsPage() {
             .from('product_images')
             .delete()
             .in('product_id', selectedProducts);
-            
+
           // Then delete the products
           const { error } = await supabase
             .from('products')
             .delete()
             .in('id', selectedProducts);
-            
+
           if (error) throw error;
-          
+
         setProducts(products.filter((p) => !selectedProducts.includes(p.id)));
         setSelectedProducts([]);
+
+        const { data: { session: delSession } } = await supabase.auth.getSession();
+        if (delSession) {
+          await logAdminAction(
+            supabase,
+            delSession.user.id,
+            'delete',
+            'product',
+            null,
+            { ids: selectedProducts }
+          );
+        }
         break;
           
       case "activate":
@@ -174,6 +187,19 @@ export default function AdminProductsPage() {
               selectedProducts.includes(p.id) ? { ...p, is_active: true } : p,
           ),
         );
+        {
+          const { data: { session: actSession } } = await supabase.auth.getSession();
+          if (actSession) {
+            await logAdminAction(
+              supabase,
+              actSession.user.id,
+              'activate',
+              'product',
+              null,
+              { ids: selectedProducts }
+            );
+          }
+        }
         break;
           
       case "deactivate":
@@ -189,6 +215,19 @@ export default function AdminProductsPage() {
               selectedProducts.includes(p.id) ? { ...p, is_active: false } : p,
           ),
         );
+        {
+          const { data: { session: deactSession } } = await supabase.auth.getSession();
+          if (deactSession) {
+            await logAdminAction(
+              supabase,
+              deactSession.user.id,
+              'deactivate',
+              'product',
+              null,
+              { ids: selectedProducts }
+            );
+          }
+        }
         break;
           
       default:

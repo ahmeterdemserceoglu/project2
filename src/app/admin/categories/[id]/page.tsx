@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
+import { logAdminAction } from "@/lib/utils";
 
 type Category = {
   id: string;
@@ -200,11 +201,23 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
         })
         .eq('id', categoryId)
         .select();
-        
+
       if (error) {
         throw error;
       }
-      
+
+      const { data: { session: logSession } } = await supabase.auth.getSession();
+      if (logSession) {
+        await logAdminAction(
+          supabase,
+          logSession.user.id,
+          'update',
+          'category',
+          categoryId,
+          { name: formData.name }
+        );
+      }
+
       // Redirect to categories page
       router.push('/admin/categories');
       
@@ -253,11 +266,23 @@ export default function EditCategoryPage({ params }: { params: { id: string } })
         .from('categories')
         .delete()
         .eq('id', categoryId);
-        
+
       if (error) {
         throw error;
       }
-      
+
+      const { data: { session: logSession } } = await supabase.auth.getSession();
+      if (logSession) {
+        await logAdminAction(
+          supabase,
+          logSession.user.id,
+          'delete',
+          'category',
+          categoryId,
+          {}
+        );
+      }
+
       // Redirect to categories page
       router.push('/admin/categories');
       

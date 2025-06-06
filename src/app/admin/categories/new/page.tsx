@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClientComponentClient } from "@/lib/supabase";
 import Link from "next/link";
+import { logAdminAction } from "@/lib/utils";
 
 type Category = {
   id: string;
@@ -156,9 +157,22 @@ export default function NewCategoryPage() {
           },
         ])
         .select();
-        
+
       if (error) {
         throw error;
+      }
+
+      const newId = data?.[0]?.id || null;
+      const { data: { session: logSession } } = await supabase.auth.getSession();
+      if (logSession) {
+        await logAdminAction(
+          supabase,
+          logSession.user.id,
+          'create',
+          'category',
+          newId,
+          { name: formData.name }
+        );
       }
       
       // Redirect to categories page

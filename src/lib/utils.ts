@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { createClientComponentClient } from "./supabase";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -81,4 +82,28 @@ export function generateUniqueSku(baseSku: string): string {
  */
 export function normalizeSlug(slug: string): string {
   return slug.toLowerCase().trim();
-} 
+}
+
+/**
+ * Inserts a record into the admin_logs table
+ */
+export async function logAdminAction(
+  supabase: ReturnType<typeof createClientComponentClient>,
+  adminId: string,
+  action: string,
+  entity: string,
+  entityId: string | null,
+  details: Record<string, any> = {}
+) {
+  try {
+    await supabase.from('admin_logs').insert({
+      admin_id: adminId,
+      action,
+      entity,
+      entity_id: entityId,
+      details,
+    });
+  } catch (e) {
+    console.error('Failed to log admin action', e);
+  }
+}
