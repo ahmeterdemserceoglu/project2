@@ -34,7 +34,14 @@ export default function OrdersPage() {
         .order("created_at", { ascending: false });
 
       if (!error && data) {
-        setOrders(data as Order[]);
+        // Normalize the profiles field since Supabase may return it as an array
+        const normalized = (data as any[]).map((order) => ({
+          ...order,
+          profiles: Array.isArray(order.profiles)
+            ? order.profiles[0] || null
+            : order.profiles,
+        })) as Order[];
+        setOrders(normalized);
       } else {
         console.error("Error loading orders", error);
         setOrders([]);
