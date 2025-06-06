@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCartStore } from "@/lib/store";
 import toast from "react-hot-toast";
 
@@ -19,6 +19,7 @@ const AddToCartButton = ({
   selectedAttributes,
 }: AddToCartButtonProps) => {
   const [isAdding, setIsAdding] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { addItem } = useCartStore();
 
   const handleAddToCart = () => {
@@ -50,10 +51,21 @@ const AddToCartButton = ({
     });
 
     // Reset adding state after a short delay
-    setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
       setIsAdding(false);
     }, 1000);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <button
