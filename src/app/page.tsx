@@ -157,14 +157,25 @@ export default function HomePage() {
     return (
         <main className="overflow-hidden">
             {/* Hero Section */}
-            <section className="liquid-header h-screen relative overflow-hidden">
+            <section className="liquid-header h-screen relative overflow-hidden text-center">
                 <div className="liquid-shape"></div>
-                <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none z-5"></div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                     <div className="glitch-container">
                         <h1 className="glitch-text" data-text="DIMENSION">
                             DIMENSION
                         </h1>
                     </div>
+                    <p className="text-lg md:text-xl mt-4 animate-fade-in-down">
+                        Geleceğin teknolojisini keşfet
+                    </p>
+                    <Link
+                        href="/products"
+                        aria-label="Ürünlere Git"
+                        className="btn btn-primary btn-lg mt-8 animate-fade-in-down"
+                    >
+                        Alışverişe Başla
+                    </Link>
                 </div>
                 <div className="scroll-indicator">
                     <div className="line"></div>
