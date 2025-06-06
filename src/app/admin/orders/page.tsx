@@ -73,19 +73,42 @@ const initialOrders = [
 export default function OrdersPage() {
   const [orders, setOrders] = useState(initialOrders);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [dateFilter, setDateFilter] = useState("");
+  const [shippingStatusFilter, setShippingStatusFilter] = useState("");
+  const [paymentStatusFilter, setPaymentStatusFilter] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  // Helper to parse dd.mm.yyyy formatted dates
+  const parseDate = (str: string) => {
+    const [day, month, year] = str.split(".");
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  };
 
   // Filter orders based on search and filters
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.orderNumber.toLowerCase().includes(search.toLowerCase()) ||
       order.customerName.toLowerCase().includes(search.toLowerCase());
-    const matchesStatus = statusFilter ? order.status === statusFilter : true;
-    // In a real app, this would be a proper date range filter
-    const matchesDate = dateFilter ? order.date.includes(dateFilter) : true;
 
-    return matchesSearch && matchesStatus && matchesDate;
+    const matchesShippingStatus = shippingStatusFilter
+      ? order.status === shippingStatusFilter
+      : true;
+
+    const matchesPaymentStatus = paymentStatusFilter
+      ? order.paymentStatus === paymentStatusFilter
+      : true;
+
+    const orderDate = parseDate(order.date);
+    const matchesStartDate = startDate ? orderDate >= new Date(startDate) : true;
+    const matchesEndDate = endDate ? orderDate <= new Date(endDate) : true;
+
+    return (
+      matchesSearch &&
+      matchesShippingStatus &&
+      matchesPaymentStatus &&
+      matchesStartDate &&
+      matchesEndDate
+    );
   });
 
   // Status badge component
@@ -166,7 +189,7 @@ export default function OrdersPage() {
 
       {/* Filters */}
       <div
-        className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-3"
+        className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-4"
         data-oid="26aegnz"
       >
         <div data-oid="-4r5g-2">
@@ -212,16 +235,16 @@ export default function OrdersPage() {
 
         <div data-oid="-sqseyk">
           <label
-            htmlFor="status"
+            htmlFor="shippingStatus"
             className="block text-sm font-medium text-gray-700 mb-1"
             data-oid="j10iwtj"
           >
-            Durum
+            Kargo Durumu
           </label>
           <select
-            id="status"
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            id="shippingStatus"
+            value={shippingStatusFilter}
+            onChange={(e) => setShippingStatusFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
             data-oid="s8c:pp9"
           >
@@ -246,23 +269,51 @@ export default function OrdersPage() {
           </select>
         </div>
 
+        <div data-oid="payment-filter">
+          <label
+            htmlFor="paymentStatus"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Ödeme Durumu
+          </label>
+          <select
+            id="paymentStatus"
+            value={paymentStatusFilter}
+            onChange={(e) => setPaymentStatusFilter(e.target.value)}
+            className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
+          >
+            <option value="">Tüm Ödemeler</option>
+            <option value="paid">Ödendi</option>
+            <option value="pending">Bekliyor</option>
+            <option value="failed">Başarısız</option>
+            <option value="refunded">İade</option>
+          </select>
+        </div>
+
         <div data-oid="-nl_cbl">
           <label
-            htmlFor="date"
+            htmlFor="startDate"
             className="block text-sm font-medium text-gray-700 mb-1"
             data-oid="j2p4:l:"
           >
-            Tarih
+            Tarih Aralığı
           </label>
-          <input
-            type="text"
-            id="date"
-            value={dateFilter}
-            onChange={(e) => setDateFilter(e.target.value)}
-            placeholder="gg.aa.yyyy"
-            className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="t3-vj7:"
-          />
+          <div className="flex space-x-2">
+            <input
+              type="date"
+              id="startDate"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
+            />
+            <input
+              type="date"
+              id="endDate"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
+            />
+          </div>
         </div>
       </div>
 
