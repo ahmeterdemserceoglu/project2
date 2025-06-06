@@ -1,31 +1,26 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { useToast } from "@/contexts/ToastContext";
-import { useNotification } from "@/contexts/NotificationContext";
+import { useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function SearchParamsHandler() {
+const SearchParamsHandler = () => {
   const searchParams = useSearchParams();
-  const { showToast } = useToast();
-  const { showNotification } = useNotification();
+  const router = useRouter();
 
   useEffect(() => {
-    // Check for auth success message
-    const authStatus = searchParams.get("auth");
-    if (authStatus === "success") {
-      showToast("Giriş başarılı!", "success");
-      showNotification(
-        "Hoş geldiniz! Hesabınıza başarıyla giriş yapıldı.",
-        "success",
-      );
-
-      // Remove the query parameter from URL after showing the message
-      const url = new URL(window.location.href);
-      url.searchParams.delete("auth");
-      window.history.replaceState({}, "", url);
+    // Here you can handle any URL search parameters
+    // For example, you might want to show a toast message if a certain parameter exists
+    
+    // Example: Check for success parameter
+    const success = searchParams.get('success');
+    if (success) {
+      // You could trigger some action here
+      console.log('Success parameter detected in URL');
     }
-  }, [searchParams, showToast, showNotification]);
+    
+  }, [searchParams]);
 
-  return null;
-}
+  return null; // This component doesn't render anything
+};
+
+export default SearchParamsHandler;

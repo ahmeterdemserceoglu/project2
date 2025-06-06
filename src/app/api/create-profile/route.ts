@@ -39,14 +39,64 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get user info to extract any name data from auth if available
+    const { data: userData, error: userError } = await supabase.auth.admin.getUserById(user_id);
+    
+    let userFirstName = first_name || '';
+    let userLastName = last_name || '';
+    
+    // Try to get name from user metadata if not provided
+    if (userData?.user) {
+      if (!userFirstName && userData.user.user_metadata?.first_name) {
+        userFirstName = userData.user.user_metadata.first_name;
+      }
+      if (!userLastName && userData.user.user_metadata?.last_name) {
+        userLastName = userData.user.user_metadata.last_name;
+      }
+      
+      // Extract name from email if still not available
+      if (!userFirstName && !userLastName) {
+        const emailUsername = email.split('@')[0];
+        
+        if (emailUsername) {
+          // Try to parse a name from email (remove numbers, split by non-alphas)
+          const cleanUsername = emailUsername
+            .replace(/[0-9]/g, '')
+            .split(/[._-]/)
+            .filter((part: string) => part.length > 0);
+          
+          if (cleanUsername.length > 0) {
+            userFirstName = cleanUsername[0].charAt(0).toUpperCase() + 
+                           cleanUsername[0].slice(1).toLowerCase();
+            
+            if (cleanUsername.length > 1) {
+              userLastName = cleanUsername[1].charAt(0).toUpperCase() + 
+                            cleanUsername[1].slice(1).toLowerCase();
+            }
+          }
+        }
+      }
+      
+      // Update the user's metadata with the name
+      if (userFirstName || userLastName) {
+        await supabase.auth.admin.updateUserById(user_id, {
+          user_metadata: {
+            ...userData.user.user_metadata,
+            first_name: userFirstName,
+            last_name: userLastName
+          }
+        });
+      }
+    }
+
     // Database fonksiyonu ile profil oluştur
     try {
       const { data, error } = await supabase.rpc(
         'register_user_with_profile', 
         { 
           user_email: email,
-          first_name: first_name || '',
-          last_name: last_name || ''
+          first_name: userFirstName,
+          last_name: userLastName
         }
       );
 
@@ -65,8 +115,8 @@ export async function POST(request: NextRequest) {
           .upsert({
             id: user_id,
             email,
-            first_name: first_name || null,
-            last_name: last_name || null,
+            first_name: userFirstName,
+            last_name: userLastName,
             is_admin: false,
             is_email_verified: false,
             created_at: new Date().toISOString(),
@@ -107,8 +157,8 @@ export async function POST(request: NextRequest) {
           .upsert({
             id: user_id,
             email,
-            first_name: first_name || null,
-            last_name: last_name || null,
+            first_name: userFirstName,
+            last_name: userLastName,
             is_admin: false,
             is_email_verified: false
           }, {

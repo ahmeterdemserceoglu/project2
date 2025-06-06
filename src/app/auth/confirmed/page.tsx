@@ -46,16 +46,16 @@ export default function EmailConfirmedPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8"
-      data-oid="0384pi."
+      data-oid="3rvb.-v"
     >
       <div
         className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-2xl text-center"
-        data-oid="ym2szz:"
+        data-oid="g32j7ah"
       >
-        <div data-oid="s.a-6ks">
+        <div data-oid="evu01j2">
           <div
             className="w-20 h-20 mx-auto bg-green-500 rounded-full flex items-center justify-center"
-            data-oid="lc.2f2a"
+            data-oid="ac2uopc"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,34 +63,34 @@ export default function EmailConfirmedPage() {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              data-oid="uznnbrp"
+              data-oid="24nh8xc"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M5 13l4 4L19 7"
-                data-oid="iot2khw"
+                data-oid="ewm3qt2"
               />
             </svg>
           </div>
           <h2
             className="mt-6 text-center text-3xl font-extrabold text-white"
-            data-oid="ooip925"
+            data-oid="fyfkjfx"
           >
             E-posta Doğrulandı!
           </h2>
-          <p className="mt-2 text-gray-300" data-oid="99iob_m">
+          <p className="mt-2 text-gray-300" data-oid="tnjt6cc">
             Hesabınız başarıyla doğrulandı. Artık tüm hizmetlerimizden
             yararlanabilirsiniz.
           </p>
         </div>
 
-        <div className="mt-8 space-y-4" data-oid="v5ga4-y">
+        <div className="mt-8 space-y-4" data-oid="3vi00i6">
           <button
             onClick={() => router.push("/login")}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            data-oid="e7-r.ww"
+            data-oid="vbn:ok0"
           >
             Giriş Yap
           </button>
@@ -98,7 +98,7 @@ export default function EmailConfirmedPage() {
           <Link
             href="/"
             className="group relative w-full flex justify-center py-2 px-4 border border-gray-600 text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            data-oid="z2yeetc"
+            data-oid="-18yue0"
           >
             Ana Sayfaya Dön
           </Link>

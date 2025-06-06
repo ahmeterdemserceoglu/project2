@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClientComponentClient } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 // Stats Card component
 const StatsCard = ({
@@ -10,30 +12,33 @@ const StatsCard = ({
   icon,
   change,
   changeType,
+  isLoading = false,
 }: {
   title: string;
   value: string | number;
   icon: React.ReactNode;
   change?: string;
   changeType?: "increase" | "decrease" | "neutral";
+  isLoading?: boolean;
 }) => {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm" data-oid="rp25_70">
-      <div
-        className="flex items-center justify-between mb-4"
-        data-oid="_nk4ptk"
-      >
-        <div className="text-gray-500 font-medium" data-oid="yisvlw2">
+    <div className="bg-white dark:bg-dark-lighter rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-center justify-between mb-4">
+        <div className="text-gray-500 dark:text-gray-400 font-medium">
           {title}
         </div>
-        <div className="text-gray-400" data-oid="2oxim3.">
+        <div className="text-gray-400 dark:text-gray-500">
           {icon}
         </div>
       </div>
-      <div className="text-2xl font-bold mb-2" data-oid="-72m30s">
+      {isLoading ? (
+        <div className="h-8 bg-gray-200 dark:bg-dark animate-pulse rounded"></div>
+      ) : (
+        <div className="text-2xl font-bold mb-2 dark:text-white">
         {value}
       </div>
-      {change && (
+      )}
+      {change && !isLoading && (
         <div
           className={`text-sm flex items-center ${
             changeType === "increase"
@@ -42,7 +47,6 @@ const StatsCard = ({
                 ? "text-red-600"
                 : "text-gray-500"
           }`}
-          data-oid="fyr.su2"
         >
           {changeType === "increase" && (
             <svg
@@ -51,14 +55,12 @@ const StatsCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="6nlre:f"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M5 15l7-7 7 7"
-                data-oid="jcw8bp3"
               ></path>
             </svg>
           )}
@@ -69,14 +71,12 @@ const StatsCard = ({
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              data-oid="cl:xhwk"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M19 9l-7 7-7-7"
-                data-oid="id6_0i_"
               ></path>
             </svg>
           )}
@@ -100,21 +100,20 @@ const ActivityItem = ({
   icon: React.ReactNode;
 }) => {
   return (
-    <div className="flex space-x-3" data-oid="z:fg4.8">
+    <div className="flex space-x-3">
       <div
         className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full text-primary"
-        data-oid="5tndz9a"
       >
         {icon}
       </div>
-      <div data-oid="fjd2mio">
-        <h4 className="text-sm font-medium text-gray-900" data-oid="bg:lngu">
+      <div>
+        <h4 className="text-sm font-medium text-gray-900 dark:text-white">
           {title}
         </h4>
-        <p className="text-sm text-gray-500" data-oid="59wz_jt">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {content}
         </p>
-        <span className="text-xs text-gray-400" data-oid="ivrxwaq">
+        <span className="text-xs text-gray-400 dark:text-gray-500">
           {time}
         </span>
       </div>
@@ -124,140 +123,165 @@ const ActivityItem = ({
 
 // Recent Orders component
 const RecentOrders = () => {
-  const orders = [
-    {
-      id: "1",
-      orderNumber: "HD-1007",
-      customer: "Mehmet Can",
-      date: "28.05.2023",
-      status: "delivered",
-      total: 1250,
-    },
-    {
-      id: "2",
-      orderNumber: "HD-1006",
-      customer: "Ayşe Demir",
-      date: "29.05.2023",
-      status: "cancelled",
-      total: 750,
-    },
-    {
-      id: "3",
-      orderNumber: "HD-1005",
-      customer: "Ali Yıldız",
-      date: "30.05.2023",
-      status: "delivered",
-      total: 1200,
-    },
-    {
-      id: "4",
-      orderNumber: "HD-1004",
-      customer: "Fatma Aydın",
-      date: "31.05.2023",
-      status: "pending",
-      total: 3450,
-    },
-    {
-      id: "5",
-      orderNumber: "HD-1003",
-      customer: "Mustafa Demir",
-      date: "01.06.2023",
-      status: "processing",
-      total: 1650,
-    },
-  ];
+  const [orders, setOrders] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('orders')
+          .select(`
+            id,
+            order_number,
+            total_amount,
+            status,
+            created_at,
+            profiles(first_name, last_name, email)
+          `)
+          .order('created_at', { ascending: false })
+          .limit(5);
+          
+        if (error) {
+          throw error;
+        }
+        
+        setOrders(data || []);
+      } catch (error) {
+        console.error('Error loading orders:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, [supabase]);
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+  };
+
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case 'delivered':
+        return 'Teslim Edildi';
+      case 'processing':
+        return 'Hazırlanıyor';
+      case 'pending':
+        return 'Bekliyor';
+      case 'paid':
+        return 'Ödendi';
+      case 'shipped':
+        return 'Kargoda';
+      case 'cancelled':
+        return 'İptal Edildi';
+      default:
+        return status;
+    }
+  };
+
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case 'delivered':
+        return 'bg-green-100 text-green-800';
+      case 'processing':
+      case 'paid':
+        return 'bg-blue-100 text-blue-800';
+      case 'pending':
+      case 'shipped':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'cancelled':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const formatPrice = (price: number) => {
+    return `₺${Number(price).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="sc0goik">
-      <div
-        className="flex justify-between items-center mb-6"
-        data-oid="hc.g476"
-      >
-        <h3 className="text-lg font-semibold" data-oid="tud97mg">
+    <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-lg font-semibold dark:text-white">
           Son Siparişler
         </h3>
         <Link
           href="/admin/orders"
           className="text-primary hover:text-primary-dark text-sm font-medium"
-          data-oid="dsj.rv7"
         >
           Tümünü Gör
         </Link>
       </div>
-      <div className="overflow-x-auto" data-oid="99w1du:">
-        <table className="min-w-full" data-oid="isbry:o">
-          <thead data-oid="l6d_9gh">
-            <tr
-              className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              data-oid="v.n-hko"
-            >
-              <th className="pb-3" data-oid="31fu0yo">
+      <div className="overflow-x-auto">
+        {isLoading ? (
+          <div className="animate-pulse space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-12 bg-gray-200 dark:bg-dark rounded"></div>
+            ))}
+          </div>
+        ) : orders.length === 0 ? (
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            Henüz sipariş bulunmuyor.
+          </div>
+        ) : (
+          <table className="min-w-full">
+            <thead>
+              <tr
+                className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+              >
+                <th className="pb-3">
                 Sipariş No
               </th>
-              <th className="pb-3" data-oid="hhhx6t.">
+                <th className="pb-3">
                 Müşteri
               </th>
-              <th className="pb-3" data-oid="0g1oj2z">
+                <th className="pb-3">
                 Tarih
               </th>
-              <th className="pb-3" data-oid="l76cewz">
+                <th className="pb-3">
                 Durum
               </th>
-              <th className="pb-3 text-right" data-oid=":2ap.7l">
+                <th className="pb-3 text-right">
                 Toplam
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200" data-oid="6zy3zn1">
+            <tbody className="divide-y divide-gray-200 dark:divide-dark">
             {orders.map((order) => (
-              <tr key={order.id} className="text-sm" data-oid="1:p4g5m">
-                <td
-                  className="py-3 text-primary font-medium"
-                  data-oid="x67nkob"
-                >
-                  <Link href={`/admin/orders/${order.id}`} data-oid="we93hok">
-                    {order.orderNumber}
+                <tr key={order.id} className="text-sm">
+                  <td className="py-3 text-primary font-medium">
+                    <Link href={`/admin/orders/${order.id}`}>
+                      {order.order_number || `#${order.id.substring(0, 8)}`}
                   </Link>
                 </td>
-                <td className="py-3 text-gray-900" data-oid="2a6m1i9">
-                  {order.customer}
+                  <td className="py-3 text-gray-900 dark:text-gray-200">
+                    {order.profiles 
+                      ? `${order.profiles.first_name || ''} ${order.profiles.last_name || ''}`.trim() || order.profiles.email 
+                      : 'Misafir Kullanıcı'}
                 </td>
-                <td className="py-3 text-gray-500" data-oid="apz6:w_">
-                  {order.date}
+                  <td className="py-3 text-gray-500">
+                    {formatDate(order.created_at)}
                 </td>
-                <td className="py-3" data-oid="7:s32m6">
+                  <td className="py-3">
                   <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                    ${
-                      order.status === "delivered"
-                        ? "bg-green-100 text-green-800"
-                        : order.status === "processing"
-                          ? "bg-blue-100 text-blue-800"
-                          : order.status === "pending"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-red-100 text-red-800"
-                    }`}
-                    data-oid="v5p33-s"
-                  >
-                    {order.status === "delivered"
-                      ? "Teslim Edildi"
-                      : order.status === "processing"
-                        ? "Hazırlanıyor"
-                        : order.status === "pending"
-                          ? "Bekliyor"
-                          : "İptal Edildi"}
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(order.status)}`}
+                    >
+                      {getStatusLabel(order.status)}
                   </span>
                 </td>
-                <td
-                  className="py-3 text-right text-gray-900"
-                  data-oid=":bojgjd"
-                >
-                  ₺{order.total.toLocaleString()}
+                  <td className="py-3 text-right font-medium dark:text-gray-300">
+                    {formatPrice(order.total_amount)}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        )}
       </div>
     </div>
   );
@@ -265,353 +289,474 @@ const RecentOrders = () => {
 
 // Top Products component
 const TopProducts = () => {
-  const products = [
-    {
-      id: "1",
-      name: "iPhone 13 Pro Max",
-      category: "Elektronik",
-      sold: 45,
-      revenue: 1259955,
-    },
-    {
-      id: "2",
-      name: "Samsung Galaxy S21",
-      category: "Elektronik",
-      sold: 32,
-      revenue: 543997,
-    },
-    {
-      id: "3",
-      name: 'MacBook Pro 16"',
-      category: "Bilgisayarlar",
-      sold: 15,
-      revenue: 584998,
-    },
-    {
-      id: "4",
-      name: "Bluetooth Kulaklık",
-      category: "Elektronik",
-      sold: 72,
-      revenue: 21593,
-    },
-    {
-      id: "5",
-      name: "Erkek Spor Ayakkabı",
-      category: "Giyim",
-      sold: 68,
-      revenue: 61173,
-    },
-  ];
+  const [products, setProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const fetchTopProducts = async () => {
+      try {
+        setIsLoading(true);
+        
+        // Get products with their images, ordered by stock quantity
+        const { data, error } = await supabase
+          .from('products')
+          .select(`
+            id,
+            name,
+            sku,
+            base_price,
+            sale_price,
+            stock_quantity,
+            is_active,
+            categories(name),
+            product_images(image_url, is_primary)
+          `)
+          .order('stock_quantity', { ascending: false })
+          .limit(5);
+        
+        if (error) {
+          throw error;
+        }
+        
+        setProducts(data || []);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTopProducts();
+  }, [supabase]);
+
+  const formatPrice = (price: number) => {
+    return `₺${Number(price).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
+
+  const getProductImage = (product: any) => {
+    if (!product.product_images || product.product_images.length === 0) {
+      return '/images/placeholder.png'; // Default placeholder image
+    }
+    
+    // Find primary image or use first available
+    const primaryImage = product.product_images.find((img: any) => img.is_primary);
+    return primaryImage ? primaryImage.image_url : product.product_images[0].image_url;
+  };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid="u.o3390">
-      <div
-        className="flex justify-between items-center mb-6"
-        data-oid="_vq0p-j"
-      >
-        <h3 className="text-lg font-semibold" data-oid="2skwhhv">
+    <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-lg font-semibold dark:text-white">
           En Çok Satan Ürünler
         </h3>
         <Link
           href="/admin/products"
           className="text-primary hover:text-primary-dark text-sm font-medium"
-          data-oid="rlv.tjg"
         >
-          Tümünü Gör
+          Tüm Ürünler
         </Link>
       </div>
-      <div className="overflow-x-auto" data-oid="835xul8">
-        <table className="min-w-full" data-oid="o6_4l0-">
-          <thead data-oid="736:ff7">
-            <tr
-              className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              data-oid="tkr_m6x"
-            >
-              <th className="pb-3" data-oid="dg3p5-9">
-                Ürün
-              </th>
-              <th className="pb-3" data-oid="-a0coww">
-                Kategori
-              </th>
-              <th className="pb-3 text-right" data-oid="isc4_6r">
-                Satış
-              </th>
-              <th className="pb-3 text-right" data-oid="zb5p5rs">
-                Hasılat
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200" data-oid="24xeycz">
+      
+      {isLoading ? (
+        <div className="space-y-4">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex animate-pulse">
+              <div className="w-12 h-12 bg-gray-200 dark:bg-dark rounded-md"></div>
+              <div className="ml-4 flex-1 space-y-2">
+                <div className="h-4 bg-gray-200 dark:bg-dark rounded"></div>
+                <div className="h-4 bg-gray-200 dark:bg-dark rounded w-1/4"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : products.length === 0 ? (
+        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+          Henüz ürün bulunmuyor.
+        </div>
+      ) : (
+        <div className="space-y-4">
             {products.map((product) => (
-              <tr key={product.id} className="text-sm" data-oid="8y-4hrx">
-                <td
-                  className="py-3 text-gray-900 font-medium"
-                  data-oid="hhdc14t"
-                >
+            <div key={product.id} className="flex items-center py-2 border-b border-gray-100 dark:border-dark last:border-0">
+              <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 dark:bg-dark">
+                <img
+                  src={getProductImage(product)}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/placeholder.png';
+                  }}
+                />
+              </div>
+              <div className="ml-4 flex-1">
                   <Link
                     href={`/admin/products/edit/${product.id}`}
-                    className="hover:text-primary"
-                    data-oid="9:5.f5q"
+                  className="font-medium text-gray-900 dark:text-white hover:text-primary block truncate"
                   >
                     {product.name}
                   </Link>
-                </td>
-                <td className="py-3 text-gray-500" data-oid="veahb96">
-                  {product.category}
-                </td>
-                <td
-                  className="py-3 text-right text-gray-900"
-                  data-oid="bq2z_kp"
-                >
-                  {product.sold}
-                </td>
-                <td
-                  className="py-3 text-right text-gray-900"
-                  data-oid="b31ok75"
-                >
-                  ₺{product.revenue.toLocaleString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                <div className="flex text-sm items-center justify-between mt-1">
+                  <div>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {product.categories && product.categories.name ? product.categories.name : 'Kategorisiz'}
+                    </span>
+                    <span className="mx-1 text-gray-400">•</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Stok: {product.stock_quantity}
+                    </span>
+                  </div>
+                  <span className="font-semibold text-gray-900 dark:text-gray-200">
+                    {formatPrice(product.sale_price || product.base_price)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
+      )}
+    </div>
+  );
+};
+
+// Revenue Chart Component (simplified for this example)
+const RevenueChart = () => {
+  return (
+    <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-lg font-semibold dark:text-white">
+          Satış İstatistikleri
+        </h3>
+        <div className="flex space-x-2">
+          <button className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+            Haftalık
+          </button>
+          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+            Aylık
+          </button>
+          <button className="text-xs font-medium text-gray-500 hover:text-primary px-2 py-1 rounded">
+            Yıllık
+          </button>
+        </div>
+      </div>
+      
+      {/* Placeholder for chart - in a real app, you would use a chart library like Chart.js or Recharts */}
+      <div className="h-64 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
+          Grafik kütüphanesi entegrasyonu gerekiyor (Chart.js veya ReCharts)
+        </p>
       </div>
     </div>
   );
 };
 
-// Revenue Chart component (placeholder - would be a real chart in a real app)
-const RevenueChart = () => {
-  return (
-    <div className="bg-white rounded-xl shadow-sm p-6" data-oid=".y60slu">
-      <div
-        className="flex justify-between items-center mb-6"
-        data-oid="oi0ny20"
-      >
-        <h3 className="text-lg font-semibold" data-oid="1ljcp2i">
-          Satış Grafiği
-        </h3>
-        <div className="flex space-x-2 text-sm" data-oid="wqznjke">
-          <button
-            className="px-3 py-1 rounded bg-primary text-white"
-            data-oid="mbz6crr"
-          >
-            Günlük
-          </button>
-          <button
-            className="px-3 py-1 rounded hover:bg-gray-100"
-            data-oid="vo6486t"
-          >
-            Haftalık
-          </button>
-          <button
-            className="px-3 py-1 rounded hover:bg-gray-100"
-            data-oid="9txzl4q"
-          >
-            Aylık
-          </button>
-        </div>
-      </div>
-      <div
-        className="h-64 flex flex-col justify-center items-center bg-gray-50 rounded-lg border border-dashed border-gray-300"
-        data-oid="3ub0byr"
-      >
-        <div className="text-gray-400 mb-2" data-oid="i63y8u4">
-          <svg
-            className="w-12 h-12"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            data-oid="-hixckt"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              data-oid="0rrppcy"
-            ></path>
-          </svg>
-        </div>
-        <p className="text-gray-500" data-oid="61rr3-n">
-          Gerçek bir uygulamada burada interaktif bir grafik gösterilecektir
-        </p>
-        <p className="text-gray-400 text-sm mt-2" data-oid="79d-djo">
-          Örneğin: Chart.js, Recharts veya Nivo kullanılabilir
-        </p>
-      </div>
-    </div>
-  );
-};
+interface ProfileType {
+  first_name: string | null;
+  last_name: string | null;
+  email: string | null;
+}
+
+interface OrderType {
+  id: string;
+  status: string;
+  created_at: string;
+  user_id: string | null;
+  profiles: ProfileType | null;
+}
 
 // Main Dashboard component
 export default function AdminDashboardPage() {
-  // Time period for filtering data
-  const [period, setPeriod] = useState("week");
+  const [stats, setStats] = useState({
+    totalOrders: '0',
+    totalRevenue: '₺0',
+    productCount: '0',
+    customerCount: '0',
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [activities, setActivities] = useState<any[]>([]);
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  // Check if current user is admin
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      try {
+        // Get current user session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError || !session) {
+          // Not logged in, redirect to login
+          router.push('/login');
+          return;
+        }
+        
+        // Check if user has admin role
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', session.user.id)
+          .single();
+          
+        if (profileError || !profile || !profile.is_admin) {
+          // Not admin, redirect to homepage
+          router.push('/');
+          return;
+        }
+        
+        // User is admin, fetch dashboard data
+        fetchDashboardData();
+        
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        router.push('/');
+      }
+    };
+    
+    checkAdminStatus();
+  }, [supabase, router]);
+
+  // Fetch dashboard statistics
+  const fetchDashboardData = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Get orders count
+      const { count: orderCount, error: orderError } = await supabase
+        .from('orders')
+        .select('*', { count: 'exact', head: true });
+      
+      // Get total revenue
+      const { data: revenue, error: revenueError } = await supabase
+        .from('orders')
+        .select('total_amount')
+        .match({ status: 'delivered' });
+      
+      // Get product count
+      const { count: productCount, error: productError } = await supabase
+        .from('products')
+        .select('*', { count: 'exact', head: true });
+      
+      // Get customer count
+      const { count: customerCount, error: customerError } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_admin', false);
+      
+      // If no errors, update stats
+      if (!orderError && !revenueError && !productError && !customerError) {
+        // Calculate total revenue
+        const totalRevenue = revenue?.reduce((sum, order) => sum + (order.total_amount || 0), 0) || 0;
+        
+        setStats({
+          totalOrders: String(orderCount || 0),
+          totalRevenue: `₺${totalRevenue.toLocaleString('tr-TR', { 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+          })}`,
+          productCount: String(productCount || 0),
+          customerCount: String(customerCount || 0),
+        });
+      }
+      
+      // Fetch recent activity (simplified example - could be from orders, products updates, etc.)
+      const { data: recentOrders, error: activityError } = await supabase
+        .from('orders')
+        .select(`
+          id, 
+          status, 
+          created_at, 
+          user_id,
+          profiles!user_id(first_name, last_name, email)
+        `)
+        .order('created_at', { ascending: false })
+        .limit(3);
+        
+      if (!activityError && recentOrders) {
+        // Cast data to any to help with TypeScript
+        const ordersData: any[] = recentOrders;
+        
+        const activities = ordersData.map(order => {
+          // Get profile from the order
+          const profile = order.profiles;
+          
+          // Build user name/email text
+          let userText = 'Misafir Kullanıcı';
+          if (profile) {
+            if (profile.first_name && profile.last_name) {
+              userText = `${profile.first_name} ${profile.last_name}`;
+            } else if (profile.email) {
+              userText = profile.email;
+            }
+          }
+          
+          return {
+            id: order.id,
+            title: `Yeni Sipariş`,
+            content: `${userText} bir sipariş verdi`,
+            time: formatTimeAgo(new Date(order.created_at)),
+            type: 'order'
+          };
+        });
+        
+        setActivities(activities);
+      }
+      
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  // Format time
+  const formatTimeAgo = (date: Date) => {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.round(diffMs / 60000);
+    const diffHours = Math.round(diffMins / 60);
+    const diffDays = Math.round(diffHours / 24);
+    
+    if (diffMins < 60) {
+      return `${diffMins} dakika önce`;
+    } else if (diffHours < 24) {
+      return `${diffHours} saat önce`;
+    } else {
+      return `${diffDays} gün önce`;
+    }
+  };
+
+  // Get activity icon based on type
+  const getActivityIcon = (type: string) => {
+    switch (type) {
+      case 'order':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        );
+      case 'product':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+        );
+      default:
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+    }
+  };
 
   return (
-    <div data-oid="a8c-efz">
-      <header
-        className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4"
-        data-oid="2gemqh."
-      >
-        <div data-oid="k7l9oeh">
-          <h1 className="text-2xl font-bold text-gray-900" data-oid="kubr-75">
-            Gösterge Paneli
+    <div>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <h1 className="text-2xl font-bold dark:text-white">
+          Yönetim Paneli
           </h1>
-          <p className="text-gray-500" data-oid="6eg4a6i">
-            Mağazanız için genel bakış ve istatistikler
-          </p>
+        <div className="mt-4 md:mt-0">
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Son güncelleme: {new Date().toLocaleString('tr-TR')}
+          </span>
         </div>
-        <div className="flex items-center space-x-3" data-oid="zq7blcs">
-          <select
-            value={period}
-            onChange={(e) => setPeriod(e.target.value)}
-            className="py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="qemzuy3"
-          >
-            <option value="today" data-oid="pfg6fts">
-              Bugün
-            </option>
-            <option value="week" data-oid="prn2gbb">
-              Bu Hafta
-            </option>
-            <option value="month" data-oid="zvy0fct">
-              Bu Ay
-            </option>
-            <option value="year" data-oid="ihf59d1">
-              Bu Yıl
-            </option>
-          </select>
-          <button
-            className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors"
-            data-oid="x-3iy_9"
-          >
-            Rapor İndir
-          </button>
         </div>
-      </header>
 
       {/* Stats Grid */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-        data-oid="54f73mz"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCard
-          title="Toplam Satış"
-          value="₺42,249.50"
+          title="Toplam Sipariş"
+          value={isLoading ? '...' : stats.totalOrders}
           icon={
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              data-oid="109swfb"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                data-oid="d5-tmc."
-              ></path>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
             </svg>
           }
-          change="+8.2% geçen haftaya göre"
           changeType="increase"
-          data-oid="wgcu-ha"
+          change="24% Artış"
+          isLoading={isLoading}
         />
-
         <StatsCard
-          title="Siparişler"
-          value="125"
+          title="Toplam Gelir"
+          value={isLoading ? '...' : stats.totalRevenue}
           icon={
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              data-oid="i0qbv8z"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                data-oid="jednp6j"
-              ></path>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           }
-          change="+12.5% geçen haftaya göre"
           changeType="increase"
-          data-oid="knvuflb"
+          change="12% Artış"
+          isLoading={isLoading}
         />
-
         <StatsCard
-          title="Müşteriler"
-          value="1,240"
+          title="Toplam Ürün"
+          value={isLoading ? '...' : stats.productCount}
           icon={
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              data-oid="lr9k1bu"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                data-oid="m9izn7g"
-              ></path>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
             </svg>
           }
-          change="+3.1% geçen haftaya göre"
+          isLoading={isLoading}
+        />
+        <StatsCard
+          title="Müşteri Sayısı"
+          value={isLoading ? '...' : stats.customerCount}
+          icon={
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          }
           changeType="increase"
-          data-oid="lq6xftm"
-        />
-
-        <StatsCard
-          title="Ortalama Sipariş"
-          value="₺338.00"
-          icon={
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              data-oid="6dowqwg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                data-oid="uihhsq5"
-              ></path>
-            </svg>
-          }
-          change="-2.5% geçen haftaya göre"
-          changeType="decrease"
-          data-oid="nrhxgc5"
+          change="7% Artış"
+          isLoading={isLoading}
         />
       </div>
 
-      {/* Charts Row */}
-      <div className="mb-8" data-oid="hu0_yti">
-        <RevenueChart data-oid="0n9sk.d" />
+      {/* Main Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="lg:col-span-2">
+          <RevenueChart />
+        </div>
+        <div>
+          <div className="bg-white dark:bg-dark-lighter rounded-xl shadow-sm p-6 h-full">
+            <h3 className="text-lg font-semibold mb-6 dark:text-white">Son Aktiviteler</h3>
+            {isLoading ? (
+              <div className="animate-pulse space-y-6">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="flex">
+                    <div className="w-8 h-8 bg-gray-200 dark:bg-dark rounded-full"></div>
+                    <div className="ml-3 space-y-2 flex-1">
+                      <div className="h-4 bg-gray-200 dark:bg-dark rounded w-3/4"></div>
+                      <div className="h-3 bg-gray-200 dark:bg-dark rounded w-full"></div>
+                      <div className="h-3 bg-gray-200 dark:bg-dark rounded w-1/3"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : activities.length === 0 ? (
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                Henüz aktivite bulunmuyor.
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {activities.map((activity) => (
+                  <ActivityItem
+                    key={activity.id}
+                    title={activity.title}
+                    content={activity.content}
+                    time={activity.time}
+                    icon={getActivityIcon(activity.type)}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Two Columns Layout for Recent Orders and Top Products */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-oid="s5onx__">
-        <RecentOrders data-oid="bvqreet" />
-        <TopProducts data-oid="z-7qxei" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <RecentOrders />
+        <TopProducts />
       </div>
     </div>
   );

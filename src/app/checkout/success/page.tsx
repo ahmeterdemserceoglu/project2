@@ -23,15 +23,15 @@ const CheckoutSuccessPage = () => {
   return (
     <div
       className="container mx-auto py-16 px-4 text-center"
-      data-oid="v9c.rwx"
+      data-oid="j1ftjqb"
     >
       <div
         className="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto"
-        data-oid="dg225ko"
+        data-oid="o3ycv6l"
       >
         <div
           className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-          data-oid="7w48y3o"
+          data-oid="g1:kor_"
         >
           <svg
             className="w-8 h-8 text-green-600"
@@ -39,48 +39,48 @@ const CheckoutSuccessPage = () => {
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            data-oid="eo9diqt"
+            data-oid="8:a-dpy"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M5 13l4 4L19 7"
-              data-oid="n.oga-m"
+              data-oid="knyisck"
             />
           </svg>
         </div>
 
-        <h1 className="text-3xl font-bold mb-4" data-oid="69xkvry">
+        <h1 className="text-3xl font-bold mb-4" data-oid="h173:1o">
           Siparişiniz Alındı!
         </h1>
-        <p className="text-gray-600 mb-6" data-oid="b1pidf9">
+        <p className="text-gray-600 mb-6" data-oid=":-5ek.n">
           Siparişiniz başarıyla oluşturuldu. Sipariş onayı e-posta adresinize
           gönderildi.
         </p>
 
-        <div className="border-t border-b py-4 my-6" data-oid="zg-c9nr">
-          <p className="text-gray-600 mb-2" data-oid="i4xs1a2">
+        <div className="border-t border-b py-4 my-6" data-oid="mq1102x">
+          <p className="text-gray-600 mb-2" data-oid="r230b0g">
             Sipariş numaranız:
           </p>
-          <p className="text-lg font-bold" data-oid="lhoh3qr">
+          <p className="text-lg font-bold" data-oid="1ib2fmu">
             #ORD-{Math.floor(100000 + Math.random() * 900000)}
           </p>
         </div>
 
-        <p className="text-gray-600 mb-8" data-oid="3_yx3sc">
+        <p className="text-gray-600 mb-8" data-oid="-8l0xfp">
           Siparişinizle ilgili herhangi bir sorunuz olursa müşteri
           hizmetlerimizle iletişime geçebilirsiniz.
         </p>
 
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center"
-          data-oid="7-nv6og"
+          data-oid="aebw:7w"
         >
-          <Link href="/orders" className="btn btn-outline" data-oid="-ahto-c">
+          <Link href="/orders" className="btn btn-outline" data-oid="ofsd0:3">
             Siparişlerim
           </Link>
-          <Link href="/" className="btn btn-primary" data-oid="lp9ui86">
+          <Link href="/" className="btn btn-primary" data-oid="cozkdz9">
             Alışverişe Devam Et
           </Link>
         </div>

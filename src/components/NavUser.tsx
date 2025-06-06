@@ -85,13 +85,13 @@ export default function NavUser({
       return (
         <div
           className="flex flex-col items-center justify-center p-3 text-xs rounded-md"
-          data-oid="rz_15kj"
+          data-oid="kuxg69:"
         >
           <div
             className="h-5 w-5 mb-1 bg-gray-200 dark:bg-dark-lighter rounded-full animate-pulse"
-            data-oid="vg8nz9g"
+            data-oid="k5gd0tg"
           ></div>
-          <span className="mt-1" data-oid="e12ju9r">
+          <span className="mt-1" data-oid="-v2spb8">
             Yükleniyor...
           </span>
         </div>
@@ -101,7 +101,7 @@ export default function NavUser({
     return (
       <div
         className="p-2 rounded-full bg-gray-100 dark:bg-dark-lighter animate-pulse w-9 h-9"
-        data-oid="w3kkjej"
+        data-oid="186bfv1"
       ></div>
     );
   }
@@ -114,7 +114,7 @@ export default function NavUser({
           href="/login"
           className="flex flex-col items-center justify-center p-3 text-xs rounded-md hover:bg-gray-100 dark:hover:bg-dark-lighter transition-colors"
           onClick={onMobileClick}
-          data-oid="uhb76yk"
+          data-oid="t744d.m"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,14 +122,14 @@ export default function NavUser({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            data-oid="s2anap6"
+            data-oid="rlbiomy"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              data-oid="gdsalo_"
+              data-oid="gc:3m_d"
             />
           </svg>
           Giriş Yap
@@ -142,7 +142,7 @@ export default function NavUser({
         href="/login"
         className="p-2 rounded-full hover:bg-gray-100/50 dark:hover:bg-dark-lighter/50 transition-colors text-gray-700 dark:text-gray-200"
         aria-label="Giriş Yap"
-        data-oid="y_erngf"
+        data-oid="9vr9aaz"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -150,14 +150,14 @@ export default function NavUser({
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          data-oid="895n4uj"
+          data-oid="-1eosow"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-            data-oid="eexjzh-"
+            data-oid="qsdtss-"
           />
         </svg>
       </Link>
@@ -169,22 +169,22 @@ export default function NavUser({
     return (
       <div
         className="flex flex-col items-center justify-center p-3 text-xs"
-        data-oid="l.4gkpq"
+        data-oid="-atkdhb"
       >
         <div
           className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-xs mb-1"
-          data-oid="sh2naoq"
+          data-oid="gv68605"
         >
           {user.email?.charAt(0).toUpperCase() ||
             user.user_metadata?.full_name?.charAt(0).toUpperCase() ||
             "U"}
         </div>
-        <div className="flex flex-col mt-1" data-oid="-gdtehg">
+        <div className="flex flex-col mt-1" data-oid="yvev78m">
           <Link
             href="/account"
             className="text-center hover:text-primary dark:hover:text-accent transition-colors"
             onClick={onMobileClick}
-            data-oid="vb98w.."
+            data-oid="7drc6iu"
           >
             Hesabım
           </Link>
@@ -194,7 +194,7 @@ export default function NavUser({
               if (onMobileClick) onMobileClick();
             }}
             className="text-red-600 dark:text-red-400 mt-2"
-            data-oid="kc3p9d6"
+            data-oid="36momcf"
           >
             Çıkış Yap
           </button>
@@ -205,17 +205,17 @@ export default function NavUser({
 
   // Default desktop view with dropdown
   return (
-    <div className="relative" data-oid="u7pqgc8">
+    <div className="relative" data-oid="u4vnnfe">
       <button
         className="p-2 rounded-full hover:bg-gray-100/50 dark:hover:bg-dark-lighter/50 transition-colors text-gray-700 dark:text-gray-200 flex items-center"
         onClick={toggleDropdown}
         aria-label="Hesabım"
         aria-expanded={isDropdownOpen}
-        data-oid="r8jjd2k"
+        data-oid="qkzqfsv"
       >
         <div
           className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-xs"
-          data-oid="pydo5r6"
+          data-oid="gnk2_bq"
         >
           {user.email?.charAt(0).toUpperCase() ||
             user.user_metadata?.full_name?.charAt(0).toUpperCase() ||
@@ -226,21 +226,21 @@ export default function NavUser({
       {isDropdownOpen && (
         <div
           className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-light rounded-lg shadow-lg py-1 z-50 border dark:border-dark-lighter"
-          data-oid="s.f43td"
+          data-oid="xkk2h16"
         >
           <div
             className="px-4 py-2 border-b dark:border-dark-lighter"
-            data-oid="u4vrh2o"
+            data-oid="-z2qq.x"
           >
             <p
               className="text-sm font-medium text-gray-900 dark:text-white truncate"
-              data-oid="mq:-yr2"
+              data-oid="dgflk6a"
             >
               {user.user_metadata?.full_name || user.email}
             </p>
             <p
               className="text-xs text-gray-500 dark:text-gray-400 truncate"
-              data-oid="n.5sia1"
+              data-oid="90frzq8"
             >
               {user.email}
             </p>
@@ -249,7 +249,7 @@ export default function NavUser({
             href="/account"
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-lighter"
             onClick={() => setIsDropdownOpen(false)}
-            data-oid="ma2rfqi"
+            data-oid="mj2n4if"
           >
             Hesabım
           </Link>
@@ -257,7 +257,7 @@ export default function NavUser({
             href="/orders"
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-lighter"
             onClick={() => setIsDropdownOpen(false)}
-            data-oid="s0sx95t"
+            data-oid="cvhcd_s"
           >
             Siparişlerim
           </Link>
@@ -267,7 +267,7 @@ export default function NavUser({
               setIsDropdownOpen(false);
             }}
             className="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-dark-lighter"
-            data-oid="r3isuke"
+            data-oid="7gseucz"
           >
             Çıkış Yap
           </button>

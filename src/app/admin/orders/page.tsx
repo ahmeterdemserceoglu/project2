@@ -111,7 +111,7 @@ export default function OrdersPage() {
     return (
       <span
         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
-        data-oid="be_h7vz"
+        data-oid="68t6b6."
       >
         {statusLabels[status] || status}
       </span>
@@ -137,7 +137,7 @@ export default function OrdersPage() {
     return (
       <span
         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[status] || "bg-gray-100 text-gray-800"}`}
-        data-oid=":xogm7e"
+        data-oid="hm97bn9"
       >
         {statusLabels[status] || status}
       </span>
@@ -154,12 +154,12 @@ export default function OrdersPage() {
   };
 
   return (
-    <div data-oid="yp6fi-0">
-      <header className="mb-8" data-oid="-f.5c6y">
-        <h1 className="text-2xl font-bold text-gray-900" data-oid="e4df2fz">
+    <div data-oid="7j76r1g">
+      <header className="mb-8" data-oid="eyzt2yd">
+        <h1 className="text-2xl font-bold text-gray-900" data-oid="kx4.i-7">
           Siparişler
         </h1>
-        <p className="text-gray-500" data-oid="79smu-u">
+        <p className="text-gray-500" data-oid="wbbr5g:">
           Tüm siparişleri görüntüleyin ve yönetin
         </p>
       </header>
@@ -167,34 +167,34 @@ export default function OrdersPage() {
       {/* Filters */}
       <div
         className="bg-white shadow-sm rounded-xl p-4 mb-6 grid gap-4 grid-cols-1 md:grid-cols-3"
-        data-oid="5a09ju-"
+        data-oid="26aegnz"
       >
-        <div data-oid="3-v2.2q">
+        <div data-oid="-4r5g-2">
           <label
             htmlFor="search"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="_5zmt:."
+            data-oid="rn.9.v4"
           >
             Arama
           </label>
-          <div className="relative" data-oid="7n631-o">
+          <div className="relative" data-oid="9062mv-">
             <div
               className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              data-oid="whol.b6"
+              data-oid="h58fbtm"
             >
               <svg
                 className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                data-oid="-j41h3f"
+                data-oid="craaqwf"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  data-oid="gzmv6zg"
+                  data-oid="tmleqpe"
                 />
               </svg>
             </div>
@@ -205,16 +205,16 @@ export default function OrdersPage() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Sipariş no veya müşteri adı"
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-              data-oid="yhx9wox"
+              data-oid="b0x7ht3"
             />
           </div>
         </div>
 
-        <div data-oid="hyvt:t-">
+        <div data-oid="-sqseyk">
           <label
             htmlFor="status"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="55z4:tb"
+            data-oid="j10iwtj"
           >
             Durum
           </label>
@@ -223,34 +223,34 @@ export default function OrdersPage() {
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="block w-full py-2 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="5m5pa46"
+            data-oid="s8c:pp9"
           >
-            <option value="" data-oid="ya8j_aa">
+            <option value="" data-oid="iuj8b6t">
               Tüm Durumlar
             </option>
-            <option value="pending" data-oid="907gmv7">
+            <option value="pending" data-oid="if4_h91">
               Bekliyor
             </option>
-            <option value="processing" data-oid="1-y9ekh">
+            <option value="processing" data-oid="7jdkuz6">
               Hazırlanıyor
             </option>
-            <option value="shipped" data-oid="njjho:m">
+            <option value="shipped" data-oid="68xutrh">
               Kargoya Verildi
             </option>
-            <option value="delivered" data-oid="9.s98yu">
+            <option value="delivered" data-oid="6ke:7l5">
               Teslim Edildi
             </option>
-            <option value="cancelled" data-oid="4uqozqn">
+            <option value="cancelled" data-oid=":vrdk4p">
               İptal Edildi
             </option>
           </select>
         </div>
 
-        <div data-oid="3--e0lz">
+        <div data-oid="-nl_cbl">
           <label
             htmlFor="date"
             className="block text-sm font-medium text-gray-700 mb-1"
-            data-oid="dgnr1yh"
+            data-oid="j2p4:l:"
           >
             Tarih
           </label>
@@ -261,7 +261,7 @@ export default function OrdersPage() {
             onChange={(e) => setDateFilter(e.target.value)}
             placeholder="gg.aa.yyyy"
             className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm"
-            data-oid="xwoth-a"
+            data-oid="t3-vj7:"
           />
         </div>
       </div>
@@ -269,61 +269,61 @@ export default function OrdersPage() {
       {/* Orders Table */}
       <div
         className="bg-white shadow-sm rounded-xl overflow-hidden"
-        data-oid="03oiuj."
+        data-oid="abwcr:2"
       >
-        <div className="overflow-x-auto" data-oid=":e46u-a">
+        <div className="overflow-x-auto" data-oid="pkrq__f">
           <table
             className="min-w-full divide-y divide-gray-200"
-            data-oid="b-bmh6f"
+            data-oid="n-.-.gg"
           >
-            <thead className="bg-gray-50" data-oid="eruns.8">
-              <tr data-oid="h27_g-r">
+            <thead className="bg-gray-50" data-oid="yxnu5o-">
+              <tr data-oid="vjkir:e">
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="xp5kf17"
+                  data-oid="5qc_l7f"
                 >
                   Sipariş No
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="nce.51o"
+                  data-oid="nztrmsn"
                 >
                   Müşteri
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="c2173g:"
+                  data-oid="6glg0g9"
                 >
                   Tarih
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="bn9avui"
+                  data-oid="ootrxa_"
                 >
                   Durum
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="3w1_t.c"
+                  data-oid="wvec.p1"
                 >
                   Ödeme
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="3.uj3.l"
+                  data-oid="n3.n:9d"
                 >
                   Toplam
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  data-oid="8xi.5yg"
+                  data-oid="s8x8da2"
                 >
                   İşlemler
                 </th>
@@ -331,69 +331,69 @@ export default function OrdersPage() {
             </thead>
             <tbody
               className="bg-white divide-y divide-gray-200"
-              data-oid="o6:9mdv"
+              data-oid="lb1pwr8"
             >
               {filteredOrders.map((order) => (
                 <tr
                   key={order.id}
                   className="hover:bg-gray-50"
-                  data-oid="e4yedbo"
+                  data-oid="1ziwef."
                 >
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary"
-                    data-oid="j0qlmvn"
+                    data-oid="iuo1ldk"
                   >
                     {order.orderNumber}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="_1mmshq"
+                    data-oid="lhpho-w"
                   >
                     {order.customerName}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    data-oid="hf4ty6_"
+                    data-oid=":je1cw."
                   >
                     {order.date}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
-                    data-oid="yr5429-"
+                    data-oid="gm:02v7"
                   >
-                    <StatusBadge status={order.status} data-oid="38mi6-m" />
+                    <StatusBadge status={order.status} data-oid="znou6oz" />
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
-                    data-oid="-eivnv:"
+                    data-oid="tq9g0:8"
                   >
                     <PaymentBadge
                       status={order.paymentStatus}
-                      data-oid="ir86vpv"
+                      data-oid="i:3_iet"
                     />
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    data-oid="7lgp473"
+                    data-oid="qbq5u_n"
                   >
                     ₺{order.total.toLocaleString()}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                    data-oid="mzoa0_-"
+                    data-oid="2chkfel"
                   >
                     <Link
                       href={`/admin/orders/${order.id}`}
                       className="text-primary hover:text-primary-dark mr-3"
-                      data-oid="2cw_xs1"
+                      data-oid="kkhblyh"
                     >
                       Görüntüle
                     </Link>
                     <button
                       className="text-indigo-600 hover:text-indigo-900 mr-3"
-                      data-oid="cmvaltr"
+                      data-oid="5ej1:h:"
                     >
-                      <span className="sr-only" data-oid="gb0zin3">
+                      <span className="sr-only" data-oid="lk6gswe">
                         Status güncelle
                       </span>
                       <svg
@@ -401,13 +401,13 @@ export default function OrdersPage() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        data-oid="n0lvqt6"
+                        data-oid="utfd2rf"
                       >
                         <path
                           fillRule="evenodd"
                           d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
                           clipRule="evenodd"
-                          data-oid="6fbegn0"
+                          data-oid="rb6ppxo"
                         />
                       </svg>
                     </button>
@@ -421,46 +421,46 @@ export default function OrdersPage() {
         {/* Pagination */}
         <div
           className="px-6 py-3 flex items-center justify-between border-t"
-          data-oid="juiuac:"
+          data-oid="a2b4lnb"
         >
-          <div className="text-sm text-gray-700" data-oid="cashtpn">
-            <span className="font-medium" data-oid="026_bjy">
+          <div className="text-sm text-gray-700" data-oid=".2p6g1t">
+            <span className="font-medium" data-oid="5cqc-4z">
               {filteredOrders.length}
             </span>{" "}
             sonuç gösteriliyor
           </div>
           <div
             className="flex-1 flex justify-center md:justify-end"
-            data-oid="v.n.hqs"
+            data-oid="jx8p35n"
           >
-            <div className="inline-flex shadow-sm" data-oid="vy4hpge">
+            <div className="inline-flex shadow-sm" data-oid="meg.cq2">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
-                data-oid="ata-j44"
+                data-oid="2scaz-c"
               >
                 Önceki
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="njk:fwu"
+                data-oid="sm4er5g"
               >
                 1
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="i:ejn4e"
+                data-oid="hxq45:."
               >
                 2
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="ft2.uk8"
+                data-oid="_91-h3s"
               >
                 3
               </button>
               <button
                 className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
-                data-oid="vz197on"
+                data-oid="ec85zvi"
               >
                 Sonraki
               </button>
@@ -472,70 +472,70 @@ export default function OrdersPage() {
       {/* Status Update Modal (simplified, would use a proper modal component in a real app) */}
       <div
         className="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4"
-        data-oid="t-ns3df"
+        data-oid="tsmt_ub"
       >
         <div
           className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
-          data-oid="trl0.f9"
+          data-oid="5ubrxy7"
         >
           <h3
             className="text-lg font-medium text-gray-900 mb-4"
-            data-oid="2wg8_f6"
+            data-oid=".4lgfkz"
           >
             Sipariş Durumunu Güncelle
           </h3>
-          <div className="space-y-4" data-oid="gtyouor">
-            <div data-oid="oi0_k5r">
+          <div className="space-y-4" data-oid=".-51per">
+            <div data-oid="dskjlgb">
               <label
                 className="block text-sm font-medium text-gray-700"
-                data-oid="4jpqv6l"
+                data-oid="tswsnoy"
               >
                 Yeni Durum
               </label>
               <select
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                data-oid="3u:hb0_"
+                data-oid="4k.vweg"
               >
-                <option value="pending" data-oid="-2ujqc7">
+                <option value="pending" data-oid="scn7db.">
                   Bekliyor
                 </option>
-                <option value="processing" data-oid="lep3_-o">
+                <option value="processing" data-oid="ntb7-a9">
                   Hazırlanıyor
                 </option>
-                <option value="shipped" data-oid="287ycjf">
+                <option value="shipped" data-oid="pypatk_">
                   Kargoya Verildi
                 </option>
-                <option value="delivered" data-oid="duig724">
+                <option value="delivered" data-oid="jb9f7d7">
                   Teslim Edildi
                 </option>
-                <option value="cancelled" data-oid="en:ujkw">
+                <option value="cancelled" data-oid="yy9xlyq">
                   İptal Edildi
                 </option>
               </select>
             </div>
-            <div data-oid="a3.rice">
+            <div data-oid="p59v5lo">
               <label
                 className="block text-sm font-medium text-gray-700"
-                data-oid="4zeohva"
+                data-oid="3vpjyou"
               >
                 Açıklama (Opsiyonel)
               </label>
               <textarea
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 rows={3}
-                data-oid="49kyq_x"
+                data-oid="88oy_0r"
               ></textarea>
             </div>
-            <div className="flex justify-end space-x-3" data-oid="hzb7upz">
+            <div className="flex justify-end space-x-3" data-oid="xh66jmo">
               <button
                 className="py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                data-oid="un9dne5"
+                data-oid="h2bwhh7"
               >
                 İptal
               </button>
               <button
                 className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark"
-                data-oid="95wz3g_"
+                data-oid="h_4dyox"
               >
                 Güncelle
               </button>

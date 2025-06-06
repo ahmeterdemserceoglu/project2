@@ -79,19 +79,19 @@ const CheckoutPage = () => {
     return (
       <div
         className="container mx-auto py-16 px-4 text-center"
-        data-oid="-o96yqs"
+        data-oid="a.d.9nt"
       >
-        <h1 className="text-3xl font-bold mb-8" data-oid="mxu9.4j">
+        <h1 className="text-3xl font-bold mb-8" data-oid="ixqhq6p">
           Ödeme
         </h1>
         <div
           className="bg-white rounded-lg shadow-md p-8 max-w-md mx-auto"
-          data-oid="hu.5vid"
+          data-oid="o5wpskm"
         >
-          <p className="text-xl mb-6" data-oid="zldnt1x">
+          <p className="text-xl mb-6" data-oid="nfffx_k">
             Sepetinizde ürün bulunmamaktadır
           </p>
-          <Link href="/products" className="btn btn-primary" data-oid="ng:7:3b">
+          <Link href="/products" className="btn btn-primary" data-oid=":oi.soc">
             Alışverişe Başla
           </Link>
         </div>
@@ -100,29 +100,29 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4" data-oid="m6id4._">
-      <h1 className="text-3xl font-bold mb-8" data-oid="f2ennz1">
+    <div className="container mx-auto py-8 px-4" data-oid="f2ay_wv">
+      <h1 className="text-3xl font-bold mb-8" data-oid="-dpl.23">
         Ödeme
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-oid="..gid30">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-oid="-v38ms_">
         {/* Checkout Form */}
-        <div className="lg:col-span-2" data-oid="d95tlmf">
-          <div className="bg-white rounded-lg shadow-md p-6" data-oid="m4mrf_d">
-            <h2 className="text-xl font-bold mb-4" data-oid="c7uf9vh">
+        <div className="lg:col-span-2" data-oid="047j34d">
+          <div className="bg-white rounded-lg shadow-md p-6" data-oid="l7m1-82">
+            <h2 className="text-xl font-bold mb-4" data-oid="krf_h3f">
               Teslimat Bilgileri
             </h2>
 
-            <form onSubmit={handleSubmit} data-oid="q.dv4-u">
+            <form onSubmit={handleSubmit} data-oid="x53jg4.">
               <div
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
-                data-oid="q5v00wg"
+                data-oid="1h6zbz4"
               >
-                <div data-oid="9olj_q7">
+                <div data-oid="ho:hdf3">
                   <label
                     htmlFor="firstName"
                     className="block mb-2 text-sm font-medium"
-                    data-oid="_-lx5rn"
+                    data-oid="kxwr6t:"
                   >
                     Ad
                   </label>
@@ -133,21 +133,21 @@ const CheckoutPage = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     className={`input ${errors.firstName ? "border-red-500" : ""}`}
-                    data-oid="bu8jfht"
+                    data-oid="m1kogri"
                   />
 
                   {errors.firstName && (
-                    <p className="mt-1 text-red-500 text-sm" data-oid="aqp9ew.">
+                    <p className="mt-1 text-red-500 text-sm" data-oid="-og9fr4">
                       {errors.firstName}
                     </p>
                   )}
                 </div>
 
-                <div data-oid="z6ny-oh">
+                <div data-oid="s3pkhlq">
                   <label
                     htmlFor="lastName"
                     className="block mb-2 text-sm font-medium"
-                    data-oid="fk7x7_c"
+                    data-oid="bl07-lq"
                   >
                     Soyad
                   </label>
@@ -158,22 +158,22 @@ const CheckoutPage = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     className={`input ${errors.lastName ? "border-red-500" : ""}`}
-                    data-oid="3me:aip"
+                    data-oid="ptj28fj"
                   />
 
                   {errors.lastName && (
-                    <p className="mt-1 text-red-500 text-sm" data-oid="k3zx66r">
+                    <p className="mt-1 text-red-500 text-sm" data-oid="p_cqm1a">
                       {errors.lastName}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="mb-6" data-oid="siu_t3b">
+              <div className="mb-6" data-oid="rofh90_">
                 <label
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium"
-                  data-oid="c521hda"
+                  data-oid="-7wjbnz"
                 >
                   E-posta
                 </label>
@@ -184,21 +184,21 @@ const CheckoutPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`input ${errors.email ? "border-red-500" : ""}`}
-                  data-oid="v2f091n"
+                  data-oid="lr_jf15"
                 />
 
                 {errors.email && (
-                  <p className="mt-1 text-red-500 text-sm" data-oid="grm2.e6">
+                  <p className="mt-1 text-red-500 text-sm" data-oid="wn_rtr0">
                     {errors.email}
                   </p>
                 )}
               </div>
 
-              <div className="mb-6" data-oid="sov8u-f">
+              <div className="mb-6" data-oid="yaqy2c:">
                 <label
                   htmlFor="address"
                   className="block mb-2 text-sm font-medium"
-                  data-oid="2ls.ieq"
+                  data-oid="bf02-5-"
                 >
                   Adres
                 </label>
@@ -209,11 +209,11 @@ const CheckoutPage = () => {
                   value={formData.address}
                   onChange={handleChange}
                   className={`input ${errors.address ? "border-red-500" : ""}`}
-                  data-oid="5p5w89u"
+                  data-oid="evbaxo5"
                 />
 
                 {errors.address && (
-                  <p className="mt-1 text-red-500 text-sm" data-oid="hf9v.s-">
+                  <p className="mt-1 text-red-500 text-sm" data-oid="jg8iyr:">
                     {errors.address}
                   </p>
                 )}
@@ -221,13 +221,13 @@ const CheckoutPage = () => {
 
               <div
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
-                data-oid="9f4vfx4"
+                data-oid="ibdjp:a"
               >
-                <div data-oid="miyb728">
+                <div data-oid="i_qfi84">
                   <label
                     htmlFor="city"
                     className="block mb-2 text-sm font-medium"
-                    data-oid="lezy5:o"
+                    data-oid="z16k9xv"
                   >
                     Şehir
                   </label>
@@ -238,21 +238,21 @@ const CheckoutPage = () => {
                     value={formData.city}
                     onChange={handleChange}
                     className={`input ${errors.city ? "border-red-500" : ""}`}
-                    data-oid="s9t9ipm"
+                    data-oid="8j0p4o2"
                   />
 
                   {errors.city && (
-                    <p className="mt-1 text-red-500 text-sm" data-oid="4n3h91h">
+                    <p className="mt-1 text-red-500 text-sm" data-oid="3xx31:n">
                       {errors.city}
                     </p>
                   )}
                 </div>
 
-                <div data-oid="naqs1k-">
+                <div data-oid="36wpr-o">
                   <label
                     htmlFor="postalCode"
                     className="block mb-2 text-sm font-medium"
-                    data-oid="89ecjfz"
+                    data-oid="z7.75uz"
                   >
                     Posta Kodu
                   </label>
@@ -263,22 +263,22 @@ const CheckoutPage = () => {
                     value={formData.postalCode}
                     onChange={handleChange}
                     className={`input ${errors.postalCode ? "border-red-500" : ""}`}
-                    data-oid="531e3-x"
+                    data-oid=":q1po7y"
                   />
 
                   {errors.postalCode && (
-                    <p className="mt-1 text-red-500 text-sm" data-oid="4d2cs2b">
+                    <p className="mt-1 text-red-500 text-sm" data-oid="xb39-:w">
                       {errors.postalCode}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="mb-6" data-oid="hj.96go">
+              <div className="mb-6" data-oid="o6t_zzx">
                 <label
                   htmlFor="phoneNumber"
                   className="block mb-2 text-sm font-medium"
-                  data-oid="etc::pt"
+                  data-oid="iyrv-q1"
                 >
                   Telefon Numarası
                 </label>
@@ -289,11 +289,11 @@ const CheckoutPage = () => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   className={`input ${errors.phoneNumber ? "border-red-500" : ""}`}
-                  data-oid="4p77lm:"
+                  data-oid="hl_d2s4"
                 />
 
                 {errors.phoneNumber && (
-                  <p className="mt-1 text-red-500 text-sm" data-oid="xd4cu6d">
+                  <p className="mt-1 text-red-500 text-sm" data-oid="pfre7v3">
                     {errors.phoneNumber}
                   </p>
                 )}
@@ -303,89 +303,89 @@ const CheckoutPage = () => {
 
           <div
             className="bg-white rounded-lg shadow-md p-6 mt-6"
-            data-oid="hg2ens_"
+            data-oid="ijw-gga"
           >
-            <h2 className="text-xl font-bold mb-4" data-oid="d71-2-a">
+            <h2 className="text-xl font-bold mb-4" data-oid="c2giro7">
               Ödeme Bilgileri
             </h2>
-            <p className="text-gray-500 mb-4" data-oid="0dgmlco">
+            <p className="text-gray-500 mb-4" data-oid="qv0kawn">
               Güvenli ödeme sayfasına yönlendirileceksiniz.
             </p>
             {/* Stripe payment will be implemented here */}
             <div
               className="border p-4 rounded-md bg-gray-50 flex items-center space-x-2"
-              data-oid="wmto1na"
+              data-oid="8y9on1z"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-gray-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                data-oid="8veopx."
+                data-oid="saem4el"
               >
                 <path
                   fillRule="evenodd"
                   d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                   clipRule="evenodd"
-                  data-oid="chxvx2o"
+                  data-oid="lnsu6bp"
                 />
               </svg>
-              <span data-oid="5qg.2gz">Stripe ile güvenli ödeme</span>
+              <span data-oid="c8olhdq">Stripe ile güvenli ödeme</span>
             </div>
           </div>
         </div>
 
         {/* Order Summary */}
-        <div className="lg:col-span-1" data-oid="x5r6g.e">
+        <div className="lg:col-span-1" data-oid="rp6aelr">
           <div
             className="bg-white rounded-lg shadow-md p-6 sticky top-24"
-            data-oid="_201.65"
+            data-oid="5lt4jga"
           >
-            <h2 className="text-xl font-bold mb-4" data-oid="yxb5lrb">
+            <h2 className="text-xl font-bold mb-4" data-oid="w93nez-">
               Sipariş Özeti
             </h2>
 
-            <div className="max-h-64 overflow-y-auto mb-4" data-oid="riboivk">
+            <div className="max-h-64 overflow-y-auto mb-4" data-oid="n.16bwk">
               {items.map((item) => (
                 <div
                   key={item.id}
                   className="flex justify-between items-center py-2 border-b"
-                  data-oid="irkls0h"
+                  data-oid="0x76kjw"
                 >
-                  <div className="flex items-center" data-oid="p336c3r">
+                  <div className="flex items-center" data-oid="eje:jhg">
                     <span
                       className="bg-gray-200 text-gray-700 w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm"
-                      data-oid=".._q99h"
+                      data-oid="d0q:8i9"
                     >
                       {item.quantity}
                     </span>
-                    <span className="text-sm" data-oid="f32-9-8">
+                    <span className="text-sm" data-oid="-89nq48">
                       {item.name}
                     </span>
                   </div>
-                  <span className="text-sm font-medium" data-oid=".a5msez">
+                  <span className="text-sm font-medium" data-oid="ydpwx4.">
                     ₺{(item.price * item.quantity).toFixed(2)}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-2 mb-4" data-oid="6i7-l2z">
-              <div className="flex justify-between" data-oid="b95xlq.">
-                <span data-oid="4_hw:x5">Ara Toplam</span>
-                <span data-oid="j.pim69">₺{totalPrice().toFixed(2)}</span>
+            <div className="space-y-2 mb-4" data-oid="-hy49c:">
+              <div className="flex justify-between" data-oid=":2gg_s-">
+                <span data-oid="b2x21h8">Ara Toplam</span>
+                <span data-oid="749_ysi">₺{totalPrice().toFixed(2)}</span>
               </div>
-              <div className="flex justify-between" data-oid="12gkd0b">
-                <span data-oid="tyxinco">Kargo</span>
-                <span data-oid="8:cgamm">₺0.00</span>
+              <div className="flex justify-between" data-oid="ln.oqrz">
+                <span data-oid="zidrdzm">Kargo</span>
+                <span data-oid="q9:qe62">₺0.00</span>
               </div>
-              <div className="border-t pt-2 mt-2" data-oid="9d05zw2">
+              <div className="border-t pt-2 mt-2" data-oid="h7i0gu9">
                 <div
                   className="flex justify-between font-bold"
-                  data-oid="hnvjtsf"
+                  data-oid="3_brgf_"
                 >
-                  <span data-oid=".erlty0">Toplam</span>
-                  <span data-oid="n86ylm-">₺{totalPrice().toFixed(2)}</span>
+                  <span data-oid="kzrbdz.">Toplam</span>
+                  <span data-oid="w4y-mmc">₺{totalPrice().toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -394,7 +394,7 @@ const CheckoutPage = () => {
               onClick={handleSubmit}
               disabled={isLoading}
               className="btn btn-primary w-full flex items-center justify-center"
-              data-oid=".nbg1_d"
+              data-oid="pcpat_l"
             >
               {isLoading ? (
                 <>
@@ -403,7 +403,7 @@ const CheckoutPage = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    data-oid="b4z3t9-"
+                    data-oid="53jhqtt"
                   >
                     <circle
                       className="opacity-25"
@@ -412,13 +412,13 @@ const CheckoutPage = () => {
                       r="10"
                       stroke="currentColor"
                       strokeWidth="4"
-                      data-oid="5o92iqk"
+                      data-oid="bxjx::1"
                     ></circle>
                     <path
                       className="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      data-oid="72ujny6"
+                      data-oid="v3im2wf"
                     ></path>
                   </svg>
                   İşleniyor...
@@ -428,11 +428,11 @@ const CheckoutPage = () => {
               )}
             </button>
 
-            <div className="mt-4" data-oid="_973s8:">
+            <div className="mt-4" data-oid="qeubms5">
               <Link
                 href="/cart"
                 className="text-primary hover:underline block text-center"
-                data-oid="w46_jfn"
+                data-oid="w3dugf4"
               >
                 Sepete Geri Dön
               </Link>
