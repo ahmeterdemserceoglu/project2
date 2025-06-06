@@ -1,0 +1,16 @@
+# Node.js / JavaScript / Next.js tipik ignore
+node_modules/
+.next/
+out/
+.DS_Store
+.env
+.env.local
+<<<<<<< HEAD
+*.log
+env.txt
+=======
+*.log
+
+pnpm-lock.yaml
+bun.lock
+>>>>>>> origin/codex/choose-package-manager-and-update-docs
