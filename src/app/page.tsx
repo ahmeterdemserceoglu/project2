@@ -417,6 +417,11 @@ export default function Home() {
   const [adminMode, setAdminMode] = useState(false);
   const [isAdminUser, setIsAdminUser] = useState(false);
   const [selectedFeaturedProduct, setSelectedFeaturedProduct] = useState<number>(featuredMobileProduct.id);
+
+  // Featured product card state
+  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [selectedProductCardIndex, setSelectedProductCardIndex] = useState<number | null>(null);
   
   // Kategori modal state'leri
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -470,6 +475,24 @@ export default function Home() {
     };
     
     loadSavedCategories();
+  }, []);
+
+  // Öne çıkan ürünleri localStorage'dan yükle
+  useEffect(() => {
+    const savedProducts = localStorage.getItem('displayedFeaturedProducts');
+    if (savedProducts) {
+      try {
+        const parsed = JSON.parse(savedProducts);
+        const valid = parsed.filter((p: any) => p && p.id);
+        if (valid.length > 0) {
+          setDisplayedProducts(valid);
+          return;
+        }
+      } catch (error) {
+        console.error('Kaydedilmiş ürünler yüklenemedi', error);
+      }
+    }
+    fetchInitialFeaturedProducts();
   }, []);
   
   // Düzenleme modu değişikliklerini izle
@@ -770,6 +793,29 @@ export default function Home() {
     }
   };
 
+  // Öne çıkan ürünleri başlat
+  const fetchInitialFeaturedProducts = () => {
+    const initial = products.filter(p => p.isFeatured).slice(0, 5);
+    setDisplayedProducts(initial);
+    localStorage.setItem('displayedFeaturedProducts', JSON.stringify(initial));
+  };
+
+  const openProductModal = (cardIndex: number) => {
+    setSelectedProductCardIndex(cardIndex);
+    setShowProductModal(true);
+  };
+
+  const assignProduct = (product: Product, cardIndex: number) => {
+    const newDisplayed = [...displayedProducts];
+    newDisplayed[cardIndex] = product;
+    setDisplayedProducts(newDisplayed);
+    localStorage.setItem('displayedFeaturedProducts', JSON.stringify(newDisplayed));
+    if (typeof showToast === 'function') {
+      showToast(`${product.name} ürünü başarıyla atandı`);
+    }
+    setShowProductModal(false);
+  };
+
   // Bir kategorinin hover edilmesi durumunda
   const handleCategoryHover = (index: number) => {
     setHoverCategory(index);
@@ -997,7 +1043,7 @@ export default function Home() {
           </div>
 
           <div className="fragment-container my-20 relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" data-oid="gw6jt-c">
-            {products.filter(product => product.isFeatured).map((product, i) => (
+            {displayedProducts.map((product, i) => (
               <div
                 key={product.id}
                 ref={(el) => {
@@ -1032,7 +1078,22 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                </div>
+                    </div>
+                  )}
+                  {isAdminUser && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openProductModal(i);
+                      }}
+                      className="absolute top-2 left-2 bg-primary/80 text-white p-1 rounded-full hover:bg-primary transition-colors"
+                      title="Ürün Ata"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </button>
                   )}
                 </div>
                 <div className="fragment-overlay p-4 bg-white/10 backdrop-blur-sm rounded-lg mt-2" data-oid="chf8t3l">
@@ -1623,6 +1684,80 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ürün Atama Modal */}
+      {showProductModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm"
+            onClick={() => setShowProductModal(false)}
+          ></div>
+          <div className="bg-dark-lighter relative z-10 rounded-lg shadow-xl max-w-xl w-full max-h-[80vh] overflow-y-auto p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-medium">
+                {selectedProductCardIndex !== null && displayedProducts[selectedProductCardIndex]?.name
+                  ? `"${displayedProducts[selectedProductCardIndex].name}" Ürününü Değiştir`
+                  : 'Ürün Seçin'}
+              </h2>
+              <button
+                onClick={() => setShowProductModal(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {products.map((product) => {
+                const isCurrent =
+                  selectedProductCardIndex !== null &&
+                  displayedProducts[selectedProductCardIndex]?.id === product.id;
+
+                return (
+                  <div
+                    key={product.id}
+                    className={`p-3 bg-dark rounded-lg cursor-pointer group transition-all duration-300 transform hover:scale-105 ${isCurrent ? 'ring-2 ring-primary' : 'hover:bg-dark-lighter'}`}
+                    onClick={() => selectedProductCardIndex !== null && assignProduct(product, selectedProductCardIndex)}
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-16 h-16 object-cover rounded-md"
+                        onError={(e) => handleImageError(e, product.name)}
+                      />
+                      <div>
+                        <h3 className="font-medium">{product.name}</h3>
+                        <p className="text-sm text-gray-400">{product.tag}</p>
+                      </div>
+                    </div>
+                    <div className={`mt-3 flex items-center justify-end ${isCurrent ? 'text-primary' : ''}`}>
+                      {isCurrent ? (
+                        <span className="text-xs text-primary mr-2">Bu ürün şu anda seçili</span>
+                      ) : (
+                        <span className="text-xs text-gray-400 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">Ürünü seçmek için tıklayın</span>
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          selectedProductCardIndex !== null && assignProduct(product, selectedProductCardIndex);
+                        }}
+                        className={`${isCurrent ? 'bg-green-600' : 'bg-primary'} text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary-dark transition`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Kategori Atama Modal */}
       {showCategoryModal && (
