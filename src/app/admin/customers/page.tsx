@@ -1,94 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-
-// Mock customer data
-const initialCustomers = [
-  {
-    id: "1",
-    firstName: "Ahmet",
-    lastName: "Yılmaz",
-    email: "ahmet@example.com",
-    phone: "+90 555 111 2222",
-    orderCount: 3,
-    totalSpent: 2300,
-    lastOrder: "02.06.2023",
-    status: "active",
-  },
-  {
-    id: "2",
-    firstName: "Ayşe",
-    lastName: "Demir",
-    email: "ayse@example.com",
-    phone: "+90 555 333 4444",
-    orderCount: 1,
-    totalSpent: 750,
-    lastOrder: "29.05.2023",
-    status: "active",
-  },
-  {
-    id: "3",
-    firstName: "Mehmet",
-    lastName: "Can",
-    email: "mehmet@example.com",
-    phone: "+90 555 555 6666",
-    orderCount: 2,
-    totalSpent: 1250,
-    lastOrder: "28.05.2023",
-    status: "active",
-  },
-  {
-    id: "4",
-    firstName: "Zeynep",
-    lastName: "Kaya",
-    email: "zeynep@example.com",
-    phone: "+90 555 777 8888",
-    orderCount: 1,
-    totalSpent: 860,
-    lastOrder: "01.06.2023",
-    status: "active",
-  },
-  {
-    id: "5",
-    firstName: "Mustafa",
-    lastName: "Demir",
-    email: "mustafa@example.com",
-    phone: "+90 555 999 0000",
-    orderCount: 1,
-    totalSpent: 1650,
-    lastOrder: "01.06.2023",
-    status: "active",
-  },
-  {
-    id: "6",
-    firstName: "Fatma",
-    lastName: "Aydın",
-    email: "fatma@example.com",
-    phone: "+90 555 121 2323",
-    orderCount: 1,
-    totalSpent: 3450,
-    lastOrder: "31.05.2023",
-    status: "inactive",
-  },
-  {
-    id: "7",
-    firstName: "Ali",
-    lastName: "Yıldız",
-    email: "ali@example.com",
-    phone: "+90 555 343 4545",
-    orderCount: 1,
-    totalSpent: 1200,
-    lastOrder: "30.05.2023",
-    status: "active",
-  },
-];
+import { createClientComponentClient } from "@/lib/supabase";
 
 export default function CustomersPage() {
-  const [customers, setCustomers] = useState(initialCustomers);
+  const [customers, setCustomers] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [orderCountFilter, setOrderCountFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        setIsLoading(true);
+        const { data: profiles, error } = await supabase
+          .from("profiles")
+          .select("id, first_name, last_name, email, phone")
+          .eq("is_admin", false);
+
+        if (error) throw error;
+
+        const ids = (profiles || []).map((p: any) => p.id);
+        const { data: ordersData, error: ordersError } = await supabase
+          .from("orders")
+          .select("user_id, total_amount, created_at")
+          .in("user_id", ids);
+
+        if (ordersError) throw ordersError;
+
+        const mapped = (profiles || []).map((p: any) => {
+          const userOrders = (ordersData || []).filter((o: any) => o.user_id === p.id);
+          const orderCount = userOrders.length;
+          const totalSpent = userOrders.reduce(
+            (sum: number, o: any) => sum + (o.total_amount || 0),
+            0,
+          );
+          const lastOrder = userOrders
+            .sort(
+              (a: any, b: any) =>
+                new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+            )[0]?.created_at;
+          return {
+            id: p.id,
+            firstName: p.first_name,
+            lastName: p.last_name,
+            email: p.email,
+            phone: p.phone,
+            orderCount,
+            totalSpent,
+            lastOrder,
+            status: orderCount > 0 ? "active" : "inactive",
+          };
+        });
+
+        setCustomers(mapped);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, [supabase]);
 
   // Filter customers based on search and filters
   const filteredCustomers = customers.filter((customer) => {
@@ -114,6 +95,16 @@ export default function CustomersPage() {
 
     return matchesSearch && matchesStatus && matchesOrderCount;
   });
+
+  const totalPages = Math.ceil(filteredCustomers.length / pageSize) || 1;
+  const paginatedCustomers = filteredCustomers.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, statusFilter, orderCountFilter, customers]);
 
   // Status badge component
   const StatusBadge = ({ status }: { status: string }) => {
@@ -319,6 +310,13 @@ export default function CustomersPage() {
         data-oid="3w20_jb"
       >
         <div className="overflow-x-auto" data-oid="anlpz5v">
+          {isLoading ? (
+            <div className="p-4 text-center">Yükleniyor...</div>
+          ) : error ? (
+            <div className="p-4 text-center text-red-600">{error}</div>
+          ) : paginatedCustomers.length === 0 ? (
+            <div className="p-4 text-center text-gray-500">Kayıt bulunamadı</div>
+          ) : (
           <table
             className="min-w-full divide-y divide-gray-200"
             data-oid="-i6hk7h"
@@ -380,7 +378,7 @@ export default function CustomersPage() {
               className="bg-white divide-y divide-gray-200"
               data-oid="gbvev8."
             >
-              {filteredCustomers.map((customer) => (
+              {paginatedCustomers.map((customer) => (
                 <tr
                   key={customer.id}
                   className="hover:bg-gray-50"
@@ -446,7 +444,9 @@ export default function CustomersPage() {
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     data-oid="ntuylp2"
                   >
-                    {customer.lastOrder}
+                    {customer.lastOrder
+                      ? new Date(customer.lastOrder).toLocaleDateString("tr-TR")
+                      : "-"}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
@@ -491,6 +491,7 @@ export default function CustomersPage() {
               ))}
             </tbody>
           </table>
+          )}
         </div>
 
         {/* Pagination */}
@@ -511,24 +512,19 @@ export default function CustomersPage() {
             <div className="inline-flex shadow-sm" data-oid="pfv_8px">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
                 data-oid="ovr5fnt"
               >
                 Önceki
               </button>
+              <span className="border-t border-b bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                {currentPage} / {totalPages}
+              </span>
               <button
-                className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="usqlnep"
-              >
-                1
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="r24:.r3"
-              >
-                2
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
+                className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
                 data-oid="qqnu-1."
               >
                 Sonraki

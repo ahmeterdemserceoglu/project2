@@ -1,80 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { createClientComponentClient } from "@/lib/supabase";
 
-// Mock order data
-const initialOrders = [
-  {
-    id: "1",
-    orderNumber: "HD-1001",
-    customerName: "Ahmet Yılmaz",
-    date: "02.06.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 2300,
-  },
-  {
-    id: "2",
-    orderNumber: "HD-1002",
-    customerName: "Zeynep Kaya",
-    date: "01.06.2023",
-    status: "shipped",
-    paymentStatus: "paid",
-    total: 860,
-  },
-  {
-    id: "3",
-    orderNumber: "HD-1003",
-    customerName: "Mustafa Demir",
-    date: "01.06.2023",
-    status: "processing",
-    paymentStatus: "paid",
-    total: 1650,
-  },
-  {
-    id: "4",
-    orderNumber: "HD-1004",
-    customerName: "Fatma Aydın",
-    date: "31.05.2023",
-    status: "pending",
-    paymentStatus: "pending",
-    total: 3450,
-  },
-  {
-    id: "5",
-    orderNumber: "HD-1005",
-    customerName: "Ali Yıldız",
-    date: "30.05.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 1200,
-  },
-  {
-    id: "6",
-    orderNumber: "HD-1006",
-    customerName: "Ayşe Demir",
-    date: "29.05.2023",
-    status: "cancelled",
-    paymentStatus: "refunded",
-    total: 750,
-  },
-  {
-    id: "7",
-    orderNumber: "HD-1007",
-    customerName: "Mehmet Can",
-    date: "28.05.2023",
-    status: "delivered",
-    paymentStatus: "paid",
-    total: 1250,
-  },
-];
 
 export default function OrdersPage() {
-  const [orders, setOrders] = useState(initialOrders);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from("orders")
+          .select(
+            `id, order_number, status, payment_status, total_amount, created_at, profiles(first_name, last_name)`,
+          )
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+
+        const mapped = (data || []).map((o: any) => ({
+          id: o.id,
+          orderNumber: o.order_number || `#${o.id.substring(0, 8)}`,
+          customerName: o.profiles
+            ? `${o.profiles.first_name || ""} ${o.profiles.last_name || ""}`.trim() ||
+              o.profiles.email
+            : "Misafir",
+          date: o.created_at,
+          status: o.status,
+          paymentStatus: o.payment_status,
+          total: o.total_amount,
+        }));
+        setOrders(mapped);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, [supabase]);
 
   // Filter orders based on search and filters
   const filteredOrders = orders.filter((order) => {
@@ -82,11 +58,24 @@ export default function OrdersPage() {
       order.orderNumber.toLowerCase().includes(search.toLowerCase()) ||
       order.customerName.toLowerCase().includes(search.toLowerCase());
     const matchesStatus = statusFilter ? order.status === statusFilter : true;
-    // In a real app, this would be a proper date range filter
-    const matchesDate = dateFilter ? order.date.includes(dateFilter) : true;
+    const matchesDate = dateFilter
+      ? new Date(order.date)
+          .toLocaleDateString("tr-TR")
+          .includes(dateFilter)
+      : true;
 
     return matchesSearch && matchesStatus && matchesDate;
   });
+
+  const totalPages = Math.ceil(filteredOrders.length / pageSize) || 1;
+  const paginatedOrders = filteredOrders.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, statusFilter, dateFilter, orders]);
 
   // Status badge component
   const StatusBadge = ({ status }: { status: string }) => {
@@ -272,6 +261,13 @@ export default function OrdersPage() {
         data-oid="abwcr:2"
       >
         <div className="overflow-x-auto" data-oid="pkrq__f">
+          {isLoading ? (
+            <div className="p-4 text-center">Yükleniyor...</div>
+          ) : error ? (
+            <div className="p-4 text-center text-red-600">{error}</div>
+          ) : paginatedOrders.length === 0 ? (
+            <div className="p-4 text-center text-gray-500">Kayıt bulunamadı</div>
+          ) : (
           <table
             className="min-w-full divide-y divide-gray-200"
             data-oid="n-.-.gg"
@@ -333,7 +329,7 @@ export default function OrdersPage() {
               className="bg-white divide-y divide-gray-200"
               data-oid="lb1pwr8"
             >
-              {filteredOrders.map((order) => (
+              {paginatedOrders.map((order) => (
                 <tr
                   key={order.id}
                   className="hover:bg-gray-50"
@@ -355,7 +351,7 @@ export default function OrdersPage() {
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     data-oid=":je1cw."
                   >
-                    {order.date}
+                    {new Date(order.date).toLocaleDateString("tr-TR")}
                   </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap"
@@ -416,6 +412,7 @@ export default function OrdersPage() {
               ))}
             </tbody>
           </table>
+          )}
         </div>
 
         {/* Pagination */}
@@ -436,30 +433,19 @@ export default function OrdersPage() {
             <div className="inline-flex shadow-sm" data-oid="meg.cq2">
               <button
                 className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-l-md"
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
                 data-oid="2scaz-c"
               >
                 Önceki
               </button>
+              <span className="border-t border-b bg-white px-4 py-2 text-sm font-medium text-gray-700">
+                {currentPage} / {totalPages}
+              </span>
               <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="sm4er5g"
-              >
-                1
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-primary text-white hover:bg-primary-dark px-4 py-2 text-sm font-medium"
-                data-oid="hxq45:."
-              >
-                2
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium"
-                data-oid="_91-h3s"
-              >
-                3
-              </button>
-              <button
-                className="border-t border-b border-r border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
+                className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 px-4 py-2 text-sm font-medium rounded-r-md"
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
                 data-oid="ec85zvi"
               >
                 Sonraki
