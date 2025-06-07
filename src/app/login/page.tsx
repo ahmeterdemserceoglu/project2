@@ -31,7 +31,7 @@ function LoginContent() {
       if (data.session) {
         setIsLoggedIn(true);
         // Redirect to account page if already logged in
-        router.push('/account');
+        router.push('/');
       }
     };
 
@@ -210,7 +210,7 @@ function LoginContent() {
       // Step 3: Successfully logged in, redirect to dashboard
       showToast("Giriş başarılı! Yönlendiriliyorsunuz...", "success");
 
-      router.push("/account");
+      router.push("/");
     } catch (error: any) {
       console.error("Login exception:", error);
       const errorMsg =
