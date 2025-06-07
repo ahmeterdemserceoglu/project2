@@ -57,14 +57,49 @@ export default function NavUser({
 
   const handleSignOut = async () => {
     try {
+      // Clear all session storage mechanisms first
+      try {
+        // Clear localStorage
+        localStorage.removeItem('supabase.auth.token');
+        localStorage.removeItem('supabase-auth-token');
+        localStorage.removeItem('sb-auth-token');
+        localStorage.removeItem('authSuccess');
+
+        // Clear sessionStorage
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.removeItem('supabase.auth.token');
+          sessionStorage.removeItem('supabase-auth-token');
+          sessionStorage.removeItem('sb-auth-token');
+          sessionStorage.removeItem('authSuccess');
+        }
+
+        // Clear all cookies
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i];
+          const eqPos = cookie.indexOf('=');
+          const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
+
+          if (name.includes('supabase') || name.includes('sb-') || name.includes('auth')) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
+          }
+        }
+      } catch (clearError) {
+        console.error("Error clearing session storage:", clearError);
+      }
+
+      // Then sign out from Supabase
       await supabase.auth.signOut();
+
       const userName =
         user?.user_metadata?.full_name ||
         user?.email?.split("@")[0] ||
         "Kullanıcı";
       showToast(`${userName}, başarıyla çıkış yapıldı`, "success");
       showNotification("Oturumunuz güvenli bir şekilde sonlandırıldı", "info");
-      router.refresh();
+
+      // Force a full page reload to ensure all state is cleared
+      window.location.href = "/";
     } catch (error) {
       console.error("Çıkış yaparken hata oluştu:", error);
       showToast("Çıkış yapılırken bir hata oluştu", "error");

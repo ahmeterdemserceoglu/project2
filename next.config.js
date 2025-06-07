@@ -11,6 +11,11 @@ const nextConfig = {
         hostname: '**.supabase.co',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
   async headers() {
@@ -31,6 +36,25 @@ const nextConfig = {
             key: 'X-Frame-Options',
             value: 'DENY',
           },
+          // Adding cache control to prevent caching of authenticated pages
+          {
+            key: 'Cache-Control',
+            value: 'no-store, max-age=0',
+          },
+        ],
+      },
+      {
+        // Authentication specific headers for auth routes
+        source: '/api/auth/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, max-age=0',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
         ],
       },
     ];
@@ -39,7 +63,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['nodemailer'],
     serverActions: {
-      allowedOrigins: ['*.vercel.app', 'localhost:3000'],
+      allowedOrigins: ['*.vercel.app', 'localhost:3000', 'hdticaret.com', '*.hdticaret.com'],
     },
   },
 };

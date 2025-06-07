@@ -7,6 +7,11 @@ import { useCartStore } from "@/lib/store";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
+// Helper function for safe price formatting
+const formatPrice = (price?: number | null): string => {
+  return price !== undefined && price !== null ? `₺${price.toFixed(2)}` : "₺0.00";
+};
+
 const CartPage = () => {
   const router = useRouter();
   const { items, removeItem, updateQuantity, totalPrice } = useCartStore();
@@ -184,7 +189,7 @@ const CartPage = () => {
                       >
                         Fiyat:
                       </span>
-                      ₺{item.price.toFixed(2)}
+                      {formatPrice(item.price)}
                     </div>
 
                     {/* Quantity */}
@@ -250,7 +255,7 @@ const CartPage = () => {
                       </span>
                       <div className="flex flex-col" data-oid=":9c9iua">
                         <span data-oid="f7e1wfz">
-                          ₺{(item.price * item.quantity).toFixed(2)}
+                          {formatPrice(item.price * item.quantity)}
                         </span>
                         <button
                           onClick={() => handleRemoveItem(item.id)}
@@ -286,7 +291,7 @@ const CartPage = () => {
                   Ara Toplam
                 </span>
                 <span className="font-medium" data-oid="e0z7881">
-                  ₺{totalPrice().toFixed(2)}
+                  {formatPrice(totalPrice())}
                 </span>
               </div>
               <div className="flex justify-between" data-oid="nryu4cc">
@@ -310,10 +315,9 @@ const CartPage = () => {
                 >
                   <span data-oid="pmgn34y">Toplam</span>
                   <span data-oid="kvaq9q:">
-                    ₺
                     {totalPrice() >= 500
-                      ? totalPrice().toFixed(2)
-                      : (totalPrice() + 29.9).toFixed(2)}
+                      ? formatPrice(totalPrice())
+                      : formatPrice(totalPrice() + 29.9)}
                   </span>
                 </div>
                 {totalPrice() < 500 && (
@@ -324,7 +328,7 @@ const CartPage = () => {
                       data-oid="h49acic"
                     >
                       {" "}
-                      ₺{(500 - totalPrice()).toFixed(2)} daha ekleyin
+                      {formatPrice(500 - totalPrice())} daha ekleyin
                     </span>
                   </p>
                 )}

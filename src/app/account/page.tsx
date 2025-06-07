@@ -141,9 +141,29 @@ export default function AccountPage() {
   }, [user]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    showNotification("Başarıyla çıkış yapıldı", "success");
-    router.push("/");
+    try {
+      // Clear all session storage mechanisms first
+      localStorage.removeItem('supabase.auth.token');
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.removeItem('supabase.auth.token');
+        sessionStorage.removeItem('authSuccess');
+      }
+
+      // Clear cookies
+      document.cookie = 'supabase.auth.token=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Strict';
+      document.cookie = 'auth_verified=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Strict';
+
+      // Then sign out from Supabase
+      await supabase.auth.signOut();
+
+      showNotification("Başarıyla çıkış yapıldı", "success");
+
+      // Force a full page reload to ensure all state is cleared
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Çıkış yaparken hata oluştu:", error);
+      showNotification("Çıkış işlemi sırasında bir sorun oluştu", "error");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

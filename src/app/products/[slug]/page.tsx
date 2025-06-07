@@ -188,8 +188,8 @@ export default async function ProductPage({ params }: Props) {
             <span className="mx-2" data-oid="gkwdnj7">
               /
             </span>
-            <Link 
-              href={`/category/${product.category_id}`} 
+            <Link
+              href={`/category/${product.category_id}`}
               className="hover:text-primary transition-colors"
               data-oid="s__o.2j"
             >
@@ -360,18 +360,18 @@ export default async function ProductPage({ params }: Props) {
             {product.sale_price ? (
               <div className="flex items-center gap-2" data-oid="aw8tn.d">
                 <span className="text-3xl font-bold" data-oid="ur_1et8">
-                  ₺{product.sale_price.toFixed(2)}
+                  ₺{product.sale_price?.toFixed(2) || "0.00"}
                 </span>
                 <span
                   className="text-gray-500 line-through text-lg"
                   data-oid=":l.j0cc"
                 >
-                  ₺{product.base_price.toFixed(2)}
+                  ₺{product.base_price?.toFixed(2) || "0.00"}
                 </span>
               </div>
             ) : (
               <span className="text-3xl font-bold" data-oid="m:xvzi1">
-                ₺{product.base_price.toFixed(2)}
+                ₺{product.base_price?.toFixed(2) || "0.00"}
               </span>
             )}
 

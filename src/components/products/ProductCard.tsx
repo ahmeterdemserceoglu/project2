@@ -40,6 +40,11 @@ const ProductCard = ({
   // Create a URL-friendly version of the slug
   const productUrl = `/products/${encodeURIComponent(slug)}`;
 
+  // Format price safely with null check
+  const formatPrice = (value?: number) => {
+    return value !== undefined && value !== null ? `₺${value.toFixed(2)}` : "₺0.00";
+  };
+
   return (
     <div className="card group h-full flex flex-col bg-white dark:bg-dark shadow-sm hover:shadow-md transition-shadow relative">
       <div className="relative overflow-hidden rounded-t-md mb-4">
@@ -92,13 +97,13 @@ const ProductCard = ({
       <div className="mt-2">
         {isOnSale && salePrice ? (
           <div className="flex items-center gap-2">
-            <span className="font-bold text-lg">₺{salePrice.toFixed(2)}</span>
+            <span className="font-bold text-lg">{formatPrice(salePrice)}</span>
             <span className="text-gray-500 line-through text-sm">
-              ₺{price.toFixed(2)}
+              {formatPrice(price)}
             </span>
           </div>
         ) : (
-          <span className="font-bold text-lg">₺{price.toFixed(2)}</span>
+          <span className="font-bold text-lg">{formatPrice(price)}</span>
         )}
       </div>
     </div>

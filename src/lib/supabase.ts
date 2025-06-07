@@ -21,20 +21,54 @@ export function createClientComponentClient() {
           autoRefreshToken: true,
           persistSession: true,
           detectSessionInUrl: true,
+          // Use a consistent storage key
           storageKey: 'supabase.auth.token',
+          // Enable debug mode to see what's happening with auth
+          debug: true,
+          // Enhanced storage to support cookies, localStorage, and sessionStorage
           storage: {
             getItem: (key: string) => {
               if (typeof window === 'undefined') {
                 return null;
               }
 
-              const storedValue = localStorage.getItem(key);
+              // Debug
+              console.log('Getting auth from storage:', key);
 
-              if (!storedValue) return null;
+              // First try to get from localStorage
+              let storedValue = localStorage.getItem(key);
+              if (storedValue) {
+                console.log('Found in localStorage');
+              }
+
+              // If not in localStorage, try sessionStorage as fallback
+              if (!storedValue && typeof sessionStorage !== 'undefined') {
+                storedValue = sessionStorage.getItem(key);
+                if (storedValue) {
+                  console.log('Found in sessionStorage');
+                }
+              }
+
+              // Check for cookies (necessary for some browsers, especially in production)
+              if (!storedValue && document.cookie) {
+                const cookies = document.cookie.split('; ');
+                // Check both the storageKey and the sb-auth-token cookie
+                const cookie = cookies.find(c => c.startsWith(`${key}=`) || c.startsWith('sb-auth-token='));
+                if (cookie) {
+                  console.log('Found in cookies');
+                  storedValue = decodeURIComponent(cookie.split('=')[1]);
+                }
+              }
+
+              if (!storedValue) {
+                console.log('No auth token found in any storage');
+                return null;
+              }
 
               try {
                 return JSON.parse(storedValue);
               } catch (error) {
+                console.log('Error parsing stored value, returning as is');
                 return storedValue;
               }
             },
@@ -43,17 +77,71 @@ export function createClientComponentClient() {
                 return;
               }
 
-              localStorage.setItem(
-                key,
-                typeof value === 'string' ? value : JSON.stringify(value)
-              );
+              console.log('Setting auth to storage:', key);
+              const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
+
+              try {
+                // Store in both localStorage and sessionStorage for redundancy
+                localStorage.setItem(key, stringValue);
+                if (typeof sessionStorage !== 'undefined') {
+                  sessionStorage.setItem(key, stringValue);
+                }
+
+                // Also store in cookies for cross-tab persistence and better Vercel compatibility
+                // Set expiry to 7 days
+                const expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + 7);
+
+                // Get hostname for the cookie domain
+                const hostname = window.location.hostname;
+                const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
+
+                // Use encodeURIComponent to handle special characters
+                // For cookies, don't set domain on localhost as it won't work
+                const cookieStr = isLocalhost
+                  ? `${key}=${encodeURIComponent(stringValue)};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`
+                  : `${key}=${encodeURIComponent(stringValue)};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`;
+
+                document.cookie = cookieStr;
+
+                // Also store a backup cookie with a different name
+                document.cookie = `sb-auth-token=${encodeURIComponent(stringValue)};expires=${expiryDate.toUTCString()};path=/;SameSite=Lax`;
+
+                console.log('Auth token saved to all storage mechanisms');
+              } catch (error) {
+                console.error('Error storing auth session:', error);
+              }
             },
             removeItem: (key: string) => {
               if (typeof window === 'undefined') {
                 return;
               }
 
-              localStorage.removeItem(key);
+              console.log('Removing auth from storage:', key);
+
+              try {
+                // Remove from localStorage and sessionStorage
+                localStorage.removeItem(key);
+                if (typeof sessionStorage !== 'undefined') {
+                  sessionStorage.removeItem(key);
+                }
+
+                // Get hostname for the cookie domain
+                const hostname = window.location.hostname;
+                const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
+
+                // Remove from cookies by setting an expired date
+                // For cookies, don't set domain on localhost as it won't work
+                const cookieStr = isLocalhost
+                  ? `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`
+                  : `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
+
+                document.cookie = cookieStr;
+                document.cookie = `sb-auth-token=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
+                console.log('Auth token removed from all storage mechanisms');
+              } catch (error) {
+                console.error('Error removing auth session:', error);
+              }
             },
           }
         }

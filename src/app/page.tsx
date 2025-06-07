@@ -1,370 +1,401 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/contexts/ToastContext";
-import { useNotification } from "@/contexts/NotificationContext";
-import { useCartStore } from '@/lib/store';
+import './anasayfa.css';
 import Image from 'next/image';
-import { createClientComponentClient } from "@/lib/supabase";
 import Link from 'next/link';
-import "./anasayfa.css";
-
-// Product interface
-interface Product {
-    id: string;
-    name: string;
-    price: number;
-    originalPrice?: number;
-    image_url: string;
-    description?: string;
-    slug: string;
-    is_featured?: boolean;
-    in_stock?: boolean;
-}
-
-// Category interface
-interface Category {
-    id: string;
-    name: string;
-    image_url: string | null;
-    slug: string;
-    product_count?: number;
-}
-
-// Format price in Turkish Lira
-const formatPrice = (price: number) => {
-    return `₺${price.toFixed(2)}`;
-};
+import { useEffect, useState, useRef } from 'react';
+import { FaCartPlus, FaArrowRight, FaStar, FaRegHeart, FaHeart, FaShieldAlt, FaShippingFast, FaUndo, FaHeadphones, FaChevronDown } from 'react-icons/fa';
 
 export default function HomePage() {
-    const router = useRouter();
-    const { showToast } = useToast();
-    const { showNotification } = useNotification();
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [subscribed, setSubscribed] = useState(false);
-    const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loadingProducts, setLoadingProducts] = useState(true);
-    const [loadingCategories, setLoadingCategories] = useState(true);
-    const productRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+    const [visibleSections, setVisibleSections] = useState<string[]>([]);
+    const [likedProducts, setLikedProducts] = useState<number[]>([]);
+    const [cartItems, setCartItems] = useState<number>(0);
 
-    const supabase = createClientComponentClient();
+    // References for animation triggers
+    const heroRef = useRef<HTMLDivElement>(null);
+    const featureSectionRef = useRef<HTMLDivElement>(null);
+    const productSectionRef = useRef<HTMLDivElement>(null);
+    const categorySectionRef = useRef<HTMLDivElement>(null);
+    const lifestyleSectionRef = useRef<HTMLDivElement>(null);
 
-    // Fetch featured products
+    // Sample featured products
+    const products = [
+        {
+            id: 1,
+            name: 'Premium Yün Palto',
+            price: 2999.99,
+            image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea',
+            category: 'Paltolar',
+            rating: 4.8,
+        },
+        {
+            id: 2,
+            name: 'Tasarım Deri Çanta',
+            price: 1899.99,
+            image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3',
+            category: 'Aksesuarlar',
+            rating: 4.9,
+        },
+        {
+            id: 3,
+            name: 'Limitli Seri Saat',
+            price: 4499.99,
+            image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3',
+            category: 'Saatler',
+            rating: 5.0,
+        },
+        {
+            id: 4,
+            name: 'Premium İpek Elbise',
+            price: 2599.99,
+            image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8',
+            category: 'Elbiseler',
+            rating: 4.7,
+        },
+        {
+            id: 5,
+            name: 'İtalyan Süet Bot',
+            price: 3299.99,
+            image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2',
+            category: 'Ayakkabılar',
+            rating: 4.6,
+        }
+    ];
+
+    // Categories
+    const categories = [
+        {
+            id: 1,
+            name: 'Erkek Koleksiyonu',
+            image: 'https://images.unsplash.com/photo-1516257984-b1b4d707412e',
+        },
+        {
+            id: 2,
+            name: 'Kadın Koleksiyonu',
+            image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8',
+        },
+        {
+            id: 3,
+            name: 'Aksesuarlar',
+            image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3',
+        },
+        {
+            id: 4,
+            name: 'Ayakkabılar',
+            image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2',
+        }
+    ];
+
+    // Handle scroll events for header fixed state
     useEffect(() => {
-        const fetchFeaturedProducts = async () => {
-            try {
-                setLoadingProducts(true);
-                const { data, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('is_featured', true)
-                    .eq('is_active', true)
-                    .limit(10);
-
-                if (error) throw error;
-
-                setFeaturedProducts(data || []);
-            } catch (error) {
-                console.error('Error fetching featured products:', error);
-            } finally {
-                setLoadingProducts(false);
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                setIsHeaderFixed(true);
+            } else {
+                setIsHeaderFixed(false);
             }
-        };
+        }
 
-        fetchFeaturedProducts();
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial scroll position
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
-    // Fetch categories
+    // Setup intersection observer for animations
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                setLoadingCategories(true);
-                const { data, error } = await supabase
-                    .from('categories')
-                    .select('*')
-                    .order('sort_order', { ascending: true })
-                    .limit(5);
+        const sections = [
+            { ref: heroRef, id: 'hero' },
+            { ref: featureSectionRef, id: 'features' },
+            { ref: productSectionRef, id: 'featured' },
+            { ref: categorySectionRef, id: 'categories' },
+            { ref: lifestyleSectionRef, id: 'lifestyle' }
+        ];
 
-                if (error) throw error;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setVisibleSections(prev => {
+                        if (!prev.includes(entry.target.id)) {
+                            return [...prev, entry.target.id];
+                        }
+                        return prev;
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
 
-                setCategories(data || []);
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            } finally {
-                setLoadingCategories(false);
+        sections.forEach(section => {
+            if (section.ref.current) {
+                observer.observe(section.ref.current);
             }
-        };
+        });
 
-        fetchCategories();
-    }, []);
-
-    // Scroll effects
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrolled = window.scrollY;
-            document.documentElement.style.setProperty("--scroll", `${scrolled}px`);
-
-            productRefs.current.forEach((item, index) => {
-                if (item) {
-                    const rect = item.getBoundingClientRect();
-                    const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-                    if (isInView) {
-                        item.style.transform = `translateX(${(index % 2 === 0 ? -1 : 1) * Math.min(scrolled * 0.02, 10)}px) translateY(${Math.sin(scrolled * 0.001 + index) * 5}px)`;
-                        item.style.opacity = "1";
-                    }
+        return () => {
+            sections.forEach(section => {
+                if (section.ref.current) {
+                    observer.unobserve(section.ref.current);
                 }
             });
         };
-
-        window.addEventListener("scroll", handleScroll);
-        handleScroll(); // Initialize scroll-based animations
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
     }, []);
 
-    // Handle image error
-    const handleImageError = (
-        event: React.SyntheticEvent<HTMLImageElement, Event>,
-        name: string,
-    ) => {
-        const target = event.target as HTMLImageElement;
-        target.onerror = null; // Prevent infinite loop if placeholder also fails
-        target.src = `https://placehold.co/500x500/1a1a1a/4a4a4a?text=${name.replace(/\s/g, "+")}`;
+    // Add to cart functionality
+    const handleAddToCart = (productId: number, e: React.MouseEvent) => {
+        e.preventDefault();
+        setCartItems(prev => prev + 1);
+
+        // Add animation effect
+        const target = e.currentTarget as HTMLElement;
+        target.classList.add('added');
+        setTimeout(() => {
+            target.classList.remove('added');
+        }, 1000);
     };
 
-    // Handle newsletter subscription
-    const handleSubscribe = (e: React.FormEvent) => {
+    // Toggle like functionality
+    const handleToggleLike = (productId: number, e: React.MouseEvent) => {
         e.preventDefault();
-        setLoading(true);
+        setLikedProducts(prev =>
+            prev.includes(productId)
+                ? prev.filter(id => id !== productId)
+                : [...prev, productId]
+        );
+    };
 
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
-            setSubscribed(true);
-            setEmail("");
-            if (showToast) {
-                showToast("Bültenimize başarıyla abone oldunuz!", "success");
-            }
-        }, 1500);
+    // Scroll to section
+    const scrollToSection = (sectionId: string) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     return (
-        <main className="overflow-hidden">
+        <div className="modern-container">
             {/* Hero Section */}
-            <section className="liquid-header h-screen relative overflow-hidden">
-                <div className="liquid-shape"></div>
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                    <div className="glitch-container">
-                        <h1 className="glitch-text" data-text="DIMENSION">
-                            DIMENSION
-                        </h1>
+            <section className="hero-container" ref={heroRef} id="hero">
+                <div className="hero-visual">
+                    <div className="hero-image">
+                        <Image
+                            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2000&auto=format&fit=crop"
+                            alt="Lüks moda alışveriş deneyimi"
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            priority
+                            quality={90}
+                        />
                     </div>
                 </div>
-                <div className="scroll-indicator">
-                    <div className="line"></div>
-                    <div className="dot"></div>
+
+                <div className="hero-content">
+                    <h1 className="hero-title">
+                        <span className="line">Premium</span>
+                        <span className="line">Pazar<span className="emphasis">Yeri</span></span>
+                    </h1>
+                    <p className="hero-subtitle">
+                        Binlerce satıcı, milyonlarca ürün. Tek bir yerde en kaliteli markaları keşfedin,
+                        en iyi fiyatlarla alışverişin keyfini çıkarın.
+                    </p>
+                    <div className="hero-buttons">
+                        <Link href="/products" className="primary-button">
+                            <span>Alışverişe Başla</span>
+                            <FaArrowRight />
+                        </Link>
+                        <button onClick={() => scrollToSection('categories')} className="secondary-button">
+                            <span>Kategorileri Keşfet</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="scroll-indicator" onClick={() => scrollToSection('featured')}>
+                    <FaChevronDown />
                 </div>
             </section>
 
             {/* Featured Products Section */}
-            <section className="py-20 px-4">
-                <div className="container mx-auto">
-                    <div className="flex items-center justify-between mb-10">
-                        <h2 className="text-3xl font-light tracking-wide">ÖNE ÇIKAN ÜRÜNLER</h2>
-                        <Link
-                            href="/products"
-                            className="text-white hover:text-accent transition-colors text-sm font-medium px-4 py-2 bg-primary/80 hover:bg-primary rounded-md"
-                        >
-                            Tümünü Gör →
-                        </Link>
-                    </div>
+            <section id="featured"
+                className={`py-20 px-4 max-w-7xl mx-auto ${visibleSections.includes('featured') ? 'animate-on-scroll visible' : 'animate-on-scroll'}`}
+                ref={productSectionRef}
+            >
+                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Öne Çıkan Koleksiyon</h2>
 
-                    {loadingProducts ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {[...Array(8)].map((_, i) => (
-                                <div key={i} className="animate-pulse">
-                                    <div className="bg-gray-800 h-64 rounded-lg"></div>
-                                    <div className="mt-4 space-y-3">
-                                        <div className="h-5 bg-gray-800 rounded w-3/4"></div>
-                                        <div className="h-4 bg-gray-800 rounded w-1/2"></div>
-                                        <div className="h-8 bg-gray-800 rounded"></div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {featuredProducts.map((product, i) => (
-                                <div
-                                    key={product.id}
-                                    ref={(el) => { productRefs.current[i] = el; }}
-                                    className="group bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                                >
-                                    <div className="relative h-64 overflow-hidden">
+                <div className="overflow-x-auto pb-8">
+                    <div className="flex gap-8 min-w-max px-4 py-4 snap-x snap-mandatory">
+                        {products.map((product) => (
+                            <div key={product.id} className="product-card">
+                                <Link href={`/products/${product.id}`} className="block">
+                                    <div className="product-image-container">
                                         <Image
-                                            src={product.image_url || '/images/placeholder.jpg'}
+                                            src={`${product.image}?auto=format&fit=crop&w=800&q=80`}
                                             alt={product.name}
                                             fill
-                                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                            onError={(e) => handleImageError(e, product.name)}
+                                            className="product-image"
                                         />
-                                        {product.originalPrice && product.originalPrice > product.price && (
-                                            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                                                {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% İndirim
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="p-4">
-                                        <h3 className="text-lg font-medium text-white mb-1">{product.name}</h3>
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <span className="text-xl font-bold text-white">{formatPrice(product.price)}</span>
-                                                {product.originalPrice && product.originalPrice > product.price && (
-                                                    <span className="ml-2 text-sm text-gray-400 line-through">
-                                                        {formatPrice(product.originalPrice)}
-                                                    </span>
+                                        <div className="absolute top-4 right-4 z-10">
+                                            <button
+                                                onClick={(e) => handleToggleLike(product.id, e)}
+                                                className="like-button p-2 bg-white bg-opacity-80 rounded-full shadow-md hover:bg-opacity-100 transition-all"
+                                            >
+                                                {likedProducts.includes(product.id) ? (
+                                                    <FaHeart className="text-red-500 text-xl" />
+                                                ) : (
+                                                    <FaRegHeart className="text-gray-700 text-xl" />
                                                 )}
-                                            </div>
-                                            <span className={`text-sm ${product.in_stock ? 'text-green-500' : 'text-red-500'}`}>
-                                                {product.in_stock ? 'Stokta' : 'Tükendi'}
-                                            </span>
+                                            </button>
                                         </div>
-                                        <Link
-                                            href={`/products/${product.slug}`}
-                                            className="block w-full mt-4 text-center bg-primary hover:bg-primary-dark text-white font-medium py-2 rounded-md transition-colors"
+                                    </div>
+                                </Link>
+                                <div className="p-6 bg-white dark:bg-gray-800">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{product.name}</h3>
+                                            <p className="text-sm text-gray-600 dark:text-gray-400">{product.category}</p>
+                                        </div>
+                                        <span className="flex items-center gap-1">
+                                            <FaStar className="text-yellow-400" />
+                                            <span className="text-gray-800 dark:text-gray-200">{product.rating}</span>
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between items-center mt-5">
+                                        <span className="text-xl font-bold text-gray-900 dark:text-white">₺{product.price}</span>
+                                        <button
+                                            onClick={(e) => handleAddToCart(product.id, e)}
+                                            className="add-to-cart"
                                         >
-                                            Ürünü İncele
-                                        </Link>
+                                            <span>Sepete Ekle</span>
+                                            <FaCartPlus />
+                                        </button>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="text-center mt-12">
+                    <Link href="/products" className="inline-flex items-center gap-2 px-8 py-3 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-all">
+                        <span>Tüm Ürünleri Gör</span>
+                        <FaArrowRight />
+                    </Link>
                 </div>
             </section>
 
             {/* Categories Section */}
-            <section className="py-20 px-4 bg-gray-900">
-                <div className="container mx-auto">
-                    <div className="flex items-center justify-between mb-10">
-                        <h2 className="text-3xl font-light tracking-wide">KATEGORİLER</h2>
-                        <Link
-                            href="/categories"
-                            className="text-white hover:text-accent transition-colors text-sm font-medium px-4 py-2 bg-primary/80 hover:bg-primary rounded-md"
-                        >
-                            Tümünü Gör →
-                        </Link>
-                    </div>
+            <section id="categories"
+                className={`py-20 px-4 max-w-7xl mx-auto ${visibleSections.includes('categories') ? 'animate-on-scroll visible' : 'animate-on-scroll'}`}
+                ref={categorySectionRef}
+            >
+                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Kategorilere Göz At</h2>
 
-                    {loadingCategories ? (
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                            {[...Array(5)].map((_, i) => (
-                                <div key={i} className="animate-pulse">
-                                    <div className="bg-gray-800 h-48 rounded-lg"></div>
-                                    <div className="mt-4 space-y-2">
-                                        <div className="h-5 bg-gray-800 rounded w-2/3"></div>
-                                        <div className="h-4 bg-gray-800 rounded w-1/4"></div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                            {categories.map((category) => (
-                                <Link
-                                    key={category.id}
-                                    href={`/categories/${category.slug}`}
-                                    className="group relative block h-64 overflow-hidden rounded-lg bg-gray-800 shadow-lg transition-all duration-300 hover:shadow-xl"
-                                >
-                                    <div className="absolute inset-0 overflow-hidden">
-                                        {category.image_url ? (
-                                            <Image
-                                                src={category.image_url}
-                                                alt={category.name}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                                onError={(e) => handleImageError(e, category.name)}
-                                            />
-                                        ) : (
-                                            <div className="flex h-full w-full items-center justify-center bg-primary/10">
-                                                <span className="text-xl font-bold text-primary">{category.name.charAt(0)}</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 transition-opacity group-hover:opacity-90"></div>
-                                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                                        <h3 className="text-xl font-bold text-white">{category.name}</h3>
-                                        {category.product_count !== undefined && (
-                                            <p className="mt-1 text-sm text-gray-300">{category.product_count} ürün</p>
-                                        )}
-                                        <div className="mt-3 h-0.5 w-10 bg-primary transition-all duration-300 group-hover:w-20"></div>
-                                    </div>
+                <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-animation ${visibleSections.includes('categories') ? 'visible' : ''}`}>
+                    {categories.map((category) => (
+                        <div key={category.id} className="category-card relative h-80 overflow-hidden">
+                            <div className="category-bg"></div>
+                            <Image
+                                src={`${category.image}?auto=format&fit=crop&w=600&q=80`}
+                                alt={category.name}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                            />
+                            <div className="category-content absolute inset-0 flex flex-col items-center justify-end p-6">
+                                <h3 className="text-xl font-semibold mb-4 text-white">{category.name}</h3>
+                                <Link href={`/products?category=${category.id}`} className="category-button px-6 py-3 bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm text-white border border-white border-opacity-40 hover:bg-opacity-30 transition-all">
+                                    Alışverişe Başla
                                 </Link>
-                            ))}
+                            </div>
                         </div>
-                    )}
+                    ))}
                 </div>
             </section>
 
-            {/* Newsletter Section */}
-            <section className="py-24 relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="bg-gradient-to-r from-gray-900 to-primary/20 w-full h-full"></div>
-                </div>
-
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-xl mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl font-light mb-4">
-                            GÜNCEL KALIN
-                        </h2>
-                        <p className="mb-8">
-                            Yeni ürünler, özel indirimler ve kampanyalardan ilk siz haberdar olun.
-                        </p>
-
-                        {subscribed ? (
-                            <div className="success-message p-4 bg-green-500/20 backdrop-blur-sm rounded-lg">
-                                <p>Teşekkürler! Bültenimize başarıyla abone oldunuz.</p>
-                            </div>
-                        ) : (
-                            <form
-                                onSubmit={handleSubscribe}
-                                className="flex flex-col sm:flex-row gap-4"
-                            >
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="E-posta adresiniz"
-                                    required
-                                    className="flex-grow px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg focus:outline-none focus:border-primary"
-                                />
-
-                                <button
-                                    type="submit"
-                                    className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors whitespace-nowrap"
-                                    disabled={loading}
-                                >
-                                    {loading ? "GÖNDERİLİYOR..." : "ABONE OL"}
-                                </button>
-                            </form>
-                        )}
-
-                        <p className="text-xs text-gray-400 mt-4">
-                            Abone olarak,{" "}
-                            <Link href="/privacy" className="underline">
-                                Gizlilik Politikamızı
-                            </Link>{" "}
-                            kabul etmiş olursunuz. İstediğiniz zaman abonelikten çıkabilirsiniz.
-                        </p>
+            {/* Lifestyle Section */}
+            <section id="lifestyle"
+                className={`lifestyle-section ${visibleSections.includes('lifestyle') ? 'animate-on-scroll visible' : 'animate-on-scroll'}`}
+                ref={lifestyleSectionRef}
+            >
+                <div className="parallax-container">
+                    <div
+                        className="parallax-layer"
+                        style={{
+                            backgroundImage: `url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=80')`
+                        }}
+                    ></div>
+                    <div className="parallax-content text-center text-white p-8 max-w-3xl">
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6">Yaşam Tarzınızı Yükseltin</h2>
+                        <p className="text-xl mb-8">Eşsiz tarzınızı yansıtan ve hayatınızın her anını özel kılan özenle seçilmiş parçaları keşfedin.</p>
+                        <button className="parallax-button px-10 py-5 bg-transparent border-2 border-white text-white text-lg hover:bg-white hover:bg-opacity-10 transition-all">
+                            <span>Koleksiyonu Keşfet</span>
+                        </button>
                     </div>
                 </div>
             </section>
-        </main>
+
+            {/* Features Section */}
+            <section id="features"
+                className="py-20 px-4"
+                ref={featureSectionRef}
+            >
+                <div className={`max-w-7xl mx-auto stagger-animation ${visibleSections.includes('features') ? 'visible' : ''}`}>
+                    <h2 className="text-3xl font-bold mb-16 text-center text-gray-900 dark:text-white">Neden Bizden Alışveriş Yapmalısınız</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                        <div className="feature flex flex-col items-center text-center">
+                            <div className="feature-icon-container mb-6 p-4 border border-black dark:border-white rounded-full">
+                                <div className="feature-icon text-3xl">
+                                    <FaShippingFast />
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Ücretsiz Hızlı Kargo</h3>
+                            <p className="text-gray-600 dark:text-gray-400">1000₺ üzeri tüm siparişlerde dünya çapında ücretsiz kargo</p>
+                        </div>
+
+                        <div className="feature flex flex-col items-center text-center">
+                            <div className="feature-icon-container mb-6 p-4 border border-black dark:border-white rounded-full">
+                                <div className="feature-icon text-3xl">
+                                    <FaUndo />
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Kolay İade</h3>
+                            <p className="text-gray-600 dark:text-gray-400">Stressiz bir alışveriş deneyimi için 30 gün iade politikası</p>
+                        </div>
+
+                        <div className="feature flex flex-col items-center text-center">
+                            <div className="feature-icon-container mb-6 p-4 border border-black dark:border-white rounded-full">
+                                <div className="feature-icon text-3xl">
+                                    <FaShieldAlt />
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Güvenli Ödeme</h3>
+                            <p className="text-gray-600 dark:text-gray-400">Ödeme bilgileriniz güvenli bir şekilde işlenir</p>
+                        </div>
+
+                        <div className="feature flex flex-col items-center text-center">
+                            <div className="feature-icon-container mb-6 p-4 border border-black dark:border-white rounded-full">
+                                <div className="feature-icon text-3xl">
+                                    <FaHeadphones />
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">7/24 Müşteri Desteği</h3>
+                            <p className="text-gray-600 dark:text-gray-400">Sorularınız veya endişeleriniz için her zaman yanınızdayız</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Scroll to top button */}
+            <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className={`fixed bottom-8 right-8 p-4 bg-black text-white dark:bg-white dark:text-black rounded-full shadow-lg transition-all transform ${isHeaderFixed ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                    }`}
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5L18 11H13V19H11V11H6L12 5Z" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
     );
 } 

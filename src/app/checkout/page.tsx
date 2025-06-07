@@ -5,6 +5,11 @@ import { useCartStore } from "@/lib/store";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// Helper function for safe price formatting
+const formatPrice = (price?: number | null): string => {
+  return price !== undefined && price !== null ? `₺${price.toFixed(2)}` : "₺0.00";
+};
+
 const CheckoutPage = () => {
   const router = useRouter();
   const { items, totalPrice, clearCart } = useCartStore();
@@ -364,7 +369,7 @@ const CheckoutPage = () => {
                     </span>
                   </div>
                   <span className="text-sm font-medium" data-oid="ydpwx4.">
-                    ₺{(item.price * item.quantity).toFixed(2)}
+                    {formatPrice(item.price * item.quantity)}
                   </span>
                 </div>
               ))}
@@ -373,7 +378,7 @@ const CheckoutPage = () => {
             <div className="space-y-2 mb-4" data-oid="-hy49c:">
               <div className="flex justify-between" data-oid=":2gg_s-">
                 <span data-oid="b2x21h8">Ara Toplam</span>
-                <span data-oid="749_ysi">₺{totalPrice().toFixed(2)}</span>
+                <span data-oid="749_ysi">{formatPrice(totalPrice())}</span>
               </div>
               <div className="flex justify-between" data-oid="ln.oqrz">
                 <span data-oid="zidrdzm">Kargo</span>
@@ -385,7 +390,7 @@ const CheckoutPage = () => {
                   data-oid="3_brgf_"
                 >
                   <span data-oid="kzrbdz.">Toplam</span>
-                  <span data-oid="w4y-mmc">₺{totalPrice().toFixed(2)}</span>
+                  <span data-oid="w4y-mmc">{formatPrice(totalPrice())}</span>
                 </div>
               </div>
             </div>

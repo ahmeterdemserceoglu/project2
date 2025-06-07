@@ -11,8 +11,8 @@ export function cn(...inputs: ClassValue[]) {
  * @param price - The price to format
  * @returns Formatted price string
  */
-export function formatPrice(price: number): string {
-  return `₺${price.toFixed(2)}`;
+export function formatPrice(price: number | null | undefined): string {
+  return price !== undefined && price !== null ? `₺${price.toFixed(2)}` : "₺0.00";
 }
 
 /**
