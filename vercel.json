@@ -1,0 +1,18 @@
+{
+  "functions": {
+    "src/app/admin/**/*.tsx": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        {
+          "key": "X-Admin-Route",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

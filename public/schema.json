@@ -1,0 +1,79 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hdticaret.com/#website",
+      "url": "https://hdticaret.com",
+      "name": "HD Ticaret - 3D Baskı Malzemeleri",
+      "description": "3D Baskı Malzemeleri ve 3D Ürünler - Profesyonel 3D Printing Çözümleri",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://hdticaret.com/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "tr-TR"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://hdticaret.com/#organization",
+      "name": "HD Ticaret",
+      "url": "https://hdticaret.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hdticaret.com/images/logo.png"
+      },
+      "description": "Türkiye'nin önde gelen 3D baskı malzemeleri ve 3D printing çözümleri merkezi",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "TR",
+        "addressLocality": "İstanbul"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+90-XXX-XXX-XXXX",
+        "contactType": "customer service",
+        "availableLanguage": "Turkish"
+      },
+      "sameAs": [
+        "https://www.facebook.com/hdticaret",
+        "https://www.instagram.com/hdticaret",
+        "https://twitter.com/hdticaret"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://hdticaret.com/#webpage",
+      "url": "https://hdticaret.com",
+      "name": "3D Baskı Malzemeleri ve 3D Ürünler - Profesyonel 3D Printing Çözümleri",
+      "isPartOf": {
+        "@id": "https://hdticaret.com/#website"
+      },
+      "about": {
+        "@id": "https://hdticaret.com/#organization"
+      },
+      "description": "HD Ticaret ile 3D baskı malzemeleri, filamentler, 3D yazıcılar ve özel 3D baskı hizmetleri. PLA, ABS, PETG filamentler ve profesyonel 3D printing çözümleri.",
+      "breadcrumb": {
+        "@id": "https://hdticaret.com/#breadcrumb"
+      },
+      "inLanguage": "tr-TR"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://hdticaret.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ana Sayfa",
+          "item": "https://hdticaret.com"
+        }
+      ]
+    }
+  ]
+}

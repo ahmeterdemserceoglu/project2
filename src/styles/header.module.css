@@ -1,0 +1,86 @@
+/* Header Responsive Styles */
+
+/* Main header container */
+.header {
+  @apply sticky top-0 z-30 bg-white dark:bg-dark shadow-soft backdrop-blur-md;
+  transition: all 0.3s ease;
+}
+
+/* Container with responsive padding */
+.container {
+  @apply container mx-auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Small screens (mobile) */
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1280px) {
+  .container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Navigation items that hide progressively */
+.navItem {
+  @apply font-medium transition-colors px-2 py-1 rounded-md hover:bg-gray-100/50 dark:hover:bg-dark-lighter/50;
+}
+
+/* Hide certain items on medium screens */
+@media (max-width: 1280px) {
+  .hideOnXl {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hideOnLg {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hideOnMd {
+    display: none;
+  }
+}
+
+/* Mobile menu animation */
+.mobileMenu {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

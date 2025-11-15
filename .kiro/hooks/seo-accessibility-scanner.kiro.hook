@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "SEO & Accessibility Scanner",
+  "description": "Comprehensive scanner that evaluates both SEO and accessibility compliance across HTML, CSS, and JavaScript code. Checks semantic HTML, heading hierarchy, alt text, meta tags, ARIA roles, color contrast, and generates actionable improvement reports.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "buttonText": "🔍 Scan SEO & Accessibility"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Perform a comprehensive SEO and accessibility audit of the project. Analyze all relevant files and provide a detailed report covering:\n\n## SEO Analysis\n1. **Meta Tags**: Check for proper title, description, keywords, viewport, and Open Graph tags\n2. **Semantic HTML**: Verify proper use of semantic elements (header, nav, main, article, section, aside, footer)\n3. **Heading Hierarchy**: Ensure proper H1-H6 structure and logical flow\n4. **Image Optimization**: Check alt attributes, file sizes, and formats\n5. **Link Quality**: Verify descriptive link texts and internal linking structure\n6. **Canonical Tags**: Check for proper canonical URL implementation\n7. **Structured Data**: Look for schema.org markup and JSON-LD\n8. **URL Structure**: Analyze URL patterns and slug optimization\n9. **Page Speed Factors**: Identify potential performance bottlenecks\n10. **Mobile Optimization**: Check responsive design implementation\n\n## Accessibility Analysis\n1. **ARIA Implementation**: Check for proper ARIA roles, labels, and descriptions\n2. **Keyboard Navigation**: Verify tab order and keyboard accessibility\n3. **Color Contrast**: Analyze color combinations for WCAG compliance\n4. **Screen Reader Support**: Check semantic structure and alternative text\n5. **Focus Management**: Verify focus indicators and logical flow\n6. **Form Accessibility**: Check labels, fieldsets, and error handling\n7. **Interactive Elements**: Verify button and link accessibility\n8. **Media Accessibility**: Check video captions and audio alternatives\n9. **Language Attributes**: Verify proper lang attributes\n10. **Skip Links**: Check for skip navigation options\n\n## Report Format\nFor each issue found, provide:\n- **Severity**: Critical, High, Medium, Low\n- **Category**: SEO or Accessibility (or both)\n- **File/Location**: Specific file and line number\n- **Issue Description**: Clear explanation of the problem\n- **Impact**: How this affects users or search engines\n- **Recommended Fix**: Specific code changes needed\n- **WCAG/SEO Standard**: Reference to relevant guidelines\n\n## Summary\n- Total issues found by severity\n- Compliance score (percentage)\n- Priority recommendations\n- Estimated time to fix critical issues\n\nScan the following file types: *.tsx, *.jsx, *.html, *.css, *.scss, *.js, *.ts, and any component files in the src directory. Focus on user-facing components and pages."
+  }
+}

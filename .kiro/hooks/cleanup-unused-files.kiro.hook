@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "name": "Unused File Cleanup",
+  "description": "Aggressively scans the entire project directory for unused, unreferenced, or empty files including orphaned images, scripts, stylesheets, or components that are not imported, required, or called anywhere in the codebase. Also detects files with zero or insignificant content and deletes them while excluding critical configuration files and explicitly marked preserved files.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "src/**/*",
+      "public/**/*",
+      "*.js",
+      "*.ts",
+      "*.tsx",
+      "*.jsx",
+      "*.css",
+      "*.scss",
+      "*.json",
+      "*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Perform an aggressive scan of the entire project directory to identify and delete unused, unreferenced, or empty files. This includes:\n\n1. **Unused Components & Modules**: Scan all TypeScript/JavaScript files in src/ to find components, functions, classes, or modules that are not imported or referenced anywhere in the codebase.\n\n2. **Orphaned Assets**: Check public/ directory for images, fonts, and other static assets that are not referenced in any source files, HTML, CSS, or configuration files.\n\n3. **Empty or Insignificant Files**: Identify files with zero content, only whitespace, or minimal content (like single comments or empty exports).\n\n4. **Unreferenced Stylesheets**: Find CSS/SCSS files that are not imported or linked anywhere.\n\n5. **Dead API Routes**: Identify API route files that are not called from the frontend or other parts of the application.\n\n**EXCLUSIONS** - Do NOT delete:\n- Configuration files (.env, .eslintrc.json, .gitignore, package.json, tsconfig.json, tailwind.config.js, next.config.js, etc.)\n- Files in node_modules/, .next/, .vercel/, .git/\n- Files explicitly marked with preservation comments (e.g., // @preserve or /* @keep */)\n- Test files (*.test.*, *.spec.*, __tests__/)\n- Files in .temp/ directories\n- README files and documentation\n\n**Process**:\n1. Build a dependency graph of all imports/requires/references\n2. Identify files not in the dependency graph\n3. Check file sizes and content significance\n4. Verify files are not referenced in non-JS files (HTML, CSS, config files)\n5. Create a summary log of files to be deleted\n6. Delete the identified unused files\n7. Provide a detailed summary report\n\nBe thorough but conservative - when in doubt, preserve the file and note it in the report for manual review."
+  }
+}
