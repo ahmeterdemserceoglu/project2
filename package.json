@@ -42,7 +42,7 @@
     "fs": "^0.0.1-security",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.516.0",
-    "next": "^15.3.4",
+    "next": "15.3.8",
     "next-auth": "^4.24.11",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.13",
